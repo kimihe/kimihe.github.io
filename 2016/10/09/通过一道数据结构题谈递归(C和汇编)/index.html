@@ -4,17 +4,33 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>洛斯里克的大书库</title>
+  <title>通过一道数据结构题谈递归(C和汇编) | 洛斯里克的大书库</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="皇家邮电11本15硕，信息安全。主iOS及C家族等乱炖技能。钟爱日式RPG。霓虹锅N3。小小程序员一枚。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="洛斯里克的大书库">
-<meta property="og:url" content="https://kimihe.github.io/index.html">
+  <meta name="description" content="背景今天微机张教授给我看了一道考研的数据结构题，是华南理工大学的，引起了我的兴趣。
+原题和分析如下：
+其实我很不喜欢刷题，所以面试裸考经常悲剧。 
+回归正题，这属于一道考察递归知识的题目，如果大家和我一样，对于题目下方的分析不是很理解，那么本文的价值就来了。  
+递归和迭代首先介绍一下递归，递归（英语：recursion）在计算机科学中是指一种通过重复将问题分解为 同类的子问题 而解决问题的方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通过一道数据结构题谈递归(C和汇编)">
+<meta property="og:url" content="https://kimihe.github.io/2016/10/09/通过一道数据结构题谈递归(C和汇编)/index.html">
 <meta property="og:site_name" content="洛斯里克的大书库">
-<meta property="og:description" content="皇家邮电11本15硕，信息安全。主iOS及C家族等乱炖技能。钟爱日式RPG。霓虹锅N3。小小程序员一枚。">
+<meta property="og:description" content="背景今天微机张教授给我看了一道考研的数据结构题，是华南理工大学的，引起了我的兴趣。
+原题和分析如下：
+其实我很不喜欢刷题，所以面试裸考经常悲剧。 
+回归正题，这属于一道考察递归知识的题目，如果大家和我一样，对于题目下方的分析不是很理解，那么本文的价值就来了。  
+递归和迭代首先介绍一下递归，递归（英语：recursion）在计算机科学中是指一种通过重复将问题分解为 同类的子问题 而解决问题的方法。">
+<meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/%E9%80%92%E5%BD%92%E8%80%83%E7%A0%94%E9%A2%98.jpeg">
+<meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/%E5%A0%86%E6%A0%88%E5%9B%BE.gif">
+<meta property="og:updated_time" content="2016-10-09T16:04:30.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="洛斯里克的大书库">
-<meta name="twitter:description" content="皇家邮电11本15硕，信息安全。主iOS及C家族等乱炖技能。钟爱日式RPG。霓虹锅N3。小小程序员一枚。">
+<meta name="twitter:title" content="通过一道数据结构题谈递归(C和汇编)">
+<meta name="twitter:description" content="背景今天微机张教授给我看了一道考研的数据结构题，是华南理工大学的，引起了我的兴趣。
+原题和分析如下：
+其实我很不喜欢刷题，所以面试裸考经常悲剧。 
+回归正题，这属于一道考察递归知识的题目，如果大家和我一样，对于题目下方的分析不是很理解，那么本文的价值就来了。  
+递归和迭代首先介绍一下递归，递归（英语：recursion）在计算机科学中是指一种通过重复将问题分解为 同类的子问题 而解决问题的方法。">
+<meta name="twitter:image" content="http://oesd9di98.bkt.clouddn.com/%E9%80%92%E5%BD%92%E8%80%83%E7%A0%94%E9%A2%98.jpeg">
   
     <link rel="alternative" href="/atom.xml" title="洛斯里克的大书库" type="application/atom+xml">
   
@@ -134,9 +150,7 @@
 </nav>
 
       <div class="body-wrap">
-        
-  
-    <article id="post-我的简书" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-通过一道数据结构题谈递归(C和汇编)" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <input type="hidden" class="isFancy" />
@@ -145,53 +159,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/10/我的简书/">我的简书</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原先的一些旧文章可以见<a href="http://www.jianshu.com/users/3a67e76a6935/latest_articles" target="_blank" rel="external">我的简书</a></p>
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      <a href="/2016/10/10/我的简书/" class="archive-article-date">
-  	<time datetime="2016-10-09T16:01:25.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-10-10</time>
-</a>
-      
-      
-
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-通过一道数据结构题谈递归(C和汇编)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/09/通过一道数据结构题谈递归(C和汇编)/">通过一道数据结构题谈递归(C和汇编)</a>
+    <h1 class="article-title" itemprop="name">
+      通过一道数据结构题谈递归(C和汇编)
     </h1>
   
 
@@ -263,17 +232,48 @@
   </div>
 </article>
 
-
-
-
-
-
-
-
-
-
+  
+<nav id="article-nav">
+  
+    <a href="/2016/10/10/我的简书/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          我的简书
+        
+      </div>
+    </a>
   
   
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+
 
 
       </div>
@@ -295,8 +295,8 @@
 		fancybox: true,
 		mathjax: false,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
