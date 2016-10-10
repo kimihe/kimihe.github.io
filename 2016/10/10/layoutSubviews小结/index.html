@@ -90,38 +90,17 @@
 
 
 
-<meta name="description" content="文章也同时在简书更新
-
-###引言iOS开发深入到一定阶段，大家可能就会尝试自己写一些空间，其中layoutSubviews的使用非常重要，特在此给出总结。
-###先来看一下别人的总结When is layoutSubviews called?谈谈UIView的几个layout方法iOS开发之layoutSubviews的作用和调用机制
-###layoutSubviews以下情况会被调用
-
-
-初">
+<meta name="description" content="文章也同时在简书更新">
 <meta property="og:type" content="article">
 <meta property="og:title" content="layoutSubviews小结">
 <meta property="og:url" content="https://kimihe.github.io/2016/10/10/layoutSubviews小结/index.html">
 <meta property="og:site_name" content="洛斯里克的大书库">
-<meta property="og:description" content="文章也同时在简书更新
-
-###引言iOS开发深入到一定阶段，大家可能就会尝试自己写一些空间，其中layoutSubviews的使用非常重要，特在此给出总结。
-###先来看一下别人的总结When is layoutSubviews called?谈谈UIView的几个layout方法iOS开发之layoutSubviews的作用和调用机制
-###layoutSubviews以下情况会被调用
-
-
-初">
+<meta property="og:description" content="文章也同时在简书更新">
 <meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/layoutSubviews%E5%B0%8F%E7%BB%93fig1.png">
-<meta property="og:updated_time" content="2016-10-10T08:39:56.000Z">
+<meta property="og:updated_time" content="2016-10-10T08:44:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="layoutSubviews小结">
-<meta name="twitter:description" content="文章也同时在简书更新
-
-###引言iOS开发深入到一定阶段，大家可能就会尝试自己写一些空间，其中layoutSubviews的使用非常重要，特在此给出总结。
-###先来看一下别人的总结When is layoutSubviews called?谈谈UIView的几个layout方法iOS开发之layoutSubviews的作用和调用机制
-###layoutSubviews以下情况会被调用
-
-
-初">
+<meta name="twitter:description" content="文章也同时在简书更新">
 <meta name="twitter:image" content="http://oesd9di98.bkt.clouddn.com/layoutSubviews%E5%B0%8F%E7%BB%93fig1.png">
 
 
@@ -397,10 +376,10 @@
         <blockquote>
 <p>文章也同时在<a href="http://www.jianshu.com/p/160bee18d1e8" target="_blank" rel="external">简书</a>更新</p>
 </blockquote>
-<p>###引言<br>iOS开发深入到一定阶段，大家可能就会尝试自己写一些空间，其中layoutSubviews的使用非常重要，特在此给出总结。</p>
-<p>###先来看一下别人的总结<br><a href="http://stackoverflow.com/questions/728372/when-is-layoutsubviews-called" target="_blank" rel="external">When is layoutSubviews called?</a><br><a href="http://www.jianshu.com/p/eb2c4bb4e3f1" target="_blank" rel="external">谈谈UIView的几个layout方法</a><br><a href="http://www.open-open.com/lib/view/open1438053045972.html" target="_blank" rel="external">iOS开发之layoutSubviews的作用和调用机制</a></p>
-<p>###layoutSubviews以下情况会被调用</p>
-<p><img src="http://oesd9di98.bkt.clouddn.com/layoutSubviews%E5%B0%8F%E7%BB%93fig1.png" alt="[When is layoutSubviews called?](http://stackoverflow.com/questions/728372/when-is-layoutsubviews-called)"></p>
+<a id="more"></a>
+<h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>iOS开发深入到一定阶段，大家可能就会尝试自己写一些空间，其中layoutSubviews的使用非常重要，特在此给出总结。</p>
+<h3 id="先来看一下别人的总结"><a href="#先来看一下别人的总结" class="headerlink" title="先来看一下别人的总结"></a>先来看一下别人的总结</h3><p><a href="http://stackoverflow.com/questions/728372/when-is-layoutsubviews-called" target="_blank" rel="external">When is layoutSubviews called?</a><br><a href="http://www.jianshu.com/p/eb2c4bb4e3f1" target="_blank" rel="external">谈谈UIView的几个layout方法</a><br><a href="http://www.open-open.com/lib/view/open1438053045972.html" target="_blank" rel="external">iOS开发之layoutSubviews的作用和调用机制</a></p>
+<h3 id="layoutSubviews以下情况会被调用"><a href="#layoutSubviews以下情况会被调用" class="headerlink" title="layoutSubviews以下情况会被调用"></a>layoutSubviews以下情况会被调用</h3><p><img src="http://oesd9di98.bkt.clouddn.com/layoutSubviews%E5%B0%8F%E7%BB%93fig1.png" alt="[When is layoutSubviews called?](http://stackoverflow.com/questions/728372/when-is-layoutsubviews-called)"></p>
 <ol>
 <li>初始化不会触发layoutSubviews，但是如果设置了不为CGRectZero的frame的时候就会触发。</li>
 <li>addSubview会触发layoutSubviews</li>
@@ -409,12 +388,11 @@
 <li>旋转Screen会触发父UIView上的layoutSubviews事件</li>
 <li>改变一个UIView大小的时候也会触发父UIView上的layoutSubviews事件  </li>
 </ol>
-<p>###个人补充</p>
-<ul>
+<h3 id="个人补充"><a href="#个人补充" class="headerlink" title="个人补充"></a>个人补充</h3><ul>
 <li>自定义view继承自UIView时，一般都会重写UIView的initWithFrame，如果调用者在使用时，没有调用你写的initWithFrame，而是直接init，系统也会在super init(即UIView init)之后，调用UIView的initWithFrame，然后因为你重写了，所以会调用你写的。<br>顺序就是<figure class="highlight plain"><figcaption><span>init``` -> ```UiView init``` -> ```UIView initWithFrame``` -> ```CustomView initWithFrame```;  </span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">* 注意：</div><div class="line">```[customView addSubView:aLabel];</div></pre></td></tr></table></figure></li>
 </ul>
 <figure class="highlight plain"><figcaption><span>removeFromSuperview];```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">```[aSuperView addSubview:customView];</div></pre></td></tr></table></figure>
-<p>都可能会进入<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">* 创建一个customView后，必须找到** 着陆床 **，让它能够被addSubview到一个父层，否则永远不会进入layoutSubviews，不管你怎么改变它的frame，或者</div><div class="line">```[customView addSubView:aLabel];```，```[aLabel removeFromSuperview];```。  </div><div class="line">* 在没有上述customView操作子层的前提下，customView调用initWithFrame时，如果frame为0，等同于没有空间大小，那么即便```[aSuperView addSubview:customView];```它也不会进入layoutSubviews。但是只要被add到了父层，在customView上操作子层仍然有效。    </div><div class="line"></div><div class="line">###总结</div><div class="line">为了能够进入layoutSubviews：</div><div class="line">首先你必须能够```[aSuperView addSubview:customView];</div></pre></td></tr></table></figure></p>
+<p>都可能会进入<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">* 创建一个customView后，必须找到** 着陆床 **，让它能够被addSubview到一个父层，否则永远不会进入layoutSubviews，不管你怎么改变它的frame，或者</div><div class="line">```[customView addSubView:aLabel];```，```[aLabel removeFromSuperview];```。  </div><div class="line">* 在没有上述customView操作子层的前提下，customView调用initWithFrame时，如果frame为0，等同于没有空间大小，那么即便```[aSuperView addSubview:customView];```它也不会进入layoutSubviews。但是只要被add到了父层，在customView上操作子层仍然有效。    </div><div class="line"></div><div class="line">### 总结</div><div class="line">为了能够进入layoutSubviews：</div><div class="line">首先你必须能够```[aSuperView addSubview:customView];</div></pre></td></tr></table></figure></p>
 <p>其次请设置frame不为0，但是操作子层不受frame为0的影响。</p>
 
       
@@ -623,7 +601,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#先来看一下别人的总结"><span class="nav-number">2.</span> <span class="nav-text">先来看一下别人的总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#layoutSubviews以下情况会被调用"><span class="nav-number">3.</span> <span class="nav-text">layoutSubviews以下情况会被调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#个人补充"><span class="nav-number">4.</span> <span class="nav-text">个人补充</span></a></li></ol></div>
             
           </div>
         </section>
