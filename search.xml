@@ -80,7 +80,7 @@
 <p>首先，注意到开头<code>&lt;+0&gt;</code>处的<code>pushq</code>和结尾<code>&lt;+38&gt;</code>处的<code>popq</code>，它们分别表示执行任何一个函数体，都要先把函数的断口地址push进去，执行完后pop回来。</p>
 <p>可以看到push和pop有关的函数的断口地址<code>0x100000dc0</code>是放在寄存器里面的。之后会通过这个地址找到后续要执行的函数的实现（这让我想起了OC Runtime的<code>IMP</code>指针，哈哈）。</p>
 <p>函数首地址通过<code>pushq</code>指令被push后，就会进入函数体，执行函数内的代码，待函数执行完毕，注意<code>&lt;+15&gt;</code>处，汇编代码会执行<code>jle</code>指令跳转到<code>&lt;+34&gt;</code>处，即<code>popq</code>指令前，然后函数断口地址被pop，表明函数生命周期结束，程序继续执行其他内容。</p>
-<p>如果含有递归，注意<code>＋29</code>处的<code>callq</code>指令，它调用的地址就是被push的函数的断口地址<code>0x100000dc0</code>，而这个断口地址下一步执行的仍旧是该函数（只是所带的参数不同），于是就发生了函数内部调用函数本身，即递归。递归也是一次函数调用，一样会走到<code>&lt;+0&gt;</code>处的<code>pushq</code>，执行完后也要<code>popq</code>。  但递归会在函数返回前继续执行函数本身，似乎不会返回，其实它在等待一个<strong> 终止条件 </strong>，一旦条件到达，递归就会开始pop之前push进去的“函数们”。</p>
+<p>如果含有递归，注意<code>&lt;+29&gt;</code>处的<code>callq</code>指令，它调用的地址就是被push的函数的断口地址<code>0x100000dc0</code>，而这个断口地址下一步执行的仍旧是该函数（只是所带的参数不同），于是就发生了函数内部调用函数本身，即递归。递归也是一次函数调用，一样会走到<code>&lt;+0&gt;</code>处的<code>pushq</code>，执行完后也要<code>popq</code>。  但递归会在函数返回前继续执行函数本身，似乎不会返回，其实它在等待一个<strong> 终止条件 </strong>，一旦条件到达，递归就会开始pop之前push进去的“函数们”。</p>
 <p>而这里的终止条件就是：<code>当k＝＝0</code>时，代码逻辑不会走<code>if</code>语句，此时函数（现在是f0）就会return，执行<code>popq</code>指令。之后前面被push的f3, f2, f1就会依次pop，执行的相应的<code>popq</code>指令。当最开始的f3被pop结束后，外层的f4函数就正式执行完毕了。 </p>
 <p>一次递归调用f(4)的流程大致就是这样，大家可以真机运行一下，会更容易理解。 </p>
 <h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>以上就是关于递归的一些理解，希望能帮助到大家。<br>欢迎大家转载！</p>
