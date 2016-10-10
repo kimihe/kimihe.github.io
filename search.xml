@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+    
+    <entry>
+      <title><![CDATA[通过一道数据结构题谈递归(C和汇编)]]></title>
+      <url>https://kimihe.github.io/2016/10/10/%E9%80%9A%E8%BF%87%E4%B8%80%E9%81%93%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%A2%98%E8%B0%88%E9%80%92%E5%BD%92(C%E5%92%8C%E6%B1%87%E7%BC%96)/</url>
+      <content type="html"><![CDATA[<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>今天微机张教授给我看了一道考研的数据结构题，是华南理工大学的，引起了我的兴趣。</p>
+<p>原题和分析如下：<br><img src="http://oesd9di98.bkt.clouddn.com/%E9%80%92%E5%BD%92%E8%80%83%E7%A0%94%E9%A2%98.jpeg" alt="递归题目"></p>
+<p><del>其实我很不喜欢刷题，所以面试裸考经常悲剧。</del> </p>
+<p>回归正题，这属于一道考察递归知识的题目，如果大家和我一样，对于题目下方的分析不是很理解，那么本文的价值就来了。  </p>
+<h3 id="递归和迭代"><a href="#递归和迭代" class="headerlink" title="递归和迭代"></a>递归和迭代</h3><p>首先介绍一下递归，递归（英语：recursion）在计算机科学中是指一种通过重复将问题分解为<strong> 同类的子问题 </strong>而解决问题的方法。具体含义可以戳这里：<a href="https://zh.wikipedia.org/wiki/%E9%80%92%E5%BD%92_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6" target="_blank" rel="external">递归 (计算机科学)</a>)。</p>
+<p>这里的<strong> 同类的子问题 </strong>一语中的，根据我的理解，可能有误，递归其实是迭代的一种实现方式，迭代可以理解为我们常说的for语句，递归则是所谓的“函数里面调用函数本身”。  </p>
+<p>大部分递归都可以较为容易地转换成迭代。二者都是基于某一初始条件和终止条件进行的循环计算，递归的好处是便于实现，根据数学公式可以方便地写出递归算法，但相应的计算机运行效率会较低，而且递归次数过多会爆栈。相比之下迭代需要更多的思考技巧，但效率也会更好（前提是你的算法是合理的）。 </p>
+<p>对于计算阶乘这个问题，下面分别是递归和迭代两种实现：</p>
+<ul>
+<li>递归</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">long long factorial_recurse (int n)</div><div class="line">&#123;</div><div class="line">    if (n &gt; 1) &#123;</div><div class="line">        return n * factorial_recurse(n-1);</div><div class="line">    &#125;</div><div class="line">    if (n == 1) &#123;</div><div class="line">        return 1;</div><div class="line">    &#125;</div><div class="line">    return -1; //should never go here</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>迭代</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">long long factorial_iteration (int n)</div><div class="line">&#123;</div><div class="line">    long long res = 1;</div><div class="line">    while (n) &#123;</div><div class="line">        res *= n;</div><div class="line">        n--;</div><div class="line">    &#125;</div><div class="line">    return res;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以看到，递归这时并没有带来思考上的便利，反而还会降低计算上的效率。  </p>
+<h3 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h3><p>上文主要让大家快速了解一下基本概念，现在我们还没有分析题目，下面开始。  </p>
+<p>首先就解题而言，因为只是f(4)，递归次数不多，我们只要一步一步做就行。解题过程如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">f0: return;</div><div class="line">=&gt;  nothing</div><div class="line"></div><div class="line">f1: print 1;  //1</div><div class="line">    f0;       //nothing</div><div class="line">    f0;       //nothing</div><div class="line">=&gt;  1</div><div class="line"></div><div class="line">f2: print 2   //2</div><div class="line">    f1;       //1</div><div class="line">    f1;       //1</div><div class="line">=&gt; 2, 1, 1</div><div class="line"></div><div class="line">f3: print 3   //3</div><div class="line">    f2;       //2, 1, 1  </div><div class="line">    f2;       //2, 1, 1</div><div class="line">=&gt;  3, 2, 1, 1, 2, 1, 1</div><div class="line"></div><div class="line">f4: print 4   //4</div><div class="line">    f3;       //3, 2, 1, 1, 2, 1, 1</div><div class="line">    f3;       //3, 2, 1, 1, 2, 1, 1</div><div class="line">=&gt;  4, 3, 2, 1, 1, 2, 1, 1, 3, 2, 1, 1, 2, 1, 1</div></pre></td></tr></table></figure>
+<p>按照步骤慢慢来，是可以笔算做好的。  </p>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>但本文是要给大家讲清楚其内部原理，因此按照传统，后文会从底层汇编来看一下。  </p>
+<p>在此之前，你可能需要知道：</p>
+<ul>
+<li>递归与函数地址压栈和出栈有关，后文统一用push，pop代替。</li>
+<li>取得任意一条指令的地址后，在执行该指令前，都会被送往CS:IP寄存器，以标记当前正在执行的指令的地址。</li>
+<li>执行一个函数前，先从CS:IP寄存器中取出当前指令地址A，把A的下一条指令地址B，即函数断口地址push压栈，函数执行完，pop出断口地址B，把B给CS:IP，继续后续执行。</li>
+<li>所谓断口地址，就是当前汇编指令之后的下一条指令的地址，此处可以理解为函数执行完后，后续程序指令的地址。 </li>
+</ul>
+<p>为了方便理解，我们用下述较为简单的代码讲解：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">void fff(int k)</div><div class="line">&#123;</div><div class="line">    if (k&gt;0) &#123;</div><div class="line">        printf(&quot;before push k: %d\\\\n&quot;, k);</div><div class="line">        fff(k-1);</div><div class="line">        printf(&quot;after  pop  k: %d\\\\n&quot;, k);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>执行f(4)的输出结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">before push k: 4</div><div class="line">before push k: 3</div><div class="line">before push k: 2</div><div class="line">before push k: 1</div><div class="line">after  pop  k: 1</div><div class="line">after  pop  k: 2</div><div class="line">after  pop  k: 3</div><div class="line">after  pop  k: 4</div></pre></td></tr></table></figure>
+<p>可以看到一个上下对称的输出，其中正是push和pop的体现。可以结合下图左侧的堆栈信息，产生一个更直观的印象，如下：<br><img src="http://oesd9di98.bkt.clouddn.com/%E5%A0%86%E6%A0%88%E5%9B%BE.gif" alt="Recurse Log"> </p>
+<h3 id="深入底层"><a href="#深入底层" class="headerlink" title="深入底层"></a>深入底层</h3><p>我们来看一下函数<strong> void fff(int) </strong>的汇编代码，这里我去掉了printf这部分代码的干扰：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Recurse_Test fff:</div><div class="line">    0x100000dc0 &lt;+0&gt;:  pushq  %rbp</div><div class="line">    0x100000dc1 &lt;+1&gt;:  movq   %rsp, %rbp</div><div class="line">    0x100000dc4 &lt;+4&gt;:  subq   $0x10, %rsp</div><div class="line">    0x100000dc8 &lt;+8&gt;:  movl   %edi, -0x4(%rbp)</div><div class="line">    0x100000dcb &lt;+11&gt;: cmpl   $0x0, -0x4(%rbp)</div><div class="line">    0x100000dcf &lt;+15&gt;: jle    0x100000de2               ; &lt;+34&gt; at main.c:71</div><div class="line">-&gt;  0x100000dd5 &lt;+21&gt;: movl   -0x4(%rbp), %eax</div><div class="line">    0x100000dd8 &lt;+24&gt;: subl   $0x1, %eax</div><div class="line">    0x100000ddb &lt;+27&gt;: movl   %eax, %edi</div><div class="line">    0x100000ddd &lt;+29&gt;: callq  0x100000dc0               ; &lt;+0&gt; at main.c:65</div><div class="line">    0x100000de2 &lt;+34&gt;: addq   $0x10, %rsp</div><div class="line">    0x100000de6 &lt;+38&gt;: popq   %rbp</div><div class="line">    0x100000de7 &lt;+39&gt;: retq   </div><div class="line">    0x100000de8 &lt;+40&gt;: nopl   (%rax,%rax)</div></pre></td></tr></table></figure>
+<p>首先，注意到开头<code>&lt;+0&gt;</code>处的<code>pushq</code>和结尾<code>&lt;+38&gt;</code>处的<code>popq</code>，它们分别表示执行任何一个函数体，都要先把函数的断口地址push进去，执行完后pop回来。</p>
+<p>可以看到push和pop有关的函数的断口地址<code>0x100000dc0</code>是放在寄存器里面的。之后会通过这个地址找到后续要执行的函数的实现（这让我想起了OC Runtime的<code>IMP</code>指针，哈哈）。</p>
+<p>函数首地址通过<code>pushq</code>指令被push后，就会进入函数体，执行函数内的代码，待函数执行完毕，注意<code>&lt;+15&gt;</code>处，汇编代码会执行<code>jle</code>指令跳转到<code>&lt;+34&gt;</code>处，即<code>popq</code>指令前，然后函数断口地址被pop，表明函数生命周期结束，程序继续执行其他内容。</p>
+<p>如果含有递归，注意<code>＋29</code>处的<code>callq</code>指令，它调用的地址就是被push的函数的断口地址<code>0x100000dc0</code>，而这个断口地址下一步执行的仍旧是该函数（只是所带的参数不同），于是就发生了函数内部调用函数本身，即递归。递归也是一次函数调用，一样会走到<code>&lt;+0&gt;</code>处的<code>pushq</code>，执行完后也要<code>popq</code>。  但递归会在函数返回前继续执行函数本身，似乎不会返回，其实它在等待一个<strong> 终止条件 </strong>，一旦条件到达，递归就会开始pop之前push进去的“函数们”。</p>
+<p>而这里的终止条件就是：<code>当k＝＝0</code>时，代码逻辑不会走<code>if</code>语句，此时函数（现在是f0）就会return，执行<code>popq</code>指令。之后前面被push的f3, f2, f1就会依次pop，执行的相应的<code>popq</code>指令。当最开始的f3被pop结束后，外层的f4函数就正式执行完毕了。 </p>
+<p>一次递归调用f(4)的流程大致就是这样，大家可以真机运行一下，会更容易理解。 </p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>以上就是关于递归的一些理解，希望能帮助到大家。  欢迎大家转载！</p>
+<p>既然都已经读到这里了，想必你也是一个有心人，那么请允许我在安利几个自娱自乐的小东西，欢迎star，fork等一切交友方式！: )  </p>
+<ul>
+<li><a href="https://github.com/kimihe/iOS_BezierJellyView" target="_blank" rel="external">山寨QQ消息气泡拉扯弄破它！(A jellyView like QQ message bubble)</a></li>
+<li><a href="https://github.com/kimihe/iOS_LyricsShowView" target="_blank" rel="external">山寨QQ音乐歌词秀的进度(Imitate QQ music lyrics show)</a>  </li>
+</ul>
+<h3 id="That’s-all-Thanks-for-reading"><a href="#That’s-all-Thanks-for-reading" class="headerlink" title="That’s all. Thanks for reading."></a>That’s all. Thanks for reading.</h3>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[我的简书]]></title>
+      <url>https://kimihe.github.io/2016/10/09/%E6%88%91%E7%9A%84%E7%AE%80%E4%B9%A6/</url>
+      <content type="html"><![CDATA[<p>原先的一些旧文章可以见<a href="http://www.jianshu.com/users/3a67e76a6935/latest_articles" target="_blank" rel="external">我的简书</a></p>
+]]></content>
+    </entry>
+    
+  
+  
+</search>
