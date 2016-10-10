@@ -4,9 +4,40 @@
   
     
     <entry>
+      <title><![CDATA[layoutSubviews小结]]></title>
+      <url>https://kimihe.github.io/2016/10/10/layoutSubviews%E5%B0%8F%E7%BB%93/</url>
+      <content type="html"><![CDATA[<blockquote>
+<p>文章也同时在<a href="http://www.jianshu.com/p/160bee18d1e8" target="_blank" rel="external">简书</a>更新</p>
+</blockquote>
+<p>###引言<br>iOS开发深入到一定阶段，大家可能就会尝试自己写一些空间，其中layoutSubviews的使用非常重要，特在此给出总结。</p>
+<p>###先来看一下别人的总结<br><a href="http://stackoverflow.com/questions/728372/when-is-layoutsubviews-called" target="_blank" rel="external">When is layoutSubviews called?</a><br><a href="http://www.jianshu.com/p/eb2c4bb4e3f1" target="_blank" rel="external">谈谈UIView的几个layout方法</a><br><a href="http://www.open-open.com/lib/view/open1438053045972.html" target="_blank" rel="external">iOS开发之layoutSubviews的作用和调用机制</a></p>
+<p>###layoutSubviews以下情况会被调用</p>
+<p><img src="http://oesd9di98.bkt.clouddn.com/layoutSubviews%E5%B0%8F%E7%BB%93fig1.png" alt="[When is layoutSubviews called?](http://stackoverflow.com/questions/728372/when-is-layoutsubviews-called)"></p>
+<ol>
+<li>初始化不会触发layoutSubviews，但是如果设置了不为CGRectZero的frame的时候就会触发。</li>
+<li>addSubview会触发layoutSubviews</li>
+<li>设置view的Frame会触发layoutSubviews，当然前提是frame的值设置前后发生了变化</li>
+<li>滚动一个UIScrollView会触发layoutSubviews</li>
+<li>旋转Screen会触发父UIView上的layoutSubviews事件</li>
+<li>改变一个UIView大小的时候也会触发父UIView上的layoutSubviews事件  </li>
+</ol>
+<p>###个人补充</p>
+<ul>
+<li>自定义view继承自UIView时，一般都会重写UIView的initWithFrame，如果调用者在使用时，没有调用你写的initWithFrame，而是直接init，系统也会在super init(即UIView init)之后，调用UIView的initWithFrame，然后因为你重写了，所以会调用你写的。<br>顺序就是<figure class="highlight plain"><figcaption><span>init``` -> ```UiView init``` -> ```UIView initWithFrame``` -> ```CustomView initWithFrame```;  </span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">* 注意：</div><div class="line">```[customView addSubView:aLabel];</div></pre></td></tr></table></figure></li>
+</ul>
+<figure class="highlight plain"><figcaption><span>removeFromSuperview];```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">```[aSuperView addSubview:customView];</div></pre></td></tr></table></figure>
+<p>都可能会进入<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">* 创建一个customView后，必须找到** 着陆床 **，让它能够被addSubview到一个父层，否则永远不会进入layoutSubviews，不管你怎么改变它的frame，或者</div><div class="line">```[customView addSubView:aLabel];```，```[aLabel removeFromSuperview];```。  </div><div class="line">* 在没有上述customView操作子层的前提下，customView调用initWithFrame时，如果frame为0，等同于没有空间大小，那么即便```[aSuperView addSubview:customView];```它也不会进入layoutSubviews。但是只要被add到了父层，在customView上操作子层仍然有效。    </div><div class="line"></div><div class="line">###总结</div><div class="line">为了能够进入layoutSubviews：</div><div class="line">首先你必须能够```[aSuperView addSubview:customView];</div></pre></td></tr></table></figure></p>
+<p>其次请设置frame不为0，但是操作子层不受frame为0的影响。</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[通过一道数据结构题谈递归(C和汇编)]]></title>
       <url>https://kimihe.github.io/2016/10/10/%E9%80%9A%E8%BF%87%E4%B8%80%E9%81%93%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E9%A2%98%E8%B0%88%E9%80%92%E5%BD%92(C%E5%92%8C%E6%B1%87%E7%BC%96)/</url>
-      <content type="html"><![CDATA[<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>今天微机张教授给我看了一道考研的数据结构题，是华南理工大学的，引起了我的兴趣。</p>
+      <content type="html"><![CDATA[<blockquote>
+<p>文章也同时在<a href="http://www.jianshu.com/p/4ccf727375b7" target="_blank" rel="external">简书</a>更新</p>
+</blockquote>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>今天微机张教授给我看了一道考研的数据结构题，是华南理工大学的，引起了我的兴趣。</p>
 <p>原题和分析如下：<br><img src="http://oesd9di98.bkt.clouddn.com/%E9%80%92%E5%BD%92%E8%80%83%E7%A0%94%E9%A2%98.jpeg" alt="递归题目"></p>
 <p><del>其实我很不喜欢刷题，所以面试裸考经常悲剧。</del> </p>
 <p>回归正题，这属于一道考察递归知识的题目，如果大家和我一样，对于题目下方的分析不是很理解，那么本文的价值就来了。<br><a id="more"></a></p>
