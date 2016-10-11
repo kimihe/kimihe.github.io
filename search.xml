@@ -9,8 +9,12 @@
       <content type="html"><![CDATA[<blockquote>
 <p>文章也同时在<a href="http://www.jianshu.com/p/160bee18d1e8" target="_blank" rel="external">简书</a>更新  </p>
 </blockquote>
-<h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>iOS开发深入到一定阶段，大家可能就会尝试自己写一些控件，其中layoutSubviews的使用非常重要，特在此给出总结。</p>
-<h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h3><p>关于更多实际的使用，可以参考我写的一个小例子：<a href="https://github.com/kimihe/iOS_BezierJellyView" target="_blank" rel="external">模仿QQ消息气泡拉扯弄破它！(A jellyView like QQ message bubble)</a></p>
+<h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>iOS开发深入到一定阶段，大家可能就会尝试自己写一些控件，其中layoutSubviews的使用非常重要，特在此给出总结。  </p>
+<p>可能有人会问：“为什么要用layoutSubviews？它有什么用？”  </p>
+<p>简单说来，使用layoutSubviews主要就是为了在自定义控件的布局、视图层次等属性发生形变时，使该控件能够及时地作出调整，保证画面的平滑显示。而控件之所以能够及时作出反馈，就要归功于layoutSubviews这个方法。<strong>在控件发生形变时，我们就可以进入该方法，在其中重新计算一些布局要素，必要时进行重绘。</strong> (重绘是一个较深的课题，涉及到更底层的绘图，以及一些优化方面的东西，之后会另写一篇文章说明) </p>
+<p>接下来，如何能够进入layoutSubviews，怎样才能触发，时机是什么？可能就会成为大家想要知道的，本文将会focus on该方法的触发时机。  </p>
+<p>此外，虽然使用layoutSubviews是自定义控件进行布局时较为规范的做法，但仍旧需要合理使用。而关于如何自定义一个控件，会在下一篇文章中，结合一个简易的自定义progressView来说明。 </p>
+<h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h3><p>关于layoutSubviews更多实际使用的时机，可以参考我写的一个小例子：<a href="https://github.com/kimihe/iOS_BezierJellyView" target="_blank" rel="external">模仿QQ消息气泡拉扯弄破它！(A jellyView like QQ message bubble)</a></p>
 <a id="more"></a>
 <h3 id="先来看一下别人的总结"><a href="#先来看一下别人的总结" class="headerlink" title="先来看一下别人的总结"></a>先来看一下别人的总结</h3><p><a href="http://stackoverflow.com/questions/728372/when-is-layoutsubviews-called" target="_blank" rel="external">When is layoutSubviews called?</a><br><a href="http://www.jianshu.com/p/eb2c4bb4e3f1" target="_blank" rel="external">谈谈UIView的几个layout方法</a><br><a href="http://www.open-open.com/lib/view/open1438053045972.html" target="_blank" rel="external">iOS开发之layoutSubviews的作用和调用机制</a></p>
 <h3 id="layoutSubviews以下情况会被调用"><a href="#layoutSubviews以下情况会被调用" class="headerlink" title="layoutSubviews以下情况会被调用"></a>layoutSubviews以下情况会被调用</h3><p><img src="http://oesd9di98.bkt.clouddn.com/layoutSubviews%E5%B0%8F%E7%BB%93fig1.png" alt="[When is layoutSubviews called?](http://stackoverflow.com/questions/728372/when-is-layoutsubviews-called)"></p>
@@ -46,7 +50,7 @@
 <p><del>其实我很不喜欢刷题，所以面试裸考经常悲剧。</del> </p>
 <p>回归正题，这属于一道考察递归知识的题目，如果大家和我一样，对于题目下方的分析不是很理解，那么本文的价值就来了。<br><a id="more"></a></p>
 <h3 id="递归和迭代"><a href="#递归和迭代" class="headerlink" title="递归和迭代"></a>递归和迭代</h3><p>首先介绍一下递归，递归（英语：recursion）在计算机科学中是指一种通过重复将问题分解为<strong> 同类的子问题 </strong>而解决问题的方法。具体含义可以戳这里：<a href="https://zh.wikipedia.org/wiki/%E9%80%92%E5%BD%92_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6" target="_blank" rel="external">递归 (计算机科学)</a>)。</p>
-<p>这里的<strong> 同类的子问题 </strong>一语中的，根据我的理解，可能有误，递归其实是迭代的一种实现方式，迭代可以理解为我们常说的for语句，递归则是所谓的“函数里面调用函数本身”。  </p>
+<p>这里的<strong> 同类的子问题 </strong>一语中的，根据我的理解，递归其实是迭代的一种实现方式，迭代可以理解为我们常说的for语句，递归则是所谓的“函数里面调用函数本身”。  </p>
 <p>大部分递归都可以较为容易地转换成迭代。二者都是基于某一初始条件和终止条件进行的循环计算，递归的好处是便于实现，根据数学公式可以方便地写出递归算法，但相应的计算机运行效率会较低，而且递归次数过多会爆栈。相比之下迭代需要更多的思考技巧，但效率也会更好（前提是你的算法是合理的）。 </p>
 <p>对于计算阶乘这个问题，下面分别是递归和迭代两种实现：</p>
 <ul>

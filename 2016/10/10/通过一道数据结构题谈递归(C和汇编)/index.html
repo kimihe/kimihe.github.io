@@ -108,7 +108,7 @@
 回归正题，这属于一道考察递归知识的题目，如果大家和我一样，对于题目下方的分析不是很理解，那么本文的价值就来了。">
 <meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/%E9%80%92%E5%BD%92%E8%80%83%E7%A0%94%E9%A2%98.jpeg">
 <meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/%E5%A0%86%E6%A0%88%E5%9B%BE.gif">
-<meta property="og:updated_time" content="2016-10-10T09:22:46.000Z">
+<meta property="og:updated_time" content="2016-10-11T08:19:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="通过一道数据结构题谈递归(C和汇编)">
 <meta name="twitter:description" content="文章也同时在简书更新
@@ -129,8 +129,8 @@
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: '0',
-      author: '博主'
+      userId: '6339700991398512000',
+      author: '周鶏🐣'
     }
   };
 </script>
@@ -397,7 +397,7 @@
 <p><del>其实我很不喜欢刷题，所以面试裸考经常悲剧。</del> </p>
 <p>回归正题，这属于一道考察递归知识的题目，如果大家和我一样，对于题目下方的分析不是很理解，那么本文的价值就来了。<br><a id="more"></a></p>
 <h3 id="递归和迭代"><a href="#递归和迭代" class="headerlink" title="递归和迭代"></a>递归和迭代</h3><p>首先介绍一下递归，递归（英语：recursion）在计算机科学中是指一种通过重复将问题分解为<strong> 同类的子问题 </strong>而解决问题的方法。具体含义可以戳这里：<a href="https://zh.wikipedia.org/wiki/%E9%80%92%E5%BD%92_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6" target="_blank" rel="external">递归 (计算机科学)</a>)。</p>
-<p>这里的<strong> 同类的子问题 </strong>一语中的，根据我的理解，可能有误，递归其实是迭代的一种实现方式，迭代可以理解为我们常说的for语句，递归则是所谓的“函数里面调用函数本身”。  </p>
+<p>这里的<strong> 同类的子问题 </strong>一语中的，根据我的理解，递归其实是迭代的一种实现方式，迭代可以理解为我们常说的for语句，递归则是所谓的“函数里面调用函数本身”。  </p>
 <p>大部分递归都可以较为容易地转换成迭代。二者都是基于某一初始条件和终止条件进行的循环计算，递归的好处是便于实现，根据数学公式可以方便地写出递归算法，但相应的计算机运行效率会较低，而且递归次数过多会爆栈。相比之下迭代需要更多的思考技巧，但效率也会更好（前提是你的算法是合理的）。 </p>
 <p>对于计算阶乘这个问题，下面分别是递归和迭代两种实现：</p>
 <ul>
@@ -449,6 +449,27 @@
     <div>
       
         
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://oesd9di98.bkt.clouddn.com/WechatQRCode.jpeg" alt="周鶏🐣(Kimiko) WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://oesd9di98.bkt.clouddn.com/AlipayReceipt.jpeg" alt="周鶏🐣(Kimiko) Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
 
       
     </div>
@@ -566,8 +587,8 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://oesd9di98.bkt.clouddn.com/Yaki%20Dango.jpg"
-               alt="周鶏(Kimiko)" />
-          <p class="site-author-name" itemprop="name">周鶏(Kimiko)</p>
+               alt="周鶏🐣(Kimiko)" />
+          <p class="site-author-name" itemprop="name">周鶏🐣(Kimiko)</p>
           <p class="site-description motion-element" itemprop="description">iOS熟练工｜Web入门｜泥轰癌晚期</p>
         </div>
         <nav class="site-state motion-element">
@@ -671,7 +692,7 @@
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">周鶏(Kimiko)</span>
+  <span class="author" itemprop="copyrightHolder">周鶏🐣(Kimiko)</span>
 </div>
 
 <div class="powered-by">
