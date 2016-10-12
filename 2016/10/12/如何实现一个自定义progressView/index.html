@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="计算机基础,C,汇编,递归," />
+  <meta name="keywords" content="iOS,UIView,progressView,自定义控件," />
 
 
 
@@ -90,34 +90,30 @@
 
 
 
-<meta name="description" content="文章也同时在简书更新
+<meta name="description" content="引言在上一篇文章中，我们提到会通过编写一个progressView来学习自定义控件，在学习了layoutSubviews之后，我们对于控件布局有了更多的了解。  
+在这篇文章中，我们将会讲解如何自己实现一个porgressView，并一次来说明如何继承UIView来编写自己的控件。  
+为了简便地讲解，我们的porgressView将会按照alert的形式来展现，请注意以下几个说明：
 
-背景今天微机张教授给我看了一道考研的数据结构题，是华南理工大学的，引起了我的兴趣。
-原题和分析如下：
-其实我很不喜欢刷题，所以面试裸考经常悲剧。 
-回归正题，这属于一道考察递归知识的题目，如果大家和我一样，对于题目下方的分析不是很理解，那么本文的价值就来了。">
+porgr">
 <meta property="og:type" content="article">
-<meta property="og:title" content="通过一道数据结构题谈递归(C和汇编)">
-<meta property="og:url" content="https://kimihe.github.io/2016/10/10/通过一道数据结构题谈递归(C和汇编)/index.html">
+<meta property="og:title" content="如何实现一个自定义progressView">
+<meta property="og:url" content="https://kimihe.github.io/2016/10/12/如何实现一个自定义progressView/index.html">
 <meta property="og:site_name" content="洛斯里克的大书库">
-<meta property="og:description" content="文章也同时在简书更新
+<meta property="og:description" content="引言在上一篇文章中，我们提到会通过编写一个progressView来学习自定义控件，在学习了layoutSubviews之后，我们对于控件布局有了更多的了解。  
+在这篇文章中，我们将会讲解如何自己实现一个porgressView，并一次来说明如何继承UIView来编写自己的控件。  
+为了简便地讲解，我们的porgressView将会按照alert的形式来展现，请注意以下几个说明：
 
-背景今天微机张教授给我看了一道考研的数据结构题，是华南理工大学的，引起了我的兴趣。
-原题和分析如下：
-其实我很不喜欢刷题，所以面试裸考经常悲剧。 
-回归正题，这属于一道考察递归知识的题目，如果大家和我一样，对于题目下方的分析不是很理解，那么本文的价值就来了。">
-<meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/%E9%80%92%E5%BD%92%E8%80%83%E7%A0%94%E9%A2%98.jpeg">
-<meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/%E5%A0%86%E6%A0%88%E5%9B%BE.gif">
-<meta property="og:updated_time" content="2016-10-11T08:19:44.000Z">
+porgr">
+<meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/KMProgressView.gif">
+<meta property="og:updated_time" content="2016-10-12T08:41:36.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="通过一道数据结构题谈递归(C和汇编)">
-<meta name="twitter:description" content="文章也同时在简书更新
+<meta name="twitter:title" content="如何实现一个自定义progressView">
+<meta name="twitter:description" content="引言在上一篇文章中，我们提到会通过编写一个progressView来学习自定义控件，在学习了layoutSubviews之后，我们对于控件布局有了更多的了解。  
+在这篇文章中，我们将会讲解如何自己实现一个porgressView，并一次来说明如何继承UIView来编写自己的控件。  
+为了简便地讲解，我们的porgressView将会按照alert的形式来展现，请注意以下几个说明：
 
-背景今天微机张教授给我看了一道考研的数据结构题，是华南理工大学的，引起了我的兴趣。
-原题和分析如下：
-其实我很不喜欢刷题，所以面试裸考经常悲剧。 
-回归正题，这属于一道考察递归知识的题目，如果大家和我一样，对于题目下方的分析不是很理解，那么本文的价值就来了。">
-<meta name="twitter:image" content="http://oesd9di98.bkt.clouddn.com/%E9%80%92%E5%BD%92%E8%80%83%E7%A0%94%E9%A2%98.jpeg">
+porgr">
+<meta name="twitter:image" content="http://oesd9di98.bkt.clouddn.com/KMProgressView.gif">
 
 
 
@@ -138,10 +134,10 @@
 
 
 
-  <link rel="canonical" href="https://kimihe.github.io/2016/10/10/通过一道数据结构题谈递归(C和汇编)/"/>
+  <link rel="canonical" href="https://kimihe.github.io/2016/10/12/如何实现一个自定义progressView/"/>
 
 
-  <title> 通过一道数据结构题谈递归(C和汇编) | 洛斯里克的大书库 </title>
+  <title> 如何实现一个自定义progressView | 洛斯里克的大书库 </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -314,7 +310,7 @@
             
             
               
-                通过一道数据结构题谈递归(C和汇编)
+                如何实现一个自定义progressView
               
             
           </h1>
@@ -326,8 +322,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-10T10:43:03+08:00" content="2016-10-10">
-              2016-10-10
+            <time itemprop="dateCreated" datetime="2016-10-12T11:36:26+08:00" content="2016-10-12">
+              2016-10-12
             </time>
           </span>
 
@@ -340,8 +336,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/计算机基础/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机基础</span>
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
                   </a>
                 </span>
 
@@ -356,8 +352,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/10/10/通过一道数据结构题谈递归(C和汇编)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/10/通过一道数据结构题谈递归(C和汇编)/" itemprop="commentsCount"></span>
+                <a href="/2016/10/12/如何实现一个自定义progressView/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/12/如何实现一个自定义progressView/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -367,7 +363,7 @@
 
           
           
-             <span id="/2016/10/10/通过一道数据结构题谈递归(C和汇编)/" class="leancloud_visitors" data-flag-title="通过一道数据结构题谈递归(C和汇编)">
+             <span id="/2016/10/12/如何实现一个自定义progressView/" class="leancloud_visitors" data-flag-title="如何实现一个自定义progressView">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -389,53 +385,56 @@
       
 
       
-        <blockquote>
-<p>文章也同时在<a href="http://www.jianshu.com/p/4ccf727375b7" target="_blank" rel="external">简书</a>更新</p>
-</blockquote>
-<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>今天微机张教授给我看了一道考研的数据结构题，是华南理工大学的，引起了我的兴趣。</p>
-<p>原题和分析如下：<br><img src="http://oesd9di98.bkt.clouddn.com/%E9%80%92%E5%BD%92%E8%80%83%E7%A0%94%E9%A2%98.jpeg" alt="递归题目"></p>
-<p><del>其实我很不喜欢刷题，所以面试裸考经常悲剧。</del> </p>
-<p>回归正题，这属于一道考察递归知识的题目，如果大家和我一样，对于题目下方的分析不是很理解，那么本文的价值就来了。<br><a id="more"></a></p>
-<h3 id="递归和迭代"><a href="#递归和迭代" class="headerlink" title="递归和迭代"></a>递归和迭代</h3><p>首先介绍一下递归，递归（英语：recursion）在计算机科学中是指一种通过重复将问题分解为<strong> 同类的子问题 </strong>而解决问题的方法。具体含义可以戳这里：<a href="https://zh.wikipedia.org/wiki/%E9%80%92%E5%BD%92_(%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6" target="_blank" rel="external">递归 (计算机科学)</a>)。</p>
-<p>这里的<strong> 同类的子问题 </strong>一语中的，根据我的理解，递归其实是迭代的一种实现方式，迭代可以理解为我们常说的for语句，递归则是所谓的“函数里面调用函数本身”。  </p>
-<p>大部分递归都可以较为容易地转换成迭代。二者都是基于某一初始条件和终止条件进行的循环计算，递归的好处是便于实现，根据数学公式可以方便地写出递归算法，但相应的计算机运行效率会较低，而且递归次数过多会爆栈。相比之下迭代需要更多的思考技巧，但效率也会更好（前提是你的算法是合理的）。 </p>
-<p>对于计算阶乘这个问题，下面分别是递归和迭代两种实现：</p>
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>在上一篇文章中，我们提到会通过编写一个progressView来学习自定义控件，在学习了layoutSubviews之后，我们对于控件布局有了更多的了解。  </p>
+<p>在这篇文章中，我们将会讲解如何自己实现一个porgressView，并一次来说明如何继承UIView来编写自己的控件。  </p>
+<p>为了简便地讲解，我们的porgressView将会按照alert的形式来展现，请注意以下几个说明：</p>
 <ul>
-<li>递归</li>
+<li>porgressView将会置顶于屏幕层级。</li>
+<li>porgressView的frame大小将不需要用户改变，是一个固定的大小。</li>
+<li>我们不使用layoutSubviews来控制布局，而是更加关注自定义控件如何实现功能。</li>
+<li>关于如何在实际工程中使用layoutSubviews，可以参考我的另一个demo：<a href="https://github.com/kimihe/KMiOSLib/tree/master/BezierCurve_Test" target="_blank" rel="external"><a href="https://github.com/kimihe/KMiOSLib/tree/master/BezierCurve_Test" target="_blank" rel="external">BezierCurve_Test</a></a>。</li>
+<li>我已经将博客中所用到的demo都集成到了<a href="https://github.com/kimihe/KMiOSLib" target="_blank" rel="external">KMiOSLib</a>，欢迎大家下载！</li>
 </ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">factorial_recurse</span> <span class="params">(<span class="keyword">int</span> n)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> (n &gt; <span class="number">1</span>) &#123;</div><div class="line">        <span class="keyword">return</span> n * factorial_recurse(n<span class="number">-1</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (n == <span class="number">1</span>) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">-1</span>; <span class="comment">//should never go here</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="Demo地址"><a href="#Demo地址" class="headerlink" title="Demo地址"></a>Demo地址</h1><p><a href=""><a href="https://github.com/kimihe/KMiOSLib/tree/master/KMProgressViewDemo" target="_blank" rel="external">KMProgressViewDemo</a></a></p>
+<a id="more"></a>
+<h1 id="Demo结构"><a href="#Demo结构" class="headerlink" title="Demo结构"></a>Demo结构</h1><p>Demo关键部分由<code>KMUIKitMacro.h</code>，<code>KMProgressView</code>类，以及<code>ViewController</code>类构成。  </p>
 <ul>
-<li>迭代</li>
+<li><code>KMUIKitMacro.h</code>是一些预定义的宏，用于简化代码。</li>
+<li><code>KMProgressView</code>类就是我们实现的自定义控件，后文会着重讲解它。</li>
+<li><code>ViewController</code>类结合storyboard使用我们的自定义控件。</li>
+<li>KMProgressView的使用在头文件<code>KMProgressView.h</code>有详细的注释，大家可以快速掌握使用方法。</li>
+<li>storyboard中有一段说明性的文字，其下是两个button，ProgressCompleted模拟网速良好，进度条成功执行完毕的情况。ProgressFailed则模拟中途失败停止的情况。</li>
 </ul>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">factorial_iteration</span> <span class="params">(<span class="keyword">int</span> n)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">long</span> <span class="keyword">long</span> res = <span class="number">1</span>;</div><div class="line">    <span class="keyword">while</span> (n) &#123;</div><div class="line">        res *= n;</div><div class="line">        n--;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> res;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>可以看到，递归这时并没有带来思考上的便利，反而还会降低计算上的效率。  </p>
-<h3 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h3><p>上文主要让大家快速了解一下基本概念，现在我们还没有分析题目，下面开始。  </p>
-<p>首先就解题而言，因为只是f(4)，递归次数不多，我们只要一步一步做就行。解题过程如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">f0: <span class="keyword">return</span>;</div><div class="line">=&gt;  nothing</div><div class="line"></div><div class="line">f1: print <span class="number">1</span>;  <span class="comment">//1</span></div><div class="line">    f0;       <span class="comment">//nothing</span></div><div class="line">    f0;       <span class="comment">//nothing</span></div><div class="line">=&gt;  <span class="number">1</span></div><div class="line"></div><div class="line">f2: print <span class="number">2</span>   <span class="comment">//2</span></div><div class="line">    f1;       <span class="comment">//1</span></div><div class="line">    f1;       <span class="comment">//1</span></div><div class="line">=&gt; <span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span></div><div class="line"></div><div class="line">f3: print <span class="number">3</span>   <span class="comment">//3</span></div><div class="line">    f2;       <span class="comment">//2, 1, 1  </span></div><div class="line">    f2;       <span class="comment">//2, 1, 1</span></div><div class="line">=&gt;  <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span></div><div class="line"></div><div class="line">f4: print <span class="number">4</span>   <span class="comment">//4</span></div><div class="line">    f3;       <span class="comment">//3, 2, 1, 1, 2, 1, 1</span></div><div class="line">    f3;       <span class="comment">//3, 2, 1, 1, 2, 1, 1</span></div><div class="line">=&gt;  <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span></div></pre></td></tr></table></figure>
-<p>按照步骤慢慢来，是可以笔算做好的。  </p>
-<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>但本文是要给大家讲清楚其内部原理，因此按照传统，后文会从底层汇编来看一下。  </p>
-<p>在此之前，你可能需要知道：</p>
+<h1 id="原理讲解"><a href="#原理讲解" class="headerlink" title="原理讲解"></a>原理讲解</h1><p>我们接下来着重讲解<code>KMProgressView</code>类的实现原理。</p>
+<p>正如上文说明的，我们的KMProgressView是不需要用户控制其frame大小的，作为弹窗它的布局应该固定，只需要根据不同机型的屏幕尺寸做略微的调整。关于屏幕尺寸的获取，可以见<code>KMUIKitMacro.h</code>中的宏。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">//获取屏幕 宽度、高度</div><div class="line">#define kSCREEN_WIDTH          ([UIScreen mainScreen].bounds.size.width)             //!&lt; UIScreen宽度</div><div class="line">#define kSCREEN_HEIGHT         ([UIScreen mainScreen].bounds.size.height)            //!&lt; UIScreen高度</div></pre></td></tr></table></figure></p>
+<h3 id="初始化方法"><a href="#初始化方法" class="headerlink" title="初始化方法"></a>初始化方法</h3><ul>
+<li><code>init</code>方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//此处没有重写initWithFrame方法，因为progressView类似于alert，其大小不需要人为再去设定</div><div class="line">- (instancetype)init</div><div class="line">&#123;</div><div class="line">    self = [super initWithFrame:CGRectMake(0, 0, kboxImageView_width, kboxImageView_height)];</div><div class="line">    if (self) &#123;</div><div class="line">        [self drawProgressViewWithFrame:CGRectMake(0, 0, kboxImageView_width, kboxImageView_height)];</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <ul>
-<li>递归与函数地址压栈和出栈有关，后文统一用push，pop代替。</li>
-<li>取得任意一条指令的地址后，在执行该指令前，都会被送往CS:IP寄存器，以标记当前正在执行的指令的地址。</li>
-<li>执行一个函数前，先从CS:IP寄存器中取出当前指令地址A，把A的下一条指令地址B，即函数断口地址push压栈，函数执行完，pop出断口地址B，把B给CS:IP，继续后续执行。</li>
-<li>所谓断口地址，就是当前汇编指令之后的下一条指令的地址，此处可以理解为函数执行完后，后续程序指令的地址。 </li>
+<li><code>initWithColor:</code>方法</li>
 </ul>
-<p>为了方便理解，我们用下述较为简单的代码讲解：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">fff</span><span class="params">(<span class="keyword">int</span> k)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> (k&gt;<span class="number">0</span>) &#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"before push k: %d\\\\n"</span>, k);</div><div class="line">        fff(k<span class="number">-1</span>);</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"after  pop  k: %d\\\\n"</span>, k);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>执行f(4)的输出结果如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">before push k: <span class="number">4</span></div><div class="line">before push k: <span class="number">3</span></div><div class="line">before push k: <span class="number">2</span></div><div class="line">before push k: <span class="number">1</span></div><div class="line">after  pop  k: <span class="number">1</span></div><div class="line">after  pop  k: <span class="number">2</span></div><div class="line">after  pop  k: <span class="number">3</span></div><div class="line">after  pop  k: <span class="number">4</span></div></pre></td></tr></table></figure>
-<p>可以看到一个上下对称的输出，其中正是push和pop的体现。可以结合下图左侧的堆栈信息，产生一个更直观的印象，如下：<br><img src="http://oesd9di98.bkt.clouddn.com/%E5%A0%86%E6%A0%88%E5%9B%BE.gif" alt="Recurse Log"> </p>
-<h3 id="深入底层"><a href="#深入底层" class="headerlink" title="深入底层"></a>深入底层</h3><p>我们来看一下函数<code>void fff(int)</code>的汇编代码，这里我去掉了printf这部分代码的干扰：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Recurse_Test fff:</div><div class="line">    <span class="number">0x100000dc0</span> &lt;+<span class="number">0</span>&gt;:  pushq  %rbp</div><div class="line">    <span class="number">0x100000dc1</span> &lt;+<span class="number">1</span>&gt;:  movq   %rsp, %rbp</div><div class="line">    <span class="number">0x100000dc4</span> &lt;+<span class="number">4</span>&gt;:  subq   $<span class="number">0x10</span>, %rsp</div><div class="line">    <span class="number">0x100000dc8</span> &lt;+<span class="number">8</span>&gt;:  movl   %edi, <span class="number">-0x4</span>(%rbp)</div><div class="line">    <span class="number">0x100000dcb</span> &lt;+<span class="number">11</span>&gt;: cmpl   $<span class="number">0x0</span>, <span class="number">-0x4</span>(%rbp)</div><div class="line">    <span class="number">0x100000dcf</span> &lt;+<span class="number">15</span>&gt;: jle    <span class="number">0x100000de2</span>               ; &lt;+<span class="number">34</span>&gt; at main.c:<span class="number">71</span></div><div class="line">-&gt;  <span class="number">0x100000dd5</span> &lt;+<span class="number">21</span>&gt;: movl   <span class="number">-0x4</span>(%rbp), %eax</div><div class="line">    <span class="number">0x100000dd8</span> &lt;+<span class="number">24</span>&gt;: subl   $<span class="number">0x1</span>, %eax</div><div class="line">    <span class="number">0x100000ddb</span> &lt;+<span class="number">27</span>&gt;: movl   %eax, %edi</div><div class="line">    <span class="number">0x100000ddd</span> &lt;+<span class="number">29</span>&gt;: callq  <span class="number">0x100000dc0</span>               ; &lt;+<span class="number">0</span>&gt; at main.c:<span class="number">65</span></div><div class="line">    <span class="number">0x100000de2</span> &lt;+<span class="number">34</span>&gt;: addq   $<span class="number">0x10</span>, %rsp</div><div class="line">    <span class="number">0x100000de6</span> &lt;+<span class="number">38</span>&gt;: popq   %rbp</div><div class="line">    <span class="number">0x100000de7</span> &lt;+<span class="number">39</span>&gt;: retq   </div><div class="line">    <span class="number">0x100000de8</span> &lt;+<span class="number">40</span>&gt;: nopl   (%rax,%rax)</div></pre></td></tr></table></figure>
-<p>首先，注意到开头<code>&lt;+0&gt;</code>处的<code>pushq</code>和结尾<code>&lt;+38&gt;</code>处的<code>popq</code>，它们分别表示执行任何一个函数体，都要先把函数的断口地址push进去，执行完后pop回来。</p>
-<p>可以看到push和pop有关的函数的断口地址<code>0x100000dc0</code>是放在寄存器里面的。之后会通过这个地址找到后续要执行的函数的实现（这让我想起了OC Runtime的<code>IMP</code>指针，哈哈）。</p>
-<p>函数首地址通过<code>pushq</code>指令被push后，就会进入函数体，执行函数内的代码，待函数执行完毕，注意<code>&lt;+15&gt;</code>处，汇编代码会执行<code>jle</code>指令跳转到<code>&lt;+34&gt;</code>处，即<code>popq</code>指令前，然后函数断口地址被pop，表明函数生命周期结束，程序继续执行其他内容。</p>
-<p>如果含有递归，注意<code>&lt;+29&gt;</code>处的<code>callq</code>指令，它调用的地址就是被push的函数的断口地址<code>0x100000dc0</code>，而这个断口地址下一步执行的仍旧是该函数（只是所带的参数不同），于是就发生了函数内部调用函数本身，即递归。递归也是一次函数调用，一样会走到<code>&lt;+0&gt;</code>处的<code>pushq</code>，执行完后也要<code>popq</code>。  但递归会在函数返回前继续执行函数本身，似乎不会返回，其实它在等待一个<strong> 终止条件 </strong>，一旦条件到达，递归就会开始pop之前push进去的“函数们”。</p>
-<p>而这里的终止条件就是：<code>当k＝＝0</code>时，代码逻辑不会走<code>if</code>语句，此时函数（现在是f0）就会return，执行<code>popq</code>指令。之后前面被push的f3, f2, f1就会依次pop，执行的相应的<code>popq</code>指令。当最开始的f3被pop结束后，外层的f4函数就正式执行完毕了。 </p>
-<p>一次递归调用f(4)的流程大致就是这样，大家可以真机运行一下，会更容易理解。 </p>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>以上就是关于递归的一些理解，希望能帮助到大家。<br>欢迎大家转载！</p>
-<h3 id="That’s-all-Thanks-for-reading"><a href="#That’s-all-Thanks-for-reading" class="headerlink" title="That’s all. Thanks for reading."></a>That’s all. Thanks for reading.</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">- (instancetype)initWithCoverColor:(UIColor *)color</div><div class="line">&#123;</div><div class="line">    self = [super initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT)];</div><div class="line">    if (self) &#123;</div><div class="line">        [self drawCoverView];</div><div class="line">        [self drawProgressViewWithFrame:CGRectMake(0, 0, kboxImageView_width, kboxImageView_height)];</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们在初始化方法中，并不需要重写<code>initWithFrame:</code>方法，在这里我提供了两种初始化方法：<code>init</code>和<code>initWithCoverColor：</code>。大家可以注意到，Apple原生的alert是带有深色透明背景的，可以突出alert的显示。我们这里也会采用，对于底色我将其称作<strong>遮罩(cover)</strong>。</p>
+<p>知道了这一点，上述两种初始化方法等区别就很简单了，前者不带有遮罩，出现progressView后，用户仍旧可以点击到位于其下方的其他控件。而后者则会有一个遮罩，阻止用户的其他操作，并使progressView显得更加醒目。此外我们遮罩的颜色是可以在初始化时指定的。</p>
+<h3 id="遮罩"><a href="#遮罩" class="headerlink" title="遮罩"></a>遮罩</h3><p>遮罩我们在<code>drawCoverView</code>方法中实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">- (void)drawCoverView</div><div class="line">&#123;</div><div class="line">    //底色遮罩</div><div class="line">    _boxCoverView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kSCREEN_WIDTH, kSCREEN_HEIGHT)];</div><div class="line">    _boxCoverView.backgroundColor = [UIColor blackColor];</div><div class="line">    _boxCoverView.alpha = 0.8;</div><div class="line">    [self insertSubview:_boxCoverView atIndex:0];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>我们根据屏幕尺寸设置遮罩的frame，然后把它作为progressView的最底层。</p>
+<h3 id="图层绘制"><a href="#图层绘制" class="headerlink" title="图层绘制"></a>图层绘制</h3><p>具体的绘制我们在``方法中实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">- (void)drawProgressViewWithFrame:(CGRect)frame</div><div class="line">&#123;</div><div class="line">    self.backgroundColor = [UIColor clearColor];</div><div class="line"></div><div class="line">    //背景图</div><div class="line">    _boxImageView = [[UIImageView alloc] initWithFrame:frame];</div><div class="line">    _boxImageView.backgroundColor = colorFromRGBA(0xFFFFFF, 1.0);</div><div class="line">    _boxImageView.image = [UIImage imageNamed:@&quot;YourPicture&quot;];</div><div class="line">    _boxImageView.center = self.center;</div><div class="line">    _boxImageView.layer.cornerRadius = 5.0;</div><div class="line">    _boxImageView.layer.masksToBounds = YES;</div><div class="line">    [self addSubview:_boxImageView];</div><div class="line"></div><div class="line">    //标题</div><div class="line">    _boxTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(kboxTitleLabel_x, kboxTitleLabel_y, kboxTitleLabel_width, kboxTitleLabel_height)];</div><div class="line">    _boxTitleLabel.textColor = colorFromRGBA(0x333333, 1.0);</div><div class="line">    _boxTitleLabel.font = [UIFont systemFontOfSize:18.0];</div><div class="line">    _boxTitleLabel.text = @&quot;Your Title&quot;;</div><div class="line">    _boxTitleLabel.textAlignment = NSTextAlignmentCenter;</div><div class="line">    _boxTitleLabel.adjustsFontSizeToFitWidth = YES;</div><div class="line">    [_boxImageView addSubview:_boxTitleLabel];</div><div class="line"></div><div class="line">    //进度数值</div><div class="line">    _boxNumberlabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kboxNumberlabel_width, kboxNumberlabel_height)];</div><div class="line">    _boxNumberlabel.textColor = [UIColor whiteColor];</div><div class="line">    _boxNumberlabel.backgroundColor = colorFromRGBA(0xFC5832, 1.0);</div><div class="line">    _boxNumberlabel.text = @&quot;0%&quot;;</div><div class="line">    _boxNumberlabel.textAlignment = NSTextAlignmentCenter;</div><div class="line">    _boxNumberlabel.layer.cornerRadius = 4.0;</div><div class="line">    _boxNumberlabel.layer.masksToBounds = YES;</div><div class="line">    _boxNumberlabel.adjustsFontSizeToFitWidth = YES;</div><div class="line">    _boxNumberlabel.layer.anchorPoint = CGPointMake(0.5, 0.0);</div><div class="line">    _boxNumberlabel.layer.position = CGPointMake(kboxNumberlabel_x, kboxNumberlabel_y);</div><div class="line">    [_boxImageView addSubview:_boxNumberlabel];</div><div class="line"></div><div class="line">    //进度条</div><div class="line">    _boxProgressView = [[UIProgressView alloc] initWithFrame:CGRectMake(kboxProgressView_x, kboxProgressView_y, kboxProgressView_width, kboxProgressView_height)];</div><div class="line">    _boxProgressView.progressViewStyle = UIProgressViewStyleDefault;</div><div class="line">    _boxProgressView.trackTintColor = colorFromRGBA(0xCFCFCF, 1.0);</div><div class="line">    _boxProgressView.progressTintColor = colorFromRGBA(0xFC5832, 1.0);</div><div class="line">    [_boxImageView addSubview:_boxProgressView];</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>分别是UIImage，UILabel，UIProgressView的添加，其中对于UIImage背景我在这里进行了留白，大家可以替换成自己喜爱的图片。此外我们使用了RGBA的宏，同样也可以在<code>KMUIKitMacro.h</code>中找到。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//16进制表示RGBA</div><div class="line">#define colorFromRGBA(rgbValue,trans) [UIColor \</div><div class="line">        colorWithRed:((float)((rgbValue &amp; 0xFF0000) &gt;&gt; 16))/255.0 \</div><div class="line">               green:((float)((rgbValue &amp; 0xFF00) &gt;&gt; 8))/255.0 \</div><div class="line">                blue:((float)(rgbValue &amp; 0xFF))/255.0 alpha:trans]</div></pre></td></tr></table></figure></p>
+<p>你可能会注意到_boxNumberlabel中使用了一些layer相关的方法，关于layer，之后我也会结合<a href="https://github.com/kimihe/KMiOSLib/tree/master/BezierCurve_Test" target="_blank" rel="external"><a href="https://github.com/kimihe/KMiOSLib/tree/master/BezierCurve_Test" target="_blank" rel="external">BezierCurve_Test</a></a>另开一篇文章详细讲解，这方面的知识还是比较繁琐的。</p>
+<h3 id="控件属性的设置"><a href="#控件属性的设置" class="headerlink" title="控件属性的设置"></a>控件属性的设置</h3><p>我们在<code>KMProgressView.h</code>中提供了几个设置其属性的方法。</p>
+<ul>
+<li><code>- (void)setState:(KMProgressViewState)state withProgress:(float)progress</code><br>在该方法中我们根据状态state和进度progress来设置控件的样式，其中state我们使用了枚举来包含几种可能的情况：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">typedef NS_ENUM(NSInteger, KMProgressViewState)</div><div class="line">&#123;</div><div class="line">    KMProgressView_Begin,</div><div class="line">    KMProgressView_Uploading,</div><div class="line">    KMProgressView_Completed,</div><div class="line">    KMProgressView_Failed</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>而在progress中，我们根据它的值来动态显示进度，progress是一个[0,1]区间的float值，0表明刚开始，1表示完成。这里我们还用到了layer的一些可动画属性，我们也会在今后关于layer的文章中具体讲解。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">CGFloat offset = kboxProgressView_width * progress;</div><div class="line">_boxNumberlabel.layer.position = CGPointMake(kboxNumberlabel_x + offset, kboxNumberlabel_y);</div></pre></td></tr></table></figure></p>
+<ul>
+<li><code>- (void)showAt:(UIView *)view</code><br>这是让控件显示的方法，我们通过<code>self.center = view.window.center;</code>让控件位于视图的最顶层。同时也使用了UIView的一些动画过度方法，它的使用很简单。</li>
+<li><code>- (void)remove</code><br>这是让控件消失，我们通过延迟执行来取得更好的动画效果。</li>
+</ul>
+<h1 id="如何使用该控件"><a href="#如何使用该控件" class="headerlink" title="如何使用该控件"></a>如何使用该控件</h1><p>参考<code>ViewController.m</code>中的示例，结合模拟器运行，大家可以更好地理解该控件的使用场景。<br><img src="http://oesd9di98.bkt.clouddn.com/KMProgressView.gif" alt="运行示意图"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文通过实际编写一个progressView来向大家演示如何自定义一个控件，涉及到了各种不同的小知识点，希望对大家有所帮助。更多绘图方面的知识，请继续关注后续的文章，感谢阅读！</p>
+
       
     </div>
 
@@ -478,13 +477,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/计算机基础/" rel="tag">#计算机基础</a>
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
           
-            <a href="/tags/C/" rel="tag">#C</a>
+            <a href="/tags/UIView/" rel="tag">#UIView</a>
           
-            <a href="/tags/汇编/" rel="tag">#汇编</a>
+            <a href="/tags/progressView/" rel="tag">#progressView</a>
           
-            <a href="/tags/递归/" rel="tag">#递归</a>
+            <a href="/tags/自定义控件/" rel="tag">#自定义控件</a>
           
         </div>
       
@@ -493,17 +492,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/09/我的简书/" rel="next" title="我的简书">
-                <i class="fa fa-chevron-left"></i> 我的简书
+              <a href="/2016/10/10/layoutSubviews小结/" rel="next" title="layoutSubviews小结">
+                <i class="fa fa-chevron-left"></i> layoutSubviews小结
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/10/10/layoutSubviews小结/" rel="prev" title="layoutSubviews小结">
-                layoutSubviews小结 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -518,10 +513,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/10/10/通过一道数据结构题谈递归(C和汇编)/"
-     data-title="通过一道数据结构题谈递归(C和汇编)"
+        <div class="ds-share flat" data-thread-key="2016/10/12/如何实现一个自定义progressView/"
+     data-title="如何实现一个自定义progressView"
      data-content=""
-     data-url="https://kimihe.github.io/2016/10/10/通过一道数据结构题谈递归(C和汇编)/">
+     data-url="https://kimihe.github.io/2016/10/12/如何实现一个自定义progressView/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -548,8 +543,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/10/10/通过一道数据结构题谈递归(C和汇编)/"
-           data-title="通过一道数据结构题谈递归(C和汇编)" data-url="https://kimihe.github.io/2016/10/10/通过一道数据结构题谈递归(C和汇编)/">
+      <div class="ds-thread" data-thread-key="2016/10/12/如何实现一个自定义progressView/"
+           data-title="如何实现一个自定义progressView" data-url="https://kimihe.github.io/2016/10/12/如何实现一个自定义progressView/">
       </div>
     
   </div>
@@ -691,7 +686,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归和迭代"><span class="nav-number">2.</span> <span class="nav-text">递归和迭代</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解题"><span class="nav-number">3.</span> <span class="nav-text">解题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析"><span class="nav-number">4.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#深入底层"><span class="nav-number">5.</span> <span class="nav-text">深入底层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">6.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#That’s-all-Thanks-for-reading"><span class="nav-number">7.</span> <span class="nav-text">That’s all. Thanks for reading.</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Demo地址"><span class="nav-number">2.</span> <span class="nav-text">Demo地址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Demo结构"><span class="nav-number">3.</span> <span class="nav-text">Demo结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原理讲解"><span class="nav-number">4.</span> <span class="nav-text">原理讲解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化方法"><span class="nav-number">4.0.1.</span> <span class="nav-text">初始化方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#遮罩"><span class="nav-number">4.0.2.</span> <span class="nav-text">遮罩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图层绘制"><span class="nav-number">4.0.3.</span> <span class="nav-text">图层绘制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控件属性的设置"><span class="nav-number">4.0.4.</span> <span class="nav-text">控件属性的设置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何使用该控件"><span class="nav-number">5.</span> <span class="nav-text">如何使用该控件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
           </div>
         </section>
