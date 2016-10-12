@@ -6,7 +6,10 @@
     <entry>
       <title><![CDATA[如何实现一个自定义progressView]]></title>
       <url>https://kimihe.github.io/2016/10/12/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E8%87%AA%E5%AE%9A%E4%B9%89progressView/</url>
-      <content type="html"><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>在上一篇文章中，我们提到会通过编写一个progressView来学习自定义控件，在学习了layoutSubviews之后，我们对于控件布局有了更多的了解。  </p>
+      <content type="html"><![CDATA[<blockquote>
+<p>文章也同时在<a href="http://www.jianshu.com/p/045773740b6a" target="_blank" rel="external">简书</a>更新 </p>
+</blockquote>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>在上一篇文章中，我们提到会通过编写一个progressView来学习自定义控件，在学习了layoutSubviews之后，我们对于控件布局有了更多的了解。  </p>
 <p>在这篇文章中，我们将会讲解如何自己实现一个porgressView，并一次来说明如何继承UIView来编写自己的控件。  </p>
 <p>为了简便地讲解，我们的porgressView将会按照alert的形式来展现，请注意以下几个说明：</p>
 <ul>
