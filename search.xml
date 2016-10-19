@@ -6,7 +6,10 @@
     <entry>
       <title><![CDATA[读笔_代码整洁之道-程序员的职业素养(第1章-专业主义)]]></title>
       <url>https://kimihe.github.io/2016/10/19/%E8%AF%BB%E7%AC%94_%E4%BB%A3%E7%A0%81%E6%95%B4%E6%B4%81%E4%B9%8B%E9%81%93-%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E8%81%8C%E4%B8%9A%E7%B4%A0%E5%85%BB(%E7%AC%AC1%E7%AB%A0-%E4%B8%93%E4%B8%9A%E4%B8%BB%E4%B9%89)/</url>
-      <content type="html"><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本篇关于《代码整洁之道-程序员的职业素养》的第1章：专业主义。<br><a id="more"></a></p>
+      <content type="html"><![CDATA[<blockquote>
+<p>文章也同时在<a href="http://www.jianshu.com/p/045773740b6a" target="_blank" rel="external">简书</a>更新</p>
+</blockquote>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本篇关于《代码整洁之道-程序员的职业素养》的第1章：专业主义。<br><a id="more"></a></p>
 <h1 id="摘录"><a href="#摘录" class="headerlink" title="摘录"></a>摘录</h1><ul>
 <li>当发现问题时，在着手解决前，你能够“重现”它吗？先重现吧！</li>
 <li>What is QA？ - Quality Assurance. </li>
@@ -31,7 +34,10 @@
     <entry>
       <title><![CDATA[读笔_代码整洁之道-程序员的职业素养(引言)]]></title>
       <url>https://kimihe.github.io/2016/10/19/%E8%AF%BB%E7%AC%94_%E4%BB%A3%E7%A0%81%E6%95%B4%E6%B4%81%E4%B9%8B%E9%81%93-%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E8%81%8C%E4%B8%9A%E7%B4%A0%E5%85%BB(%E5%BC%95%E8%A8%80)/</url>
-      <content type="html"><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>昨天《代码整洁之道-程序员的职业素养》以及《汇编语言-基于Linux环境》到达，终于要踏上重修底层基础，恶补专业技能之路了。  </p>
+      <content type="html"><![CDATA[<blockquote>
+<p>文章也同时在<a href="http://www.jianshu.com/p/045773740b6a" target="_blank" rel="external">简书</a>更新</p>
+</blockquote>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>昨天《代码整洁之道-程序员的职业素养》以及《汇编语言-基于Linux环境》到达，终于要踏上重修底层基础，恶补专业技能之路了。  </p>
 <p>此前虽然也读了很多书，但时间一长也大多遗忘了其中的要义。思来想去，解决上述困境，坚持写读书笔记似乎是一个好的办法。回想起高中语文老师强迫我们写读笔，当时极其反感，现在却甚感亲切。  </p>
 <p>在这里我就先预定把上述两本书认真读完吧！读笔主要分两部分，先是一些重要的摘录，然后是一些个人的理解和感想。本篇主要涉及《代码整洁之道-程序员的职业素养》的序和引言，即目录前的那些部分。</p>
 <a id="more"></a>
