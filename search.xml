@@ -7,7 +7,7 @@
       <title><![CDATA[读笔_汇编语言-基于Linux环境(第3章-摘下面具探索计算机的真正面目)]]></title>
       <url>https://kimihe.github.io/2016/10/20/%E8%AF%BB%E7%AC%94_%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80-%E5%9F%BA%E4%BA%8ELinux%E7%8E%AF%E5%A2%83(%E7%AC%AC3%E7%AB%A0-%E6%91%98%E4%B8%8B%E9%9D%A2%E5%85%B7%E6%8E%A2%E7%B4%A2%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E7%9C%9F%E6%AD%A3%E9%9D%A2%E7%9B%AE)/</url>
       <content type="html"><![CDATA[<blockquote>
-<p>文章也同时在<a href="http://www.jianshu.com/p/59522da0a789" target="_blank" rel="external">简书</a>更新  </p>
+<p>文章也同时在<a href="http://www.jianshu.com/p/f2b7b513acb1" target="_blank" rel="external">简书</a>更新  </p>
 </blockquote>
 <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本篇是关于《汇编语言-基于Linux环境》的第3章：摘下面具探索计算机的真正面目。  </p>
 <p>学习底层或许能够让自己更加深刻地理解计算机的原理，理解它每一个组成部分正在做的事情，以及它们是如何协同工作的。在使用汇编时，你与计算机的距离就最大限度地缩短了，或许只有汇编语言程序员才真正有资格声称是计算机的主人。  </p>
