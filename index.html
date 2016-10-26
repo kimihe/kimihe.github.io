@@ -298,6 +298,144 @@
             
               
                 
+                <a class="post-title-link" href="/2016/10/26/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置I)/" itemprop="url">
+                  读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置I)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-26T18:52:35+08:00" content="2016-10-26">
+              2016-10-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/26/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置I)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/26/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置I)/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/10/26/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置I)/" class="leancloud_visitors" data-flag-title="读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置I)">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>文章也同时在<a href="http://www.jianshu.com/p/8a01e00bad5d">简书</a>更新</p>
+</blockquote>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本章节着重阐述x86的内存寻址机制，理解内存寻址是一项艰苦的过程，但是一旦掌握其中的精髓，将会收获一生受用(程序员生涯)的技能，这是令人激动的。  </p>
+<p>我在本科以及考研期间，都有系统地学习过《微型计算机原理与接口技术》，其中涉及到汇编的部分详细地讲解了内存寻址，因此这一次在本书中再次看到这方面的知识，是怀着一种怀旧和重温的心境的。本以为之前已经学得不错了，这次再读，果然如作者所说，会有新的知识 <strong>GET DA☆ZE!!!</strong>  </p>
+<p>作为一名从计算机专业科班出身的人来说，将来不管是做什么，可能都或多或少无法割离编程了，甚至可以说编程的影响已经深入我的生活中，它是一种思维方式。而计算机也几乎是我们谋生的首选技能，当然一味地以金钱和收入来衡量计算机专业的价值是对这门科学的不尊重。大家可以看到现在软件行业门槛低，收入高，非常多的人趋之若鹜，大多是以追求高收入为首要目标，真正从心底热爱它，撇去名利地想去钻研它的人还是非常少的。这里我不会去评价这种现象，它存在必然有它的合理性。但不管我们是以何种动机踏入计算机科学的领域，我们都希望能够在这方面做的出色。，至少能够做一个<strong>优秀的程序员</strong>。  </p>
+<p>想做到这一点，需要我们付出艰苦的努力，我现在越来越感受到基础知识的重要性，有一个好的计算机专业基础，将会极大提高我们学习新知识的能力。而在基础知识中，我认为底层方面计算机的基本原理是非常重要的，这也是为什么我会在互联网时代还会去学一门大多数人嗤之以鼻的汇编语言。本身我业余兴趣是做iOS，iOS做到后来需要强力的C语言支持，而C语言又会牵扯出更多底层的知识：Linux，数据结构，计算机网络，操作系统，算法等等。恰恰这也是各大一流企业所看重的基本技能。所以，如果你想成为一个优秀的程序员，可能就需要在这些方面花点精力进行提高了。当然，学习的知识有很多，不局限与我所说的，如果你有兴趣和我一起学习计算机底层的知识，那将是我的荣幸，非常欢迎你的加入！  </p>
+<p>我们开始吧！</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/26/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置I)/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/10/22/台风、张江、搬家/" itemprop="url">
                   台风、张江、搬家
                 </a>
@@ -1393,7 +1531,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">9</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
