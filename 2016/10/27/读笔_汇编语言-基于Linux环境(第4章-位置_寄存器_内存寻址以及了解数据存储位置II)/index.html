@@ -100,7 +100,7 @@
 <meta property="og:description" content="文章也同时在简书更新
 
 引言本篇文章继续第四章关于内存寻址的探讨，主要介绍各类寄存器。">
-<meta property="og:updated_time" content="2016-10-27T07:10:22.000Z">
+<meta property="og:updated_time" content="2016-10-27T11:07:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="读笔 汇编语言-基于Linux环境(第4章-位置:寄存器、内存寻址以及了解数据存储位置II)">
 <meta name="twitter:description" content="文章也同时在简书更新
@@ -383,6 +383,7 @@
 <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本篇文章继续第四章关于内存寻址的探讨，主要介绍各类寄存器。</p>
 <a id="more"></a>
 <h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><h3 id="16位和32位段寄存器"><a href="#16位和32位段寄存器" class="headerlink" title="16位和32位段寄存器"></a>16位和32位段寄存器</h3><p>不管CPU正在做什么，只要他对内存中某一个位置进行寻址，那么该位置的段地址就会出现在6个寄存器之一中。  </p>
+<p><strong>所有的段寄存器大小都是16位</strong>！<strong>所有的段寄存器大小都是16位</strong>！！<strong>所有的段寄存器大小都是16位</strong>！！！无论CPU是什么型号，甚至是对于32位CPU来说也是如此。  </p>
 <ul>
 <li><strong>CS(code segment)代码段</strong>：<strong>机器指令</strong>存放在代码段的某些偏移位置处。CS包含当前执行指令的代码段的段地址。</li>
 <li><strong>DS(data segment)数据段</strong>：<strong>变量</strong>和其他<strong>数据</strong>存放在数据段的某些偏移位置处。也许会有很多个数据段，但CPU一次只能使用一个，这是通过将该段的段地址放入寄存器DS来实现的。</li>
@@ -474,6 +475,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2016/10/27/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置III)/" rel="prev" title="读笔 汇编语言-基于Linux环境(第4章-位置:寄存器、内存寻址以及了解数据存储位置II)">
+                读笔 汇编语言-基于Linux环境(第4章-位置:寄存器、内存寻址以及了解数据存储位置II) <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -563,7 +568,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-count">11</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
