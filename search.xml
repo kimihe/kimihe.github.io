@@ -6,7 +6,10 @@
     <entry>
       <title><![CDATA[读笔 汇编语言-基于Linux环境(第4章-位置:寄存器、内存寻址以及了解数据存储位置III)]]></title>
       <url>https://kimihe.github.io/2016/10/27/%E8%AF%BB%E7%AC%94_%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80-%E5%9F%BA%E4%BA%8ELinux%E7%8E%AF%E5%A2%83(%E7%AC%AC4%E7%AB%A0-%E4%BD%8D%E7%BD%AE_%E5%AF%84%E5%AD%98%E5%99%A8_%E5%86%85%E5%AD%98%E5%AF%BB%E5%9D%80%E4%BB%A5%E5%8F%8A%E4%BA%86%E8%A7%A3%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E4%BD%8D%E7%BD%AEIII)/</url>
-      <content type="html"><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本文将作为第四章的收尾，主要介绍三种主要的汇编编程模型，并顺带提及64位长模式。</p>
+      <content type="html"><![CDATA[<blockquote>
+<p>文章也同时在<a href="http://www.jianshu.com/p/61342af55df6" target="_blank" rel="external">简书</a>更新</p>
+</blockquote>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本文将作为第四章的收尾，主要介绍三种主要的汇编编程模型，并顺带提及64位长模式。</p>
 <a id="more"></a>
 <h1 id="摘录"><a href="#摘录" class="headerlink" title="摘录"></a>摘录</h1><h3 id="实模式平面模型"><a href="#实模式平面模型" class="headerlink" title="实模式平面模型"></a>实模式平面模型</h3><ul>
 <li>在实模式平面模型下，程序和它处理的所有数据都必须位于一个<strong>64KB</strong>大小的内存块中。</li>
