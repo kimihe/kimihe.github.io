@@ -112,7 +112,7 @@
 2. Demo地址KMNi">
 <meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/AlipayGesturePasswd3.PNG">
 <meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/KMNineBoxView222.gif">
-<meta property="og:updated_time" content="2016-10-30T08:47:32.000Z">
+<meta property="og:updated_time" content="2016-10-30T08:52:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="实现仿支付宝九宫格手势密码">
 <meta name="twitter:description" content="文章也同时在简书更新
@@ -469,7 +469,7 @@
 <p>记录过程如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">NSString *checkStr = [NSString stringWithFormat:@&quot;%ld&quot;, circleIndex+1];//加1</div><div class="line">if (![self checkString:checkStr isInArray:_sequenceArr]) &#123;</div><div class="line">    // 不允许重复添加</div><div class="line">    [_sequenceArr addObject:checkStr];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>其中结合<code>- (BOOL)checkString:isInArray:</code>方法实现去重添加，因为手势是实时检测的，那么对于落点的判断结果就会实时反馈，对于某一个圆圈，我们只希望记录下一次，于是去重是必须的。  </p>
-<p><strong><code>_sequenceArr</code>记录下了手势移动的轨迹序列，这也是一部非常关键的操作。</strong></p>
+<p><strong><code>_sequenceArr</code>记录下了手势移动的轨迹序列，这也是非常关键的一步操作。</strong></p>
 <h3 id="7-6-圆圈间的连接线"><a href="#7-6-圆圈间的连接线" class="headerlink" title="7.6 圆圈间的连接线"></a>7.6 圆圈间的连接线</h3><p>有了上述步骤记录下的轨迹序列，我们就能方便地画出连线了。思路比较简单，取出<code>_sequenceArr</code>中的最后两个元素，作为最近扫过的两个点，在两点之间进行连线。  </p>
 <p>不过需要注意，我们不希望重复画线，即两点间已经有连线了，在下一次绘制时最新的两点没有变化时，就不需要再画线了，判断代码如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// 新的两点连线，才继续画</div><div class="line">if ([KMMathHelper point1:currentBoxCenter EqualToPoint2:_currentBoxCenter] &amp;&amp;</div><div class="line">	[KMMathHelper point1:previousBoxCenter EqualToPoint2:_previousBoxCenter]) &#123;</div><div class="line">    return;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
