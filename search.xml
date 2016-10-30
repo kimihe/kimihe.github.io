@@ -4,6 +4,74 @@
   
     
     <entry>
+      <title><![CDATA[实现仿支付宝九宫格手势密码]]></title>
+      <url>https://kimihe.github.io/2016/10/30/%E5%AE%9E%E7%8E%B0%E4%BB%BF%E6%94%AF%E4%BB%98%E5%AE%9D%E4%B9%9D%E5%AE%AB%E6%A0%BC%E6%89%8B%E5%8A%BF%E5%AF%86%E7%A0%81/</url>
+      <content type="html"><![CDATA[<h1 id="1-引言"><a href="#1-引言" class="headerlink" title="1. 引言"></a>1. 引言</h1><p>前几天支付宝刚刚更新了双十一logo，各电商备战的氛围越来越浓厚。支付宝每天都用得相当频繁，为提高账户安全性，我开启了<strong>“手势密码”</strong>功能，首次进入敏感页面会要求验证九宫格手势来解锁。  </p>
+<div align="center"><br><img src="http://oesd9di98.bkt.clouddn.com/AlipayGesturePasswd.PNG" alt="运行示意图"><br></div>
+
+
+<p>这个九宫格和安卓上面的绘图解锁非常类似，这引起了我自制一个的想法。而且最近一直在看微机汇编，有段时间没有搞iOS了，为避免生疏就拿它练手吧。  </p>
+<h1 id="2-Demo地址"><a href="#2-Demo地址" class="headerlink" title="2. Demo地址"></a>2. Demo地址</h1><p><a href="https://github.com/kimihe/KMiOSLib/tree/master/KMNineBoxDemo" target="_blank" rel="external">KMNineBoxDemo</a><br>Demo中仍有不少可以进一步改进的地方，欢迎各位读者提出宝贵意见。 </p>
+<h1 id="3-效果预览"><a href="#3-效果预览" class="headerlink" title="3. 效果预览"></a>3. 效果预览</h1><p>这里的图案是绘制数字2的形状，对应的手势序列就是123654789。</p>
+<p><div align="center"><br><img src="http://oesd9di98.bkt.clouddn.com/KMNineBoxView222.gif" alt="效果预览"><br></div><br>可以看到九宫格手势较好地检测了触摸点的位置，跟踪了手势，并在验证后反馈不同的显示效果。绘制的手势图案除了简单的一步到底的图案，你也可以绘制一些连线交叉的复杂图案。  </p>
+<a id="more"></a>
+<h1 id="4-几点说明"><a href="#4-几点说明" class="headerlink" title="4. 几点说明"></a>4. 几点说明</h1><ul>
+<li>虽说是仿支付宝的手势密码，但由于水平有限，难以100%仿制。大家可以看到图案的颜色和大小有些许不同，这里也是尽量模仿。</li>
+<li>支付宝的手势密码在绘制图案时，会有箭头指向以及实时更新的连线，连线会跟随用户的手指不断移动，这里的箭头我没有增加进去，但应该是较容易实现的，主要是没有箭头的切图。而实时跟踪的连线，我暂时还没有想到特别好的融合方法，虽说也可以加入，但总觉得以目前水平写出来的实时连线，效率不高，故没有加入。</li>
+<li>至于上方的两个label，都可以通过<strong>KMNineBoxView</strong>的接口中拿到验证和手势序列信息，设置起来非常简单。  </li>
+</ul>
+<h1 id="5-如何使用该控件"><a href="#5-如何使用该控件" class="headerlink" title="5. 如何使用该控件"></a>5. 如何使用该控件</h1><p>参考<code>ViewController.m</code>中的示例，结合模拟器运行，大家可以快读地理解该控件的使用场景。  </p>
+<p>在<code>KMNineBoxView.h</code>中说明了几个接口的使用说明。这里需要注意的一点是，为了能够较好地根据验证结果返回显示，在使用前需要设置好正确的密码序列，然后在用户绘制完手势图案后，会进行比较，根据结果显示不同的颜色。  </p>
+<p><code>- (void)nineBoxDidFinishWithState:(KMNineBoxState)state passSequence:(NSString *)passSequence;</code>这个接口中也会返回验证结果和用户绘制的序列，<strong>KMNineBoxView</strong>本身已经会自动根据验证结果设置不同的显示，这里还提供这个接口主要是给用户更大的自由度，方便用户进行更多的个性化设置。例如用户可以根据拿到的用户序列，提示用户一些信息，正如Demo里面的使用情景。</p>
+<h1 id="6-Demo结构"><a href="#6-Demo结构" class="headerlink" title="6. Demo结构"></a>6. Demo结构</h1><p>Demo主要由<code>KMUIKitMacro.h</code>头文件，<code>KMMathHelper</code>类，<code>KMNineBoxView</code>类，以及<code>ViewController</code>类构成。  </p>
+<ul>
+<li><code>KMUIKitMacro.h</code>头文件是一些预定义的宏，用于简化代码。</li>
+<li><code>KMMathHelper</code>类提供了一些数学计算工具。</li>
+<li><code>KMNineBoxView</code>类就是我们实现的九宫格手势密码，后文会着重讲解它。</li>
+<li><code>ViewController</code>类结合storyboard使用我们的自定义控件。</li>
+</ul>
+<h1 id="7-原理讲解"><a href="#7-原理讲解" class="headerlink" title="7. 原理讲解"></a>7. 原理讲解</h1><h3 id="7-1-难点"><a href="#7-1-难点" class="headerlink" title="7.1 难点"></a>7.1 难点</h3><p>首先罗列一些实现过程中我认为的难点，其实与其说是难点，不如说是需要注意或者是可以优化的地方。  </p>
+<ul>
+<li>Layer的布局，显示正确的图案。</li>
+<li>用户手势的状态，以此对应设置<strong>KMNineBoxView</strong>状态。</li>
+<li>用户触摸点的位置判断，即落在9格圆圈的哪一个里面。</li>
+<li>跟踪用户触摸过的轨迹，即记录下9个圆圈哪些被触摸过，以及它们的顺序。</li>
+<li>圆圈间的连接线。</li>
+<li>给予手势反馈结果，即验证通过还是手势错误。</li>
+</ul>
+<p><strong>下面的讲解着重说明思路和注意点，代码会贴上一些关键部分，完整的代码请见工程。</strong>  </p>
+<h3 id="7-2-Layer布局"><a href="#7-2-Layer布局" class="headerlink" title="7.2 Layer布局"></a>7.2 Layer布局</h3><p>常见地重写<code>- (instancetype)initWithFrame:(CGRect)frame</code>方法，提供初始化方法，并在其中计算一些布局尺寸和画出9个基本的圆圈，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">- (instancetype)initWithFrame:(CGRect)frame</div><div class="line">&#123;</div><div class="line">    self = [super initWithFrame:frame];</div><div class="line">    if (self) &#123;</div><div class="line">        [self initData];</div><div class="line">        [self setupBoundsAndFrame];</div><div class="line">        [self drawNineBox];</div><div class="line">    &#125;</div><div class="line">    return self;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>考虑到用户可能会跳针view的frame，因此需要启用<code>- (void)layoutSubviews</code>方法，在其中重新计算布局，并调整圆圈的frame，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">- (void)layoutSubviews</div><div class="line">&#123;</div><div class="line">    //改变frame，subviews，sublayers会跑进来</div><div class="line">    [self setupBoundsAndFrame];</div><div class="line">    [self reloadNineBox];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里需要注意<strong>layoutSubviews</strong>这个方法的使用，如果不明白其中的原理，可以戳这篇文章学习一下：<a href="http://kimihe.com/2016/10/10/layoutSubviews%E5%B0%8F%E7%BB%93/" target="_blank" rel="external">layoutSubviews小结</a>，否则可能会遇到一些奇怪的问题。</p>
+<p>常见的一个问题就是在其中重新布局时，需要重绘view或者layer，重绘这一步本身没什么问题，但是一般我们后续都会不自觉地加上<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">所以我在这里调用的`reloadNineBox`方法中，没有重绘操纵，只有修改布局。而对于修改布局，以往常用的layer的position属性在这里**有点迷**，似乎是一个相对位置，控制起来不直观。考虑到layer的圆圈和中心点是基于`UIBezierPath`来绘制的，我索性就更新了这个path。  </div><div class="line"></div><div class="line">上述的layer圆圈和中心点在`drawNineBox`中完成绘制，其中绘制所需的布局信息在`setupBoundsAndFrame`中进行计算。并且信息存储在两个成员数组中，**这两个数组非常重要：**</div></pre></td></tr></table></figure></p>
+<p>//保存9个circleLayer的数组会随frame变化<br>NSMutableArray *_nineCirclesArr;  </p>
+<p>//保存9个中心点的位置，会随frame变化<br>NSArray *_boxCentersArr;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">可以看到在`initWithFrame:`和`layoutSubviews `中都调用了**setupBoundsAndFrame**方法，这就是所谓实现了整个view能够根据用户对于frame的调整，自动配置内部各layer的位置，使整个view能够正确布局。</div><div class="line"></div><div class="line">### 7.3 用户手势的状态</div><div class="line">整个view需要区分不同的几个状态，从而实现各阶段的功能，我在这里通过**枚举**把状态分为四个：</div><div class="line"></div><div class="line">* **KMNineBoxStateNormal：普通状态，**即初始的用户未进行任何触摸操作前的状态，同时在完成验证反馈结果后，需要返回这个状态。</div><div class="line">* **KMNineBoxStateTouched：触摸状态，**表明用户正在绘制手势图案，被扫过的圆圈会高亮加粗，并且进行连线。</div><div class="line">* **KMNineBoxStatePassed：验证通过状态，**在完成绘制后会立刻进行手势密码的验证，这里表明手势正确，通过验证。</div><div class="line">* **KMNineBoxStateFailed：验证失败状态，**表明手势密码错误，同时被扫过的圆圈和连线变成红色，提升用户手势错误。</div><div class="line"></div><div class="line">`- (void)setNineBoxState:(KMNineBoxState)nineBoxState`方法中实现对不同状态的操作。  </div><div class="line"></div><div class="line">### 7.4 用户触摸点的位置判断</div><div class="line">绘制九宫格手势时，需要适时标记被扫过的圆圈，使其高亮加粗，这就需要对用户的触摸点进行位置判断。  </div><div class="line"></div><div class="line">思路就是现获取用户手指的位置，然后再计算落在9个圆圈哪一个的**“管辖范围”**内。由于9个圆圈不相交，所以触摸点同一时刻只可能落在一个圆圈的范围内。  </div><div class="line"></div><div class="line">首先，通过`UIResponder`的三个touch event获取手指的三个不同状态：</div><div class="line"></div><div class="line">* 刚刚触碰到屏幕</div><div class="line">* 在屏幕上移动</div><div class="line">* 离开了屏幕</div><div class="line"></div><div class="line">三个接口如下:</div></pre></td></tr></table></figure></p>
+<ul>
+<li><p>(void)touchesBegan:(NSSet<uitouch *=""> <em>)touches withEvent:(nullable UIEvent </em>)event<br>{<br>  CGPoint point = [[touches anyObject] locationInView:self];</uitouch></p>
+<p>  KMNineBoxIndex index = [self checkLocationWithTouchPoint:point];<br>  [self decorateCircleWithBoxIndex:index];<br>}</p>
+</li>
+<li><p>(void)touchesMoved:(NSSet<uitouch *=""> <em>)touches withEvent:(UIEvent </em>)event<br>{<br>  CGPoint point = [[touches anyObject] locationInView:self];</uitouch></p>
+<p>  KMNineBoxIndex index = [self checkLocationWithTouchPoint:point];<br>  [self decorateCircleWithBoxIndex:index];<br>}</p>
+</li>
+<li><p>(void)touchesEnded:(NSSet<uitouch *=""> <em>)touches withEvent:(UIEvent </em>)event<br>{<br>  // sth reset<br>  …<br>  …<br>}</uitouch></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">可以看到在Began和Moved状态中进行了触摸点位置的判断。 </div><div class="line"> </div><div class="line">`- (KMNineBoxIndex)checkLocationWithTouchPoint:(CGPoint)touchPoint `方法中进行来上述操作。它会返回一个**KMNineBoxIndex**枚举类型，表明现在手中落在哪一个圆圈范围内，例如落在圆圈3中时，就会返回KMNineBoxIndex3。  </div><div class="line"></div><div class="line">而具体的判断落点的算法，我在实现时思路比较简单，就是计算触摸点与九个圆圈中心点距离，找出最短距离，在最短距离不大于圆圈半径的前提下，就认为触摸点落在这个圆的范围内。**这里面的计算最短距离，甚至整个落点的判断都是可以进一步优化的，欢迎大家提出建议。**  </div><div class="line"></div><div class="line">之后便可以根据这个index信息去修饰对应的圆圈，使其高亮加粗。通过`- (void)decorateCircleWithBoxIndex:(KMNineBoxIndex)index`方法来进行。</div><div class="line"></div><div class="line">### 7.5 跟踪用户触摸过的轨迹 </div><div class="line">完成扫过的圆圈高亮加粗后，我们还需要记录下这些被扫过的圆圈，以及它们的序列。目的就是为了能够在移动手指时，提供圆圈间的连线，并且在手势验证失败时，把这些圆圈加以红色。此外还要能够方便我们提取出手势的序列，在接口中提供用户使用。  </div><div class="line"></div><div class="line">这里是用了一个成员数组来记录上述信息：</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>// 保存九宫格序列的数组，会随触摸手势变化<br>NSMutableArray *_sequenceArr;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">记录过程如下：</div></pre></td></tr></table></figure></p>
+<p>NSString *checkStr = [NSString stringWithFormat:@”%ld”, circleIndex+1];//加1<br>if (![self checkString:checkStr isInArray:_sequenceArr]) {<br>    // 不允许重复添加<br>    [_sequenceArr addObject:checkStr];<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">其中结合`- (BOOL)checkString:isInArray:`方法实现去重添加，因为手势是实时检测的，那么对于落点的判断结果就会实时反馈，对于某一个圆圈，我们只希望记录下一次，于是去重是必须的。  </div><div class="line"></div><div class="line">**`_sequenceArr`记录下了手势移动的轨迹序列，这也是一部非常关键的操作。**</div><div class="line">### 7.6 圆圈间的连接线  </div><div class="line">有了上述步骤记录下的轨迹序列，我们就能方便地画出连线了。思路比较简单，取出`_sequenceArr`中的最后两个元素，作为最近扫过的两个点，在两点之间进行连线。  </div><div class="line"></div><div class="line">不过需要注意，我们不希望重复画线，即两点间已经有连线了，在下一次绘制时最新的两点没有变化时，就不需要再画线了，判断代码如下：</div></pre></td></tr></table></figure></p>
+<p>// 新的两点连线，才继续画<br>if ([KMMathHelper point1:currentBoxCenter EqualToPoint2:_currentBoxCenter] &amp;&amp;<br>    [KMMathHelper point1:previousBoxCenter EqualToPoint2:_previousBoxCenter]) {<br>    return;<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">此外，只有一个序列点时，也不画线，因为二维平面内两个点才确定一条直线嘛！</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">### 7.7 给予手势反馈结果</div><div class="line">经过上述一系列步骤，我们的手势密码基本成型，接下来就只需要反馈验证的结果，以及提供接口给用户。  </div><div class="line"></div><div class="line">在手势密码本身的反馈显示中，如果密码验证成功，将会返回普通状态。而如果验证失败，则被扫过的圆圈会以红色提醒用户，代码如下：</div></pre></td></tr></table></figure></p>
+<p>if ([self.predefinedPassSeq isEqualToString:sequenceStr]) {<br>    [self setNineBoxState:KMNineBoxStatePassed];<br>}<br>else {<br>    [self setNineBoxState:KMNineBoxStateFailed];<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">而对于协议接口给予用户的信息，首先需要提取出手势序列，将其转化成数字1-9组成的字符串：</div></pre></td></tr></table></figure></p>
+<p>NSString <em>sequenceStr = @””;<br>for (int i = 0; i &lt; [_sequenceArr count]; i++) {<br>    NSString </em>tmp = [NSString stringWithFormat:@”%@”, _sequenceArr[i]];<br>    sequenceStr = [NSString stringWithFormat:@”%@%@”, sequenceStr, tmp];<br>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">然后结合状态信息，一并通过接口提供给用户：</div></pre></td></tr></table></figure>
+<p>[self.delegate nineBoxDidFinishWithState:_nineBoxState passSequence:sequenceStr];<br>```<br>最后就是一些提升用户体验的步骤，比如自动重置<strong>KMNineBoxView</strong>的状态，控制用户触摸响应等等，这里就不再赘述了。</p>
+<h1 id="8-总结"><a href="#8-总结" class="headerlink" title="8. 总结"></a>8. 总结</h1><p>本文介绍了如何仿制一个支付宝的手势密码，涉及到了较多页面布局和手势检测的知识。不过让我感受最深的还是其中有一些计算技巧，需要平时的基础积累。<del>这又再次提醒我：该回去补数据结构和算法啦！还不快ACM！</del>  </p>
+<p>总之，希望这篇文章对大家有所帮助。更多iOS的知识，请继续关注后续的文章，感谢阅读！</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[读笔 汇编语言-基于Linux环境(第4章-位置:寄存器、内存寻址以及了解数据存储位置III)]]></title>
       <url>https://kimihe.github.io/2016/10/27/%E8%AF%BB%E7%AC%94_%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80-%E5%9F%BA%E4%BA%8ELinux%E7%8E%AF%E5%A2%83(%E7%AC%AC4%E7%AB%A0-%E4%BD%8D%E7%BD%AE_%E5%AF%84%E5%AD%98%E5%99%A8_%E5%86%85%E5%AD%98%E5%AF%BB%E5%9D%80%E4%BB%A5%E5%8F%8A%E4%BA%86%E8%A7%A3%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E4%BD%8D%E7%BD%AEIII)/</url>
       <content type="html"><![CDATA[<blockquote>
@@ -307,7 +375,8 @@
 </li>
 <li><p>创建一个customView后，必须找到<strong> 着陆床 </strong>，让它能够被addSubview到一个父层，否则永远不会进入layoutSubviews，不管你怎么改变它的frame，使用<code>[customView addSubView:aLabel];</code>或者<code>[aLabel removeFromSuperview];</code>。</p>
 </li>
-<li>在没有上述customView操作子层的前提下，customView调用initWithFrame时，如果frame为0，等同于没有空间大小，那么即便<code>[aSuperView addSubview:customView];</code>它也不会进入layoutSubviews。但是只要被add到了父层，在customView上操作子层仍然有效。    </li>
+<li>在没有上述customView操作子层的前提下，customView调用initWithFrame时，如果frame为0，等同于没有空间大小，那么即便<code>[aSuperView addSubview:customView];</code>它也不会进入layoutSubviews。但是只要被add到了父层，在customView上操作子层仍然有效。 </li>
+<li>上述对应UIView的说明同样适用于CALayer。   </li>
 </ul>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>为了能够进入layoutSubviews：<br>首先你必须能够<code>[aSuperView addSubview:customView];</code><br>其次请设置frame不为0，但是操作子层不受frame为0的影响。</p>
 ]]></content>

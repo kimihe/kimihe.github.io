@@ -105,7 +105,7 @@
 可能有人会问：“为什么要用layoutSubviews？它有什么用？”  
 简单说来，使用layoutSubviews主要就是为了在自定义控件的布局、视图层次等属性发生形变时，使该控件能够及时地作出调整，保证画面的平滑显示。而控件之所以能">
 <meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/layoutSubviews%E5%B0%8F%E7%BB%93fig1.png">
-<meta property="og:updated_time" content="2016-10-11T08:24:01.000Z">
+<meta property="og:updated_time" content="2016-10-30T06:25:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="layoutSubviews小结">
 <meta name="twitter:description" content="文章也同时在简书更新  
@@ -412,7 +412,8 @@
 </li>
 <li><p>创建一个customView后，必须找到<strong> 着陆床 </strong>，让它能够被addSubview到一个父层，否则永远不会进入layoutSubviews，不管你怎么改变它的frame，使用<code>[customView addSubView:aLabel];</code>或者<code>[aLabel removeFromSuperview];</code>。</p>
 </li>
-<li>在没有上述customView操作子层的前提下，customView调用initWithFrame时，如果frame为0，等同于没有空间大小，那么即便<code>[aSuperView addSubview:customView];</code>它也不会进入layoutSubviews。但是只要被add到了父层，在customView上操作子层仍然有效。    </li>
+<li>在没有上述customView操作子层的前提下，customView调用initWithFrame时，如果frame为0，等同于没有空间大小，那么即便<code>[aSuperView addSubview:customView];</code>它也不会进入layoutSubviews。但是只要被add到了父层，在customView上操作子层仍然有效。 </li>
+<li>上述对应UIView的说明同样适用于CALayer。   </li>
 </ul>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>为了能够进入layoutSubviews：<br>首先你必须能够<code>[aSuperView addSubview:customView];</code><br>其次请设置frame不为0，但是操作子层不受frame为0的影响。</p>
 
@@ -572,7 +573,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -589,7 +590,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">20</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
