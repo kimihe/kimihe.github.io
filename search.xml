@@ -6,8 +6,11 @@
     <entry>
       <title><![CDATA[实现仿支付宝九宫格手势密码]]></title>
       <url>https://kimihe.github.io/2016/10/30/%E5%AE%9E%E7%8E%B0%E4%BB%BF%E6%94%AF%E4%BB%98%E5%AE%9D%E4%B9%9D%E5%AE%AB%E6%A0%BC%E6%89%8B%E5%8A%BF%E5%AF%86%E7%A0%81/</url>
-      <content type="html"><![CDATA[<h1 id="1-引言"><a href="#1-引言" class="headerlink" title="1. 引言"></a>1. 引言</h1><p>前几天支付宝刚刚更新了双十一logo，各电商备战的氛围越来越浓厚。支付宝每天都用得相当频繁，为提高账户安全性，我开启了<strong>“手势密码”</strong>功能，首次进入敏感页面会要求验证九宫格手势来解锁。  </p>
-<div align="center"><br><img src="http://oesd9di98.bkt.clouddn.com/AlipayGesturePasswd.PNG" alt="运行示意图"><br></div>
+      <content type="html"><![CDATA[<blockquote>
+<p>文章也同时在<a href="http://www.jianshu.com/p/32372e300b2e" target="_blank" rel="external">简书</a>更新</p>
+</blockquote>
+<h1 id="1-引言"><a href="#1-引言" class="headerlink" title="1. 引言"></a>1. 引言</h1><p>前几天支付宝刚刚更新了双十一logo，各电商备战的氛围越来越浓厚。支付宝每天都用得相当频繁，为提高账户安全性，我开启了<strong>“手势密码”</strong>功能，首次进入敏感页面会要求验证九宫格手势来解锁。  </p>
+<div align="center"><br><img src="http://oesd9di98.bkt.clouddn.com/AlipayGesturePasswd.PNG" alt="手势密码"><br></div>
 
 
 <p>这个九宫格和安卓上面的绘图解锁非常类似，这引起了我自制一个的想法。而且最近一直在看微机汇编，有段时间没有搞iOS了，为避免生疏就拿它练手吧。  </p>
