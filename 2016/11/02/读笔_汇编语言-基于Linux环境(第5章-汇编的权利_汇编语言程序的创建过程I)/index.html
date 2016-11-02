@@ -90,37 +90,16 @@
 
 
 
-<meta name="description" content="引言本章介绍汇编语言程序的创建过程，我们要准备踏上创作汇编程序之路啦～还是那句话，越了解底层，就越能够驾驭计算机。  
-摘要
-所有的汇编过程都是处理文件的过程。
-程序就是一个由非常小的步骤组成的漫长旅途，这些步骤是一个代表机器指令的二进制值的列表。
-
-二进制文件 vs. 文本文件
-机器上文件可以分为：文本文件(text file)和二进制文件(binary file)。
-二进制文件可以使用Linu">
+<meta name="description" content="引言本章介绍汇编语言程序的创建过程，我们要准备踏上创作汇编程序之路啦～还是之前所说的，越了解底层，就越能够驾驭计算机。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="读笔 汇编语言-基于Linux环境(第5章-汇编的权利:汇编语言的创建过程I)">
 <meta property="og:url" content="https://kimihe.github.io/2016/11/02/读笔_汇编语言-基于Linux环境(第5章-汇编的权利_汇编语言程序的创建过程I)/index.html">
 <meta property="og:site_name" content="洛斯里克的大书库">
-<meta property="og:description" content="引言本章介绍汇编语言程序的创建过程，我们要准备踏上创作汇编程序之路啦～还是那句话，越了解底层，就越能够驾驭计算机。  
-摘要
-所有的汇编过程都是处理文件的过程。
-程序就是一个由非常小的步骤组成的漫长旅途，这些步骤是一个代表机器指令的二进制值的列表。
-
-二进制文件 vs. 文本文件
-机器上文件可以分为：文本文件(text file)和二进制文件(binary file)。
-二进制文件可以使用Linu">
-<meta property="og:updated_time" content="2016-11-02T06:34:38.000Z">
+<meta property="og:description" content="引言本章介绍汇编语言程序的创建过程，我们要准备踏上创作汇编程序之路啦～还是之前所说的，越了解底层，就越能够驾驭计算机。">
+<meta property="og:updated_time" content="2016-11-02T06:53:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="读笔 汇编语言-基于Linux环境(第5章-汇编的权利:汇编语言的创建过程I)">
-<meta name="twitter:description" content="引言本章介绍汇编语言程序的创建过程，我们要准备踏上创作汇编程序之路啦～还是那句话，越了解底层，就越能够驾驭计算机。  
-摘要
-所有的汇编过程都是处理文件的过程。
-程序就是一个由非常小的步骤组成的漫长旅途，这些步骤是一个代表机器指令的二进制值的列表。
-
-二进制文件 vs. 文本文件
-机器上文件可以分为：文本文件(text file)和二进制文件(binary file)。
-二进制文件可以使用Linu">
+<meta name="twitter:description" content="引言本章介绍汇编语言程序的创建过程，我们要准备踏上创作汇编程序之路啦～还是之前所说的，越了解底层，就越能够驾驭计算机。">
 
 
 
@@ -392,7 +371,8 @@
       
 
       
-        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本章介绍汇编语言程序的创建过程，我们要准备踏上创作汇编程序之路啦～还是那句话，越了解底层，就越能够驾驭计算机。  </p>
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本章介绍汇编语言程序的创建过程，我们要准备踏上创作汇编程序之路啦～还是之前所说的，越了解底层，就越能够驾驭计算机。  </p>
+<a id="more"></a>
 <h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><ul>
 <li>所有的汇编过程都是处理文件的过程。</li>
 <li>程序就是一个由非常小的步骤组成的漫长旅途，这些步骤是一个代表机器指令的二进制值的列表。</li>
@@ -401,13 +381,20 @@
 <li>机器上文件可以分为：<strong>文本文件</strong>(text file)和<strong>二进制文件</strong>(binary file)。</li>
 <li>二进制文件可以使用Linux命令：<code>&gt; xxd file</code>来查看，你需要直到打印出来的内容各字段的含义。如下输出：</li>
 </ul>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ xxd aa</div><div class="line"><span class="number">00000000</span>: <span class="number">610</span>a <span class="number">620</span>a <span class="number">630</span>a <span class="number">640</span>a <span class="number">650</span>a <span class="number">660</span>a <span class="number">670</span>a <span class="number">680</span>a  a.b.c.d.e.f.g.h.</div><div class="line"><span class="number">00000010</span>: <span class="number">300</span>a <span class="number">310</span>a <span class="number">320</span>a <span class="number">330</span>a <span class="number">340</span>a <span class="number">350</span>a <span class="number">360</span>a <span class="number">370</span>a  <span class="number">0.1</span><span class="number">.2</span><span class="number">.3</span><span class="number">.4</span><span class="number">.5</span><span class="number">.6</span><span class="number">.7</span>.</div><div class="line"><span class="number">00000020</span>: <span class="number">380</span>a <span class="number">390</span>a</div></pre></td></tr></table></figure>
-<p>其中最左侧的00000000等数字代表<strong>偏移量</strong>，它包含显示那一行的第一个字节与文件开头的第一个字节的偏移量。中间的<strong>以字节为单位</strong>显示16进制内容。最右侧显示可视化文本字符，对于<strong>不可显字符</strong>的二进制值采用句号字符表示。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ xxd aa</div><div class="line">00000000:   610a 620a 630a 640a 650a 660a 670a 680a   a.b.c.d.e.f.g.h.</div><div class="line">00000010:   300a 310a 320a 330a 340a 350a 360a 370a   0.1.2.3.4.5.6.7.</div><div class="line">00000020:   380a 390a</div></pre></td></tr></table></figure>
+<p>可以看到输出有三列，最左侧的00000000等数字代表<strong>偏移量</strong>，它包含显示那一行的第一个字节与文件开头的第一个字节的偏移量。中间的<strong>以字节为单位</strong>显示16进制内容。最右侧显示可视化文本字符，对于<strong>不可显字符</strong>的二进制值采用句号字符表示。</p>
 <ul>
 <li>注意到其中夹杂的0AH，这里它代表换行，对应键盘的enter(return)。值得一提的是在<strong>windows</strong>中，这个按键会产生<strong>回车(0DH)+换行(0AH)</strong>，而<strong>Linux</strong>中只有<strong>换行(0AH)</strong>。现在大多数计算机系统和软件忽略回车，这是当年机械打字机的历史遗留：当打字机一行打满后，你必须把游标移到行首(回车0DH)，并切到下一行(换行0AH)，这样才能开始新一行的输入。</li>
 <li>在一个二进制可执行文件中，位模式可能意味着完全不同的内容，这取决于它刚好位于文件中的位置，以及该文件中，它附近存在这哪些其他位模式。</li>
 </ul>
-<h3 id="字节序"><a href="#字节序" class="headerlink" title="字节序"></a>字节序</h3><h1 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h1>
+<h3 id="字节序"><a href="#字节序" class="headerlink" title="字节序"></a>字节序</h3><ul>
+<li>对于字节顺序的解释可以分为<strong>小端法(little endian)</strong>和<strong>大端法(big endian)</strong>。一旦使用不止一个字节来代表一个数字值，字节的顺序就变得至关重要。</li>
+<li>将多字节值的最低有效字节存储到最低偏移位置的计算机体系结构称为小端系统(little endian)。将多字节值的最高有效字节存储到最低偏移位置的计算机体系结构称为大端系统(big endian)。</li>
+<li>在大端系统中的数据以16进制显示很容易，因为它们按照人民期待的顺序出现，最重要(高位)的数在左边。而在小端系统中，一切都是颠倒的。</li>
+<li>字节排列顺序的差异不仅适用于存储在<strong>文件中</strong>的字节，而且也适用于存储在<strong>内存中</strong>的字节。而最近的硬件体系结构都被设计为<strong>双向字节</strong>。</li>
+</ul>
+<h1 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h1><p>似乎是时候可以去亲手挑选硬件，并组装一台机器了呢。</p>
+
       
     </div>
 
