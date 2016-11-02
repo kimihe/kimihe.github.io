@@ -298,6 +298,289 @@
             
               
                 
+                <a class="post-title-link" href="/2016/10/12/如何实现一个自定义progressView/" itemprop="url">
+                  如何实现一个自定义progressView
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-12T11:36:26+08:00" content="2016-10-12">
+              2016-10-12
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/12/如何实现一个自定义progressView/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/12/如何实现一个自定义progressView/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/10/12/如何实现一个自定义progressView/" class="leancloud_visitors" data-flag-title="如何实现一个自定义progressView">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>文章也同时在<a href="http://www.jianshu.com/p/045773740b6a">简书</a>更新</p>
+</blockquote>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>在上一篇文章中，我们提到会通过编写一个progressView来学习自定义控件，在学习了layoutSubviews之后，我们对于控件布局有了更多的了解。  </p>
+<p>在这篇文章中，我们将会讲解如何自己实现一个porgressView，并一次来说明如何继承UIView来编写自己的控件。  </p>
+<p>为了简便地讲解，我们的porgressView将会按照alert的形式来展现，请注意以下几个说明：</p>
+<ul>
+<li>porgressView将会置顶于屏幕层级。</li>
+<li>porgressView的frame大小将不需要用户改变，是一个固定的大小。</li>
+<li>我们不使用layoutSubviews来控制布局，而是更加关注自定义控件如何实现功能。</li>
+<li>关于如何在实际工程中使用layoutSubviews，可以参考我的另一个demo：<a href="https://github.com/kimihe/KMiOSLib/tree/master/BezierCurve_Test"><a href="https://github.com/kimihe/KMiOSLib/tree/master/BezierCurve_Test">BezierCurve_Test</a></a>。</li>
+<li>我已经将博客中所用到的demo都集成到了<a href="https://github.com/kimihe/KMiOSLib">KMiOSLib</a>，欢迎大家下载！</li>
+</ul>
+<h1 id="Demo地址"><a href="#Demo地址" class="headerlink" title="Demo地址"></a>Demo地址</h1><p><a href=""><a href="https://github.com/kimihe/KMiOSLib/tree/master/KMProgressViewDemo">KMProgressViewDemo</a></a></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/12/如何实现一个自定义progressView/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/10/10/layoutSubviews小结/" itemprop="url">
+                  layoutSubviews小结
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-10T16:32:09+08:00" content="2016-10-10">
+              2016-10-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/10/layoutSubviews小结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/10/layoutSubviews小结/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/10/10/layoutSubviews小结/" class="leancloud_visitors" data-flag-title="layoutSubviews小结">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>文章也同时在<a href="http://www.jianshu.com/p/160bee18d1e8">简书</a>更新  </p>
+</blockquote>
+<h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>iOS开发深入到一定阶段，大家可能就会尝试自己写一些控件，其中layoutSubviews的使用非常重要，特在此给出总结。  </p>
+<p>可能有人会问：“为什么要用layoutSubviews？它有什么用？”  </p>
+<p>简单说来，使用layoutSubviews主要就是为了在自定义控件的布局、视图层次等属性发生形变时，使该控件能够及时地作出调整，保证画面的平滑显示。而控件之所以能够及时作出反馈，就要归功于layoutSubviews这个方法。<strong>在控件发生形变时，我们就可以进入该方法，在其中重新计算一些布局要素，必要时进行重绘。</strong> (重绘是一个较深的课题，涉及到更底层的绘图，以及一些优化方面的东西，之后会另写一篇文章说明) </p>
+<p>接下来，如何能够进入layoutSubviews，怎样才能触发，时机是什么？可能就会成为大家想要知道的，本文将会focus on该方法的触发时机。  </p>
+<p>此外，虽然使用layoutSubviews是自定义控件进行布局时较为规范的做法，但仍旧需要合理使用。而关于如何自定义一个控件，会在下一篇文章中，结合一个简易的自定义progressView来说明。 </p>
+<h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h3><p>关于layoutSubviews更多实际使用的时机，可以参考我写的一个小例子：<a href="https://github.com/kimihe/iOS_BezierJellyView">模仿QQ消息气泡拉扯弄破它！(A jellyView like QQ message bubble)</a></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/10/layoutSubviews小结/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/10/10/通过一道数据结构题谈递归(C和汇编)/" itemprop="url">
                   通过一道数据结构题谈递归(C和汇编)
                 </a>
@@ -588,7 +871,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
