@@ -4,6 +4,46 @@
   
     
     <entry>
+      <title><![CDATA[iOS知识点拾遗I]]></title>
+      <url>https://kimihe.github.io/2016/11/03/iOS%E7%9F%A5%E8%AF%86%E7%82%B9%E6%8B%BE%E9%81%97I/</url>
+      <content type="html"><![CDATA[<blockquote>
+<p>文章也同时在<a href="http://www.jianshu.com/p/458b24e0995d" target="_blank" rel="external">简书</a>更新</p>
+</blockquote>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本文章主要收录一些在iOS日常中司空见惯、但是仔细咀嚼别有深意的，以及容易被大家忽视的细节。待扩充到一定量会考虑分类出第二篇文章。</p>
+<a id="more"></a>
+<h1 id="拾遗"><a href="#拾遗" class="headerlink" title="拾遗"></a>拾遗</h1><h3 id="基本的基本"><a href="#基本的基本" class="headerlink" title="基本的基本"></a>基本的基本</h3><ul>
+<li>OC强调的消息传递，而非方法，正是这一点使其区别于Java等语言。</li>
+</ul>
+<h3 id="类声明"><a href="#类声明" class="headerlink" title="类声明"></a>类声明</h3><p>实例变量自动声明为<strong>@protected</strong>，其他的可能的可见类型还包括<strong>@public</strong>和<strong>@private</strong>。</p>
+<h3 id="property属性"><a href="#property属性" class="headerlink" title="@property属性"></a>@property属性</h3><ul>
+<li>参数nonatomic：此主要为线程访问行为，当采用<strong>atomic</strong>时，访问以序列方式进行，而<strong>nonatomic</strong>则支持并行处理。</li>
+</ul>
+<h3 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h3><ul>
+<li>对象通过<strong>alloc</strong>分配内存空间，对应内存赋值后可得到一个对象实例，随后可使用init方法。</li>
+<li>通过alloc方法创建的对象，包含一个自身的引用。如果内存分配过程中出现了问题(例如内存空间不足)，则可以通过安全的方法检测当前引用是否安全。如下所示：<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (<span class="keyword">self</span>) &#123;</div><div class="line">  <span class="comment">// everything is OK</span></div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span> &#123;</div><div class="line">  <span class="comment">// error: self  = nil</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>如果未继承<strong>NSObject</strong>且期望包含父类的构造方法，则可以使用：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (<span class="keyword">self</span> = [<span class="keyword">super</span> init]) &#123;</div><div class="line">  ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li><strong>nil</strong>意指当前对象不存在，并包含false值(需要注意，<strong>nil不同于NULL</strong>，因而nil可作为有效参数加以使用)。</li>
+<li>形如<code>MyObject *myObject = [][MyObject alloc] init]</code>，其中的<em>号表明对应变量为指针。通常，对象通过其内存位置加以引用。例如，<strong>myObject</strong>表示为指针变量，因而指向内存位置<em>*0x12345678</em></em>。</li>
+<li><strong>id</strong>数据类型已经定义为指针结构：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">typedef struct objc_object &#123;Class isa;&#125; *id</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>因而<em>号应针对<em>*id</em></em>予以忽略。</p>
+<h3 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h3><ul>
+<li>某些时候，当与线程协同工作时，往往无法确切地知晓对象地生命周期于何时结束。对此，Objective-C语言提供了<strong>NSAutoreleasePool</strong>类。</li>
+</ul>
+<h3 id="UIWindow相关"><a href="#UIWindow相关" class="headerlink" title="UIWindow相关"></a>UIWindow相关</h3><ul>
+<li><strong>makeKeyAndVisible</strong> 方法确保父窗口处于活动状态，并可包含触摸事件。</li>
+</ul>
+<h3 id="UIView绘图相关"><a href="#UIView绘图相关" class="headerlink" title="UIView绘图相关"></a>UIView绘图相关</h3><ul>
+<li><strong>addSubview</strong>会触发UIView的<strong>drawRect</strong>方法。</li>
+</ul>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[DARK SOULS或许也是一种遗憾]]></title>
       <url>https://kimihe.github.io/2016/11/02/DARK%20SOULS%E6%88%96%E8%AE%B8%E4%B9%9F%E6%98%AF%E4%B8%80%E7%A7%8D%E9%81%97%E6%86%BE/</url>
       <content type="html"><![CDATA[<blockquote>
