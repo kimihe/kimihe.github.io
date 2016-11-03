@@ -28,11 +28,11 @@
 <p>如果未继承<strong>NSObject</strong>且期望包含父类的构造方法，则可以使用：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (<span class="keyword">self</span> = [<span class="keyword">super</span> init]) &#123;</div><div class="line">  ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <ul>
 <li><strong>nil</strong>意指当前对象不存在，并包含false值(需要注意，<strong>nil不同于NULL</strong>，因而nil可作为有效参数加以使用)。</li>
-<li>形如<code>MyObject *myObject = [[MyObject alloc] init]</code>，其中的<em>号表明对应变量为指针。通常，对象通过其内存位置加以引用。例如，<strong>myObject</strong>表示为指针变量，因而指向内存位置<em>*0x12345678</em></em>。</li>
+<li>形如<code>MyObject *myObject = [[MyObject alloc] init]</code>，其中的<code>*</code>号表明对应变量为指针。通常，对象通过其内存位置加以引用。例如，<strong>myObject</strong>表示为指针变量，因而指向内存位置<strong>0x12345678</strong>。</li>
 <li><strong>id</strong>数据类型已经定义为指针结构：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">typedef struct objc_object &#123;Class isa;&#125; *id</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>因而<em>号应针对<em>*id</em></em>予以忽略。</p>
+<p>因而<code>*</code>号应针对<strong>id</strong>予以忽略。</p>
 <h3 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h3><ul>
 <li>某些时候，当与线程协同工作时，往往无法确切地知晓对象地生命周期于何时结束。对此，Objective-C语言提供了<strong>NSAutoreleasePool</strong>类。</li>
 </ul>
