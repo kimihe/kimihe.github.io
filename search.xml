@@ -36,11 +36,18 @@
 <h3 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h3><ul>
 <li>某些时候，当与线程协同工作时，往往无法确切地知晓对象地生命周期于何时结束。对此，Objective-C语言提供了<strong>NSAutoreleasePool</strong>类。</li>
 </ul>
+<h3 id="NSObject"><a href="#NSObject" class="headerlink" title="NSObject"></a>NSObject</h3><ul>
+<li><p>当检测相关类是否存在时，可以使用<strong>NSClassFromString()</strong>函数。如对应类不存在，则该函数返回<strong>nil</strong>。</p>
+</li>
+<li><p>如相关类存在，还可以进一步查询。继承自<strong>NSObject</strong>的各个类包含两个方法，即<code>[Class instanceRespondToSelector:SEL]</code>和<code>[instance respondsToSelector:SEL]</code>。取决于查询方法是否存在，方法返回<strong>YES</strong>或<strong>NO</strong>。</p>
+</li>
+</ul>
 <h3 id="UIWindow相关"><a href="#UIWindow相关" class="headerlink" title="UIWindow相关"></a>UIWindow相关</h3><ul>
 <li><strong>makeKeyAndVisible</strong> 方法确保父窗口处于活动状态，并可包含触摸事件。</li>
 </ul>
 <h3 id="UIView绘图相关"><a href="#UIView绘图相关" class="headerlink" title="UIView绘图相关"></a>UIView绘图相关</h3><ul>
 <li><strong>addSubview</strong>会触发UIView的<strong>drawRect</strong>方法。</li>
+<li><strong>setNeedsDisplay</strong>消息将触发<strong>UIView</strong>中的<strong>drawRect:</strong>方法，一个常见的使用案例就是：当屏幕发生旋转时重绘View以正确显示。</li>
 </ul>
 ]]></content>
     </entry>
