@@ -4,6 +4,30 @@
   
     
     <entry>
+      <title><![CDATA[如何使用WebRTC实现视频聊天]]></title>
+      <url>https://kimihe.github.io/2016/11/07/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8WebRTC%E5%AE%9E%E7%8E%B0%E8%A7%86%E9%A2%91%E8%81%8A%E5%A4%A9/</url>
+      <content type="html"><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>昨天和同学闲聊，发现半年前的一个项目中的一些东西可以拿出来分享，是关于利用WebRtc实现视频聊天的，故今天温习了一下陈旧的代码(不忍直视)，略加修改后，通过此文予以阐述。  </p>
+<h1 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h1><p><a href="https://github.com/kimihe/KMFaceChat_RTC" target="_blank" rel="external">KMFaceChat_RTC</a><br>欢迎一切fork，issue，pull request来帮助该项目做得更好。</p>
+<h1 id="效果演示"><a href="#效果演示" class="headerlink" title="效果演示"></a>效果演示</h1><p>Gif 演示：左下角会黑屏是由于使用了iOS模拟器，无法启用摄像头，正常情况下它应该显示自己拍摄的图像，而主屏幕是对方拍摄的图像。  </p>
+<div align="center"><br><img src="http://oesd9di98.bkt.clouddn.com/faceChat3.gif" width="256" height="454.4" alt="faceChat3.gif"><br></div>
+
+<a id="more"></a>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>具体可见Demo中<strong>ViewController.m</strong>用法。<br>简要思路是：</p>
+<ul>
+<li>双方需要向服务器上报一个<strong>session ID</strong>，以唯一区分不同的用户。</li>
+<li>双方类似于打电话，角色分为会话主动发起方：<strong>offer</strong>。以及被动接听方：<strong>answer</strong>。</li>
+<li>通过使用对方的ID，<strong>offer</strong>方需要主动call <strong>answer</strong>方。</li>
+<li>会话过程中，一旦挂断此次会话便宣告结束。下次可以重新call。</li>
+<li>在视频界面，可以随时切换前后摄像头，以方便拍摄自己需要的内容。</li>
+<li>屏幕上会同时出现自己以及对方的视频图像。主屏幕区域是<strong>对方拍摄的图像(remote view)</strong>，左下角小镜头是<strong>自己拍摄的图像(local view)</strong>。</li>
+</ul>
+<p>而更加具体的原理可以深入查阅KMFaceChatRTC -&gt; KMFaceChat_RTC -&gt; KMRTCCore -&gt; RTCLib -&gt; <strong>ARDAppClient类</strong>。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本文主要是给出一个实际可用的视频聊天Demo，以期帮助大家实现快速开发。陈旧的代码总是无法直视，后续会继续更新。  </p>
+<p>更多iOS的知识，请继续关注后续的文章，感谢阅读！</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[iOS知识点拾遗I]]></title>
       <url>https://kimihe.github.io/2016/11/03/iOS%E7%9F%A5%E8%AF%86%E7%82%B9%E6%8B%BE%E9%81%97I/</url>
       <content type="html"><![CDATA[<blockquote>
