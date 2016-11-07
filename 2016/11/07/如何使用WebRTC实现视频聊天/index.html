@@ -90,23 +90,29 @@
 
 
 
-<meta name="description" content="引言昨天和同学闲聊，发现半年前的一个项目中的一些东西可以拿出来分享，是关于利用WebRtc实现视频聊天的，故今天温习了一下陈旧的代码(不忍直视)，略加修改后，通过此文予以阐述。  
+<meta name="description" content="文章也同时在简书更新
+
+引言昨天和同学闲聊，发现半年前的一个项目中的一些东西可以拿出来分享，是关于利用WebRtc实现视频聊天的，故今天温习了一下陈旧的代码(不忍直视)，略加修改后，通过此文予以阐述。  
 项目地址KMFaceChat_RTC欢迎一切fork，issue，pull request来帮助该项目做得更好。
-效果演示Gif 演示：左下角会黑屏是由于使用了iOS模拟器，无法启用摄像头，正常情况下它应该显示自己拍摄">
+效果演示Gif 演示：左下角会黑屏是由于使用了iOS模拟器，无法启用摄像头，正">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何使用WebRTC实现视频聊天">
 <meta property="og:url" content="https://kimihe.github.io/2016/11/07/如何使用WebRTC实现视频聊天/index.html">
 <meta property="og:site_name" content="洛斯里克的大书库">
-<meta property="og:description" content="引言昨天和同学闲聊，发现半年前的一个项目中的一些东西可以拿出来分享，是关于利用WebRtc实现视频聊天的，故今天温习了一下陈旧的代码(不忍直视)，略加修改后，通过此文予以阐述。  
+<meta property="og:description" content="文章也同时在简书更新
+
+引言昨天和同学闲聊，发现半年前的一个项目中的一些东西可以拿出来分享，是关于利用WebRtc实现视频聊天的，故今天温习了一下陈旧的代码(不忍直视)，略加修改后，通过此文予以阐述。  
 项目地址KMFaceChat_RTC欢迎一切fork，issue，pull request来帮助该项目做得更好。
-效果演示Gif 演示：左下角会黑屏是由于使用了iOS模拟器，无法启用摄像头，正常情况下它应该显示自己拍摄">
+效果演示Gif 演示：左下角会黑屏是由于使用了iOS模拟器，无法启用摄像头，正">
 <meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/faceChat3.gif">
-<meta property="og:updated_time" content="2016-11-07T14:47:13.000Z">
+<meta property="og:updated_time" content="2016-11-07T14:50:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何使用WebRTC实现视频聊天">
-<meta name="twitter:description" content="引言昨天和同学闲聊，发现半年前的一个项目中的一些东西可以拿出来分享，是关于利用WebRtc实现视频聊天的，故今天温习了一下陈旧的代码(不忍直视)，略加修改后，通过此文予以阐述。  
+<meta name="twitter:description" content="文章也同时在简书更新
+
+引言昨天和同学闲聊，发现半年前的一个项目中的一些东西可以拿出来分享，是关于利用WebRtc实现视频聊天的，故今天温习了一下陈旧的代码(不忍直视)，略加修改后，通过此文予以阐述。  
 项目地址KMFaceChat_RTC欢迎一切fork，issue，pull request来帮助该项目做得更好。
-效果演示Gif 演示：左下角会黑屏是由于使用了iOS模拟器，无法启用摄像头，正常情况下它应该显示自己拍摄">
+效果演示Gif 演示：左下角会黑屏是由于使用了iOS模拟器，无法启用摄像头，正">
 <meta name="twitter:image" content="http://oesd9di98.bkt.clouddn.com/faceChat3.gif">
 
 
@@ -379,7 +385,10 @@
       
 
       
-        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>昨天和同学闲聊，发现半年前的一个项目中的一些东西可以拿出来分享，是关于利用WebRtc实现视频聊天的，故今天温习了一下陈旧的代码(不忍直视)，略加修改后，通过此文予以阐述。  </p>
+        <blockquote>
+<p>文章也同时在<a href="http://www.jianshu.com/p/e731bc1dea1f" target="_blank" rel="external">简书</a>更新</p>
+</blockquote>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>昨天和同学闲聊，发现半年前的一个项目中的一些东西可以拿出来分享，是关于利用WebRtc实现视频聊天的，故今天温习了一下陈旧的代码(不忍直视)，略加修改后，通过此文予以阐述。  </p>
 <h1 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h1><p><a href="https://github.com/kimihe/KMFaceChat_RTC" target="_blank" rel="external">KMFaceChat_RTC</a><br>欢迎一切fork，issue，pull request来帮助该项目做得更好。</p>
 <h1 id="效果演示"><a href="#效果演示" class="headerlink" title="效果演示"></a>效果演示</h1><p>Gif 演示：左下角会黑屏是由于使用了iOS模拟器，无法启用摄像头，正常情况下它应该显示自己拍摄的图像，而主屏幕是对方拍摄的图像。  </p>
 <div align="center"><br><img src="http://oesd9di98.bkt.clouddn.com/faceChat3.gif" width="256" height="454.4" alt="faceChat3.gif"><br></div>
