@@ -10,7 +10,7 @@
 <p>文章也同时在<a href="http://www.jianshu.com/p/e731bc1dea1f" target="_blank" rel="external">简书</a>更新</p>
 </blockquote>
 <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>昨天和同学闲聊，发现半年前的一个项目中的一些东西可以拿出来分享，是关于利用WebRtc实现视频聊天的，故今天温习了一下陈旧的代码(不忍直视)，略加修改后，通过此文予以阐述。  </p>
-<h1 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h1><p><a href="https://github.com/kimihe/KMFaceChat_RTC" target="_blank" rel="external">KMFaceChat_RTC</a><br>欢迎一切fork，issue，pull request来帮助该项目做得更好。</p>
+<h1 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h1><p><a href="https://github.com/kimihe/RTC_FaceChat" target="_blank" rel="external">KMFaceChat_RTC</a><br>欢迎一切fork，issue，pull request来帮助该项目做得更好。</p>
 <h1 id="效果演示"><a href="#效果演示" class="headerlink" title="效果演示"></a>效果演示</h1><p>Gif演示了一系列无限镜像。画面中左下角的黑屏是由于使用了iOS模拟器，无法启用摄像头，正常情况下它应该显示自己拍摄的图像，而主屏幕是对方拍摄的图像。  </p>
 <div align="center"><br><img src="http://oesd9di98.bkt.clouddn.com/faceChat4.gif" width="256" height="454.4" alt="faceChat4.gif"><br></div>
 
