@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="iOS,WebRTC,视频聊天,Video Chat," />
+  <meta name="keywords" content="读书笔记,汇编语言-基于Linux环境,reading notes,GDB,计算机基础,汇编,指针,循环结构," />
 
 
 
@@ -92,28 +92,47 @@
 
 <meta name="description" content="文章也同时在简书更新
 
-引言昨天和同学闲聊，发现半年前的一个项目中的一些东西可以拿出来分享，是关于利用WebRtc实现视频聊天的，故今天温习了一下陈旧的代码(不忍直视)，略加修改后，通过此文予以阐述。  
-项目地址RTC_FaceChat欢迎一切fork，issue，pull request来帮助该项目做得更好。
-效果演示Gif演示了一系列无限镜像。画面中左下角的黑屏是由于使用了iOS模拟器，无">
+引言本文亦是《读笔 汇编语言-基于Linux环境(第7章-跟踪指令：与机器指令亲密接触I)》。  
+本文将会以一个简单的.ASM程序，step by step地帮助大家快速入门GDB，并通过GDB调试，深入底层阐述高级语言(如C语言)中循环结构和指针的由来。  
+通过阅读本文，你将知道：
+
+如何快速在Linux下进行汇编开发。
+如何快速入门GDB。
+高级语言循环结构的原理">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何使用WebRTC实现视频聊天">
-<meta property="og:url" content="https://kimihe.github.io/2016/11/07/如何使用WebRTC实现视频聊天/index.html">
+<meta property="og:title" content="快速入门Linux下GDB和汇编开发工具">
+<meta property="og:url" content="https://kimihe.github.io/2016/11/15/快速入门Linux下GDB和汇编开发工具/index.html">
 <meta property="og:site_name" content="洛斯里克的大书库">
 <meta property="og:description" content="文章也同时在简书更新
 
-引言昨天和同学闲聊，发现半年前的一个项目中的一些东西可以拿出来分享，是关于利用WebRtc实现视频聊天的，故今天温习了一下陈旧的代码(不忍直视)，略加修改后，通过此文予以阐述。  
-项目地址RTC_FaceChat欢迎一切fork，issue，pull request来帮助该项目做得更好。
-效果演示Gif演示了一系列无限镜像。画面中左下角的黑屏是由于使用了iOS模拟器，无">
-<meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/faceChat4.gif">
-<meta property="og:updated_time" content="2016-11-09T12:11:05.000Z">
+引言本文亦是《读笔 汇编语言-基于Linux环境(第7章-跟踪指令：与机器指令亲密接触I)》。  
+本文将会以一个简单的.ASM程序，step by step地帮助大家快速入门GDB，并通过GDB调试，深入底层阐述高级语言(如C语言)中循环结构和指针的由来。  
+通过阅读本文，你将知道：
+
+如何快速在Linux下进行汇编开发。
+如何快速入门GDB。
+高级语言循环结构的原理">
+<meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/kate.png">
+<meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/GDB_terminal.png">
+<meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/GDB_step1.png">
+<meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/GDB_step2.png">
+<meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/GDB_step3.png">
+<meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/GDB_step4.png">
+<meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/GDB_step5.png">
+<meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/GDB_step6.png">
+<meta property="og:updated_time" content="2016-11-15T12:34:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="如何使用WebRTC实现视频聊天">
+<meta name="twitter:title" content="快速入门Linux下GDB和汇编开发工具">
 <meta name="twitter:description" content="文章也同时在简书更新
 
-引言昨天和同学闲聊，发现半年前的一个项目中的一些东西可以拿出来分享，是关于利用WebRtc实现视频聊天的，故今天温习了一下陈旧的代码(不忍直视)，略加修改后，通过此文予以阐述。  
-项目地址RTC_FaceChat欢迎一切fork，issue，pull request来帮助该项目做得更好。
-效果演示Gif演示了一系列无限镜像。画面中左下角的黑屏是由于使用了iOS模拟器，无">
-<meta name="twitter:image" content="http://oesd9di98.bkt.clouddn.com/faceChat4.gif">
+引言本文亦是《读笔 汇编语言-基于Linux环境(第7章-跟踪指令：与机器指令亲密接触I)》。  
+本文将会以一个简单的.ASM程序，step by step地帮助大家快速入门GDB，并通过GDB调试，深入底层阐述高级语言(如C语言)中循环结构和指针的由来。  
+通过阅读本文，你将知道：
+
+如何快速在Linux下进行汇编开发。
+如何快速入门GDB。
+高级语言循环结构的原理">
+<meta name="twitter:image" content="http://oesd9di98.bkt.clouddn.com/kate.png">
 
 
 
@@ -134,10 +153,10 @@
 
 
 
-  <link rel="canonical" href="https://kimihe.github.io/2016/11/07/如何使用WebRTC实现视频聊天/"/>
+  <link rel="canonical" href="https://kimihe.github.io/2016/11/15/快速入门Linux下GDB和汇编开发工具/"/>
 
 
-  <title> 如何使用WebRTC实现视频聊天 | 洛斯里克的大书库 </title>
+  <title> 快速入门Linux下GDB和汇编开发工具 | 洛斯里克的大书库 </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -310,7 +329,7 @@
             
             
               
-                如何使用WebRTC实现视频聊天
+                快速入门Linux下GDB和汇编开发工具
               
             
           </h1>
@@ -322,8 +341,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-07T22:24:56+08:00" content="2016-11-07">
-              2016-11-07
+            <time itemprop="dateCreated" datetime="2016-11-15T17:50:00+08:00" content="2016-11-15">
+              2016-11-15
             </time>
           </span>
 
@@ -336,8 +355,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
+                  <a href="/categories/读书笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书笔记</span>
                   </a>
                 </span>
 
@@ -352,8 +371,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/11/07/如何使用WebRTC实现视频聊天/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/07/如何使用WebRTC实现视频聊天/" itemprop="commentsCount"></span>
+                <a href="/2016/11/15/快速入门Linux下GDB和汇编开发工具/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/15/快速入门Linux下GDB和汇编开发工具/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -363,7 +382,7 @@
 
           
           
-             <span id="/2016/11/07/如何使用WebRTC实现视频聊天/" class="leancloud_visitors" data-flag-title="如何使用WebRTC实现视频聊天">
+             <span id="/2016/11/15/快速入门Linux下GDB和汇编开发工具/" class="leancloud_visitors" data-flag-title="快速入门Linux下GDB和汇编开发工具">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -386,26 +405,69 @@
 
       
         <blockquote>
-<p>文章也同时在<a href="http://www.jianshu.com/p/e731bc1dea1f" target="_blank" rel="external">简书</a>更新</p>
+<p>文章也同时在<a href="http://www.jianshu.com/p/a3ffe41d2327" target="_blank" rel="external">简书</a>更新</p>
 </blockquote>
-<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>昨天和同学闲聊，发现半年前的一个项目中的一些东西可以拿出来分享，是关于利用WebRtc实现视频聊天的，故今天温习了一下陈旧的代码(不忍直视)，略加修改后，通过此文予以阐述。  </p>
-<h1 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h1><p><a href="https://github.com/kimihe/RTC_FaceChat" target="_blank" rel="external">RTC_FaceChat</a><br>欢迎一切fork，issue，pull request来帮助该项目做得更好。</p>
-<h1 id="效果演示"><a href="#效果演示" class="headerlink" title="效果演示"></a>效果演示</h1><p>Gif演示了一系列无限镜像。画面中左下角的黑屏是由于使用了iOS模拟器，无法启用摄像头，正常情况下它应该显示自己拍摄的图像，而主屏幕是对方拍摄的图像。  </p>
-<div align="center"><br><img src="http://oesd9di98.bkt.clouddn.com/faceChat4.gif" width="256" height="454.4" alt="faceChat4.gif"><br></div>
-
-<a id="more"></a>
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>具体可见Demo中<strong>ViewController.m</strong>用法。<br>简要思路是：</p>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本文亦是《读笔 汇编语言-基于Linux环境(第7章-跟踪指令：与机器指令亲密接触I)》。  </p>
+<p>本文将会以一个简单的.ASM程序，step by step地帮助大家快速入门GDB，并通过GDB调试，深入底层阐述高级语言(如C语言)中循环结构和指针的由来。  </p>
+<p>通过阅读本文，你将知道：</p>
 <ul>
-<li>双方需要向服务器上报一个<strong>session ID</strong>，以唯一区分不同的用户。</li>
-<li>双方类似于打电话，角色分为会话主动发起方：<strong>offer</strong>。以及被动接听方：<strong>answer</strong>。</li>
-<li>通过使用对方的ID，<strong>offer</strong>方需要主动call <strong>answer</strong>方。</li>
-<li>会话过程中，一旦挂断此次会话便宣告结束。下次可以重新call。</li>
-<li>在视频界面，可以随时切换前后摄像头，以方便拍摄自己需要的内容。</li>
-<li>屏幕上会同时出现自己以及对方的视频图像。主屏幕区域是<strong>对方拍摄的图像(remote view)</strong>，左下角小镜头是<strong>自己拍摄的图像(local view)</strong>。</li>
+<li><strong>如何快速在Linux下进行汇编开发。</strong></li>
+<li><strong>如何快速入门GDB。</strong></li>
+<li><strong>高级语言循环结构的原理。</strong></li>
+<li><strong>指针到底是什么。</strong></li>
 </ul>
-<p>而更加具体的原理可以深入查阅KMFaceChatRTC -&gt; KMFaceChat_RTC -&gt; KMRTCCore -&gt; RTCLib -&gt; <strong>ARDAppClient类</strong>。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本文主要是给出一个实际可用的视频聊天Demo，以期帮助大家实现快速开发。陈旧的代码总是无法直视，后续会继续更新。  </p>
-<p>更多iOS的知识，请继续关注后续的文章，感谢阅读！</p>
+<a id="more"></a>
+<h1 id="构建汇编程序"><a href="#构建汇编程序" class="headerlink" title="构建汇编程序"></a>构建汇编程序</h1><h3 id="原料"><a href="#原料" class="headerlink" title="原料"></a>原料</h3><ul>
+<li>Linux环境，笔者是Ubuntu 12.04 LTS。</li>
+<li>安装NASM: 新立得软件包管理器。</li>
+<li>安装Kate编辑器和KWrite编辑器: 新立得软件包管理器。</li>
+<li>安装konsole：<code>&gt; sudo apt-get install konsole</code></li>
+</ul>
+<h1 id="第一个汇编程序"><a href="#第一个汇编程序" class="headerlink" title="第一个汇编程序"></a>第一个汇编程序</h1><p>切到你喜欢的工作目录下，执行<code>&gt; kate</code>以启动Kate编辑器，启动后界面类似于这样：<br><img src="http://oesd9di98.bkt.clouddn.com/kate.png" alt="Kate"><br>左侧是导航栏，右侧是代码编辑区，下方是终端控制区(若要启用此特性请务必先安装konsle)。  </p>
+<p>新建一个文件，命名为sandbox.asm，在其中输入如下内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">section .data</div><div class="line">	Snippet db &quot;KANGAROO&quot;</div><div class="line">section .text</div><div class="line">	global	_start</div><div class="line">_start:</div><div class="line">	nop</div><div class="line">; Put your experiments between the two nops...</div><div class="line">	mov ebx, Snippet</div><div class="line">	mov eax, 8</div><div class="line">DoMore: add byte [ebx], 32</div><div class="line">	inc ebx</div><div class="line">	dec eax</div><div class="line">	jnz DoMore</div><div class="line">; Put your experiments between the two nops...</div><div class="line">	nop</div></pre></td></tr></table></figure></p>
+<p>这段代码是我们第一个汇编小例子，用于阐明循环结构的原理，请确保文章例子和你的完全一致。</p>
+<h1 id="循环结构的原理"><a href="#循环结构的原理" class="headerlink" title="循环结构的原理"></a>循环结构的原理</h1><p>如果是首次接触汇编，你可能会一头雾水，在这里你不必在意汇编的语法，只需要理解我对代码的说明即可。  </p>
+<p>此处请先注意语句<code>Snippet db &quot;KANGAROO&quot;</code>，其中<strong>Snippet</strong>代表一个字符串，内容为<strong>KANGAROO</strong>。然后注意语句<code>mov ebx, Snippet</code>，这一步相当于获取字符串的首地址。紧接着的<code>mov eax, 8</code>用于获知字符串的长度。这两步很平常，高级语言的字符串处理也需要获知字符串地址以及相应的长度。  </p>
+<p>然后请关注如下四条语句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">DoMore: add byte [ebx], 32</div><div class="line">	    inc ebx</div><div class="line">	    dec eax</div><div class="line">	    jnz DoMore</div></pre></td></tr></table></figure></p>
+<p>此处的<code>jnz DoMore</code>语句便是循环结构的核心。其含义是：<strong>jnz(Jump if Not Z-Flag)</strong>进行判断，如果<strong>零标志位ZF</strong>不为0，就跳转到DoMore语句处。  </p>
+<p>于是你可以想到，只要这个ZF标志位不是0，程序就会不停地循环跳转(loop)，循环结构由此而来。  </p>
+<p>你可能会想问：<strong>什么时候ZF会变成0？</strong>这个问题很好，试想一下高级语言的<strong>while(n)循环</strong>，我们必然需要一个操作步骤来改变n的值，使其在某一时刻变成0，从而跳出while。  </p>
+<p>此处，眼尖的读者可能发现了<strong>dec指令</strong>，还记得一开始的获取字符串长度为8吗？我们<strong>把8存在了eax寄存器中</strong>(如果你不清楚寄存器是什么，也没有关系，把它想象成一个可以存放数值容器即可)。通过<code>dec eax</code>指令，我们会<strong>不断地对eax中的8进行递减，</strong>类似于<code>int eax = 8; eax--;</code>总有一天，eax中的值会从8减到0，此时我们的x86 Intel CPU就会执行一项既定的操作，<strong>把ZF标志设为1,以代表此标志位处于激活状态。</strong>于是，jnz在判断的时候就发现ZF已经被激活为1了，不需要再跳转，循环结果宣告结束。  </p>
+<p>此外，不知道你有没有对于jnz跳转指令产生一些联想：它是不是很像函数指针？(jnz到一个地方，那个地方叫做DoMore，然后执行一段过程。)当然关于函数指针详细的说明，本文篇幅可就不够了，笔者会考虑以后单独写一篇文章详细说明，敬请期待～</p>
+<h1 id="什么是指针"><a href="#什么是指针" class="headerlink" title="什么是指针"></a>什么是指针</h1><p>有读者可能会问，还有两行代码没有解释呢。不要着急，这两行代码蕴含着<strong>指针</strong>的奥秘。听起来可能有点令人惊奇，但实际情况确实如此。让我们来看一下这两行代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">DoMore: add byte [ebx], 32</div><div class="line">	    inc ebx</div></pre></td></tr></table></figure></p>
+<p>注意<code>add byte [ebx], 32</code>这句话，它的专业术语叫做<strong>寄存器间接寻址</strong>。它是如此神奇，毫不夸张地说，如果没有它，我们日常所见的绝大部分程序将难以构建。  </p>
+<p>这句话解释一下就是这样：有一个内存单元，它有一个byte大小的空间，里面存有一个数值n(具体是多少，现在不用关心)。把数值32 Add到这个n上，就是相当于<code>n+=32</code>。然后关键点来了，为了加上32，<strong>我们需要知道这个内存区域在哪儿。在哪儿呢？在ebx里存着呢！</strong>  </p>
+<p>内存就像一个个信箱，每个信箱都有自己的<strong>编号</strong>，当我们寻找自家的信箱时，会根据信箱的编号去寻找它。这里ebx就存着我们要的内存区域的编号，这个编号叫做<strong>地址</strong>，<strong>根据这个地址，我们找到了那个内存单元的具体位置，然后知道了其中存了一个数n，最后把32给加到了n上。</strong>  </p>
+<p>这里，你应该可以看到，我们并不是直接去访问那个数值n的，而是先去找存放它的内存单元。这里面存在一层<strong>间接</strong>。正是有了这层间接，我们才能在高级语言中构筑起各种华丽的调用操作。  </p>
+<p>于是指针的原理也显而易见了，对于<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">char arr[4] = &quot;abcd&quot;;</div><div class="line">char *p = arr;</div><div class="line">p+=3;</div><div class="line">printf(&quot;*p: %c\n&quot;, *p);</div></pre></td></tr></table></figure></p>
+<p>我们<code>char *p = arr;</code>操作定位的arr数组的首地址。arr信箱有四个格子，我们定位到第一个，然后<code>p+=3;</code>并不是直接给信箱什么的加3，这明显不符合逻辑，而是操作信箱的编号(地址)。加3意味着往后数三个，定位到第四个格子，最后打印里面的东西，就是字符d。</p>
+<p>内存中的数据有两种，分别是<strong>数据</strong>和<strong>地址</strong>，数据就是普通的变量，地址就是指针。希望你不要混淆。</p>
+<h1 id="使用GDB"><a href="#使用GDB" class="headerlink" title="使用GDB"></a>使用GDB</h1><p>下面进入最后一个知识点，快速入门GDB。在此之前，我们需要把编写的.ASM程序编译链接运行起来。你可能听说过Linux下的<strong>make工具</strong>，说白了就是个配置文件，告诉NASM，gcc等编译器怎么有效地编译我们的源码，避免重复劳动。make配合<strong>makefile文件</strong>工作，如果你不知道这到底是什么，也完全没有关系，毕竟这不是本文的重点，只是顺带提一下。  </p>
+<p>你可以在Kate编辑器中再新建一个文本，名为makefile，请确保它和我们的sandbox.asm在同一个目录下。向其中输入如下内容:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sandbox: sandbox.o</div><div class="line">	ld -o sandbox sandbox.o</div><div class="line">sandbox.o: sandbox.asm</div><div class="line">	nasm -f elf64 -g -F stabs sandbox.asm -l sandbox.lst</div></pre></td></tr></table></figure></p>
+<p>你可以完全不必理会这四句话到底代表了什么，只需要明白它们会让NASM正确地生成我们的.ASM程序。  </p>
+<p>有了这个makefile，接下来可以在Kate编辑器下方的terminal中输入<code>&gt; make -k</code>，或者你自己启动shell，切到你的工作目录，执行上述命令。如果正确编译完成，那么看起来就像这样子：<br><img src="http://oesd9di98.bkt.clouddn.com/GDB_terminal.png" alt="GDB_terminal"></p>
+<p>接下来，我们要使用GDB了，在Terminal中键入：<code>&gt; gdb sandbox</code>以启用gdb调试。  </p>
+<p>调试，我们一般都会需要设置断点，来看看各变量的情况。这里我们已经更加深入到底层，不在内存中操作了，直接来到了CPU内部的寄存器中。键入：<code>&gt; b 10</code>即在<code>DoMore: add byte [ebx], 32</code>语句处加入断点。  </p>
+<p>然后，键入：<code>&gt; r</code>然程序开始运行。程序会停在DoMore语句那里，看起来就像这样：</p>
+<p><img src="http://oesd9di98.bkt.clouddn.com/GDB_step1.png" alt="step1"></p>
+<p>接着，键入:<code>i r</code>查看个寄存器状态，就像这样：</p>
+<p><img src="http://oesd9di98.bkt.clouddn.com/GDB_step2.png" alt="step2"></p>
+<p>你可以看到高亮的绿色部分，rax中存有字符串长度8，rbx中存有字符串地址。  </p>
+<p>啥？为什么不是eax和ebx？嗯，很有价值的问题，eax和ebx是32位CPU架构下的寄存器，而如今64位已经普及，我们的寄存器也随之升级了。  </p>
+<p>然后按一下<strong>Enter键</strong>，或者输入return，可以看到下一页未显示完全的一些寄存器：</p>
+<p><img src="http://oesd9di98.bkt.clouddn.com/GDB_step3.png" alt="step3"></p>
+<p>注意到绿色高亮部分的eflags标志位，我们发现其中除了IF什么都没有，这表明我们上文提到的<strong>ZF标志还没有被激活。</strong></p>
+<p>接下来，键入：<code>s</code>，它代表单步执行一行语句，请先执行一次，然后再键入：<code>i r</code>看一下结果寄存器状态:</p>
+<p><img src="http://oesd9di98.bkt.clouddn.com/GDB_step4.png" alt="step4"></p>
+<p>可以看到rax寄存器内部的值从8减到7，表明执行了一次循环中的dec指令。接下来你可以继续单步执行7次，即键入7次<code>s</code>。每一次都查看一下寄存器的状态，你会发现rax不断递减，直到0。7次单步之后，再次键入<code>i r</code>进行查看：</p>
+<p><img src="http://oesd9di98.bkt.clouddn.com/GDB_step5.png" alt="step5"></p>
+<p>你会发现rax变成0了，此时Enter到下一页，我们发现：</p>
+<p><img src="http://oesd9di98.bkt.clouddn.com/GDB_step6.png" alt="step6"></p>
+<p>没错！eflags中出现了ZF标志，表明其被激活，这样jnz就不会再跳到DoMore，循环终于结束了。  </p>
+<p>最有请键入<code>q</code>，然后<code>y</code>退出GDB。我们的GDB快速入门到此告一段落。</p>
+<h1 id="留一个小问题"><a href="#留一个小问题" class="headerlink" title="留一个小问题"></a>留一个小问题</h1><p>看到这儿，相信你已经大概理解了循环结构和指针的原理，对汇编工具以及GDB的使用也略知一二。那么我在这里提一个小问题：这段汇编代码到底是做什么的？请你积极思考哦～  </p>
+<p>答案我会在留言中说明。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本篇文章通过Linux下的一个最简易的汇编开发流程，带领大家熟悉了开发工具的使用，并入门了GDB这一神器。同时通过阅读汇编代码，从底层理解了循环结构和指针的原理。希望对大家有所启迪，感谢阅读！</p>
 
       
     </div>
@@ -449,13 +511,21 @@
       
         <div class="post-tags">
           
-            <a href="/tags/iOS/" rel="tag">#iOS</a>
+            <a href="/tags/读书笔记/" rel="tag">#读书笔记</a>
           
-            <a href="/tags/WebRTC/" rel="tag">#WebRTC</a>
+            <a href="/tags/汇编语言-基于Linux环境/" rel="tag">#汇编语言-基于Linux环境</a>
           
-            <a href="/tags/视频聊天/" rel="tag">#视频聊天</a>
+            <a href="/tags/reading-notes/" rel="tag">#reading notes</a>
           
-            <a href="/tags/Video-Chat/" rel="tag">#Video Chat</a>
+            <a href="/tags/GDB/" rel="tag">#GDB</a>
+          
+            <a href="/tags/计算机基础/" rel="tag">#计算机基础</a>
+          
+            <a href="/tags/汇编/" rel="tag">#汇编</a>
+          
+            <a href="/tags/指针/" rel="tag">#指针</a>
+          
+            <a href="/tags/循环结构/" rel="tag">#循环结构</a>
           
         </div>
       
@@ -464,17 +534,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/03/iOS知识点拾遗I/" rel="next" title="iOS知识点拾遗I">
-                <i class="fa fa-chevron-left"></i> iOS知识点拾遗I
+              <a href="/2016/11/10/读笔_汇编语言-基于Linux环境(第6章-有地儿有工具)/" rel="next" title="读笔 汇编语言-基于Linux环境(第6章-有地儿有工具)">
+                <i class="fa fa-chevron-left"></i> 读笔 汇编语言-基于Linux环境(第6章-有地儿有工具)
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/10/读笔_汇编语言-基于Linux环境(第6章-有地儿有工具)/" rel="prev" title="读笔 汇编语言-基于Linux环境(第6章-有地儿有工具)">
-                读笔 汇编语言-基于Linux环境(第6章-有地儿有工具) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -489,10 +555,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/11/07/如何使用WebRTC实现视频聊天/"
-     data-title="如何使用WebRTC实现视频聊天"
+        <div class="ds-share flat" data-thread-key="2016/11/15/快速入门Linux下GDB和汇编开发工具/"
+     data-title="快速入门Linux下GDB和汇编开发工具"
      data-content=""
-     data-url="https://kimihe.github.io/2016/11/07/如何使用WebRTC实现视频聊天/">
+     data-url="https://kimihe.github.io/2016/11/15/快速入门Linux下GDB和汇编开发工具/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -519,8 +585,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/11/07/如何使用WebRTC实现视频聊天/"
-           data-title="如何使用WebRTC实现视频聊天" data-url="https://kimihe.github.io/2016/11/07/如何使用WebRTC实现视频聊天/">
+      <div class="ds-thread" data-thread-key="2016/11/15/快速入门Linux下GDB和汇编开发工具/"
+           data-title="快速入门Linux下GDB和汇编开发工具" data-url="https://kimihe.github.io/2016/11/15/快速入门Linux下GDB和汇编开发工具/">
       </div>
     
   </div>
@@ -666,7 +732,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#项目地址"><span class="nav-number">2.</span> <span class="nav-text">项目地址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#效果演示"><span class="nav-number">3.</span> <span class="nav-text">效果演示</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用"><span class="nav-number">3.0.1.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">3.0.2.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构建汇编程序"><span class="nav-number">2.</span> <span class="nav-text">构建汇编程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原料"><span class="nav-number">2.0.1.</span> <span class="nav-text">原料</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第一个汇编程序"><span class="nav-number">3.</span> <span class="nav-text">第一个汇编程序</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#循环结构的原理"><span class="nav-number">4.</span> <span class="nav-text">循环结构的原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是指针"><span class="nav-number">5.</span> <span class="nav-text">什么是指针</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用GDB"><span class="nav-number">6.</span> <span class="nav-text">使用GDB</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#留一个小问题"><span class="nav-number">7.</span> <span class="nav-text">留一个小问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
           </div>
         </section>
