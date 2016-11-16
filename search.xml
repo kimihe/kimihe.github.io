@@ -66,7 +66,7 @@
 <p>你会发现rax变成0了，此时Enter到下一页，我们发现：</p>
 <p><img src="http://oesd9di98.bkt.clouddn.com/GDB_step6.png" alt="step6"></p>
 <p>没错！eflags中出现了ZF标志，表明其被激活，这样jnz就不会再跳到DoMore，循环终于结束了。  </p>
-<p>最有请键入<code>q</code>，然后<code>y</code>退出GDB。我们的GDB快速入门到此告一段落。</p>
+<p>最后请键入<code>q</code>，然后<code>y</code>退出GDB。我们的GDB快速入门到此告一段落。</p>
 <h1 id="留一个小问题"><a href="#留一个小问题" class="headerlink" title="留一个小问题"></a>留一个小问题</h1><p>看到这儿，相信你已经大概理解了循环结构和指针的原理，对汇编工具以及GDB的使用也略知一二。那么我在这里提一个小问题：这段汇编代码到底是做什么的？请你积极思考哦～  </p>
 <p>答案我会在留言中说明。</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本篇文章通过Linux下的一个最简易的汇编开发流程，带领大家熟悉了开发工具的使用，并入门了GDB这一神器。同时通过阅读汇编代码，从底层理解了循环结构和指针的原理。希望对大家有所启迪，感谢阅读！</p>
