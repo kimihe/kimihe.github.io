@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="计算机基础,C,汇编,内存," />
 
 
 
@@ -90,15 +90,24 @@
 
 
 
-<meta name="description" content="iOS熟练工｜微机汇编｜泥轰癌晚期">
-<meta property="og:type" content="website">
-<meta property="og:title" content="洛斯里克的大书库">
-<meta property="og:url" content="https://kimihe.github.io/tags/知识点拾遗/index.html">
+<meta name="description" content="文章也同时在简书更新参考: iOS 最详细的解析（数组与指针）笔试题，并做了改进。
+
+引题先来看一下这道题目，如下代码的输出结果是什么？12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455short arrayName[10] = &amp;#123;0,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一道数组指针题搞清楚x86内存">
+<meta property="og:url" content="https://kimihe.github.io/2016/09/07/一道数组指针题搞清楚x86内存/index.html">
 <meta property="og:site_name" content="洛斯里克的大书库">
-<meta property="og:description" content="iOS熟练工｜微机汇编｜泥轰癌晚期">
+<meta property="og:description" content="文章也同时在简书更新参考: iOS 最详细的解析（数组与指针）笔试题，并做了改进。
+
+引题先来看一下这道题目，如下代码的输出结果是什么？12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455short arrayName[10] = &amp;#123;0,">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1609713-059738eebded541f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-11-18T13:20:55.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="洛斯里克的大书库">
-<meta name="twitter:description" content="iOS熟练工｜微机汇编｜泥轰癌晚期">
+<meta name="twitter:title" content="一道数组指针题搞清楚x86内存">
+<meta name="twitter:description" content="文章也同时在简书更新参考: iOS 最详细的解析（数组与指针）笔试题，并做了改进。
+
+引题先来看一下这道题目，如下代码的输出结果是什么？12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455short arrayName[10] = &amp;#123;0,">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1609713-059738eebded541f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -119,10 +128,10 @@
 
 
 
-  <link rel="canonical" href="https://kimihe.github.io/tags/知识点拾遗/"/>
+  <link rel="canonical" href="https://kimihe.github.io/2016/09/07/一道数组指针题搞清楚x86内存/"/>
 
 
-  <title> 标签: 知识点拾遗 | 洛斯里克的大书库 </title>
+  <title> 一道数组指针题搞清楚x86内存 | 洛斯里克的大书库 </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -153,7 +162,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -274,46 +283,214 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        知识点拾遗
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                一道数组指针题搞清楚x86内存
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-07T21:14:36+08:00" content="2016-09-07">
+              2016-09-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/计算机基础/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机基础</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/07/一道数组指针题搞清楚x86内存/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/07/一道数组指针题搞清楚x86内存/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/09/07/一道数组指针题搞清楚x86内存/" class="leancloud_visitors" data-flag-title="一道数组指针题搞清楚x86内存">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
+      
+        <blockquote>
+<p>文章也同时在<a href="http://www.jianshu.com/p/ed5e6aad3d99" target="_blank" rel="external">简书</a>更新<br>参考: <a href="http://www.jianshu.com/p/605858e5bcf3" target="_blank" rel="external">iOS 最详细的解析（数组与指针）笔试题</a>，并做了改进。</p>
+</blockquote>
+<h3 id="引题"><a href="#引题" class="headerlink" title="引题"></a>引题</h3><p>先来看一下这道题目，如下代码的输出结果是什么？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line">short arrayName[10] = &#123;0, 1, 2, 3, 4, 5, 6, 7, 8, 9&#125;;</div><div class="line">int *q = (int *)(&amp;arrayName+1);</div><div class="line">printf(&quot;*(q-2):%d\n&quot;, *(q-2));</div><div class="line">```  </div><div class="line">在看后文的解释前，不妨自己思考一下。  </div><div class="line"></div><div class="line">.  </div><div class="line">.  </div><div class="line">.  </div><div class="line">.  </div><div class="line">.  </div><div class="line">.    </div><div class="line">.  </div><div class="line">.  </div><div class="line">.     </div><div class="line">.  </div><div class="line">.  </div><div class="line">.  </div><div class="line">.   </div><div class="line"></div><div class="line">好了，相信你已经思考过了，我们来揭晓结果，结果是令人匪夷所思的**458758**，答对了吗？也许你会有疑惑，那么请看下面的注解，在其中增加了些许解释代码，并在关键代码后有注释。</div><div class="line"></div><div class="line">详细注释解答：</div><div class="line">  </div><div class="line">``` </div><div class="line">short arrayName[10] = &#123;0, 1, 2, 3, 4, 5, 6, 7, 8, 9&#125;;</div><div class="line">for (int i = 0; i &lt; 10; i++) &#123;</div><div class="line">    printf(&quot;arr%d addr:%p\n&quot;, i, arrayName+i);</div><div class="line">&#125;</div><div class="line">//&amp;arratName是short(*)[10]类型</div><div class="line">short *sp1 = (short *)&amp;arrayName+2; //short(*)[10]先转short*，再移动2个short*位(4B)</div><div class="line">short *sp2 = (short *)(&amp;arrayName+2);//short(*)[10]先移动2个数组位(20个short*: 40B-&gt;0x28)，再转short*型</div><div class="line">printf(&quot;sp1:%p\nsp2:%p\n&quot;, sp1, sp2);</div><div class="line"></div><div class="line">short *p = (short *)(&amp;arrayName+1);//short(*)[10]先移动1个数组位(10个short*: 20B-&gt;0x14)，再转short*型</div><div class="line">int *q = (int *)(&amp;arrayName+1);//short(*)[10]先移动1个数组位(10个short*: 20B-&gt;0x14)，再转int*型</div><div class="line">printf(&quot;p: %p\nq: %p\n&quot;, p, q);</div><div class="line">printf(&quot;p-2:%p\nq-2:%p\n&quot;, p-2, q-2);</div><div class="line"></div><div class="line">//q-2:移动2个short*(4B), p-2:移动2个int*(8B)</div><div class="line">//x86是小端字节序: 0x0007 0006 -&gt; 7*256*256+6=458758</div><div class="line">printf(&quot;*(p-2):%d\n*(q-2):%d&quot;, *(p-2), *(q-2));</div><div class="line">```  </div><div class="line"></div><div class="line">内存地址分配图：</div><div class="line"></div><div class="line">![内存地址分配图.png](http://upload-images.jianshu.io/upload_images/1609713-02a43a395fccde1b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)  </div><div class="line"></div><div class="line">### 重点：</div><div class="line">* 字节序</div><div class="line">* 内存地址分配</div><div class="line">* 类型转换 </div><div class="line"></div><div class="line">### 补充</div><div class="line">最后我们通过汇编，来深入理解一下如下几行代码的含义：</div></pre></td></tr></table></figure></p>
+<p>int <em>p = NULL;<br>p = (int </em>)&arrayName;<br>p = (int *)(&amp;arrayName+1);<br>```<br>对应的汇编分别为：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1609713-059738eebded541f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="汇编代码.png">  </p>
+<p>如图三个红圈，这边是AT&amp;T的汇编格式，我们还是以更好看的intel的样式来说明：</p>
+<ul>
+<li>第一个红圈，左边的<code>$0x00</code>立即数赋给<code>[rbp-0x28]</code>这个内存地址，<code>0x00</code>就是<code>NULL</code>的值，而<code>[rbp-0x28]</code>内存地址就是指针<code>p</code>的值（不是<code>*p</code>）。  </li>
+<li>第二个红圈，<code>rcx</code>寄存器中含有<code>arrayName</code>数组的首地址(注意：<code>arrayName+0</code>和<code>&amp;arrayName</code>取得的地址是相同的)，赋给<code>rdx</code>；<code>rdx</code>在把它赋给<code>[rbp-0x28]</code>，即赋给指针<code>p</code>。</li>
+<li>第三个红圈，第一句中，<code>$0x14</code>立即数就是十进制的20，表明10个<code>short*</code>型，因为每个<code>short *</code>占2B。<code>$0x14</code>赋给<code>rcx</code>寄存器，<code>rcx</code>再赋给指针<code>p</code>，最终导致前文所说的，所谓移动整个数组位，从第0个元素移到了第11个元素(虽然数组并没有第11个元素，但位置的移动可以这样理解)。</li>
+</ul>
+<h3 id="That’s-all-Thanks-for-reading"><a href="#That’s-all-Thanks-for-reading" class="headerlink" title="That’s all. Thanks for reading."></a>That’s all. Thanks for reading.</h3>
+      
+    </div>
 
-      <h1 class="post-title">
+    <div>
+      
         
-            <a class="post-title-link" href="/2016/11/03/iOS知识点拾遗I/" itemprop="url">
-              
-                <span itemprop="name">iOS知识点拾遗I</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://oesd9di98.bkt.clouddn.com/WechatQRCode.jpeg" alt="周鶏🐣(Kimiko) WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://oesd9di98.bkt.clouddn.com/AlipayReceipt.jpeg" alt="周鶏🐣(Kimiko) Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-11-03T21:53:10+08:00"
-              content="2016-11-03" >
-          11-03
-        </time>
-      </div>
 
-    </header>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/计算机基础/" rel="tag">#计算机基础</a>
+          
+            <a href="/tags/C/" rel="tag">#C</a>
+          
+            <a href="/tags/汇编/" rel="tag">#汇编</a>
+          
+            <a href="/tags/内存/" rel="tag">#内存</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/19/Universal-Links通用链接应用跳转总结以及坑/" rel="prev" title="Universal Links通用链接应用跳转总结以及坑">
+                Universal Links通用链接应用跳转总结以及坑 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/09/07/一道数组指针题搞清楚x86内存/"
+     data-title="一道数组指针题搞清楚x86内存"
+     data-content=""
+     data-url="https://kimihe.github.io/2016/09/07/一道数组指针题搞清楚x86内存/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
 
 
           </div>
@@ -321,6 +498,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/07/一道数组指针题搞清楚x86内存/"
+           data-title="一道数组指针题搞清楚x86内存" data-url="https://kimihe.github.io/2016/09/07/一道数组指针题搞清楚x86内存/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -340,8 +525,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://oesd9di98.bkt.clouddn.com/Yaki%20Dango.jpg"
@@ -447,6 +641,17 @@
       </section>
 
       
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#引题"><span class="nav-number">1.</span> <span class="nav-text">引题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#That’s-all-Thanks-for-reading"><span class="nav-number">2.</span> <span class="nav-text">That’s all. Thanks for reading.</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
 
     </div>
   </aside>
@@ -549,6 +754,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
 
   
 
