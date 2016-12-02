@@ -12,6 +12,14 @@
     </entry>
     
     <entry>
+      <title><![CDATA[深入总结iOS内存管理]]></title>
+      <url>https://kimihe.github.io/2016/12/02/%E6%B7%B1%E5%85%A5%E6%80%BB%E7%BB%93iOS%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</url>
+      <content type="html"><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本文主要针对iOS内存管理进行总结。首先声明，本文是一篇分量十足的干货，相信看过之后一定会让你有所收获。对于内存管理，网上充斥着各种良莠不齐的文章，其中有很多总结不是已经过时，就是似懂非懂的误读。本文立足严谨的治学态度，希望能够尽可能全面地让大家理解内存管理的本质，以及需要注意的知识点。</p>
+<a id="more"></a>
+<h1 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h1><h1 id="ARC"><a href="#ARC" class="headerlink" title="ARC"></a>ARC</h1><h1 id="delloc方法"><a href="#delloc方法" class="headerlink" title="delloc方法"></a>delloc方法</h1><h1 id="循环引用"><a href="#循环引用" class="headerlink" title="循环引用"></a>循环引用</h1><h1 id="自动释放池-autoreleasepool"><a href="#自动释放池-autoreleasepool" class="headerlink" title="自动释放池@autoreleasepool"></a>自动释放池@autoreleasepool</h1><h1 id="retainCount"><a href="#retainCount" class="headerlink" title="retainCount"></a>retainCount</h1>]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[手把手教你如何实现iOS消消乐小游戏Demo]]></title>
       <url>https://kimihe.github.io/2016/11/29/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0iOS%E6%B6%88%E6%B6%88%E4%B9%90%E5%B0%8F%E6%B8%B8%E6%88%8FDemo/</url>
       <content type="html"><![CDATA[<blockquote>
