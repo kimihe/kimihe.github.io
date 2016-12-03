@@ -13,10 +13,88 @@
     
     <entry>
       <title><![CDATA[深入总结iOS内存管理]]></title>
-      <url>https://kimihe.github.io/2016/12/02/%E6%B7%B1%E5%85%A5%E6%80%BB%E7%BB%93iOS%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</url>
+      <url>https://kimihe.github.io/2016/12/03/%E6%B7%B1%E5%85%A5%E6%80%BB%E7%BB%93iOS%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</url>
       <content type="html"><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本文主要针对iOS内存管理进行总结。首先声明，本文是一篇分量十足的干货，相信看过之后一定会让你有所收获。对于内存管理，网上充斥着各种良莠不齐的文章，其中有很多总结不是已经过时，就是似懂非懂的误读。本文立足严谨的治学态度，希望能够尽可能全面地让大家理解内存管理的本质，以及需要注意的知识点。</p>
 <a id="more"></a>
-<h1 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h1><h1 id="ARC"><a href="#ARC" class="headerlink" title="ARC"></a>ARC</h1><h1 id="delloc方法"><a href="#delloc方法" class="headerlink" title="delloc方法"></a>delloc方法</h1><h1 id="循环引用"><a href="#循环引用" class="headerlink" title="循环引用"></a>循环引用</h1><h1 id="自动释放池-autoreleasepool"><a href="#自动释放池-autoreleasepool" class="headerlink" title="自动释放池@autoreleasepool"></a>自动释放池@autoreleasepool</h1><h1 id="retainCount"><a href="#retainCount" class="headerlink" title="retainCount"></a>retainCount</h1>]]></content>
+<p>本文涵盖的知识点比较多，大家可以根据需要择章节阅读，下面是目录：</p>
+<ul>
+<li>基础知识</li>
+<li>引用计数</li>
+<li>ARC</li>
+<li>delloc方法</li>
+<li>循环引用</li>
+<li>自动释放池@autoreleasepool</li>
+<li>关于retainCount</li>
+</ul>
+<h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><p>在理解内存管理之前，你需要理解内存的到底如何被我们的操作系统使用的，需要有一个清晰的内存模型。  </p>
+<p>对于内存的使用模型，大家应该不陌生<strong>堆栈</strong>这次词。但具体的内部原理其实还是比较复杂的。大家谷歌或者百度一下，可以搜到如下这张内存堆栈图：<br><img src="http://oesd9di98.bkt.clouddn.com/%E5%86%85%E5%AD%98%E5%A0%86%E6%A0%88%E5%9B%BE.jpg" alt="内存堆栈图"><br>这张图的信息量还是比较大的，请大家耐心阅读笔者的讲解。  </p>
+<p>首先常说的堆栈一词包含了“堆”和“栈”两个概念。它们是有区别的，而且和数据结构中的堆栈是不同的。“堆”和“栈”分别代表了两种数据管理方式，前者有程序员自己控制，后者由操作系统(由编译器在编译时确定套路)控制。这句话是网上很多文章常说的，但可能并没有说明白其中的本质。如果你想更加清楚地了解堆栈在内存中的底层细节，可以参考一下笔者的这篇文章<a href="http://kimihe.com/2016/12/02/%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%A0%86%E5%92%8C%E6%A0%88%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88/" target="_blank" rel="external">《内存中的堆和栈到底是什么》</a>。  </p>
+<p>在明白了上述细节后，大家请看如下代码：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSString</span> *someString = <span class="string">@"Some String"</span>;</div><div class="line"><span class="built_in">NSString</span> *anotherString = someString;</div></pre></td></tr></table></figure>
+<p>对于上述代码，我们表明上看起来似乎创建了两个<strong>NSString</strong>对象，其实它们二者是复用的关系。要理解这一点，你可能需要明白什么是指针。可以看笔者的这篇文章<a href="http://kimihe.com/2016/11/15/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8Linux%E4%B8%8BGDB%E5%92%8C%E6%B1%87%E7%BC%96%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" target="_blank" rel="external">《快速入门Linux下GDB和汇编开发工具》</a>中介绍指针原理的部分。  </p>
+<p>如果你清楚指针的含义，请继续往后看。实际上，上述代码只创建了一个<strong>NSString</strong>对象，它分配在堆中，由我们人工进行内存管理。而<strong>someString</strong>和<strong>anotherString</strong>是两个指针<strong>(请注意它们C语言风格的<code>*</code>号)</strong>，它们存在于栈中，跟随栈的管理由系统控制，我们人工无需也最好不要去控制。具体看来，我们在当前代码区域的栈中分配了两个内存，但这两个内存只是用来存放指针，与堆中用来存储字符串实例是完全不同的。这两个内存的大小刚好能够分别存下一个指针(在32位CPU上是4字节，在64位上是8字节)，而且两个内存中的值是一样的，即两个指针的值是一样的，于是两个指针指向同一个堆内存区域，从而导致<strong>someString</strong>和<strong>anotherString</strong>这两个指针指向的是相同的字符串实例。如下图:<br><img src="http://oesd9di98.bkt.clouddn.com/NSString%E5%A0%86%E6%A0%88%E7%A4%BA%E4%BE%8B%E5%9B%BE.png" alt="NSString堆栈示例图"><br>总结一下：<strong>someString</strong>和<strong>anotherString</strong>分配在栈上，无需我们控制。<strong>NSString: @”Some String”</strong>分配在堆上，需要我们进行内存管理。而这里的内存管理你需要理解引用计数，请看下一小节。  </p>
+<p>除此之外，OC虽然是一门面向对象语言，但本质上它是一个C的超级。很多理念和C是通用的，如果你熟悉C，学习OC将很快。注意到上述指针的<code>*</code>号，OC中的对象都是以指针来引用的，因此<strong>对象类型</strong>的实例的名字前都会带有一个<code>*</code>号。  </p>
+<p>对于普通的<strong>非对象类型</strong>的变量，比如<strong>CGRect</strong>结构，它们也会使用栈空间，而非对象类型所用的堆空间。因此，相比于创建结构体创建对象需要分配和释放内存等额外开销，所以若需要存储<strong>int，float，double，char，bool</strong>等非对象类型，建议直接使用结构体。  </p>
+<p>建议花一点时间学习一下C，这将有助于OC的学习。</p>
+<h3 id="后续待更～"><a href="#后续待更～" class="headerlink" title="后续待更～"></a>后续待更～</h3><h1 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h1><h1 id="ARC"><a href="#ARC" class="headerlink" title="ARC"></a>ARC</h1><h1 id="delloc方法"><a href="#delloc方法" class="headerlink" title="delloc方法"></a>delloc方法</h1><h1 id="循环引用"><a href="#循环引用" class="headerlink" title="循环引用"></a>循环引用</h1><h1 id="自动释放池-autoreleasepool"><a href="#自动释放池-autoreleasepool" class="headerlink" title="自动释放池@autoreleasepool"></a>自动释放池@autoreleasepool</h1><h1 id="关于retainCount"><a href="#关于retainCount" class="headerlink" title="关于retainCount"></a>关于retainCount</h1>]]></content>
+    </entry>
+    
+    <entry>
+      <title><![CDATA[内存中的堆和栈到底是什么]]></title>
+      <url>https://kimihe.github.io/2016/12/02/%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%A0%86%E5%92%8C%E6%A0%88%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88/</url>
+      <content type="html"><![CDATA[<blockquote>
+<p>文章也同时在<a href="http://www.jianshu.com/p/52b5a1879aa1" target="_blank" rel="external">简书</a>更新</p>
+</blockquote>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>网络上关于内存中各区段作用的文章有很多，但不得不吐槽一下，这些文章大多相互引用，内容大同小异，没有把问题讲解清楚。  </p>
+<p>因此，笔者想通过本文，借助汇编的知识，深入底层讲解内存模型。阅读完本文，你将知道：</p>
+<ul>
+<li>程序在内存中的存储模型</li>
+<li>编程过程中常见的几类变量所在的位置和作用</li>
+<li>堆和栈的细节</li>
+</ul>
+<a id="more"></a>
+<h1 id="网上的资料"><a href="#网上的资料" class="headerlink" title="网上的资料"></a>网上的资料</h1><p>首先，笔者也罗列出一些质量较好的博客，大家可以先阅读一下。之后笔者会针对大家可能存在的疑惑，从底层来一一讲解清楚。</p>
+<blockquote>
+<p><a href="http://www.cleey.com/blog/single/id/776.html" target="_blank" rel="external">《堆和栈的区别 之 数据结构和内存》</a></p>
+<p><a href="http://michaelyou.github.io/2015/03/07/%E6%89%A7%E8%A1%8C%E5%8F%AF%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F%E6%97%B6%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%9A%84%E6%96%B9%E5%BC%8F/" target="_blank" rel="external">《执行可执行程序时内存分配的方式&amp;&amp;BSS段》</a></p>
+</blockquote>
+<p>网上很多文章都引用到了下面这段代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> a = <span class="number">0</span>; <span class="comment">//全局初始化区</span></div><div class="line"><span class="keyword">char</span> *p1; <span class="comment">//全局未初始化区</span></div><div class="line">main()</div><div class="line">&#123; </div><div class="line">    <span class="keyword">int</span> b; <span class="comment">//栈</span></div><div class="line">    <span class="keyword">char</span> s[] = <span class="string">"abc"</span>; <span class="comment">//栈</span></div><div class="line">    <span class="keyword">char</span> *p2; <span class="comment">//栈</span></div><div class="line">    <span class="keyword">char</span> *p3 = <span class="string">"123456"</span>; <span class="comment">//123456\0在常量区，p3在栈上</span></div><div class="line">    <span class="keyword">static</span> <span class="keyword">int</span> c =<span class="number">0</span>； <span class="comment">//全局（静态）初始化区</span></div><div class="line">    p1 = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(<span class="number">10</span>); <span class="comment">//堆</span></div><div class="line">    p2 = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(<span class="number">20</span>);  <span class="comment">//堆</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>并且如果你搜索关键词“内存堆栈图”，将很容易找到下面这张图：<br><img src="http://oesd9di98.bkt.clouddn.com/%E5%86%85%E5%AD%98%E5%A0%86%E6%A0%88%E5%9B%BE.jpg" alt=""></p>
+<p>这也是笔者在查阅资料时很不满的地方，许多文章互相引用，内容雷同，却没有把问题的本质讲清楚。  </p>
+<p>因此，笔者将结合上述代码以及这张图，这两个最常被引用的东西，来把原理讲清楚。</p>
+<h1 id="程序在内存中的模型"><a href="#程序在内存中的模型" class="headerlink" title="程序在内存中的模型"></a>程序在内存中的模型</h1><p><strong>PS：本文所指的程序皆在用户空间运行，即不涉及操作系统类程序和驱动程序。</strong></p>
+<p>目前流行的那几种高级语言，归根到底，底层实现的思路都是差不多的。而且当今以Intel主流的CPU架构(虽然也有ARM)，其设计理念也是一脉相承的。  </p>
+<p>要讲清楚内存模型，我们就要深入底层涉及到汇编，很多高级语言都会经历翻译到汇编这一中间过程，汇编可以直观且直接地使用机器指令，是最接近的底层的语言。  </p>
+<p>在一个汇编程序中，常常把一个用户空间程序按习惯分为三个段：.data段，.bss段，.text段。</p>
+<h3 id="data段"><a href="#data段" class="headerlink" title=".data段"></a>.data段</h3><p><strong>.data段</strong>包含了已经初始化了段数据项，这些数据在程序开始运行前就拥有自己的值，这些值是可执行文件的一部分，当可执行文件被加载到内存中用于执行是，这些数据也被加载到内存中。  </p>
+<p>定义的初始化数据越多，可执行文件就越大，运行它的时候也就需要更长的时间才能将它们从磁盘加载到内存。  </p>
+<p>一些全局或者静态的，且经过定义初始化过的变量，就属于该段。例如下面代码中的<strong>a，指针p以及b</strong>三个变量：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">int a = 2;</div><div class="line">int *p = &amp;a;</div><div class="line"></div><div class="line">int main () </div><div class="line">&#123;</div><div class="line">	static int b = 1;</div><div class="line">...</div><div class="line">...</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="bss段"><a href="#bss段" class="headerlink" title=".bss段"></a>.bss段</h3><p>并不是所有数据项在程序开始之前都拥有值，例如你可以定义一个缓冲区来存在某些数据，这个缓冲区是<strong>.bss段</strong>中定义的。  </p>
+<p>分别定义<strong>.data段</strong>与<strong>.bss段</strong>中的数据，它们一个重要的区别就是：<strong>.data段</strong>中的数据会添加到可执行文件的大小上，而<strong>.bss段</strong>中的则不会。即便你给<strong>.bss段</strong>定义一个1M字节的缓冲区，其最终可执行文件大小也几乎不变(除了大约50个字节用于描述外)。  </p>
+<p>程序在加载时知道哪些数据项没有初值，它会为这些数据项分配空间，而具有初值的数据线会与其初值一同读入。  </p>
+<p>一些全局或者静态的，且未经过初始化的变量，属于<strong>.bss段</strong>。例如上文中<strong>.data段</strong>段的三个变量，如果不进行初始化，就会存储在本段中。</p>
+<h3 id="text段"><a href="#text段" class="headerlink" title=".text段"></a>.text段</h3><p>以上两个段都是源程序所需要的数据，而真正组成程序的机器指令则存放在<strong>.text段</strong>中。一般情况下，在<strong>.text段</strong>中不进行数据项的定义。<strong>.text段</strong>包含名为<strong>标号(label)</strong>的符号，这些符号用于标识跳转和调用程序代码位置。</p>
+<h3 id="程序内存中的堆栈"><a href="#程序内存中的堆栈" class="headerlink" title="程序内存中的堆栈"></a>程序内存中的堆栈</h3><p>现附上笔者在学习汇编时的一张笔记图，字比较丑，望各位见谅。<br><img src="http://oesd9di98.bkt.clouddn.com/%E7%A8%8B%E5%BA%8F%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%A0%86%E6%A0%88%E9%99%84%E7%AC%94%E8%AE%B0.jpg" alt="程序内存中的堆栈附笔记"><br>通过改图大家能够大概了解内存中上述三个段的位置。至于其中的堆栈以及笔记的含义请继续阅读后文。  </p>
+<h1 id="编程过程中常见的几类变量"><a href="#编程过程中常见的几类变量" class="headerlink" title="编程过程中常见的几类变量"></a>编程过程中常见的几类变量</h1><p>观察最开头经常被引用的那段代码，其中涵盖了几类最常见的变量以及其对应的存储位置。在上一小节中，我们已经说明了<strong>全局变量和静态变量</strong>存储的位置取决于是否进行过初始化。对于堆栈的解释我们留到下一小节。这里我们着重讲解这个文字常量区。如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">char *p3 = &quot;123456&quot;; //123456\0在常量区，p3在栈上</div></pre></td></tr></table></figure>
+<p>这个文字常量区是什么？根据我的理解，我认为其存储于.data段。和该段中的所有变量一样，它也是一种已经初始化的数据：带有一个值，而不仅仅是一个在将来某时刻用于存放数据的内存空间。  </p>
+<p>另外，所谓字符串是指位于连续内存区域中的一个字符序列。字符串通过在起始处关联一个标号来进行定义。在汇编中，常见的字符串定义如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">MSG: db &quot;something&quot;</div></pre></td></tr></table></figure></p>
+<p>MSG标号和DB指令在内存中指定一个字节作为字符串的起点，而字符串中的字符数则告诉汇编编译器为该字符预留多少个字节的存储空间。  </p>
+<h1 id="堆和栈的细节"><a href="#堆和栈的细节" class="headerlink" title="堆和栈的细节"></a>堆和栈的细节</h1><p>下面进入最后一个部分，讲解堆和栈，这也是最开头代码中仍未涉及的两种变量存储位置。注意：我们在汇编中常说的堆栈，其实是栈，并不包含堆。  </p>
+<p>在此之前，推荐大家看一下stackoverflow的这个问答<a href="http://stackoverflow.com/questions/79923/what-and-where-are-the-stack-and-heap" target="_blank" rel="external">What and where are the stack and heap?</a></p>
+<h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><p>栈由系统管理。但是为什么呢？  </p>
+<p>首先，栈是一个<strong>后进先出(LIFO)</strong>结构。当把数据放入栈时，我们把数据push进入；当从栈取出数据时，我们把数据pop出来。栈随着数据被压入或者弹出而增长或者减小。最新压入栈的项被认为是在“栈的顶部”。当从栈中弹出一个项时，我们得到的是位于栈最顶部的那一个。就像给弹夹上子弹，只能在顶部进行操作。  </p>
+<p>在x86体系中，栈顶由<strong>堆栈指针寄存器ESP</strong>来标记，它是一个32位寄存器，里面存放着最后一个压入栈顶的项的内存地址。正因为有它，我们才能够随时操作到需要的项。需要注意的是，<strong>栈顶是朝着地内存方向增长的。</strong></p>
+<h3 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h3><p>再来看我拍的照片，为于<strong>.bss段</strong>和<strong>栈</strong>之间有一段空余内存，C程序经常使用这种剩余内存空间来为那些为于堆内存中的，“已经在运行中”的变量分配空间。我们常说的堆就存在于这里。</p>
+<h3 id="二者分别存储什么以及原因"><a href="#二者分别存储什么以及原因" class="headerlink" title="二者分别存储什么以及原因"></a>二者分别存储什么以及原因</h3><p>可以看到栈有一个ESP寄存器管理，从底层就实现了一种“自动化”，而堆似乎并没有额外的东西来帮助管理。  </p>
+<p>此外，栈的大小需要有一定的限制，栈的增长是向低地址扩展，如照片中看到的，如果栈不断地增加，很可能会与<strong>.bss段</strong>发生碰撞，这是不堪设想的，系统会发出错误并终止程序。  </p>
+<p>栈应该被看成一个短期存储数据的地方，存在在栈中的数据项没有名字，只是按照后进先出来操作罢了。栈经常可以用来在寄存器紧张的情况下，临时存储一些数据，并且十分安全。当寄存器空闲后，我们可以从栈中弹出该数据，供寄存器使用。<strong>这种临时存放数据的特性，使得它经常用来存储局部变量，函数参数，上下文环境等。</strong></p>
+<p>相反，堆是由人工控制的，我们手动申请，手动释放。因此可以分配更大的空间，但开销也会更多。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>以上就是笔者对于堆栈以及内存模型的一些理解，希望能够解答大家的疑惑。  </p>
+<p>感谢阅读，欢迎分享～</p>
+]]></content>
     </entry>
     
     <entry>

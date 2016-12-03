@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="读书笔记,汇编语言-基于Linux环境,reading notes," />
+  <meta name="keywords" content="iOS,内存管理,memory management," />
 
 
 
@@ -90,22 +90,19 @@
 
 
 
-<meta name="description" content="文章也同时在简书更新
-
-引言本篇文章继续第四章关于内存寻址的探讨，主要介绍各类寄存器。">
+<meta name="description" content="引言本文主要针对iOS内存管理进行总结。首先声明，本文是一篇分量十足的干货，相信看过之后一定会让你有所收获。对于内存管理，网上充斥着各种良莠不齐的文章，其中有很多总结不是已经过时，就是似懂非懂的误读。本文立足严谨的治学态度，希望能够尽可能全面地让大家理解内存管理的本质，以及需要注意的知识点。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="读笔 汇编语言-基于Linux环境(第4章-位置:寄存器、内存寻址以及了解数据存储位置II)">
-<meta property="og:url" content="https://kimihe.github.io/2016/10/27/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置II)/index.html">
+<meta property="og:title" content="深入总结iOS内存管理">
+<meta property="og:url" content="https://kimihe.github.io/2016/12/03/深入总结iOS内存管理/index.html">
 <meta property="og:site_name" content="洛斯里克的大书库">
-<meta property="og:description" content="文章也同时在简书更新
-
-引言本篇文章继续第四章关于内存寻址的探讨，主要介绍各类寄存器。">
-<meta property="og:updated_time" content="2016-10-27T11:07:18.000Z">
+<meta property="og:description" content="引言本文主要针对iOS内存管理进行总结。首先声明，本文是一篇分量十足的干货，相信看过之后一定会让你有所收获。对于内存管理，网上充斥着各种良莠不齐的文章，其中有很多总结不是已经过时，就是似懂非懂的误读。本文立足严谨的治学态度，希望能够尽可能全面地让大家理解内存管理的本质，以及需要注意的知识点。">
+<meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/%E5%86%85%E5%AD%98%E5%A0%86%E6%A0%88%E5%9B%BE.jpg">
+<meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/NSString%E5%A0%86%E6%A0%88%E7%A4%BA%E4%BE%8B%E5%9B%BE.png">
+<meta property="og:updated_time" content="2016-12-03T14:18:17.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="读笔 汇编语言-基于Linux环境(第4章-位置:寄存器、内存寻址以及了解数据存储位置II)">
-<meta name="twitter:description" content="文章也同时在简书更新
-
-引言本篇文章继续第四章关于内存寻址的探讨，主要介绍各类寄存器。">
+<meta name="twitter:title" content="深入总结iOS内存管理">
+<meta name="twitter:description" content="引言本文主要针对iOS内存管理进行总结。首先声明，本文是一篇分量十足的干货，相信看过之后一定会让你有所收获。对于内存管理，网上充斥着各种良莠不齐的文章，其中有很多总结不是已经过时，就是似懂非懂的误读。本文立足严谨的治学态度，希望能够尽可能全面地让大家理解内存管理的本质，以及需要注意的知识点。">
+<meta name="twitter:image" content="http://oesd9di98.bkt.clouddn.com/%E5%86%85%E5%AD%98%E5%A0%86%E6%A0%88%E5%9B%BE.jpg">
 
 
 
@@ -126,10 +123,10 @@
 
 
 
-  <link rel="canonical" href="https://kimihe.github.io/2016/10/27/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置II)/"/>
+  <link rel="canonical" href="https://kimihe.github.io/2016/12/03/深入总结iOS内存管理/"/>
 
 
-  <title> 读笔 汇编语言-基于Linux环境(第4章-位置:寄存器、内存寻址以及了解数据存储位置II) | 洛斯里克的大书库 </title>
+  <title> 深入总结iOS内存管理 | 洛斯里克的大书库 </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -302,7 +299,7 @@
             
             
               
-                读笔 汇编语言-基于Linux环境(第4章-位置:寄存器、内存寻址以及了解数据存储位置II)
+                深入总结iOS内存管理
               
             
           </h1>
@@ -314,8 +311,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-27T13:52:20+08:00" content="2016-10-27">
-              2016-10-27
+            <time itemprop="dateCreated" datetime="2016-12-03T22:09:23+08:00" content="2016-12-03">
+              2016-12-03
             </time>
           </span>
 
@@ -328,8 +325,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/读书笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">读书笔记</span>
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
                   </a>
                 </span>
 
@@ -344,8 +341,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/10/27/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置II)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/27/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置II)/" itemprop="commentsCount"></span>
+                <a href="/2016/12/03/深入总结iOS内存管理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/03/深入总结iOS内存管理/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -355,7 +352,7 @@
 
           
           
-             <span id="/2016/10/27/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置II)/" class="leancloud_visitors" data-flag-title="读笔 汇编语言-基于Linux环境(第4章-位置:寄存器、内存寻址以及了解数据存储位置II)">
+             <span id="/2016/12/03/深入总结iOS内存管理/" class="leancloud_visitors" data-flag-title="深入总结iOS内存管理">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -377,41 +374,29 @@
       
 
       
-        <blockquote>
-<p>文章也同时在<a href="http://www.jianshu.com/p/86b59f66a62e" target="_blank" rel="external">简书</a>更新</p>
-</blockquote>
-<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本篇文章继续第四章关于内存寻址的探讨，主要介绍各类寄存器。</p>
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本文主要针对iOS内存管理进行总结。首先声明，本文是一篇分量十足的干货，相信看过之后一定会让你有所收获。对于内存管理，网上充斥着各种良莠不齐的文章，其中有很多总结不是已经过时，就是似懂非懂的误读。本文立足严谨的治学态度，希望能够尽可能全面地让大家理解内存管理的本质，以及需要注意的知识点。</p>
 <a id="more"></a>
-<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><h3 id="16位和32位段寄存器"><a href="#16位和32位段寄存器" class="headerlink" title="16位和32位段寄存器"></a>16位和32位段寄存器</h3><p>不管CPU正在做什么，只要他对内存中某一个位置进行寻址，那么该位置的段地址就会出现在6个寄存器之一中。  </p>
-<p><strong>所有的段寄存器大小都是16位</strong>！<strong>所有的段寄存器大小都是16位</strong>！！<strong>所有的段寄存器大小都是16位</strong>！！！无论CPU是什么型号，甚至是对于32位CPU来说也是如此。  </p>
+<p>本文涵盖的知识点比较多，大家可以根据需要择章节阅读，下面是目录：</p>
 <ul>
-<li><strong>CS(code segment)代码段</strong>：<strong>机器指令</strong>存放在代码段的某些偏移位置处。CS包含当前执行指令的代码段的段地址。</li>
-<li><strong>DS(data segment)数据段</strong>：<strong>变量</strong>和其他<strong>数据</strong>存放在数据段的某些偏移位置处。也许会有很多个数据段，但CPU一次只能使用一个，这是通过将该段的段地址放入寄存器DS来实现的。</li>
-<li><strong>SS(stack segment)堆栈段</strong>：堆栈式CPU用来<strong>暂时</strong>存放数据和地址等一个非常重要的部件。堆栈也有一个段地址，它存放在SS中。</li>
-<li><strong>ES(extra segment)附加段</strong>：它是一个可用于指定内存中某一位置的<strong>备用段</strong>。</li>
-<li><strong>FS</strong>和<strong>GS</strong>是ES的<strong>克隆</strong>：从命名上可以联想到<strong>E-&gt;F-&gt;G</strong>。</li>
+<li>基础知识</li>
+<li>引用计数</li>
+<li>ARC</li>
+<li>delloc方法</li>
+<li>循环引用</li>
+<li>自动释放池@autoreleasepool</li>
+<li>关于retainCount</li>
 </ul>
-<h3 id="通用寄存器"><a href="#通用寄存器" class="headerlink" title="通用寄存器"></a>通用寄存器</h3><ul>
-<li>段寄存器是存放<strong>段地址</strong>的专家，通用寄存器则用来存放<strong>偏移地址</strong>，它必须和段地址成对出现，以标识内存中的某个位置。</li>
-<li>在当前32位世界中，通用寄存器分为三个一般类：16位通用寄存器，32位扩展通用寄存器和8位的半寄存器。16位和8位寄存器实际上是32位寄存器内部的一块区域的名字。</li>
-<li>32位通用寄存器的高16位根本没有自己的名字，可以通过SI来访问ESI的低16位，但是想要获取高16位，必须要引用ESI，获取整个32位数据。</li>
-</ul>
-<h3 id="半寄存器"><a href="#半寄存器" class="headerlink" title="半寄存器"></a>半寄存器</h3><ul>
-<li>8位半寄存器的好处是可以读取和修改16位数据的其中一半，<strong>高H低L</strong>。但这一双重特性只涉及16位通用寄存器<strong>AX</strong>，<strong>BX</strong>，<strong>CX</strong>和<strong>DX</strong>。其他的16位通用寄存器(<strong>SP</strong>，<strong>BP</strong>，<strong>SI</strong>，<strong>DI</strong>)并不具有类似的特性。例如，不存在名为SIH和SIL的8位寄存器。</li>
-</ul>
-<h3 id="指令指针寄存器"><a href="#指令指针寄存器" class="headerlink" title="指令指针寄存器"></a>指令指针寄存器</h3><ul>
-<li>指令指针寄存器(instruction pointer)通常称为<strong>IP</strong>，它是16位的大小。在32位保护模式下，则为<strong>EIP</strong>。</li>
-<li>它只做一件事情：包含<strong>当前代码</strong>段中<strong>下一条</strong>即将执行的机器指令的<strong>偏移地址</strong>。一个程序可能有很多个代码段或者只有一个。当前代码段(current code segment)是指段地址当前存放在代码寄存器CS中的那段代码。</li>
-<li>当执行程序时，CPU使用IP来<strong>跟踪</strong>位于当前代码段中的位置。每执行一条指令后，IP就递增<strong>一定数量的字节</strong>。这个字节数是刚刚执行的那条指令的大小。最终的结果是IP跳到了内存中更远的地方，指向下一条即将执行的指令的开始位置。</li>
-<li>CS和IP一起，保存下一条即将执行指令的完整地址。在实模式段模型中，CS和IP共同组成一个<strong>20位</strong>的地址，指向实模式内存中的<strong>1048576(2的20次方)</strong>个字节之一。</li>
-<li>值得注意的是，IP是唯一既不能<strong>直接</strong>读出，也不能直接写入的寄存器。有一些技巧可以用来获取当前IP寄存器的值，但是拥有IP的值并不是像你想象得那么有用。</li>
-</ul>
-<h3 id="标志寄存器"><a href="#标志寄存器" class="headerlink" title="标志寄存器"></a>标志寄存器</h3><ul>
-<li>标志寄存器(flags register)在8086，8088和80286中的大小为16位，正式名称是<strong>FLAGS</strong>。在386等更高CPU中，它的大小是32位，正式名称为<strong>EFLAGS</strong>。</li>
-<li>当程序执行测试时，它所测试的就是标志寄存器中某个<strong>单个</strong>的标志位。因为每个标志位可以包含的值只有<strong>0或1</strong>，所以在汇编中，测试就是二选一的过程：标志位被设置为1，或者没有被设置为1。根据是否被设置为1，程序会执行<strong>非此即彼</strong>的不同决策，走不同的路。关于各标志位的具体作用将在后续再详细介绍。</li>
-</ul>
-<h1 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h1><p>如果整个PC是一个工厂车间，各类外设是工人们，那么CPU就是车间工长，而寄存器就是工长衣服的口袋，里面装着他常用的各种数据和信息。工人们和工长在名为“数据总线”的流水线上协同工作，保障车间的正常运作。</p>
-
+<h1 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h1><p>在理解内存管理之前，你需要理解内存的到底如何被我们的操作系统使用的，需要有一个清晰的内存模型。  </p>
+<p>对于内存的使用模型，大家应该不陌生<strong>堆栈</strong>这次词。但具体的内部原理其实还是比较复杂的。大家谷歌或者百度一下，可以搜到如下这张内存堆栈图：<br><img src="http://oesd9di98.bkt.clouddn.com/%E5%86%85%E5%AD%98%E5%A0%86%E6%A0%88%E5%9B%BE.jpg" alt="内存堆栈图"><br>这张图的信息量还是比较大的，请大家耐心阅读笔者的讲解。  </p>
+<p>首先常说的堆栈一词包含了“堆”和“栈”两个概念。它们是有区别的，而且和数据结构中的堆栈是不同的。“堆”和“栈”分别代表了两种数据管理方式，前者有程序员自己控制，后者由操作系统(由编译器在编译时确定套路)控制。这句话是网上很多文章常说的，但可能并没有说明白其中的本质。如果你想更加清楚地了解堆栈在内存中的底层细节，可以参考一下笔者的这篇文章<a href="http://kimihe.com/2016/12/02/%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%A0%86%E5%92%8C%E6%A0%88%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88/" target="_blank" rel="external">《内存中的堆和栈到底是什么》</a>。  </p>
+<p>在明白了上述细节后，大家请看如下代码：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSString</span> *someString = <span class="string">@"Some String"</span>;</div><div class="line"><span class="built_in">NSString</span> *anotherString = someString;</div></pre></td></tr></table></figure>
+<p>对于上述代码，我们表明上看起来似乎创建了两个<strong>NSString</strong>对象，其实它们二者是复用的关系。要理解这一点，你可能需要明白什么是指针。可以看笔者的这篇文章<a href="http://kimihe.com/2016/11/15/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8Linux%E4%B8%8BGDB%E5%92%8C%E6%B1%87%E7%BC%96%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" target="_blank" rel="external">《快速入门Linux下GDB和汇编开发工具》</a>中介绍指针原理的部分。  </p>
+<p>如果你清楚指针的含义，请继续往后看。实际上，上述代码只创建了一个<strong>NSString</strong>对象，它分配在堆中，由我们人工进行内存管理。而<strong>someString</strong>和<strong>anotherString</strong>是两个指针<strong>(请注意它们C语言风格的<code>*</code>号)</strong>，它们存在于栈中，跟随栈的管理由系统控制，我们人工无需也最好不要去控制。具体看来，我们在当前代码区域的栈中分配了两个内存，但这两个内存只是用来存放指针，与堆中用来存储字符串实例是完全不同的。这两个内存的大小刚好能够分别存下一个指针(在32位CPU上是4字节，在64位上是8字节)，而且两个内存中的值是一样的，即两个指针的值是一样的，于是两个指针指向同一个堆内存区域，从而导致<strong>someString</strong>和<strong>anotherString</strong>这两个指针指向的是相同的字符串实例。如下图:<br><img src="http://oesd9di98.bkt.clouddn.com/NSString%E5%A0%86%E6%A0%88%E7%A4%BA%E4%BE%8B%E5%9B%BE.png" alt="NSString堆栈示例图"><br>总结一下：<strong>someString</strong>和<strong>anotherString</strong>分配在栈上，无需我们控制。<strong>NSString: @”Some String”</strong>分配在堆上，需要我们进行内存管理。而这里的内存管理你需要理解引用计数，请看下一小节。  </p>
+<p>除此之外，OC虽然是一门面向对象语言，但本质上它是一个C的超级。很多理念和C是通用的，如果你熟悉C，学习OC将很快。注意到上述指针的<code>*</code>号，OC中的对象都是以指针来引用的，因此<strong>对象类型</strong>的实例的名字前都会带有一个<code>*</code>号。  </p>
+<p>对于普通的<strong>非对象类型</strong>的变量，比如<strong>CGRect</strong>结构，它们也会使用栈空间，而非对象类型所用的堆空间。因此，相比于创建结构体创建对象需要分配和释放内存等额外开销，所以若需要存储<strong>int，float，double，char，bool</strong>等非对象类型，建议直接使用结构体。  </p>
+<p>建议花一点时间学习一下C，这将有助于OC的学习。</p>
+<h3 id="后续待更～"><a href="#后续待更～" class="headerlink" title="后续待更～"></a>后续待更～</h3><h1 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h1><h1 id="ARC"><a href="#ARC" class="headerlink" title="ARC"></a>ARC</h1><h1 id="delloc方法"><a href="#delloc方法" class="headerlink" title="delloc方法"></a>delloc方法</h1><h1 id="循环引用"><a href="#循环引用" class="headerlink" title="循环引用"></a>循环引用</h1><h1 id="自动释放池-autoreleasepool"><a href="#自动释放池-autoreleasepool" class="headerlink" title="自动释放池@autoreleasepool"></a>自动释放池@autoreleasepool</h1><h1 id="关于retainCount"><a href="#关于retainCount" class="headerlink" title="关于retainCount"></a>关于retainCount</h1>
       
     </div>
 
@@ -454,11 +439,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/读书笔记/" rel="tag">#读书笔记</a>
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
           
-            <a href="/tags/汇编语言-基于Linux环境/" rel="tag">#汇编语言-基于Linux环境</a>
+            <a href="/tags/内存管理/" rel="tag">#内存管理</a>
           
-            <a href="/tags/reading-notes/" rel="tag">#reading notes</a>
+            <a href="/tags/memory-management/" rel="tag">#memory management</a>
           
         </div>
       
@@ -467,16 +452,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/26/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置I)/" rel="next" title="读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置I)">
-                <i class="fa fa-chevron-left"></i> 读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置I)
+              <a href="/2016/12/02/内存中的堆和栈到底是什么/" rel="next" title="内存中的堆和栈到底是什么">
+                <i class="fa fa-chevron-left"></i> 内存中的堆和栈到底是什么
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/10/27/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置III)/" rel="prev" title="读笔 汇编语言-基于Linux环境(第4章-位置:寄存器、内存寻址以及了解数据存储位置III)">
-                读笔 汇编语言-基于Linux环境(第4章-位置:寄存器、内存寻址以及了解数据存储位置III) <i class="fa fa-chevron-right"></i>
+              <a href="/2099/12/30/README/" rel="prev" title="README">
+                README <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -492,10 +477,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/10/27/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置II)/"
-     data-title="读笔 汇编语言-基于Linux环境(第4章-位置:寄存器、内存寻址以及了解数据存储位置II)"
+        <div class="ds-share flat" data-thread-key="2016/12/03/深入总结iOS内存管理/"
+     data-title="深入总结iOS内存管理"
      data-content=""
-     data-url="https://kimihe.github.io/2016/10/27/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置II)/">
+     data-url="https://kimihe.github.io/2016/12/03/深入总结iOS内存管理/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -522,8 +507,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/10/27/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置II)/"
-           data-title="读笔 汇编语言-基于Linux环境(第4章-位置:寄存器、内存寻址以及了解数据存储位置II)" data-url="https://kimihe.github.io/2016/10/27/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置II)/">
+      <div class="ds-thread" data-thread-key="2016/12/03/深入总结iOS内存管理/"
+           data-title="深入总结iOS内存管理" data-url="https://kimihe.github.io/2016/12/03/深入总结iOS内存管理/">
       </div>
     
   </div>
@@ -669,7 +654,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">2.</span> <span class="nav-text">摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#16位和32位段寄存器"><span class="nav-number">2.0.1.</span> <span class="nav-text">16位和32位段寄存器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通用寄存器"><span class="nav-number">2.0.2.</span> <span class="nav-text">通用寄存器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#半寄存器"><span class="nav-number">2.0.3.</span> <span class="nav-text">半寄存器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指令指针寄存器"><span class="nav-number">2.0.4.</span> <span class="nav-text">指令指针寄存器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标志寄存器"><span class="nav-number">2.0.5.</span> <span class="nav-text">标志寄存器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#感想"><span class="nav-number">3.</span> <span class="nav-text">感想</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基础知识"><span class="nav-number">2.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#后续待更～"><span class="nav-number">2.0.1.</span> <span class="nav-text">后续待更～</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#引用计数"><span class="nav-number">3.</span> <span class="nav-text">引用计数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ARC"><span class="nav-number">4.</span> <span class="nav-text">ARC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#delloc方法"><span class="nav-number">5.</span> <span class="nav-text">delloc方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#循环引用"><span class="nav-number">6.</span> <span class="nav-text">循环引用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自动释放池-autoreleasepool"><span class="nav-number">7.</span> <span class="nav-text">自动释放池@autoreleasepool</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于retainCount"><span class="nav-number">8.</span> <span class="nav-text">关于retainCount</span></a></li></ol></div>
             
           </div>
         </section>

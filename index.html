@@ -409,7 +409,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/12/02/深入总结iOS内存管理/" itemprop="url">
+                <a class="post-title-link" href="/2016/12/03/深入总结iOS内存管理/" itemprop="url">
                   深入总结iOS内存管理
                 </a>
               
@@ -423,8 +423,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-02T22:09:23+08:00" content="2016-12-02">
-              2016-12-02
+            <time itemprop="dateCreated" datetime="2016-12-03T22:09:23+08:00" content="2016-12-03">
+              2016-12-03
             </time>
           </span>
 
@@ -453,8 +453,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/12/02/深入总结iOS内存管理/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/02/深入总结iOS内存管理/" itemprop="commentsCount"></span>
+                <a href="/2016/12/03/深入总结iOS内存管理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/03/深入总结iOS内存管理/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -464,7 +464,7 @@
 
           
           
-             <span id="/2016/12/02/深入总结iOS内存管理/" class="leancloud_visitors" data-flag-title="深入总结iOS内存管理">
+             <span id="/2016/12/03/深入总结iOS内存管理/" class="leancloud_visitors" data-flag-title="深入总结iOS内存管理">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -489,7 +489,147 @@
         
           <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本文主要针对iOS内存管理进行总结。首先声明，本文是一篇分量十足的干货，相信看过之后一定会让你有所收获。对于内存管理，网上充斥着各种良莠不齐的文章，其中有很多总结不是已经过时，就是似懂非懂的误读。本文立足严谨的治学态度，希望能够尽可能全面地让大家理解内存管理的本质，以及需要注意的知识点。</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/02/深入总结iOS内存管理/#more" rel="contents">
+            <a class="btn" href="/2016/12/03/深入总结iOS内存管理/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/12/02/内存中的堆和栈到底是什么/" itemprop="url">
+                  内存中的堆和栈到底是什么
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-02T15:04:20+08:00" content="2016-12-02">
+              2016-12-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/计算机基础/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机基础</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/02/内存中的堆和栈到底是什么/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/02/内存中的堆和栈到底是什么/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/12/02/内存中的堆和栈到底是什么/" class="leancloud_visitors" data-flag-title="内存中的堆和栈到底是什么">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>文章也同时在<a href="http://www.jianshu.com/p/52b5a1879aa1">简书</a>更新</p>
+</blockquote>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>网络上关于内存中各区段作用的文章有很多，但不得不吐槽一下，这些文章大多相互引用，内容大同小异，没有把问题讲解清楚。  </p>
+<p>因此，笔者想通过本文，借助汇编的知识，深入底层讲解内存模型。阅读完本文，你将知道：</p>
+<ul>
+<li>程序在内存中的存储模型</li>
+<li>编程过程中常见的几类变量所在的位置和作用</li>
+<li>堆和栈的细节</li>
+</ul>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/12/02/内存中的堆和栈到底是什么/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1472,147 +1612,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/30/实现仿支付宝九宫格手势密码/" itemprop="url">
-                  实现仿支付宝九宫格手势密码
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-30T10:43:46+08:00" content="2016-10-30">
-              2016-10-30
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/30/实现仿支付宝九宫格手势密码/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/30/实现仿支付宝九宫格手势密码/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/10/30/实现仿支付宝九宫格手势密码/" class="leancloud_visitors" data-flag-title="实现仿支付宝九宫格手势密码">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>文章也同时在<a href="http://www.jianshu.com/p/32372e300b2e">简书</a>更新</p>
-</blockquote>
-<h1 id="1-引言"><a href="#1-引言" class="headerlink" title="1. 引言"></a>1. 引言</h1><p>前几天支付宝刚刚更新了双十一logo，各电商备战的氛围越来越浓厚。支付宝每天都用得相当频繁，为提高账户安全性，我开启了<strong>“手势密码”</strong>功能，首次进入敏感页面会要求验证九宫格手势来解锁。  </p>
-<div align=center><br><img src="http://oesd9di98.bkt.clouddn.com/AlipayGesturePasswd3.PNG" alt="手势密码"><br></div>
-
-
-<p>这个九宫格和安卓上面的绘图解锁非常类似，这引起了我自制一个的想法。而且最近一直在看微机汇编，有段时间没有搞iOS了，为避免生疏就拿它练手吧。  </p>
-<h1 id="2-Demo地址"><a href="#2-Demo地址" class="headerlink" title="2. Demo地址"></a>2. Demo地址</h1><p><a href="https://github.com/kimihe/KMiOSLib/tree/master/KMNineBoxDemo">KMNineBoxDemo</a><br>Demo中仍有不少可以进一步改进的地方，欢迎各位读者提出宝贵意见。</p>
-<h1 id="3-效果预览"><a href="#3-效果预览" class="headerlink" title="3. 效果预览"></a>3. 效果预览</h1><p>这里的图案是绘制数字2的形状，对应的手势序列就是123654789。</p>
-<p><div align=center><br><img src="http://oesd9di98.bkt.clouddn.com/KMNineBoxView222.gif" alt="效果预览"><br></div><br>可以看到九宫格手势较好地检测了触摸点的位置，跟踪了手势，并在验证后反馈不同的显示效果。绘制的手势图案除了简单的一步到底的图案，你也可以绘制一些连线交叉的复杂图案。  </p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/10/30/实现仿支付宝九宫格手势密码/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1658,7 +1657,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">23</span>
+              <span class="site-state-item-count">24</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1675,7 +1674,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">36</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

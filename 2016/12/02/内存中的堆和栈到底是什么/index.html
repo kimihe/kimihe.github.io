@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="读书笔记,汇编语言-基于Linux环境,reading notes," />
+  <meta name="keywords" content="计算机基础,内存管理,堆栈," />
 
 
 
@@ -92,20 +92,38 @@
 
 <meta name="description" content="文章也同时在简书更新
 
-引言本篇文章继续第四章关于内存寻址的探讨，主要介绍各类寄存器。">
+引言网络上关于内存中各区段作用的文章有很多，但不得不吐槽一下，这些文章大多相互引用，内容大同小异，没有把问题讲解清楚。  
+因此，笔者想通过本文，借助汇编的知识，深入底层讲解内存模型。阅读完本文，你将知道：
+
+程序在内存中的存储模型
+编程过程中常见的几类变量所在的位置和作用
+堆和栈的细节">
 <meta property="og:type" content="article">
-<meta property="og:title" content="读笔 汇编语言-基于Linux环境(第4章-位置:寄存器、内存寻址以及了解数据存储位置II)">
-<meta property="og:url" content="https://kimihe.github.io/2016/10/27/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置II)/index.html">
+<meta property="og:title" content="内存中的堆和栈到底是什么">
+<meta property="og:url" content="https://kimihe.github.io/2016/12/02/内存中的堆和栈到底是什么/index.html">
 <meta property="og:site_name" content="洛斯里克的大书库">
 <meta property="og:description" content="文章也同时在简书更新
 
-引言本篇文章继续第四章关于内存寻址的探讨，主要介绍各类寄存器。">
-<meta property="og:updated_time" content="2016-10-27T11:07:18.000Z">
+引言网络上关于内存中各区段作用的文章有很多，但不得不吐槽一下，这些文章大多相互引用，内容大同小异，没有把问题讲解清楚。  
+因此，笔者想通过本文，借助汇编的知识，深入底层讲解内存模型。阅读完本文，你将知道：
+
+程序在内存中的存储模型
+编程过程中常见的几类变量所在的位置和作用
+堆和栈的细节">
+<meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/%E5%86%85%E5%AD%98%E5%A0%86%E6%A0%88%E5%9B%BE.jpg">
+<meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/%E7%A8%8B%E5%BA%8F%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%A0%86%E6%A0%88%E9%99%84%E7%AC%94%E8%AE%B0.jpg">
+<meta property="og:updated_time" content="2016-12-03T14:20:47.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="读笔 汇编语言-基于Linux环境(第4章-位置:寄存器、内存寻址以及了解数据存储位置II)">
+<meta name="twitter:title" content="内存中的堆和栈到底是什么">
 <meta name="twitter:description" content="文章也同时在简书更新
 
-引言本篇文章继续第四章关于内存寻址的探讨，主要介绍各类寄存器。">
+引言网络上关于内存中各区段作用的文章有很多，但不得不吐槽一下，这些文章大多相互引用，内容大同小异，没有把问题讲解清楚。  
+因此，笔者想通过本文，借助汇编的知识，深入底层讲解内存模型。阅读完本文，你将知道：
+
+程序在内存中的存储模型
+编程过程中常见的几类变量所在的位置和作用
+堆和栈的细节">
+<meta name="twitter:image" content="http://oesd9di98.bkt.clouddn.com/%E5%86%85%E5%AD%98%E5%A0%86%E6%A0%88%E5%9B%BE.jpg">
 
 
 
@@ -126,10 +144,10 @@
 
 
 
-  <link rel="canonical" href="https://kimihe.github.io/2016/10/27/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置II)/"/>
+  <link rel="canonical" href="https://kimihe.github.io/2016/12/02/内存中的堆和栈到底是什么/"/>
 
 
-  <title> 读笔 汇编语言-基于Linux环境(第4章-位置:寄存器、内存寻址以及了解数据存储位置II) | 洛斯里克的大书库 </title>
+  <title> 内存中的堆和栈到底是什么 | 洛斯里克的大书库 </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -302,7 +320,7 @@
             
             
               
-                读笔 汇编语言-基于Linux环境(第4章-位置:寄存器、内存寻址以及了解数据存储位置II)
+                内存中的堆和栈到底是什么
               
             
           </h1>
@@ -314,8 +332,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-27T13:52:20+08:00" content="2016-10-27">
-              2016-10-27
+            <time itemprop="dateCreated" datetime="2016-12-02T15:04:20+08:00" content="2016-12-02">
+              2016-12-02
             </time>
           </span>
 
@@ -328,8 +346,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/读书笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">读书笔记</span>
+                  <a href="/categories/计算机基础/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机基础</span>
                   </a>
                 </span>
 
@@ -344,8 +362,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/10/27/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置II)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/27/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置II)/" itemprop="commentsCount"></span>
+                <a href="/2016/12/02/内存中的堆和栈到底是什么/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/02/内存中的堆和栈到底是什么/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -355,7 +373,7 @@
 
           
           
-             <span id="/2016/10/27/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置II)/" class="leancloud_visitors" data-flag-title="读笔 汇编语言-基于Linux环境(第4章-位置:寄存器、内存寻址以及了解数据存储位置II)">
+             <span id="/2016/12/02/内存中的堆和栈到底是什么/" class="leancloud_visitors" data-flag-title="内存中的堆和栈到底是什么">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -378,39 +396,57 @@
 
       
         <blockquote>
-<p>文章也同时在<a href="http://www.jianshu.com/p/86b59f66a62e" target="_blank" rel="external">简书</a>更新</p>
+<p>文章也同时在<a href="http://www.jianshu.com/p/52b5a1879aa1" target="_blank" rel="external">简书</a>更新</p>
 </blockquote>
-<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本篇文章继续第四章关于内存寻址的探讨，主要介绍各类寄存器。</p>
-<a id="more"></a>
-<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><h3 id="16位和32位段寄存器"><a href="#16位和32位段寄存器" class="headerlink" title="16位和32位段寄存器"></a>16位和32位段寄存器</h3><p>不管CPU正在做什么，只要他对内存中某一个位置进行寻址，那么该位置的段地址就会出现在6个寄存器之一中。  </p>
-<p><strong>所有的段寄存器大小都是16位</strong>！<strong>所有的段寄存器大小都是16位</strong>！！<strong>所有的段寄存器大小都是16位</strong>！！！无论CPU是什么型号，甚至是对于32位CPU来说也是如此。  </p>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>网络上关于内存中各区段作用的文章有很多，但不得不吐槽一下，这些文章大多相互引用，内容大同小异，没有把问题讲解清楚。  </p>
+<p>因此，笔者想通过本文，借助汇编的知识，深入底层讲解内存模型。阅读完本文，你将知道：</p>
 <ul>
-<li><strong>CS(code segment)代码段</strong>：<strong>机器指令</strong>存放在代码段的某些偏移位置处。CS包含当前执行指令的代码段的段地址。</li>
-<li><strong>DS(data segment)数据段</strong>：<strong>变量</strong>和其他<strong>数据</strong>存放在数据段的某些偏移位置处。也许会有很多个数据段，但CPU一次只能使用一个，这是通过将该段的段地址放入寄存器DS来实现的。</li>
-<li><strong>SS(stack segment)堆栈段</strong>：堆栈式CPU用来<strong>暂时</strong>存放数据和地址等一个非常重要的部件。堆栈也有一个段地址，它存放在SS中。</li>
-<li><strong>ES(extra segment)附加段</strong>：它是一个可用于指定内存中某一位置的<strong>备用段</strong>。</li>
-<li><strong>FS</strong>和<strong>GS</strong>是ES的<strong>克隆</strong>：从命名上可以联想到<strong>E-&gt;F-&gt;G</strong>。</li>
+<li>程序在内存中的存储模型</li>
+<li>编程过程中常见的几类变量所在的位置和作用</li>
+<li>堆和栈的细节</li>
 </ul>
-<h3 id="通用寄存器"><a href="#通用寄存器" class="headerlink" title="通用寄存器"></a>通用寄存器</h3><ul>
-<li>段寄存器是存放<strong>段地址</strong>的专家，通用寄存器则用来存放<strong>偏移地址</strong>，它必须和段地址成对出现，以标识内存中的某个位置。</li>
-<li>在当前32位世界中，通用寄存器分为三个一般类：16位通用寄存器，32位扩展通用寄存器和8位的半寄存器。16位和8位寄存器实际上是32位寄存器内部的一块区域的名字。</li>
-<li>32位通用寄存器的高16位根本没有自己的名字，可以通过SI来访问ESI的低16位，但是想要获取高16位，必须要引用ESI，获取整个32位数据。</li>
-</ul>
-<h3 id="半寄存器"><a href="#半寄存器" class="headerlink" title="半寄存器"></a>半寄存器</h3><ul>
-<li>8位半寄存器的好处是可以读取和修改16位数据的其中一半，<strong>高H低L</strong>。但这一双重特性只涉及16位通用寄存器<strong>AX</strong>，<strong>BX</strong>，<strong>CX</strong>和<strong>DX</strong>。其他的16位通用寄存器(<strong>SP</strong>，<strong>BP</strong>，<strong>SI</strong>，<strong>DI</strong>)并不具有类似的特性。例如，不存在名为SIH和SIL的8位寄存器。</li>
-</ul>
-<h3 id="指令指针寄存器"><a href="#指令指针寄存器" class="headerlink" title="指令指针寄存器"></a>指令指针寄存器</h3><ul>
-<li>指令指针寄存器(instruction pointer)通常称为<strong>IP</strong>，它是16位的大小。在32位保护模式下，则为<strong>EIP</strong>。</li>
-<li>它只做一件事情：包含<strong>当前代码</strong>段中<strong>下一条</strong>即将执行的机器指令的<strong>偏移地址</strong>。一个程序可能有很多个代码段或者只有一个。当前代码段(current code segment)是指段地址当前存放在代码寄存器CS中的那段代码。</li>
-<li>当执行程序时，CPU使用IP来<strong>跟踪</strong>位于当前代码段中的位置。每执行一条指令后，IP就递增<strong>一定数量的字节</strong>。这个字节数是刚刚执行的那条指令的大小。最终的结果是IP跳到了内存中更远的地方，指向下一条即将执行的指令的开始位置。</li>
-<li>CS和IP一起，保存下一条即将执行指令的完整地址。在实模式段模型中，CS和IP共同组成一个<strong>20位</strong>的地址，指向实模式内存中的<strong>1048576(2的20次方)</strong>个字节之一。</li>
-<li>值得注意的是，IP是唯一既不能<strong>直接</strong>读出，也不能直接写入的寄存器。有一些技巧可以用来获取当前IP寄存器的值，但是拥有IP的值并不是像你想象得那么有用。</li>
-</ul>
-<h3 id="标志寄存器"><a href="#标志寄存器" class="headerlink" title="标志寄存器"></a>标志寄存器</h3><ul>
-<li>标志寄存器(flags register)在8086，8088和80286中的大小为16位，正式名称是<strong>FLAGS</strong>。在386等更高CPU中，它的大小是32位，正式名称为<strong>EFLAGS</strong>。</li>
-<li>当程序执行测试时，它所测试的就是标志寄存器中某个<strong>单个</strong>的标志位。因为每个标志位可以包含的值只有<strong>0或1</strong>，所以在汇编中，测试就是二选一的过程：标志位被设置为1，或者没有被设置为1。根据是否被设置为1，程序会执行<strong>非此即彼</strong>的不同决策，走不同的路。关于各标志位的具体作用将在后续再详细介绍。</li>
-</ul>
-<h1 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h1><p>如果整个PC是一个工厂车间，各类外设是工人们，那么CPU就是车间工长，而寄存器就是工长衣服的口袋，里面装着他常用的各种数据和信息。工人们和工长在名为“数据总线”的流水线上协同工作，保障车间的正常运作。</p>
+<a id="more"></a>
+<h1 id="网上的资料"><a href="#网上的资料" class="headerlink" title="网上的资料"></a>网上的资料</h1><p>首先，笔者也罗列出一些质量较好的博客，大家可以先阅读一下。之后笔者会针对大家可能存在的疑惑，从底层来一一讲解清楚。</p>
+<blockquote>
+<p><a href="http://www.cleey.com/blog/single/id/776.html" target="_blank" rel="external">《堆和栈的区别 之 数据结构和内存》</a></p>
+<p><a href="http://michaelyou.github.io/2015/03/07/%E6%89%A7%E8%A1%8C%E5%8F%AF%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F%E6%97%B6%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E7%9A%84%E6%96%B9%E5%BC%8F/" target="_blank" rel="external">《执行可执行程序时内存分配的方式&amp;&amp;BSS段》</a></p>
+</blockquote>
+<p>网上很多文章都引用到了下面这段代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> a = <span class="number">0</span>; <span class="comment">//全局初始化区</span></div><div class="line"><span class="keyword">char</span> *p1; <span class="comment">//全局未初始化区</span></div><div class="line">main()</div><div class="line">&#123; </div><div class="line">    <span class="keyword">int</span> b; <span class="comment">//栈</span></div><div class="line">    <span class="keyword">char</span> s[] = <span class="string">"abc"</span>; <span class="comment">//栈</span></div><div class="line">    <span class="keyword">char</span> *p2; <span class="comment">//栈</span></div><div class="line">    <span class="keyword">char</span> *p3 = <span class="string">"123456"</span>; <span class="comment">//123456\0在常量区，p3在栈上</span></div><div class="line">    <span class="keyword">static</span> <span class="keyword">int</span> c =<span class="number">0</span>； <span class="comment">//全局（静态）初始化区</span></div><div class="line">    p1 = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(<span class="number">10</span>); <span class="comment">//堆</span></div><div class="line">    p2 = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(<span class="number">20</span>);  <span class="comment">//堆</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>并且如果你搜索关键词“内存堆栈图”，将很容易找到下面这张图：<br><img src="http://oesd9di98.bkt.clouddn.com/%E5%86%85%E5%AD%98%E5%A0%86%E6%A0%88%E5%9B%BE.jpg" alt=""></p>
+<p>这也是笔者在查阅资料时很不满的地方，许多文章互相引用，内容雷同，却没有把问题的本质讲清楚。  </p>
+<p>因此，笔者将结合上述代码以及这张图，这两个最常被引用的东西，来把原理讲清楚。</p>
+<h1 id="程序在内存中的模型"><a href="#程序在内存中的模型" class="headerlink" title="程序在内存中的模型"></a>程序在内存中的模型</h1><p><strong>PS：本文所指的程序皆在用户空间运行，即不涉及操作系统类程序和驱动程序。</strong></p>
+<p>目前流行的那几种高级语言，归根到底，底层实现的思路都是差不多的。而且当今以Intel主流的CPU架构(虽然也有ARM)，其设计理念也是一脉相承的。  </p>
+<p>要讲清楚内存模型，我们就要深入底层涉及到汇编，很多高级语言都会经历翻译到汇编这一中间过程，汇编可以直观且直接地使用机器指令，是最接近的底层的语言。  </p>
+<p>在一个汇编程序中，常常把一个用户空间程序按习惯分为三个段：.data段，.bss段，.text段。</p>
+<h3 id="data段"><a href="#data段" class="headerlink" title=".data段"></a>.data段</h3><p><strong>.data段</strong>包含了已经初始化了段数据项，这些数据在程序开始运行前就拥有自己的值，这些值是可执行文件的一部分，当可执行文件被加载到内存中用于执行是，这些数据也被加载到内存中。  </p>
+<p>定义的初始化数据越多，可执行文件就越大，运行它的时候也就需要更长的时间才能将它们从磁盘加载到内存。  </p>
+<p>一些全局或者静态的，且经过定义初始化过的变量，就属于该段。例如下面代码中的<strong>a，指针p以及b</strong>三个变量：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">int a = 2;</div><div class="line">int *p = &amp;a;</div><div class="line"></div><div class="line">int main () </div><div class="line">&#123;</div><div class="line">	static int b = 1;</div><div class="line">...</div><div class="line">...</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="bss段"><a href="#bss段" class="headerlink" title=".bss段"></a>.bss段</h3><p>并不是所有数据项在程序开始之前都拥有值，例如你可以定义一个缓冲区来存在某些数据，这个缓冲区是<strong>.bss段</strong>中定义的。  </p>
+<p>分别定义<strong>.data段</strong>与<strong>.bss段</strong>中的数据，它们一个重要的区别就是：<strong>.data段</strong>中的数据会添加到可执行文件的大小上，而<strong>.bss段</strong>中的则不会。即便你给<strong>.bss段</strong>定义一个1M字节的缓冲区，其最终可执行文件大小也几乎不变(除了大约50个字节用于描述外)。  </p>
+<p>程序在加载时知道哪些数据项没有初值，它会为这些数据项分配空间，而具有初值的数据线会与其初值一同读入。  </p>
+<p>一些全局或者静态的，且未经过初始化的变量，属于<strong>.bss段</strong>。例如上文中<strong>.data段</strong>段的三个变量，如果不进行初始化，就会存储在本段中。</p>
+<h3 id="text段"><a href="#text段" class="headerlink" title=".text段"></a>.text段</h3><p>以上两个段都是源程序所需要的数据，而真正组成程序的机器指令则存放在<strong>.text段</strong>中。一般情况下，在<strong>.text段</strong>中不进行数据项的定义。<strong>.text段</strong>包含名为<strong>标号(label)</strong>的符号，这些符号用于标识跳转和调用程序代码位置。</p>
+<h3 id="程序内存中的堆栈"><a href="#程序内存中的堆栈" class="headerlink" title="程序内存中的堆栈"></a>程序内存中的堆栈</h3><p>现附上笔者在学习汇编时的一张笔记图，字比较丑，望各位见谅。<br><img src="http://oesd9di98.bkt.clouddn.com/%E7%A8%8B%E5%BA%8F%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%A0%86%E6%A0%88%E9%99%84%E7%AC%94%E8%AE%B0.jpg" alt="程序内存中的堆栈附笔记"><br>通过改图大家能够大概了解内存中上述三个段的位置。至于其中的堆栈以及笔记的含义请继续阅读后文。  </p>
+<h1 id="编程过程中常见的几类变量"><a href="#编程过程中常见的几类变量" class="headerlink" title="编程过程中常见的几类变量"></a>编程过程中常见的几类变量</h1><p>观察最开头经常被引用的那段代码，其中涵盖了几类最常见的变量以及其对应的存储位置。在上一小节中，我们已经说明了<strong>全局变量和静态变量</strong>存储的位置取决于是否进行过初始化。对于堆栈的解释我们留到下一小节。这里我们着重讲解这个文字常量区。如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">char *p3 = &quot;123456&quot;; //123456\0在常量区，p3在栈上</div></pre></td></tr></table></figure>
+<p>这个文字常量区是什么？根据我的理解，我认为其存储于.data段。和该段中的所有变量一样，它也是一种已经初始化的数据：带有一个值，而不仅仅是一个在将来某时刻用于存放数据的内存空间。  </p>
+<p>另外，所谓字符串是指位于连续内存区域中的一个字符序列。字符串通过在起始处关联一个标号来进行定义。在汇编中，常见的字符串定义如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">MSG: db &quot;something&quot;</div></pre></td></tr></table></figure></p>
+<p>MSG标号和DB指令在内存中指定一个字节作为字符串的起点，而字符串中的字符数则告诉汇编编译器为该字符预留多少个字节的存储空间。  </p>
+<h1 id="堆和栈的细节"><a href="#堆和栈的细节" class="headerlink" title="堆和栈的细节"></a>堆和栈的细节</h1><p>下面进入最后一个部分，讲解堆和栈，这也是最开头代码中仍未涉及的两种变量存储位置。注意：我们在汇编中常说的堆栈，其实是栈，并不包含堆。  </p>
+<p>在此之前，推荐大家看一下stackoverflow的这个问答<a href="http://stackoverflow.com/questions/79923/what-and-where-are-the-stack-and-heap" target="_blank" rel="external">What and where are the stack and heap?</a></p>
+<h3 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h3><p>栈由系统管理。但是为什么呢？  </p>
+<p>首先，栈是一个<strong>后进先出(LIFO)</strong>结构。当把数据放入栈时，我们把数据push进入；当从栈取出数据时，我们把数据pop出来。栈随着数据被压入或者弹出而增长或者减小。最新压入栈的项被认为是在“栈的顶部”。当从栈中弹出一个项时，我们得到的是位于栈最顶部的那一个。就像给弹夹上子弹，只能在顶部进行操作。  </p>
+<p>在x86体系中，栈顶由<strong>堆栈指针寄存器ESP</strong>来标记，它是一个32位寄存器，里面存放着最后一个压入栈顶的项的内存地址。正因为有它，我们才能够随时操作到需要的项。需要注意的是，<strong>栈顶是朝着地内存方向增长的。</strong></p>
+<h3 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h3><p>再来看我拍的照片，为于<strong>.bss段</strong>和<strong>栈</strong>之间有一段空余内存，C程序经常使用这种剩余内存空间来为那些为于堆内存中的，“已经在运行中”的变量分配空间。我们常说的堆就存在于这里。</p>
+<h3 id="二者分别存储什么以及原因"><a href="#二者分别存储什么以及原因" class="headerlink" title="二者分别存储什么以及原因"></a>二者分别存储什么以及原因</h3><p>可以看到栈有一个ESP寄存器管理，从底层就实现了一种“自动化”，而堆似乎并没有额外的东西来帮助管理。  </p>
+<p>此外，栈的大小需要有一定的限制，栈的增长是向低地址扩展，如照片中看到的，如果栈不断地增加，很可能会与<strong>.bss段</strong>发生碰撞，这是不堪设想的，系统会发出错误并终止程序。  </p>
+<p>栈应该被看成一个短期存储数据的地方，存在在栈中的数据项没有名字，只是按照后进先出来操作罢了。栈经常可以用来在寄存器紧张的情况下，临时存储一些数据，并且十分安全。当寄存器空闲后，我们可以从栈中弹出该数据，供寄存器使用。<strong>这种临时存放数据的特性，使得它经常用来存储局部变量，函数参数，上下文环境等。</strong></p>
+<p>相反，堆是由人工控制的，我们手动申请，手动释放。因此可以分配更大的空间，但开销也会更多。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>以上就是笔者对于堆栈以及内存模型的一些理解，希望能够解答大家的疑惑。  </p>
+<p>感谢阅读，欢迎分享～</p>
 
       
     </div>
@@ -454,11 +490,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/读书笔记/" rel="tag">#读书笔记</a>
+            <a href="/tags/计算机基础/" rel="tag">#计算机基础</a>
           
-            <a href="/tags/汇编语言-基于Linux环境/" rel="tag">#汇编语言-基于Linux环境</a>
+            <a href="/tags/内存管理/" rel="tag">#内存管理</a>
           
-            <a href="/tags/reading-notes/" rel="tag">#reading notes</a>
+            <a href="/tags/堆栈/" rel="tag">#堆栈</a>
           
         </div>
       
@@ -467,16 +503,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/26/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置I)/" rel="next" title="读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置I)">
-                <i class="fa fa-chevron-left"></i> 读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置I)
+              <a href="/2016/11/29/手把手教你如何实现iOS消消乐小游戏Demo/" rel="next" title="手把手教你如何实现iOS消消乐小游戏Demo">
+                <i class="fa fa-chevron-left"></i> 手把手教你如何实现iOS消消乐小游戏Demo
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/10/27/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置III)/" rel="prev" title="读笔 汇编语言-基于Linux环境(第4章-位置:寄存器、内存寻址以及了解数据存储位置III)">
-                读笔 汇编语言-基于Linux环境(第4章-位置:寄存器、内存寻址以及了解数据存储位置III) <i class="fa fa-chevron-right"></i>
+              <a href="/2016/12/03/深入总结iOS内存管理/" rel="prev" title="深入总结iOS内存管理">
+                深入总结iOS内存管理 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -492,10 +528,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/10/27/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置II)/"
-     data-title="读笔 汇编语言-基于Linux环境(第4章-位置:寄存器、内存寻址以及了解数据存储位置II)"
+        <div class="ds-share flat" data-thread-key="2016/12/02/内存中的堆和栈到底是什么/"
+     data-title="内存中的堆和栈到底是什么"
      data-content=""
-     data-url="https://kimihe.github.io/2016/10/27/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置II)/">
+     data-url="https://kimihe.github.io/2016/12/02/内存中的堆和栈到底是什么/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -522,8 +558,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/10/27/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置II)/"
-           data-title="读笔 汇编语言-基于Linux环境(第4章-位置:寄存器、内存寻址以及了解数据存储位置II)" data-url="https://kimihe.github.io/2016/10/27/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置II)/">
+      <div class="ds-thread" data-thread-key="2016/12/02/内存中的堆和栈到底是什么/"
+           data-title="内存中的堆和栈到底是什么" data-url="https://kimihe.github.io/2016/12/02/内存中的堆和栈到底是什么/">
       </div>
     
   </div>
@@ -669,7 +705,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#摘要"><span class="nav-number">2.</span> <span class="nav-text">摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#16位和32位段寄存器"><span class="nav-number">2.0.1.</span> <span class="nav-text">16位和32位段寄存器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通用寄存器"><span class="nav-number">2.0.2.</span> <span class="nav-text">通用寄存器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#半寄存器"><span class="nav-number">2.0.3.</span> <span class="nav-text">半寄存器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指令指针寄存器"><span class="nav-number">2.0.4.</span> <span class="nav-text">指令指针寄存器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标志寄存器"><span class="nav-number">2.0.5.</span> <span class="nav-text">标志寄存器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#感想"><span class="nav-number">3.</span> <span class="nav-text">感想</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网上的资料"><span class="nav-number">2.</span> <span class="nav-text">网上的资料</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#程序在内存中的模型"><span class="nav-number">3.</span> <span class="nav-text">程序在内存中的模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#data段"><span class="nav-number">3.0.1.</span> <span class="nav-text">.data段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bss段"><span class="nav-number">3.0.2.</span> <span class="nav-text">.bss段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#text段"><span class="nav-number">3.0.3.</span> <span class="nav-text">.text段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#程序内存中的堆栈"><span class="nav-number">3.0.4.</span> <span class="nav-text">程序内存中的堆栈</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编程过程中常见的几类变量"><span class="nav-number">4.</span> <span class="nav-text">编程过程中常见的几类变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#堆和栈的细节"><span class="nav-number">5.</span> <span class="nav-text">堆和栈的细节</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#栈"><span class="nav-number">5.0.1.</span> <span class="nav-text">栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#堆"><span class="nav-number">5.0.2.</span> <span class="nav-text">堆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二者分别存储什么以及原因"><span class="nav-number">5.0.3.</span> <span class="nav-text">二者分别存储什么以及原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.0.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
         </section>
