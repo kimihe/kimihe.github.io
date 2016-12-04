@@ -90,18 +90,18 @@
 
 
 
-<meta name="description" content="引言本文主要针对iOS内存管理进行总结。首先声明，本文是一篇分量十足的干货，相信看过之后一定会让你有所收获。对于内存管理，网上充斥着各种良莠不齐的文章，其中有很多总结不是已经过时，就是似懂非懂的误读。本文立足严谨的治学态度，希望能够尽可能全面地让大家理解内存管理的本质，以及需要注意的知识点。">
+<meta name="description" content="引言本文主要针对iOS内存管理进行总结,相信看过之后一定会让你有所收获。对于内存管理，网上充斥着各种良莠不齐的文章，其中有很多总结不是已经过时，就是似懂非懂的误读。本文立足严谨的治学态度，希望能够尽可能全面地让大家理解内存管理的本质，以及需要注意的知识点。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深入总结iOS内存管理">
 <meta property="og:url" content="https://kimihe.github.io/2016/12/03/深入总结iOS内存管理/index.html">
 <meta property="og:site_name" content="洛斯里克的大书库">
-<meta property="og:description" content="引言本文主要针对iOS内存管理进行总结。首先声明，本文是一篇分量十足的干货，相信看过之后一定会让你有所收获。对于内存管理，网上充斥着各种良莠不齐的文章，其中有很多总结不是已经过时，就是似懂非懂的误读。本文立足严谨的治学态度，希望能够尽可能全面地让大家理解内存管理的本质，以及需要注意的知识点。">
+<meta property="og:description" content="引言本文主要针对iOS内存管理进行总结,相信看过之后一定会让你有所收获。对于内存管理，网上充斥着各种良莠不齐的文章，其中有很多总结不是已经过时，就是似懂非懂的误读。本文立足严谨的治学态度，希望能够尽可能全面地让大家理解内存管理的本质，以及需要注意的知识点。">
 <meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/%E5%86%85%E5%AD%98%E5%A0%86%E6%A0%88%E5%9B%BE.jpg">
 <meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/NSString%E5%A0%86%E6%A0%88%E7%A4%BA%E4%BE%8B%E5%9B%BE.png">
-<meta property="og:updated_time" content="2016-12-03T14:18:17.000Z">
+<meta property="og:updated_time" content="2016-12-04T12:28:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入总结iOS内存管理">
-<meta name="twitter:description" content="引言本文主要针对iOS内存管理进行总结。首先声明，本文是一篇分量十足的干货，相信看过之后一定会让你有所收获。对于内存管理，网上充斥着各种良莠不齐的文章，其中有很多总结不是已经过时，就是似懂非懂的误读。本文立足严谨的治学态度，希望能够尽可能全面地让大家理解内存管理的本质，以及需要注意的知识点。">
+<meta name="twitter:description" content="引言本文主要针对iOS内存管理进行总结,相信看过之后一定会让你有所收获。对于内存管理，网上充斥着各种良莠不齐的文章，其中有很多总结不是已经过时，就是似懂非懂的误读。本文立足严谨的治学态度，希望能够尽可能全面地让大家理解内存管理的本质，以及需要注意的知识点。">
 <meta name="twitter:image" content="http://oesd9di98.bkt.clouddn.com/%E5%86%85%E5%AD%98%E5%A0%86%E6%A0%88%E5%9B%BE.jpg">
 
 
@@ -374,7 +374,7 @@
       
 
       
-        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本文主要针对iOS内存管理进行总结。首先声明，本文是一篇分量十足的干货，相信看过之后一定会让你有所收获。对于内存管理，网上充斥着各种良莠不齐的文章，其中有很多总结不是已经过时，就是似懂非懂的误读。本文立足严谨的治学态度，希望能够尽可能全面地让大家理解内存管理的本质，以及需要注意的知识点。</p>
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本文主要针对iOS内存管理进行总结,相信看过之后一定会让你有所收获。对于内存管理，网上充斥着各种良莠不齐的文章，其中有很多总结不是已经过时，就是似懂非懂的误读。本文立足严谨的治学态度，希望能够尽可能全面地让大家理解内存管理的本质，以及需要注意的知识点。</p>
 <a id="more"></a>
 <p>本文涵盖的知识点比较多，大家可以根据需要择章节阅读，下面是目录：</p>
 <ul>
@@ -392,11 +392,31 @@
 <p>在明白了上述细节后，大家请看如下代码：</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSString</span> *someString = <span class="string">@"Some String"</span>;</div><div class="line"><span class="built_in">NSString</span> *anotherString = someString;</div></pre></td></tr></table></figure>
 <p>对于上述代码，我们表明上看起来似乎创建了两个<strong>NSString</strong>对象，其实它们二者是复用的关系。要理解这一点，你可能需要明白什么是指针。可以看笔者的这篇文章<a href="http://kimihe.com/2016/11/15/%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8Linux%E4%B8%8BGDB%E5%92%8C%E6%B1%87%E7%BC%96%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/" target="_blank" rel="external">《快速入门Linux下GDB和汇编开发工具》</a>中介绍指针原理的部分。  </p>
-<p>如果你清楚指针的含义，请继续往后看。实际上，上述代码只创建了一个<strong>NSString</strong>对象，它分配在堆中，由我们人工进行内存管理。而<strong>someString</strong>和<strong>anotherString</strong>是两个指针<strong>(请注意它们C语言风格的<code>*</code>号)</strong>，它们存在于栈中，跟随栈的管理由系统控制，我们人工无需也最好不要去控制。具体看来，我们在当前代码区域的栈中分配了两个内存，但这两个内存只是用来存放指针，与堆中用来存储字符串实例是完全不同的。这两个内存的大小刚好能够分别存下一个指针(在32位CPU上是4字节，在64位上是8字节)，而且两个内存中的值是一样的，即两个指针的值是一样的，于是两个指针指向同一个堆内存区域，从而导致<strong>someString</strong>和<strong>anotherString</strong>这两个指针指向的是相同的字符串实例。如下图:<br><img src="http://oesd9di98.bkt.clouddn.com/NSString%E5%A0%86%E6%A0%88%E7%A4%BA%E4%BE%8B%E5%9B%BE.png" alt="NSString堆栈示例图"><br>总结一下：<strong>someString</strong>和<strong>anotherString</strong>分配在栈上，无需我们控制。<strong>NSString: @”Some String”</strong>分配在堆上，需要我们进行内存管理。而这里的内存管理你需要理解引用计数，请看下一小节。  </p>
+<p>如果你清楚指针的含义，请继续往后看。实际上，上述代码只创建了一个<strong>NSString</strong>对象，它分配在堆中，需要进行内存管理。注意，我们并不是说这个字符串常量在堆上，而是创建一个OC对象需要的内存开销是在堆上，普通的字符串常量存在数据段的.rodata区。笔者强烈建议先阅读一下介绍内存堆栈的那篇文章。  </p>
+<p>而<strong>someString</strong>和<strong>anotherString</strong>是两个指针<strong>(请注意它们C语言风格的<code>*</code>号)</strong>，它们存在于栈中，跟随栈的管理由系统控制，我们人工无需也最好不要去控制。具体看来，我们在当前代码区域的栈中分配了两个内存，但这两个内存只是用来存放指针，与堆中用来存储字符串实例是完全不同的。这两个内存的大小刚好能够分别存下一个指针(在32位CPU上是4字节，在64位上是8字节)，而且两个内存中的值是一样的，即两个指针的值是一样的，于是两个指针指向同一个堆内存区域，从而导致<strong>someString</strong>和<strong>anotherString</strong>这两个指针指向的是相同的字符串实例。如下图:<br><img src="http://oesd9di98.bkt.clouddn.com/NSString%E5%A0%86%E6%A0%88%E7%A4%BA%E4%BE%8B%E5%9B%BE.png" alt="NSString堆栈示例图"><br>总结一下：<strong>someString</strong>和<strong>anotherString</strong>分配在栈上，无需我们控制。<strong>NSString: @”Some String”</strong>分配在堆上，需要我们进行内存管理。而这里的内存管理你需要理解引用计数，请看下一小节。  </p>
 <p>除此之外，OC虽然是一门面向对象语言，但本质上它是一个C的超级。很多理念和C是通用的，如果你熟悉C，学习OC将很快。注意到上述指针的<code>*</code>号，OC中的对象都是以指针来引用的，因此<strong>对象类型</strong>的实例的名字前都会带有一个<code>*</code>号。  </p>
 <p>对于普通的<strong>非对象类型</strong>的变量，比如<strong>CGRect</strong>结构，它们也会使用栈空间，而非对象类型所用的堆空间。因此，相比于创建结构体创建对象需要分配和释放内存等额外开销，所以若需要存储<strong>int，float，double，char，bool</strong>等非对象类型，建议直接使用结构体。  </p>
 <p>建议花一点时间学习一下C，这将有助于OC的学习。</p>
-<h3 id="后续待更～"><a href="#后续待更～" class="headerlink" title="后续待更～"></a>后续待更～</h3><h1 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h1><h1 id="ARC"><a href="#ARC" class="headerlink" title="ARC"></a>ARC</h1><h1 id="delloc方法"><a href="#delloc方法" class="headerlink" title="delloc方法"></a>delloc方法</h1><h1 id="循环引用"><a href="#循环引用" class="headerlink" title="循环引用"></a>循环引用</h1><h1 id="自动释放池-autoreleasepool"><a href="#自动释放池-autoreleasepool" class="headerlink" title="自动释放池@autoreleasepool"></a>自动释放池@autoreleasepool</h1><h1 id="关于retainCount"><a href="#关于retainCount" class="headerlink" title="关于retainCount"></a>关于retainCount</h1>
+<h1 id="其余章节待更～"><a href="#其余章节待更～" class="headerlink" title="其余章节待更～"></a>其余章节待更～</h1><h1 id="关于retainCount"><a href="#关于retainCount" class="headerlink" title="关于retainCount"></a>关于retainCount</h1><p>大家在搜索引擎中输入“retainCount”，可以看到非常多的文章讲述retainCount的作用。  </p>
+<p>大多数文章都在强调这个retainCount是用来标记对象，进行内存管理的。所谓“reatin +1；release -1；到0释放；打印retainCount查看当前计数”等等。但其实retainCount并不应该像上述那样使用，OC的引用计数也不是那样理解的。  </p>
+<h3 id="误区一"><a href="#误区一" class="headerlink" title="误区一"></a>误区一</h3><p>retainCount似乎可以返回某对象的保留计数，其实即便在MRC下，retainCount在实际编程过程中也并没有什么用。首要原因在于：它返回的保留计数只是某个时间点上的值。该方法并未考虑到系统会稍后把自动释放池清空，因而没有将后续的释放操作从返回值里减去。  </p>
+<p>如果你想根据这个数值来进行某些释放操作，那就很糟糕了。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">while ([object retainCount]) &#123;</div><div class="line">	[object release];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>其中存在两个错误，第一个就是没有考虑到自动释放操作，只是不停地release，直到对象被系统回收。假如此对象在自动释放池里，那么稍后系统在清理空池子时还要仔把它释放一次，这将导致程序崩溃。  </p>
+<p>第二个错误就是：retainCount可能永远也不会减少到0。因为有时候系统会优化对象的释放行为，在保留计数还是1的时候就把它回收了。只有在系统不打算这么优化时，计数值才会递减址0。所以靠上述条件进行判断，完全是在赌运气。  </p>
+<p>我们真正应该做的是确保release和retain操作的匹配(即可以相互抵消)，我们在期望系统回收某对象时，应该确保没有尚未抵消的保留操作，也就是不要让保留计数大于我们的期望值。如果发现内存泄漏了，那么应该检查还有社仍然保留这个对象，并查明为何没有释放。  </p>
+<p>虽然Apple建议大家使用ARC，实际也确实如此。但基于MRC的开发也并非一无是处，至少它能够让我们更加清晰地理解内存管理的真谛。</p>
+<h3 id="误区二"><a href="#误区二" class="headerlink" title="误区二"></a>误区二</h3><p>如果我们打印一些字符串或者数值对象的retainCount，如下代码：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">NSString</span> *string = <span class="string">@"Apple"</span>;</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"string retainCount: %lu"</span>, (<span class="keyword">unsigned</span> <span class="keyword">long</span>)[string retainCount]);</div><div class="line">    </div><div class="line"><span class="built_in">NSNumber</span> *numberI = @<span class="number">1</span>;</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"numberI retainCount: %lu"</span>, (<span class="keyword">unsigned</span> <span class="keyword">long</span>)[numberI retainCount]);</div><div class="line">    </div><div class="line"><span class="built_in">NSNumber</span> *numberF = @<span class="number">3.14</span>f;</div><div class="line"><span class="built_in">NSLog</span>(<span class="string">@"numberF retainCount: %lu"</span>, (<span class="keyword">unsigned</span> <span class="keyword">long</span>)[numberF retainCount]);</div></pre></td></tr></table></figure>
+<p>其输出将会如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">2016-12-04 20:04:51.007 tmp[1522:138528] string retainCount: 18446744073709551615</div><div class="line">2016-12-04 20:04:51.008 tmp[1522:138528] numberI retainCount: 9223372036854775807</div><div class="line">2016-12-04 20:04:51.008 tmp[1522:138528] numberF retainCount: 1</div></pre></td></tr></table></figure>
+<p>我们发现结果非常奇怪。怎么回事呢？  </p>
+<p>第一个string的保留计数其实为2的64次方-1，而第二个numberI是2的63次方-1。二者皆为<strong>“单例对象”</strong>(singleton object)，所以保留计数都很大。  </p>
+<p>系统会尽可能地把NSString实现成单例对象。像上述代码中的字符串，其实是一个编译期常量，编译器会把NSString对象所表示的数据放到应用程序的二进制文件里，这样的话，运行程序时<strong>就能直接用了。</strong>这一点对应到底层的话，隶属于程序的可执行文件中<strong>数据段的.rodata小段</strong>的作用，如果你阅读过开头笔者提到的<a href="http://kimihe.com/2016/12/02/%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%A0%86%E5%92%8C%E6%A0%88%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88/" target="_blank" rel="external">《内存中的堆和栈到底是什么》</a>这篇文章，应该可以很容易理解。  </p>
+<p>NSNumber也类似，它使用了一种叫做“标签指针”(tagged pointer)的概念来标注特定类型的数值。这种做法不使用NSNumber对象，而是把数值有关的全部消息都放在指针值里面。运行期系统会在消息派发期间检测到这种标签指针，并对它执行相应操作，使其行为看上去和真正的NSNumber对象一样。这种优化只在某些场合使用，比如上述代码中的浮点数对象就没有优化，所以保留计数就是1。  </p>
+<p>上述的这种单例对象，其保留计数绝对不会变。这种对象的保留及释放操作都是“空操作”(noop)。  </p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>对象的保留计数看似有用，其实<strong>最好根本不要去使用。</strong>因为任何给定时间点上的“绝对保留计数”(absolute retain count)都无法反应对象生命期的全貌。</p>
+
       
     </div>
 
@@ -654,7 +674,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基础知识"><span class="nav-number">2.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#后续待更～"><span class="nav-number">2.0.1.</span> <span class="nav-text">后续待更～</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#引用计数"><span class="nav-number">3.</span> <span class="nav-text">引用计数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ARC"><span class="nav-number">4.</span> <span class="nav-text">ARC</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#delloc方法"><span class="nav-number">5.</span> <span class="nav-text">delloc方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#循环引用"><span class="nav-number">6.</span> <span class="nav-text">循环引用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自动释放池-autoreleasepool"><span class="nav-number">7.</span> <span class="nav-text">自动释放池@autoreleasepool</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于retainCount"><span class="nav-number">8.</span> <span class="nav-text">关于retainCount</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基础知识"><span class="nav-number">2.</span> <span class="nav-text">基础知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其余章节待更～"><span class="nav-number">3.</span> <span class="nav-text">其余章节待更～</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于retainCount"><span class="nav-number">4.</span> <span class="nav-text">关于retainCount</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#误区一"><span class="nav-number">4.0.1.</span> <span class="nav-text">误区一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#误区二"><span class="nav-number">4.0.2.</span> <span class="nav-text">误区二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.0.3.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
         </section>
