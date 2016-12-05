@@ -123,7 +123,7 @@
 <meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/%E5%A0%86.jpg">
 <meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/%E9%9A%90%E5%BC%8F%E7%A9%BA%E9%97%B2%E9%93%BE%E8%A1%A8.jpg">
 <meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/%E6%A0%88%E5%B8%A7%E7%BB%93%E6%9E%84.jpg">
-<meta property="og:updated_time" content="2016-12-04T09:36:53.000Z">
+<meta property="og:updated_time" content="2016-12-05T09:50:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="内存中的堆和栈到底是什么">
 <meta name="twitter:description" content="文章也同时在简书更新
@@ -436,7 +436,7 @@
 <p>目前流行的那几种高级语言，归根到底，底层实现的思路都是差不多的。而且当今以Intel主流的CPU架构(虽然也有ARM)，其设计理念也是一脉相承的。  </p>
 <p>要讲清楚内存模型，我们就要深入底层涉及到汇编，很多高级语言都会经历翻译到汇编这一中间过程，汇编可以直观且直接地使用机器指令，是最接近的底层的语言。  </p>
 <p>在一个汇编程序中，常常把一个用户空间程序按习惯分为三个段：.data段，.bss段，.text段。</p>
-<h3 id="data段"><a href="#data段" class="headerlink" title=".data段"></a>.data段</h3><p><strong>.data段</strong>包含了已经初始化了段数据项，这些数据在程序开始运行前就拥有自己的值，这些值是可执行文件的一部分，当可执行文件被加载到内存中用于执行是，这些数据也被加载到内存中。  </p>
+<h3 id="data段"><a href="#data段" class="headerlink" title=".data段"></a>.data段</h3><p><strong>.data段</strong>包含了已经初始化了的数据项，这些数据在程序开始运行前就拥有自己的值，这些值是可执行文件的一部分，当可执行文件被加载到内存中用于执行是，这些数据也被加载到内存中。  </p>
 <p>定义的初始化数据越多，可执行文件就越大，运行它的时候也就需要更长的时间才能将它们从磁盘加载到内存。  </p>
 <p>一些全局或者静态的，且经过定义初始化过的变量，就属于该段。例如下面代码中的<strong>a，指针p以及b</strong>三个变量：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">int a = 2;</div><div class="line">int *p = &amp;a;</div><div class="line"></div><div class="line">int main () </div><div class="line">&#123;</div><div class="line">	static int b = 1;</div><div class="line">...</div><div class="line">...</div><div class="line">	return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
