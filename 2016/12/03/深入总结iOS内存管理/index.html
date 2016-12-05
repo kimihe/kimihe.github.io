@@ -90,19 +90,19 @@
 
 
 
-<meta name="description" content="引言本文主要针对iOS内存管理进行总结，相信看过之后一定会让你有所收获。对于内存管理，网上有很多这方面的文章，但论质量可谓良莠不齐。其中的很多总结不是已经过时，就是似懂非懂的误读。因此，本文立足严谨的治学态度，希望能够尽可能全面地让大家理解内存管理的要点。">
+<meta name="description" content="引言本文主要针对iOS内存管理进行总结，相信看过之后一定会让你有所收获。对于内存管理，网上有很多这方面的文章，但论质量可谓良莠不齐。其中的很多总结已经过时，甚至有些内容是似懂非懂的误读。因此，本文立足严谨的治学态度，希望能够尽可能全面地让大家理解内存管理的要点。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深入总结iOS内存管理">
 <meta property="og:url" content="https://kimihe.github.io/2016/12/03/深入总结iOS内存管理/index.html">
 <meta property="og:site_name" content="洛斯里克的大书库">
-<meta property="og:description" content="引言本文主要针对iOS内存管理进行总结，相信看过之后一定会让你有所收获。对于内存管理，网上有很多这方面的文章，但论质量可谓良莠不齐。其中的很多总结不是已经过时，就是似懂非懂的误读。因此，本文立足严谨的治学态度，希望能够尽可能全面地让大家理解内存管理的要点。">
+<meta property="og:description" content="引言本文主要针对iOS内存管理进行总结，相信看过之后一定会让你有所收获。对于内存管理，网上有很多这方面的文章，但论质量可谓良莠不齐。其中的很多总结已经过时，甚至有些内容是似懂非懂的误读。因此，本文立足严谨的治学态度，希望能够尽可能全面地让大家理解内存管理的要点。">
 <meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/%E5%86%85%E5%AD%98%E5%A0%86%E6%A0%88%E5%9B%BE.jpg">
 <meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/NSString%E5%A0%86%E6%A0%88%E7%A4%BA%E4%BE%8B%E5%9B%BE.png">
 <meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/%E4%BC%98%E9%85%B7iOS%E7%AC%94%E8%AF%95%E9%A2%981.jpeg">
-<meta property="og:updated_time" content="2016-12-05T09:52:38.000Z">
+<meta property="og:updated_time" content="2016-12-05T12:32:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入总结iOS内存管理">
-<meta name="twitter:description" content="引言本文主要针对iOS内存管理进行总结，相信看过之后一定会让你有所收获。对于内存管理，网上有很多这方面的文章，但论质量可谓良莠不齐。其中的很多总结不是已经过时，就是似懂非懂的误读。因此，本文立足严谨的治学态度，希望能够尽可能全面地让大家理解内存管理的要点。">
+<meta name="twitter:description" content="引言本文主要针对iOS内存管理进行总结，相信看过之后一定会让你有所收获。对于内存管理，网上有很多这方面的文章，但论质量可谓良莠不齐。其中的很多总结已经过时，甚至有些内容是似懂非懂的误读。因此，本文立足严谨的治学态度，希望能够尽可能全面地让大家理解内存管理的要点。">
 <meta name="twitter:image" content="http://oesd9di98.bkt.clouddn.com/%E5%86%85%E5%AD%98%E5%A0%86%E6%A0%88%E5%9B%BE.jpg">
 
 
@@ -375,7 +375,7 @@
       
 
       
-        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本文主要针对iOS内存管理进行总结，相信看过之后一定会让你有所收获。对于内存管理，网上有很多这方面的文章，但论质量可谓良莠不齐。其中的很多总结不是已经过时，就是似懂非懂的误读。因此，本文立足严谨的治学态度，希望能够尽可能全面地让大家理解内存管理的要点。</p>
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本文主要针对iOS内存管理进行总结，相信看过之后一定会让你有所收获。对于内存管理，网上有很多这方面的文章，但论质量可谓良莠不齐。其中的很多总结已经过时，甚至有些内容是似懂非懂的误读。因此，本文立足严谨的治学态度，希望能够尽可能全面地让大家理解内存管理的要点。</p>
 <a id="more"></a>
 <p>本文涵盖的知识点比较多，大家可以根据需要择章节阅读(部分章节待更)，下面是目录：</p>
 <ul>
@@ -436,7 +436,8 @@
 <p>我们发现结果非常奇怪。怎么回事呢？  </p>
 <p>第一个string的保留计数其实为2的64次方-1，而第二个numberI是2的63次方-1。二者皆为<strong>“单例对象”</strong>(singleton object)，所以保留计数都很大。  </p>
 <p>系统会尽可能地把NSString实现成单例对象。像上述代码中的字符串，其实是一个编译期常量，编译器会把NSString对象所表示的数据放到应用程序的二进制文件里，这样的话，运行程序时<strong>就能直接用了。</strong>这一点对应到底层的话，隶属于程序的可执行文件中<strong>数据段的.rodata小段</strong>的作用，如果你阅读过开头笔者提到的<a href="http://kimihe.com/2016/12/02/%E5%86%85%E5%AD%98%E4%B8%AD%E7%9A%84%E5%A0%86%E5%92%8C%E6%A0%88%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88/" target="_blank" rel="external">《内存中的堆和栈到底是什么》</a>这篇文章，应该可以很容易理解。  </p>
-<p>NSNumber也类似，它使用了一种叫做“标签指针”(tagged pointer)的概念来标注特定类型的数值。这种做法不使用NSNumber对象，而是把数值有关的全部消息都放在指针值里面。运行期系统会在消息派发期间检测到这种标签指针，并对它执行相应操作，使其行为看上去和真正的NSNumber对象一样。这种优化只在某些场合使用，比如上述代码中的浮点数对象就没有优化，所以保留计数就是1。  </p>
+<p>NSNumber也类似，它使用了一种叫做“标签指针”(<strong>tagged pointer</strong>)的概念来标注特定类型的数值。关于<strong>tagged pointer</strong>，可以阅读这篇唐巧的文章：<a href="http://www.infoq.com/cn/articles/deep-understanding-of-tagged-pointer/" target="_blank" rel="external">深入理解Tagged Pointer</a>。  </p>
+<p><strong>tagged pointer</strong>不使用NSNumber对象，而是把数值有关的全部消息都放在指针值里面。运行期系统会在消息派发期间检测到这种标签指针，并对它执行相应操作，使其行为看上去和真正的NSNumber对象一样。这种优化只在某些场合使用，比如上述代码中的浮点数对象就没有优化，所以保留计数就是1。  </p>
 <p>上述的这种单例对象，其保留计数绝对不会变。这种对象的保留及释放操作都是“空操作”(noop)。  </p>
 <h3 id="retainCount小结"><a href="#retainCount小结" class="headerlink" title="retainCount小结"></a>retainCount小结</h3><p>对象的保留计数看似有用，其实<strong>最好根本不要去使用。</strong>因为任何给定时间点上的“绝对保留计数”(absolute retain count)都无法反应对象生命期的全貌。</p>
 
