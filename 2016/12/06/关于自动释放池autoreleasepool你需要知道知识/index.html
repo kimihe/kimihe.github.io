@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="随笔,essay," />
+  <meta name="keywords" content="iOS,内存管理,memory management,autoreleasepool,自动释放池," />
 
 
 
@@ -90,16 +90,32 @@
 
 
 
-<meta name="description" content="To your valor, and my old friend Yhorm. Long may the sun shine!">
+<meta name="description" content="文章也同时在简书更新
+
+引言OC对象的生命周期取决于引用计数，我们有两种方式可以释放对象：一种是直接调用release释放；另一种是调用autorelease将对象加入自动释放池中。自动释放池用于存放那些需要在稍后某个时刻释放的对象。 
+本文将介绍自动释放池的原理和使用场景，并结合一道据说是优酷iOS的笔试题来举例说明自动释放池的妙用。  
+更多关于iOS内存管理的文章已经汇总至：深入总结iOS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DARK SOULS或许也是一种遗憾">
-<meta property="og:url" content="https://kimihe.github.io/2016/11/02/DARK SOULS或许也是一种遗憾/index.html">
+<meta property="og:title" content="关于自动释放池@autoreleasepool你需要知道知识">
+<meta property="og:url" content="https://kimihe.github.io/2016/12/06/关于自动释放池autoreleasepool你需要知道知识/index.html">
 <meta property="og:site_name" content="洛斯里克的大书库">
-<meta property="og:description" content="To your valor, and my old friend Yhorm. Long may the sun shine!">
-<meta property="og:updated_time" content="2016-11-02T08:02:55.000Z">
+<meta property="og:description" content="文章也同时在简书更新
+
+引言OC对象的生命周期取决于引用计数，我们有两种方式可以释放对象：一种是直接调用release释放；另一种是调用autorelease将对象加入自动释放池中。自动释放池用于存放那些需要在稍后某个时刻释放的对象。 
+本文将介绍自动释放池的原理和使用场景，并结合一道据说是优酷iOS的笔试题来举例说明自动释放池的妙用。  
+更多关于iOS内存管理的文章已经汇总至：深入总结iOS">
+<meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/%E4%BC%98%E9%85%B7iOS%E7%AC%94%E8%AF%95%E9%A2%981.jpeg">
+<meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/HeapWithoutAutoreleasepool.gif">
+<meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/HeapWithAutoreleasepool.gif">
+<meta property="og:updated_time" content="2016-12-06T12:40:19.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DARK SOULS或许也是一种遗憾">
-<meta name="twitter:description" content="To your valor, and my old friend Yhorm. Long may the sun shine!">
+<meta name="twitter:title" content="关于自动释放池@autoreleasepool你需要知道知识">
+<meta name="twitter:description" content="文章也同时在简书更新
+
+引言OC对象的生命周期取决于引用计数，我们有两种方式可以释放对象：一种是直接调用release释放；另一种是调用autorelease将对象加入自动释放池中。自动释放池用于存放那些需要在稍后某个时刻释放的对象。 
+本文将介绍自动释放池的原理和使用场景，并结合一道据说是优酷iOS的笔试题来举例说明自动释放池的妙用。  
+更多关于iOS内存管理的文章已经汇总至：深入总结iOS">
+<meta name="twitter:image" content="http://oesd9di98.bkt.clouddn.com/%E4%BC%98%E9%85%B7iOS%E7%AC%94%E8%AF%95%E9%A2%981.jpeg">
 
 
 
@@ -120,10 +136,10 @@
 
 
 
-  <link rel="canonical" href="https://kimihe.github.io/2016/11/02/DARK SOULS或许也是一种遗憾/"/>
+  <link rel="canonical" href="https://kimihe.github.io/2016/12/06/关于自动释放池autoreleasepool你需要知道知识/"/>
 
 
-  <title> DARK SOULS或许也是一种遗憾 | 洛斯里克的大书库 </title>
+  <title> 关于自动释放池@autoreleasepool你需要知道知识 | 洛斯里克的大书库 </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -296,7 +312,7 @@
             
             
               
-                DARK SOULS或许也是一种遗憾
+                关于自动释放池@autoreleasepool你需要知道知识
               
             
           </h1>
@@ -308,8 +324,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-02T11:47:35+08:00" content="2016-11-02">
-              2016-11-02
+            <time itemprop="dateCreated" datetime="2016-12-06T20:27:46+08:00" content="2016-12-06">
+              2016-12-06
             </time>
           </span>
 
@@ -322,8 +338,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
                   </a>
                 </span>
 
@@ -338,8 +354,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/11/02/DARK SOULS或许也是一种遗憾/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/02/DARK SOULS或许也是一种遗憾/" itemprop="commentsCount"></span>
+                <a href="/2016/12/06/关于自动释放池autoreleasepool你需要知道知识/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/06/关于自动释放池autoreleasepool你需要知道知识/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -349,7 +365,7 @@
 
           
           
-             <span id="/2016/11/02/DARK SOULS或许也是一种遗憾/" class="leancloud_visitors" data-flag-title="DARK SOULS或许也是一种遗憾">
+             <span id="/2016/12/06/关于自动释放池autoreleasepool你需要知道知识/" class="leancloud_visitors" data-flag-title="关于自动释放池@autoreleasepool你需要知道知识">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -372,15 +388,36 @@
 
       
         <blockquote>
-<p>To your valor, and my old friend Yhorm. Long may the sun shine!</p>
+<p>文章也同时在<a href="http://www.jianshu.com/p/affc844da255" target="_blank" rel="external">简书</a>更新</p>
 </blockquote>
-<a id="more"></a>
-<h1 id="DARK-SOULS-III"><a href="#DARK-SOULS-III" class="headerlink" title="DARK SOULS III"></a>DARK SOULS III</h1><p>最近<a href="http://store.steampowered.com/app/374320/" target="_blank" rel="external">DARK SOULS III</a>让我重新感受到了日式RPG的魅力，Ash一次次在残酷中倒下，但又一次次站起，出于对火的渴望。  </p>
-<p>这款游戏真的很棒！非常羡慕那些能够加入这种大团队的人，在其中参与游戏开发或许是一件美妙的事情。  </p>
-<h1 id="回忆"><a href="#回忆" class="headerlink" title="回忆"></a>回忆</h1><p>我会不时回忆起大二忽视了同学的邀请，没有及早加入steam大家庭，以及体验黑魂，至今我仍然为此感到惋惜。  </p>
-<p>每当拿着手柄，沉静在屏幕中史诗般的画质和扣人的剧情中时，内心总有个声音在反复提醒我：你永远不知道别人的真实心境，你所谓的的理解也大多只是从自己的角度去看待，很难有人能真正做到站在对方角度考虑问题，理解他人的苦衷和境遇。  </p>
-<p>至今，我仍为当年的不仗义和无知感到羞愧和后悔。时间会告诉你哪些人才是真正值得去交一辈子的朋友。</p>
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="http://music.163.com/outchain/player?type=2&id=407677593&auto=1&height=66"></iframe>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>OC对象的生命周期取决于引用计数，我们有<strong>两种方式</strong>可以释放对象：一种是直接调用<strong>release</strong>释放；另一种是调用<strong>autorelease</strong>将对象加入自动释放池中。自动释放池用于存放那些需要在稍后某个时刻释放的对象。 </p>
+<p>本文将介绍自动释放池的原理和使用场景，并结合一道据说是优酷iOS的笔试题来举例说明自动释放池的妙用。  </p>
+<p>更多关于iOS内存管理的文章已经汇总至：<a href="http://kimihe.com/2016/12/03/%E6%B7%B1%E5%85%A5%E6%80%BB%E7%BB%93iOS%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" target="_blank" rel="external">深入总结iOS内存管理</a>。</p>
+<a id="more"></a> 
+<h3 id="自动释放池的创建"><a href="#自动释放池的创建" class="headerlink" title="自动释放池的创建"></a>自动释放池的创建</h3><p>如果没有自动释放池而给对象发送autorelease消息，将会收到控制台报错。但一般我们无需担心自动释放池的创建问题。  </p>
+<p>我们的Mac以及iOS系统会自动创建一些线程，例如主线程和GCD中的线程，都默认拥有自动释放池。<strong>每次执行 “事件循环”(event loop)时，就会将其清空，这一点非常重要，请务必牢记！</strong> 关于事件循环，其涉及到runloop，可以看这篇文章：<a href="http://blog.ibireme.com/2015/05/18/runloop/" target="_blank" rel="external">深入理解RunLoop</a>。 </p>
+<p>因此我们一般不需要手动创建自动释放池，通常只有一个地方需要它，那就是在<strong>main()</strong>函数里，如下：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> main(<span class="keyword">int</span> argc, <span class="keyword">char</span> * argv[]) &#123;</div><div class="line">    <span class="keyword">@autoreleasepool</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="built_in">UIApplicationMain</span>(argc, argv, <span class="literal">nil</span>, <span class="built_in">NSStringFromClass</span>([AppDelegate <span class="keyword">class</span>]));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个<strong>main()</strong>函数里面的池并非必需。因为块的末尾是应用程序的终止处，即便没有这个自动释放池，也会由操作系统来释放。但是这些由<strong>UIApplicationMain</strong>函数所自动释放的对象就没有池可以容纳了，系统会发出警告。因此，这里的池可以理解成<strong>最外围捕捉全部自动释放对象所用的池。</strong></p>
+<h3 id="autoreleasepool的作用"><a href="#autoreleasepool的作用" class="headerlink" title="@autoreleasepool的作用"></a>@autoreleasepool的作用</h3><p>大家可以先看一下下面的iOS笔试题的第5题(修改代码的错误)，如下图：<br><img src="http://oesd9di98.bkt.clouddn.com/%E4%BC%98%E9%85%B7iOS%E7%AC%94%E8%AF%95%E9%A2%981.jpeg" alt="优酷iOS笔试题"><br>这段代码问题在哪里呢？题目的解答请继续阅读。笔者先给一个提示：与内存的释放有关。  </p>
+<p>现考虑如下代码：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++) &#123;</div><div class="line">	[<span class="keyword">self</span> doSthWith:object];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这段代码和笔试题关键部分大同小异。如果<strong>“doSthWith:”</strong>方法要创建一个临时对象，那么这个对象很可能会放在自动释放池里。笔试题中最后<strong>stringByAppendingString</strong>方法很有可能属于上述的方法。因此如果涉及到了自动释放池，那么问题也应该就出在上面。  </p>
+<p>注意：即便临时对象在调用完方法后就不再使用了，它们也依然处于存活状态，因为目前它们都在自动释放池里，等待系统稍后进行回收。但自动释放池却要等到该线程执行下一次事件循环时才会清空，这就意味着在执行for循环时，会有持续不断的新的临时对象被创建出来，并加入自动释放池。要等到结束for循环才会释放。在for循环中内存用量会持续上涨，而等到结束循环后，内存用量又会突然下降。  </p>
+<p>而如果把循环内的代码包裹在“自动释放池”中，那么在循环中自动释放的对象就会放在这个池，而不是在线程的主池里面。如下：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000000</span>; i++) &#123;</div><div class="line">        <span class="keyword">@autoreleasepool</span> &#123;</div><div class="line">            <span class="built_in">NSString</span> *str = <span class="string">@"abc"</span>;</div><div class="line">            str = [str lowercaseString];</div><div class="line">            str = [str stringByAppendingString:<span class="string">@"xyz"</span>];</div><div class="line">        &#125;        </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>新增的自动释放池可以减少内存用量，因为系统会在块的末尾把这些对象回收掉。而上述这些临时对象，正在回收之列。  </p>
+<p><strong>自动释放池的机制就像“栈”</strong>。系统创建好池之后，将其压入栈中，而清空自动释放池相当于将池从栈中弹出。<strong>在对象上执行自动释放操作，就等于将其放入位于栈顶的那个池。</strong></p>
+<h3 id="实验验证"><a href="#实验验证" class="headerlink" title="实验验证"></a>实验验证</h3><p>我们可以通过实验进行验证。新建工程加入上述代码，并关闭ARC(不然是看不到区别的)。  </p>
+<p><strong>在未添加autoreleasepool时</strong>，我们的堆内存实时分配情况如下图：<br><img src="http://oesd9di98.bkt.clouddn.com/HeapWithoutAutoreleasepool.gif" alt="HeapWithoutAutoreleasepool"><br>大家可以看到Persistent Bytes不断增加，到达100W次的创建峰值后(出for循环)开始逐步释放。因此图像是一个向上凸的曲线。  </p>
+<p>而<strong>在加入autoreleasepool后</strong>，我们看到如下的曲线：<br><img src="http://oesd9di98.bkt.clouddn.com/HeapWithAutoreleasepool.gif" alt="HeapWithAutoreleasepool"><br>可以发现尽管字符串在不断地创建，但由于得到了及时的释放，堆内存始终保持在一个很低的水平。</p>
+<h3 id="其他注意点"><a href="#其他注意点" class="headerlink" title="其他注意点"></a>其他注意点</h3><p>@autoreleasepool语法还有一个好处，就是可以避免无意间误用那些在清空池之后已被系统回收的对象，例如：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">@autoreleasepool</span> &#123;</div><div class="line">	<span class="keyword">id</span> obj = [<span class="keyword">self</span> createObject];</div><div class="line">&#125;</div><div class="line">[<span class="keyword">self</span> useObject:obj];</div></pre></td></tr></table></figure>
+<p>上述代码在编译时就会基于错误警告，因为obj出了自动释放池就不可用了。</p>
+<h3 id="autoreleasepool小结"><a href="#autoreleasepool小结" class="headerlink" title="@autoreleasepool小结"></a>@autoreleasepool小结</h3><ul>
+<li>自动释放池排布在栈中，对象受到autorelease消息后，系统将其放入栈顶的池里。</li>
+<li>合理运用自动释放池，可以降低程序的内存峰值。</li>
+</ul>
 
       
     </div>
@@ -424,9 +461,15 @@
       
         <div class="post-tags">
           
-            <a href="/tags/随笔/" rel="tag">#随笔</a>
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
           
-            <a href="/tags/essay/" rel="tag">#essay</a>
+            <a href="/tags/内存管理/" rel="tag">#内存管理</a>
+          
+            <a href="/tags/memory-management/" rel="tag">#memory management</a>
+          
+            <a href="/tags/autoreleasepool/" rel="tag">#autoreleasepool</a>
+          
+            <a href="/tags/自动释放池/" rel="tag">#自动释放池</a>
           
         </div>
       
@@ -435,16 +478,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/02/读笔_汇编语言-基于Linux环境(第5章-汇编的权利_汇编语言程序的创建过程)/" rel="next" title="读笔 汇编语言-基于Linux环境(第5章-汇编的权利:汇编语言的创建过程)">
-                <i class="fa fa-chevron-left"></i> 读笔 汇编语言-基于Linux环境(第5章-汇编的权利:汇编语言的创建过程)
+              <a href="/2016/12/03/深入总结iOS内存管理/" rel="next" title="深入总结iOS内存管理">
+                <i class="fa fa-chevron-left"></i> 深入总结iOS内存管理
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/11/03/iOS知识点拾遗I/" rel="prev" title="iOS知识点拾遗I">
-                iOS知识点拾遗I <i class="fa fa-chevron-right"></i>
+              <a href="/2099/12/30/README/" rel="prev" title="README">
+                README <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -460,10 +503,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/11/02/DARK SOULS或许也是一种遗憾/"
-     data-title="DARK SOULS或许也是一种遗憾"
+        <div class="ds-share flat" data-thread-key="2016/12/06/关于自动释放池autoreleasepool你需要知道知识/"
+     data-title="关于自动释放池@autoreleasepool你需要知道知识"
      data-content=""
-     data-url="https://kimihe.github.io/2016/11/02/DARK SOULS或许也是一种遗憾/">
+     data-url="https://kimihe.github.io/2016/12/06/关于自动释放池autoreleasepool你需要知道知识/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -490,8 +533,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/11/02/DARK SOULS或许也是一种遗憾/"
-           data-title="DARK SOULS或许也是一种遗憾" data-url="https://kimihe.github.io/2016/11/02/DARK SOULS或许也是一种遗憾/">
+      <div class="ds-thread" data-thread-key="2016/12/06/关于自动释放池autoreleasepool你需要知道知识/"
+           data-title="关于自动释放池@autoreleasepool你需要知道知识" data-url="https://kimihe.github.io/2016/12/06/关于自动释放池autoreleasepool你需要知道知识/">
       </div>
     
   </div>
@@ -637,7 +680,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DARK-SOULS-III"><span class="nav-number">1.</span> <span class="nav-text">DARK SOULS III</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#回忆"><span class="nav-number">2.</span> <span class="nav-text">回忆</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自动释放池的创建"><span class="nav-number">1.0.1.</span> <span class="nav-text">自动释放池的创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#autoreleasepool的作用"><span class="nav-number">1.0.2.</span> <span class="nav-text">@autoreleasepool的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验验证"><span class="nav-number">1.0.3.</span> <span class="nav-text">实验验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他注意点"><span class="nav-number">1.0.4.</span> <span class="nav-text">其他注意点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#autoreleasepool小结"><span class="nav-number">1.0.5.</span> <span class="nav-text">@autoreleasepool小结</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
         </section>

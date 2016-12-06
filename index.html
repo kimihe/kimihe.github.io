@@ -409,6 +409,142 @@
             
               
                 
+                <a class="post-title-link" href="/2016/12/06/关于自动释放池autoreleasepool你需要知道知识/" itemprop="url">
+                  关于自动释放池@autoreleasepool你需要知道知识
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-06T20:27:46+08:00" content="2016-12-06">
+              2016-12-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/06/关于自动释放池autoreleasepool你需要知道知识/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/06/关于自动释放池autoreleasepool你需要知道知识/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/12/06/关于自动释放池autoreleasepool你需要知道知识/" class="leancloud_visitors" data-flag-title="关于自动释放池@autoreleasepool你需要知道知识">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>文章也同时在<a href="http://www.jianshu.com/p/affc844da255">简书</a>更新</p>
+</blockquote>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>OC对象的生命周期取决于引用计数，我们有<strong>两种方式</strong>可以释放对象：一种是直接调用<strong>release</strong>释放；另一种是调用<strong>autorelease</strong>将对象加入自动释放池中。自动释放池用于存放那些需要在稍后某个时刻释放的对象。 </p>
+<p>本文将介绍自动释放池的原理和使用场景，并结合一道据说是优酷iOS的笔试题来举例说明自动释放池的妙用。  </p>
+<p>更多关于iOS内存管理的文章已经汇总至：<a href="http://kimihe.com/2016/12/03/%E6%B7%B1%E5%85%A5%E6%80%BB%E7%BB%93iOS%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">深入总结iOS内存管理</a>。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/12/06/关于自动释放池autoreleasepool你需要知道知识/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/12/03/深入总结iOS内存管理/" itemprop="url">
                   深入总结iOS内存管理
                 </a>
@@ -487,7 +623,10 @@
 
       
         
-          <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本文主要针对iOS内存管理进行总结，相信看过之后一定会让你有所收获。对于内存管理，网上有很多这方面的文章，但论质量可谓良莠不齐。其中的很多总结已经过时，甚至有些内容是似懂非懂的误读。因此，本文立足严谨的治学态度，希望能够尽可能全面地让大家理解内存管理的要点。</p>
+          <blockquote>
+<p>文章也同时在<a href="http://www.jianshu.com/p/9c8139fc3100">简书</a>更新</p>
+</blockquote>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本文主要针对iOS内存管理进行总结，相信看过之后一定会让你有所收获。对于内存管理，网上有很多这方面的文章，但论质量可谓良莠不齐。其中的很多总结已经过时，甚至有些内容是似懂非懂的误读。因此，本文立足严谨的治学态度，希望能够尽可能全面地让大家理解内存管理的要点。</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/12/03/深入总结iOS内存管理/#more" rel="contents">
               阅读全文 &raquo;
@@ -1480,140 +1619,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/02/读笔_汇编语言-基于Linux环境(第5章-汇编的权利_汇编语言程序的创建过程)/" itemprop="url">
-                  读笔 汇编语言-基于Linux环境(第5章-汇编的权利:汇编语言的创建过程)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-02T11:33:20+08:00" content="2016-11-02">
-              2016-11-02
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/读书笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">读书笔记</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/11/02/读笔_汇编语言-基于Linux环境(第5章-汇编的权利_汇编语言程序的创建过程)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/02/读笔_汇编语言-基于Linux环境(第5章-汇编的权利_汇编语言程序的创建过程)/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/11/02/读笔_汇编语言-基于Linux环境(第5章-汇编的权利_汇编语言程序的创建过程)/" class="leancloud_visitors" data-flag-title="读笔 汇编语言-基于Linux环境(第5章-汇编的权利:汇编语言的创建过程)">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>文章也同时在<a href="http://www.jianshu.com/p/ef5e76b3c8fd">简书</a>更新</p>
-</blockquote>
-<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本章介绍汇编语言程序的创建过程，我们要准备踏上创作汇编程序之路啦～<br>仍旧如之前所说的，越了解底层，就越能够驾驭计算机。  </p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/11/02/读笔_汇编语言-基于Linux环境(第5章-汇编的权利_汇编语言程序的创建过程)/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1659,7 +1664,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-count">25</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1676,7 +1681,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-count">38</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

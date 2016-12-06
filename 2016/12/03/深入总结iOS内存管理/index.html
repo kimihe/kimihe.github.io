@@ -90,19 +90,27 @@
 
 
 
-<meta name="description" content="引言本文主要针对iOS内存管理进行总结，相信看过之后一定会让你有所收获。对于内存管理，网上有很多这方面的文章，但论质量可谓良莠不齐。其中的很多总结已经过时，甚至有些内容是似懂非懂的误读。因此，本文立足严谨的治学态度，希望能够尽可能全面地让大家理解内存管理的要点。">
+<meta name="description" content="文章也同时在简书更新
+
+引言本文主要针对iOS内存管理进行总结，相信看过之后一定会让你有所收获。对于内存管理，网上有很多这方面的文章，但论质量可谓良莠不齐。其中的很多总结已经过时，甚至有些内容是似懂非懂的误读。因此，本文立足严谨的治学态度，希望能够尽可能全面地让大家理解内存管理的要点。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深入总结iOS内存管理">
 <meta property="og:url" content="https://kimihe.github.io/2016/12/03/深入总结iOS内存管理/index.html">
 <meta property="og:site_name" content="洛斯里克的大书库">
-<meta property="og:description" content="引言本文主要针对iOS内存管理进行总结，相信看过之后一定会让你有所收获。对于内存管理，网上有很多这方面的文章，但论质量可谓良莠不齐。其中的很多总结已经过时，甚至有些内容是似懂非懂的误读。因此，本文立足严谨的治学态度，希望能够尽可能全面地让大家理解内存管理的要点。">
+<meta property="og:description" content="文章也同时在简书更新
+
+引言本文主要针对iOS内存管理进行总结，相信看过之后一定会让你有所收获。对于内存管理，网上有很多这方面的文章，但论质量可谓良莠不齐。其中的很多总结已经过时，甚至有些内容是似懂非懂的误读。因此，本文立足严谨的治学态度，希望能够尽可能全面地让大家理解内存管理的要点。">
 <meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/%E5%86%85%E5%AD%98%E5%A0%86%E6%A0%88%E5%9B%BE.jpg">
 <meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/NSString%E5%A0%86%E6%A0%88%E7%A4%BA%E4%BE%8B%E5%9B%BE.png">
 <meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/%E4%BC%98%E9%85%B7iOS%E7%AC%94%E8%AF%95%E9%A2%981.jpeg">
-<meta property="og:updated_time" content="2016-12-05T14:36:15.000Z">
+<meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/HeapWithoutAutoreleasepool.gif">
+<meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/HeapWithAutoreleasepool.gif">
+<meta property="og:updated_time" content="2016-12-06T12:37:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入总结iOS内存管理">
-<meta name="twitter:description" content="引言本文主要针对iOS内存管理进行总结，相信看过之后一定会让你有所收获。对于内存管理，网上有很多这方面的文章，但论质量可谓良莠不齐。其中的很多总结已经过时，甚至有些内容是似懂非懂的误读。因此，本文立足严谨的治学态度，希望能够尽可能全面地让大家理解内存管理的要点。">
+<meta name="twitter:description" content="文章也同时在简书更新
+
+引言本文主要针对iOS内存管理进行总结，相信看过之后一定会让你有所收获。对于内存管理，网上有很多这方面的文章，但论质量可谓良莠不齐。其中的很多总结已经过时，甚至有些内容是似懂非懂的误读。因此，本文立足严谨的治学态度，希望能够尽可能全面地让大家理解内存管理的要点。">
 <meta name="twitter:image" content="http://oesd9di98.bkt.clouddn.com/%E5%86%85%E5%AD%98%E5%A0%86%E6%A0%88%E5%9B%BE.jpg">
 
 
@@ -375,7 +383,10 @@
       
 
       
-        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本文主要针对iOS内存管理进行总结，相信看过之后一定会让你有所收获。对于内存管理，网上有很多这方面的文章，但论质量可谓良莠不齐。其中的很多总结已经过时，甚至有些内容是似懂非懂的误读。因此，本文立足严谨的治学态度，希望能够尽可能全面地让大家理解内存管理的要点。</p>
+        <blockquote>
+<p>文章也同时在<a href="http://www.jianshu.com/p/9c8139fc3100" target="_blank" rel="external">简书</a>更新</p>
+</blockquote>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本文主要针对iOS内存管理进行总结，相信看过之后一定会让你有所收获。对于内存管理，网上有很多这方面的文章，但论质量可谓良莠不齐。其中的很多总结已经过时，甚至有些内容是似懂非懂的误读。因此，本文立足严谨的治学态度，希望能够尽可能全面地让大家理解内存管理的要点。</p>
 <a id="more"></a>
 <p>本文涵盖的知识点比较多，大家可以根据需要择章节阅读(部分章节待更)，下面是目录：</p>
 <ul>
@@ -404,15 +415,18 @@
 <p>因此我们一般不需要手动创建自动释放池，通常只有一个地方需要它，那就是在<strong>main()</strong>函数里，如下：</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> main(<span class="keyword">int</span> argc, <span class="keyword">char</span> * argv[]) &#123;</div><div class="line">    <span class="keyword">@autoreleasepool</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="built_in">UIApplicationMain</span>(argc, argv, <span class="literal">nil</span>, <span class="built_in">NSStringFromClass</span>([AppDelegate <span class="keyword">class</span>]));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>这个<strong>main()</strong>函数里面的池并非必需。因为块的末尾是应用程序的终止处，即便没有这个自动释放池，也会由操作系统来释放。但是这些由<strong>UIApplicationMain</strong>函数所自动释放的对象就没有池可以容纳了，系统会发出警告。因此，这里的池可以理解成<strong>最外围捕捉全部自动释放对象所用的池。</strong></p>
-<h3 id="autoreleasepool的作用"><a href="#autoreleasepool的作用" class="headerlink" title="@autoreleasepool的作用"></a>@autoreleasepool的作用</h3><p>大家可以先看一下下面的iOS笔试题的第5题(修改代码的错误)：<br><img src="http://oesd9di98.bkt.clouddn.com/%E4%BC%98%E9%85%B7iOS%E7%AC%94%E8%AF%95%E9%A2%981.jpeg" alt="优酷iOS笔试题"><br>这段代码问题在哪里呢？题目的解答请继续阅读。笔者先给一个提示：与内存的释放有关。  </p>
+<h3 id="autoreleasepool的作用"><a href="#autoreleasepool的作用" class="headerlink" title="@autoreleasepool的作用"></a>@autoreleasepool的作用</h3><p>大家可以先看一下下面的iOS笔试题的第5题(修改代码的错误)，如下图：<br><img src="http://oesd9di98.bkt.clouddn.com/%E4%BC%98%E9%85%B7iOS%E7%AC%94%E8%AF%95%E9%A2%981.jpeg" alt="优酷iOS笔试题"><br>这段代码问题在哪里呢？题目的解答请继续阅读。笔者先给一个提示：与内存的释放有关。  </p>
 <p>现考虑如下代码：</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10000</span>; i++) &#123;</div><div class="line">	[<span class="keyword">self</span> doSthWith:object];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这段代码和笔试题关键部分大同小异。如果”doSthWith:”方法要创建一个临时对象，那么这个对象很可能会放在自动释放池里。笔试题中最后stringByAppendingString方法很有可能属于上述的方法。因此如果涉及到了自动释放池，那么问题也应该就出在上面。  </p>
+<p>这段代码和笔试题关键部分大同小异。如果<strong>“doSthWith:”</strong>方法要创建一个临时对象，那么这个对象很可能会放在自动释放池里。笔试题中最后<strong>stringByAppendingString</strong>方法很有可能属于上述的方法。因此如果涉及到了自动释放池，那么问题也应该就出在上面。  </p>
 <p>注意：即便临时对象在调用完方法后就不再使用了，它们也依然处于存活状态，因为目前它们都在自动释放池里，等待系统稍后进行回收。但自动释放池却要等到该线程执行下一次事件循环时才会清空，这就意味着在执行for循环时，会有持续不断的新的临时对象被创建出来，并加入自动释放池。要等到结束for循环才会释放。在for循环中内存用量会持续上涨，而等到结束循环后，内存用量又会突然下降。  </p>
 <p>而如果把循环内的代码包裹在“自动释放池”中，那么在循环中自动释放的对象就会放在这个池，而不是在线程的主池里面。如下：</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100000000</span>; i++) &#123;</div><div class="line">        <span class="keyword">@autoreleasepool</span> &#123;</div><div class="line">            <span class="built_in">NSString</span> *str = <span class="string">@"abc"</span>;</div><div class="line">            str = [str lowercaseString];</div><div class="line">            str = [str stringByAppendingString:<span class="string">@"xyz"</span>];</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000000</span>; i++) &#123;</div><div class="line">        <span class="keyword">@autoreleasepool</span> &#123;</div><div class="line">            <span class="built_in">NSString</span> *str = <span class="string">@"abc"</span>;</div><div class="line">            str = [str lowercaseString];</div><div class="line">            str = [str stringByAppendingString:<span class="string">@"xyz"</span>];</div><div class="line">        &#125;        </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>新增的自动释放池可以减少内存用量，因为系统会在块的末尾把这些对象回收掉。而上述这些临时对象，正在回收之列。  </p>
-<p><strong>自动释放池的机制就像“栈”</strong>。系统创建号池之后，将其压入栈中，而清空自动释放池相当于将池从栈中弹出。<strong>在对象上执行自动释放操作，就等于将其放入位于栈顶的那个池。</strong></p>
+<p><strong>自动释放池的机制就像“栈”</strong>。系统创建好池之后，将其压入栈中，而清空自动释放池相当于将池从栈中弹出。<strong>在对象上执行自动释放操作，就等于将其放入位于栈顶的那个池。</strong></p>
+<h3 id="实验验证"><a href="#实验验证" class="headerlink" title="实验验证"></a>实验验证</h3><p>我们可以通过实验进行验证。新建工程加入上述代码，并关闭ARC(不然是看不到区别的)。  </p>
+<p><strong>在未添加autoreleasepool时</strong>，我们的堆内存实时分配情况如下图：<br><img src="http://oesd9di98.bkt.clouddn.com/HeapWithoutAutoreleasepool.gif" alt="HeapWithoutAutoreleasepool"><br>大家可以看到Persistent Bytes不断增加，到达100W次的创建峰值后(出for循环)开始逐步释放。因此图像是一个向上凸的曲线。  </p>
+<p>而<strong>在加入autoreleasepool后</strong>，我们看到如下的曲线：<br><img src="http://oesd9di98.bkt.clouddn.com/HeapWithAutoreleasepool.gif" alt="HeapWithAutoreleasepool"><br>可以发现尽管字符串在不断地创建，但由于得到了及时的释放，堆内存始终保持在一个很低的水平。</p>
 <h3 id="其他注意点"><a href="#其他注意点" class="headerlink" title="其他注意点"></a>其他注意点</h3><p>@autoreleasepool语法还有一个好处，就是可以避免无意间误用那些在清空池之后已被系统回收的对象，例如：</p>
 <figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">@autoreleasepool</span> &#123;</div><div class="line">	<span class="keyword">id</span> obj = [<span class="keyword">self</span> createObject];</div><div class="line">&#125;</div><div class="line">[<span class="keyword">self</span> useObject:obj];</div></pre></td></tr></table></figure>
 <p>上述代码在编译时就会基于错误警告，因为obj出了自动释放池就不可用了。</p>
@@ -504,8 +518,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2099/12/30/README/" rel="prev" title="README">
-                README <i class="fa fa-chevron-right"></i>
+              <a href="/2016/12/06/关于自动释放池autoreleasepool你需要知道知识/" rel="prev" title="关于自动释放池@autoreleasepool你需要知道知识">
+                关于自动释放池@autoreleasepool你需要知道知识 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -597,7 +611,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-count">25</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -614,7 +628,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-count">38</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -698,7 +712,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基础知识"><span class="nav-number">2.</span> <span class="nav-text">基础知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其余章节待更～"><span class="nav-number">3.</span> <span class="nav-text">其余章节待更～</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自动释放池-autoreleasepool"><span class="nav-number">4.</span> <span class="nav-text">自动释放池@autoreleasepool</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自动释放池的创建"><span class="nav-number">4.0.1.</span> <span class="nav-text">自动释放池的创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#autoreleasepool的作用"><span class="nav-number">4.0.2.</span> <span class="nav-text">@autoreleasepool的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他注意点"><span class="nav-number">4.0.3.</span> <span class="nav-text">其他注意点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#autoreleasepool小结"><span class="nav-number">4.0.4.</span> <span class="nav-text">@autoreleasepool小结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于retainCount"><span class="nav-number">5.</span> <span class="nav-text">关于retainCount</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#误区一"><span class="nav-number">5.0.1.</span> <span class="nav-text">误区一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#误区二"><span class="nav-number">5.0.2.</span> <span class="nav-text">误区二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#retainCount小结"><span class="nav-number">5.0.3.</span> <span class="nav-text">retainCount小结</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基础知识"><span class="nav-number">2.</span> <span class="nav-text">基础知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其余章节待更～"><span class="nav-number">3.</span> <span class="nav-text">其余章节待更～</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自动释放池-autoreleasepool"><span class="nav-number">4.</span> <span class="nav-text">自动释放池@autoreleasepool</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自动释放池的创建"><span class="nav-number">4.0.1.</span> <span class="nav-text">自动释放池的创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#autoreleasepool的作用"><span class="nav-number">4.0.2.</span> <span class="nav-text">@autoreleasepool的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验验证"><span class="nav-number">4.0.3.</span> <span class="nav-text">实验验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他注意点"><span class="nav-number">4.0.4.</span> <span class="nav-text">其他注意点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#autoreleasepool小结"><span class="nav-number">4.0.5.</span> <span class="nav-text">@autoreleasepool小结</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于retainCount"><span class="nav-number">5.</span> <span class="nav-text">关于retainCount</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#误区一"><span class="nav-number">5.0.1.</span> <span class="nav-text">误区一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#误区二"><span class="nav-number">5.0.2.</span> <span class="nav-text">误区二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#retainCount小结"><span class="nav-number">5.0.3.</span> <span class="nav-text">retainCount小结</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
         </section>
