@@ -14,6 +14,18 @@
     </entry>
     
     <entry>
+      <title><![CDATA[汉诺塔问题与递归]]></title>
+      <url>https://kimihe.github.io/2016/12/21/%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98%E4%B8%8E%E9%80%92%E5%BD%92/</url>
+      <content type="html"><![CDATA[<h1 id="汉诺塔问题-Hanoi-Tower）"><a href="#汉诺塔问题-Hanoi-Tower）" class="headerlink" title="汉诺塔问题(Hanoi Tower）"></a>汉诺塔问题(Hanoi Tower）</h1><p>汉诺塔问题最根本的思路就是利用递归，把n个圆盘移到另外一根柱子上需要先把底盘上方的n-1个圆盘进行移动，而移动这n-1个又需要先移动更上面的n-2个，如此地柜之最开始的只有一个圆盘的情况。  </p>
+<p>移动完上方的n-1个圆盘后，移动底盘，然后再把这n-1个圆盘叠加在底盘上。  </p>
+<p>算法思路如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">hanoi(n) &#123;</div><div class="line">	<span class="keyword">if</span> (n==<span class="number">0</span>) &#123;</div><div class="line">	<span class="keyword">return</span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">if</span> (n==<span class="number">1</span>) &#123;</div><div class="line">	move(n);</div><div class="line">	<span class="keyword">return</span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	hanoi(n<span class="number">-1</span>);</div><div class="line">	move(n);</div><div class="line">	hanoi(n<span class="number">-1</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="代码地址"><a href="#代码地址" class="headerlink" title="代码地址"></a>代码地址</h1><p>代码示例可见<a href="https://github.com/kimihe/FUN_IN_CS/tree/master/HanoiTower" target="_blank" rel="external">https://github.com/kimihe/FUN_IN_CS/tree/master/HanoiTower</a>。</p>
+<p>#视频教学推荐<br>推荐B站上一个很棒的科普视频：<a href="http://www.bilibili.com/video/av7398130/" target="_blank" rel="external">用二进制来解汉诺塔问题</a>。</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[关于自动释放池@autoreleasepool你需要知道知识]]></title>
       <url>https://kimihe.github.io/2016/12/06/%E5%85%B3%E4%BA%8E%E8%87%AA%E5%8A%A8%E9%87%8A%E6%94%BE%E6%B1%A0autoreleasepool%E4%BD%A0%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9F%A5%E8%AF%86/</url>
       <content type="html"><![CDATA[<blockquote>
