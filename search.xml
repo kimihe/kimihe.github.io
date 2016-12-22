@@ -16,25 +16,28 @@
     <entry>
       <title><![CDATA[汉诺塔问题与递归]]></title>
       <url>https://kimihe.github.io/2016/12/21/%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98%E4%B8%8E%E9%80%92%E5%BD%92/</url>
-      <content type="html"><![CDATA[<h1 id="汉诺塔问题-Hanoi-Tower）"><a href="#汉诺塔问题-Hanoi-Tower）" class="headerlink" title="汉诺塔问题(Hanoi Tower）"></a>汉诺塔问题(Hanoi Tower）</h1><p>汉诺塔问题的描述就是有三根柱子，其中一根从上至下按照从小到大的顺序叠放着若干圆盘，我们的目标就是借助另外两根空柱子，把这一碟圆盘移到另外任意一根柱子上。在移动端过程中，编号较大的圆盘只能在较小的下面，而不能在上面。例如3可以在1，2的下面，但不能在1，2的上面。  </p>
+      <content type="html"><![CDATA[<blockquote>
+<p>文章也同时在<a href="http://www.jianshu.com/p/3e38ff5522a9" target="_blank" rel="external">简书</a>更新</p>
+</blockquote>
+<h1 id="汉诺塔问题-Hanoi-Tower）"><a href="#汉诺塔问题-Hanoi-Tower）" class="headerlink" title="汉诺塔问题(Hanoi Tower）"></a>汉诺塔问题(Hanoi Tower）</h1><p>汉诺塔问题的描述就是有三根柱子，其中一根从上至下按照从小到大的顺序叠放着若干圆盘，我们的目标就是借助另外两根空柱子，把这一碟圆盘移到另外任意一根柱子上。在移动端过程中，编号较大的圆盘只能在较小的下面，而不能在上面。例如3可以在1，2的下面，但不能在1，2的上面。  </p>
 <p>解决汉诺塔问题的一个很好的思路就是利用递归，把n个圆盘移到另外一根柱子上需要先把底盘上方的n-1个圆盘进行移动，而移动这n-1个又需要先移动更上面的n-2个，如此循环至最开始的只有一个圆盘的情况。</p>
 <a id="more"></a>  
 <p>上述思路的核心就是把一个复杂问题分解成若干较小的问题，而较小的问题的模型和大问题的相同，直到最后到达一个临界点，该临界点处问题的解决非常简单。这种<strong>把大问题不断分解成较小的子问题</strong>的思路与递归契合，而最终的临界点条件满足后，我们就能向上回溯，从最简单的情况到最复杂的情况，一层层地解决。</p>
 <h1 id="算法简述"><a href="#算法简述" class="headerlink" title="算法简述"></a>算法简述</h1><ol>
-<li>递归移动完上方的n-1个圆盘后</li>
-<li>移动底盘，简单的一步操作</li>
-<li>然后再把这n-1个圆盘叠加在底盘上，与第一点的递归操作相同</li>
+<li>首先，递归移动上方的n-1个圆盘到一根<strong>“合适”</strong>的柱子上</li>
+<li>接着，移动底盘到另一根<strong>“合适”</strong>的柱子，简单的一步操作</li>
+<li>最后，把这n-1个圆盘叠加在底盘上，与第一点的递归操作相同</li>
 </ol>
 <h5 id="算法伪代码如下："><a href="#算法伪代码如下：" class="headerlink" title="算法伪代码如下："></a>算法伪代码如下：</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">hanoi(n) &#123;</div><div class="line">    <span class="keyword">if</span> (n==<span class="number">0</span>) &#123;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">if</span> (n==<span class="number">1</span>) &#123;</div><div class="line">        move(n);</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    hanoi(n<span class="number">-1</span>);</div><div class="line">    move(n);</div><div class="line">    hanoi(n<span class="number">-1</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>在实际编写过程中，我们更多地是需要考虑如何把每一步过程详细地表达出来，我们可以在<strong>move(n)</strong>函数中打印相关信息，即<strong>n</strong>号圆盘从<strong>from</strong>柱子移动到<strong>to</strong>柱子。  </p>
-<p>如果由人工操作，只要告诉我们该移动哪个圆盘了，按照大编号在下的规则，我们就很容易看出应该把这个圆盘移到哪个柱子上，因为n号圆盘移动时，你不能放在含有比它小的圆盘的柱子上，只能放在另外一根上面，这一点很直观。  </p>
+<p>如果由人工操作，只要告诉我们应该移动哪个圆盘，按照大编号在下的规则，我们就很容易看出应该把这个圆盘移到哪个柱子上。因为n号圆盘在移动时，你不能放在含有比它小的圆盘的柱子上，只能放在另外一根上面，这一点很直观。  </p>
 <p>但是如果要把该过程打印出来，让机器来进行柱子的判断还是比较复杂的，因此我们最好把移动的起点，终点，中间暂存的柱子也加入递归函数中，即加入三根柱子的实时状态。于是伪代码就变成了如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">void hanoi(n, from, to, tmp) &#123;</div><div class="line">    if (n == 0) &#123;</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    if (n == 1) &#123;</div><div class="line">        moveBottom(n, from, to);</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    hanoi(n-1, from, tmp, to);</div><div class="line">    moveBottom(n, from, to);</div><div class="line">    hanoi(n-1, tmp, to, from);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>临界点n=1时不需要临时存放的柱子，直接移到目标柱子即可。  </p>
 <p>整个问题的起点我们可以人工设定，如把A柱子上的一堆圆盘移到C柱子上，中间过程借助B柱子暂存，以此启动我们的“递归机器”。如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hanoi(diskNumber, &apos;A&apos;, &apos;C&apos;, &apos;B&apos;);</div></pre></td></tr></table></figure>
 <p>当然你也可以从A移到B，中间借助C，问题的模型是一样的。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>设定好初始状态和递归函数后，我们就能启动“递归机器”，当递归函数到达临界点，即只有一个盘子时，进行完最简单的移动操作后，整个过程开始回溯。递归借助栈的性质，我们能够安全保存每一次递归调用前的状态，一步步从简单返回最复杂的情况，<strong>抽丝剥茧</strong>地把大问题降维成小问题。  </p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>设定好初始状态和递归函数后，我们就能启动<strong>“递归机器”</strong>，当递归函数到达临界点，即只有一个盘子时，进行完最简单的移动操作后，整个过程开始回溯。递归借助<strong>栈</strong>的性质，我们能够安全保存每一次递归调用前的状态，一步步从简单返回最复杂的情况，<strong>抽丝剥茧</strong>地把大问题降维成小问题。  </p>
 <p>你想要数到100，你得先数99，数99得先数98，…，一直到最开始你得先数0。这也是一种递归的思路，后续步骤都可以同结构地依赖之前的步骤。</p>
 <h1 id="代码地址"><a href="#代码地址" class="headerlink" title="代码地址"></a>代码地址</h1><p>代码示例可见<a href="https://github.com/kimihe/FUN_IN_CS/tree/master/HanoiTower" target="_blank" rel="external">https://github.com/kimihe/FUN_IN_CS/tree/master/HanoiTower</a>。</p>
 <p>#视频教学推荐<br>推荐B站上一个很棒的科普视频：<a href="http://www.bilibili.com/video/av7398130/" target="_blank" rel="external">用二进制来解汉诺塔问题</a>。</p>
