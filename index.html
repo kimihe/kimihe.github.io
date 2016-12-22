@@ -439,8 +439,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/计算机基础/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机基础</span>
+                  <a href="/categories/计算机科学/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学</span>
                   </a>
                 </span>
 
@@ -489,15 +489,13 @@
 
       
         
-          
-            <h1 id="汉诺塔问题-Hanoi-Tower）"><a href="#汉诺塔问题-Hanoi-Tower）" class="headerlink" title="汉诺塔问题(Hanoi Tower）"></a>汉诺塔问题(Hanoi Tower）</h1><p>汉诺塔问题最根本的思路就是利用递归，把n个圆盘移到另外一根柱子上需要先把底盘上方的n-1个圆盘进行移动，而移动这n-1个又需要先移动更上面的n-2个，如此地柜之最开始的只有一个圆盘的情况。  </p>
-<p>移动完上方的n-1个圆盘后，移动底盘，然后再把这n-1个圆盘叠加在底盘上。  </p>
-<p>算法思路如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">hanoi(n) &#123;</div><div class="line">	<span class="keyword">if</span> (n==<span class="number">0</span>) &#123;</div><div class="line">	<span class="keyword">return</span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="keyword">if</span> (n==<span class="number">1</span>) &#123;</div><div class="line">	move(n);</div><div class="line">	<span class="keyword">return</span>;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	hanoi(n<span class="number">-1</span>);</div><div class="line">	move(n);</div><div class="line">	hanoi(n<span class="number">-1</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h1 id="代码地址"><a href="#代码地址" class="headerlink" title="代码地址"></a>代码地址</h1><p>代码示例可见<a href="https://github.com/kimihe/FUN_IN_CS/tree/master/HanoiTower" target="_blank" rel="external">https://github.com/kimihe/FUN_IN_CS/tree/master/HanoiTower</a>。</p>
-<p>#视频教学推荐<br>推荐B站上一个很棒的科普视频：<a href="http://www.bilibili.com/video/av7398130/" target="_blank" rel="external">用二进制来解汉诺塔问题</a>。</p>
-
-          
+          <h1 id="汉诺塔问题-Hanoi-Tower）"><a href="#汉诺塔问题-Hanoi-Tower）" class="headerlink" title="汉诺塔问题(Hanoi Tower）"></a>汉诺塔问题(Hanoi Tower）</h1><p>汉诺塔问题的描述就是有三根柱子，其中一根从上至下按照从小到大的顺序叠放着若干圆盘，我们的目标就是借助另外两根空柱子，把这一碟圆盘移到另外任意一根柱子上。在移动端过程中，编号较大的圆盘只能在较小的下面，而不能在上面。例如3可以在1，2的下面，但不能在1，2的上面。  </p>
+<p>解决汉诺塔问题的一个很好的思路就是利用递归，把n个圆盘移到另外一根柱子上需要先把底盘上方的n-1个圆盘进行移动，而移动这n-1个又需要先移动更上面的n-2个，如此循环至最开始的只有一个圆盘的情况。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/12/21/汉诺塔问题与递归/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1676,7 +1674,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1685,7 +1683,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">40</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
