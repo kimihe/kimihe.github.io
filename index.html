@@ -411,6 +411,144 @@
             
               
                 
+                <a class="post-title-link" href="/2016/12/26/Objective-C-Runtime之关联对象/" itemprop="url">
+                  Objective-C Runtime之关联对象
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-26T15:00:04+08:00" content="2016-12-26">
+              2016-12-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/26/Objective-C-Runtime之关联对象/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/26/Objective-C-Runtime之关联对象/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/12/26/Objective-C-Runtime之关联对象/" class="leancloud_visitors" data-flag-title="Objective-C Runtime之关联对象">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>文章也同时在<a href="http://www.jianshu.com/p/4cde4b5b6ada">简书</a>更新</p>
+</blockquote>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>最近在补习<a href="https://book.douban.com/subject/25829244/">《Effective Objective-C 2.0》</a>。其中涉及到部分OC runtime的知识，runtime是OC的一个重要特性，掌握它对于理解OC有着巨大的帮助，也能够提升我们的开发能力。  </p>
+<p>OC的runtime可以将我们的程序在运行期进行一系列控制，表象看起来如同我们可以动态修改正在运行的程序。我将其视为<strong>OC语法的封装 -&gt; C高级API的转化魔法</strong>，因为在最终，我们的程序还是会被翻译成是C(以及C++)的样式。在C的层面上，我们或许能够忽略runtime这种说法，毕竟C几乎可以做任何事情。  </p>
+<p>可以说，如果你了解runtime的设计理念，你将可以亲手用C实现一个类，包含一些最基本的面相对象的特性。runtime也是开源的，有兴趣不妨学习一下。  </p>
+<p>我们平时在学习OC时，可能都听说过Category的作用，可以拆分代码，增加方法等等。不过在一般意义下无法增加实例变量，这可能会阻碍我们实现一些有趣的idea，但是runtime可以非常简单地跨过这个限制，将我们带入OC特性的更深层次。  </p>
+<p>本文将通过一个非常简单的Demo，来演示runtime中关联对象的作用。我们修改UIAlertView，给它增加一个传入ActionBlock的方法，我们可以直接在ActionBlock中编写逻辑代码，避免了在相关protocol的方法中进行操作的繁杂。虽然UIAlertView在iOS9.0后被<strong>UIAlertController</strong>代替，但却非常适合用于教学演示。  </p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/12/26/Objective-C-Runtime之关联对象/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/12/21/汉诺塔问题与递归/" itemprop="url">
                   汉诺塔问题与递归
                 </a>
@@ -1490,140 +1628,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/03/iOS知识点拾遗I/" itemprop="url">
-                  iOS知识点拾遗I
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-03T21:53:10+08:00" content="2016-11-03">
-              2016-11-03
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/11/03/iOS知识点拾遗I/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/03/iOS知识点拾遗I/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/11/03/iOS知识点拾遗I/" class="leancloud_visitors" data-flag-title="iOS知识点拾遗I">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>文章也同时在<a href="http://www.jianshu.com/p/458b24e0995d">简书</a>更新</p>
-</blockquote>
-<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本文章主要收录一些在iOS日常中司空见惯、但是仔细咀嚼别有深意的，以及容易被大家忽视的细节。待扩充到一定量会考虑分类出第二篇文章。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/11/03/iOS知识点拾遗I/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1669,7 +1673,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">26</span>
+              <span class="site-state-item-count">27</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1686,7 +1690,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

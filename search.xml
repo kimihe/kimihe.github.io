@@ -14,6 +14,56 @@
     </entry>
     
     <entry>
+      <title><![CDATA[Objective-C Runtime之关联对象]]></title>
+      <url>https://kimihe.github.io/2016/12/26/Objective-C-Runtime%E4%B9%8B%E5%85%B3%E8%81%94%E5%AF%B9%E8%B1%A1/</url>
+      <content type="html"><![CDATA[<blockquote>
+<p>文章也同时在<a href="http://www.jianshu.com/p/4cde4b5b6ada" target="_blank" rel="external">简书</a>更新</p>
+</blockquote>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>最近在补习<a href="https://book.douban.com/subject/25829244/" target="_blank" rel="external">《Effective Objective-C 2.0》</a>。其中涉及到部分OC runtime的知识，runtime是OC的一个重要特性，掌握它对于理解OC有着巨大的帮助，也能够提升我们的开发能力。  </p>
+<p>OC的runtime可以将我们的程序在运行期进行一系列控制，表象看起来如同我们可以动态修改正在运行的程序。我将其视为<strong>OC语法的封装 -&gt; C高级API的转化魔法</strong>，因为在最终，我们的程序还是会被翻译成是C(以及C++)的样式。在C的层面上，我们或许能够忽略runtime这种说法，毕竟C几乎可以做任何事情。  </p>
+<p>可以说，如果你了解runtime的设计理念，你将可以亲手用C实现一个类，包含一些最基本的面相对象的特性。runtime也是开源的，有兴趣不妨学习一下。  </p>
+<p>我们平时在学习OC时，可能都听说过Category的作用，可以拆分代码，增加方法等等。不过在一般意义下无法增加实例变量，这可能会阻碍我们实现一些有趣的idea，但是runtime可以非常简单地跨过这个限制，将我们带入OC特性的更深层次。  </p>
+<p>本文将通过一个非常简单的Demo，来演示runtime中关联对象的作用。我们修改UIAlertView，给它增加一个传入ActionBlock的方法，我们可以直接在ActionBlock中编写逻辑代码，避免了在相关protocol的方法中进行操作的繁杂。虽然UIAlertView在iOS9.0后被<strong>UIAlertController</strong>代替，但却非常适合用于教学演示。  </p>
+<a id="more"></a>
+<h1 id="好书推荐"><a href="#好书推荐" class="headerlink" title="好书推荐"></a>好书推荐</h1><p><a href="https://book.douban.com/subject/25829244/" target="_blank" rel="external">《Effective Objective-C 2.0》</a>是一本非常适合深入学习OC内涵的书，很多开发中的疑惑都可以在书中找到较为科学的解答。不过，这本书需要一定的iOS开发积累，可能不适合初学者。</p>
+<h1 id="代码地址"><a href="#代码地址" class="headerlink" title="代码地址"></a>代码地址</h1><p><a href="https://github.com/kimihe/KMiOSLib/tree/master/ObjcRuntimeResearch/UIAlertViewMagic" target="_blank" rel="external">https://github.com/kimihe/KMiOSLib/tree/master/ObjcRuntimeResearch/UIAlertViewMagic</a></p>
+<h1 id="原理详解"><a href="#原理详解" class="headerlink" title="原理详解"></a>原理详解</h1><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>我们的目的很明确，给UIAlertView增加可以传入逻辑代码块的ActionBlock接口，这样我们就不需要把这些代码写在相关protocol的方法中了，使代码更加集中，便于理解和管理。我们的思路如下：</p>
+<ul>
+<li>通过<strong>Category</strong>来扩充这个UIAlertView类。</li>
+<li>遵循<strong>“勿在分类中声明属性”</strong>这一原则，不声明ActionBlock的@property，而是<strong>直接提供一个setup方法。</strong></li>
+<li>通过runtime的<strong>objc_associatedObject</strong>来“变相”给分类增加实例变量，即把我们要增加的实例变量(ActionBlock)关联到UIAlerView分类</li>
+</ul>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>我们新增一个分类<strong>UIAlertView+ActionBlock</strong>，在头文件中声明我们的<strong>ActionBlock</strong>类型，并增加一个传block的方法。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#import <span class="meta-string">&lt;UIKit/UIKit.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">void</span>(^ActionBlock)(<span class="built_in">UIAlertView</span>*, <span class="built_in">NSInteger</span>);</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">UIAlertView</span> (<span class="title">ActionBlock</span>) &lt;<span class="title">UIAlertViewDelegate</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> 设置一个ActionBlock</div><div class="line"></div><div class="line"> @param action 需要传入的block</div><div class="line"> */</div><div class="line">- (<span class="keyword">void</span>)setupActionBlock:(ActionBlock)action;</div><div class="line"></div><div class="line"><span class="keyword">@end</span></div></pre></td></tr></table></figure>
+<p>在实现文件中我们只需要实现两个模块，一是完成关联对象，二是在何时的时机调用外部传入的ActionBlock。</p>
+<h3 id="完成关联对象"><a href="#完成关联对象" class="headerlink" title="完成关联对象"></a>完成关联对象</h3><p>在我们添加的方法中，利用runtime完成关联对象，变相存储外部传入的block，如下：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">void</span> *KMAlertViewKey = <span class="string">"KMAlertViewKey"</span>;</div><div class="line">...</div><div class="line">- (<span class="keyword">void</span>)setupActionBlock:(ActionBlock)action</div><div class="line">&#123;</div><div class="line">    objc_setAssociatedObject(<span class="keyword">self</span>, KMAlertViewKey, action, OBJC_ASSOCIATION_COPY_NONATOMIC);</div><div class="line">    <span class="keyword">self</span>.delegate = <span class="keyword">self</span>;</div><div class="line">&#125;</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>代码就只有两行，第一行是设置关联对象，把传入的<strong>block(action)</strong>关联到<strong>self(UIAlerView分类)</strong>，其中的<strong>KMAlertViewKey</strong>是一个唯一区分标识符，类似于字典的键，以此来寻找我们关联的对象。<code>OBJC_ASSOCIATION_COPY_NONATOMIC</code>是内存管理语义，我们强调：<strong>block通过copy存放在堆上。</strong>  </p>
+<p>第二行重新覆盖delegate，将其引导至本实现文件中，从而实现protocol的方法，并适时进行ActionBlock的调用。</p>
+<h3 id="调用ActionBlock"><a href="#调用ActionBlock" class="headerlink" title="调用ActionBlock"></a>调用ActionBlock</h3><p>经过上述的delegate重定向，我们可以拦截相关方法，并在其中调用ActionBlock，完成外部传入的逻辑代码，如下：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)alertView:(<span class="built_in">UIAlertView</span> *)alertView clickedButtonAtIndex:(<span class="built_in">NSInteger</span>)buttonIndex</div><div class="line">&#123;</div><div class="line">    ActionBlock action = objc_getAssociatedObject(<span class="keyword">self</span>, KMAlertViewKey);</div><div class="line">    action(alertView, buttonIndex);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>和设置关联对象一样，代码的第一行，我们取出分类关联的ActionBlock。然后在代码的第二行进行调用。</p>
+<h3 id="使用演示"><a href="#使用演示" class="headerlink" title="使用演示"></a>使用演示</h3><p>在<strong>ViewController.m</strong>中进行使用，代码如下：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</div><div class="line">    [<span class="keyword">super</span> viewDidLoad];</div><div class="line">    <span class="comment">// Do any additional setup after loading the view, typically from a nib.</span></div><div class="line">    </div><div class="line">    <span class="built_in">UIAlertView</span> *alert = [[<span class="built_in">UIAlertView</span> alloc]initWithTitle:<span class="string">@"Title"</span> message:<span class="string">@"Message"</span> delegate:<span class="keyword">self</span> cancelButtonTitle:<span class="string">@"Cancel"</span> otherButtonTitles:<span class="string">@"OK"</span>, <span class="literal">nil</span>];</div><div class="line">    [alert setupActionBlock:^(<span class="built_in">UIAlertView</span> *alertView, <span class="built_in">NSInteger</span> buttonIndex) &#123;</div><div class="line">        <span class="built_in">NSLog</span>(<span class="string">@"You did click button index %ld"</span>, (<span class="keyword">long</span>)buttonIndex);</div><div class="line">    &#125;];</div><div class="line">    [alert show];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注意，我们在生成一个alert时会声明其delegate，但是当执行到后续的<code>setupActionBlock:</code>方法时，我们其实会覆盖这个delegate，将其引导至新增的分类中，所以在使用时，我们可以完全不编写相关的protocol方法，而是直接在block中传入逻辑代码。  </p>
+<p>运行一下，点击alert的OK按钮，控制台输出符合预期：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">2016-12-26 16:05:53.776 UIAlertViewMagic[2082:70283] You did click button index 1</div></pre></td></tr></table></figure>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文通过给UIAlertView增加一个actionBlock回调，演示了OC runtime的<strong>“关联对象”(objc_associatedObject)</strong>的功能。算是对OC runtime的涉猎。  </p>
+<h3 id="要点"><a href="#要点" class="headerlink" title="要点"></a>要点</h3><ul>
+<li>iOS9.0后，你应该使用<strong>UIAlertController</strong>，弃用UIAlerView！</li>
+<li>代码主要讲解了如何使用runtime的<strong>objc_associatedObject</strong>，模拟部分UIAlertController的功能，使用了category来增加一个方法，<strong>但在实际开发中，还是建议通过继承使用子类来实现。</strong>毕竟category中增加实例变量属于一种trick技巧。</li>
+<li>我们需要一个内部block来存储外部传进来的action，但是category无法在一般意义上增加实例变量， 因此可以使用runtime魔法实现。 </li>
+<li>我们依旧遵照<strong>“勿在分类中声明属性”</strong>这一原则，不声明void (^block)(UIAlertView*, NSInteger)的@property，直接提供一个setup方法。</li>
+</ul>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><ul>
+<li><a href="https://book.douban.com/subject/25829244/" target="_blank" rel="external">《Effective Objective-C 2.0》</a></li>
+<li><a href="https://www.ianisme.com/ios/2019.html" target="_blank" rel="external">Objective-C Runtime 1小时入门教程</a></li>
+<li><a href="https://www.ianisme.com/ios/2233.html" target="_blank" rel="external">Objective-C Runtime之着魔的UIAlertView</a></li>
+</ul>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[汉诺塔问题与递归]]></title>
       <url>https://kimihe.github.io/2016/12/21/%E6%B1%89%E8%AF%BA%E5%A1%94%E9%97%AE%E9%A2%98%E4%B8%8E%E9%80%92%E5%BD%92/</url>
       <content type="html"><![CDATA[<blockquote>
