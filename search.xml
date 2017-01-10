@@ -15,6 +15,47 @@
     </entry>
     
     <entry>
+      <title><![CDATA[五分钟速览计算机中数的存储与运算]]></title>
+      <url>https://kimihe.github.io/2017/01/10/%E4%B8%80%E5%88%86%E9%92%9F%E9%80%9F%E8%A7%88%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%AD%E6%95%B0%E7%9A%84%E5%AD%98%E5%82%A8%E4%B8%8E%E8%BF%90%E7%AE%97/</url>
+      <content type="html"><![CDATA[<blockquote>
+<p>文章也同时在<a href="http://www.jianshu.com/p/d46d0b4091a9" target="_blank" rel="external">简书</a>更新</p>
+</blockquote>
+<h1 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h1><p>本文内容是关于数字表示，存储以及运算的计算机科学。  </p>
+<p>包含了原理速览以及代码示例。</p>
+<a id="more"></a>  
+<h1 id="数的表示"><a href="#数的表示" class="headerlink" title="数的表示"></a>数的表示</h1><p>数在计算机中以bit为基本单位，以0和1两种状态组成二进制。通常以8bits组成进一步的字节来计算。习惯上以两个16进制数来表达一个字节。 </p>
+<p>与十进制一样，每一位的二进制都有各自的权重，是一个二次幂的形式。  </p>
+<p>整数分为有符号与无符号两种，通常以补码表示。  </p>
+<p>浮点数由符号，尾数，阶码构成。<del>一般大家可以不用太在意浮点数的具体原理</del> </p>
+<h1 id="数的存储"><a href="#数的存储" class="headerlink" title="数的存储"></a>数的存储</h1><p>数字根据其声明的类型，占据对应长度的位数，如int32_t站32bits，4个字节。平时存储于内存中，运算时加载入对应长度的寄存器，供CPU使用。</p>
+<h1 id="数的运算"><a href="#数的运算" class="headerlink" title="数的运算"></a>数的运算</h1><p>由于一个类型的数取值范围有限，你不能无限制地进行运算操作，当运算结果超出其值域范围，便会产生错误，从这一点看计算机不如人脑“聪明”。  </p>
+<p>计算机对于数的理解，完全取决于程序员如何规定解释这个数字，如内存中有<strong>0x30(0011 0000)</strong>：</p>
+<ul>
+<li>如果解释成8位无符号数，那它表示<strong>48</strong>。</li>
+<li>如果解释成8位有符号数，那它表示<strong>-16</strong>。</li>
+<li>甚至可以将其理解为表示字符的ascii码，它表示字符<strong>“0”</strong>。</li>
+</ul>
+<p>此外，我们想要强调：<strong>在C语言这种更接近底层的语言中，我们需要时刻小心数值存储及运算溢出。</strong>  </p>
+<p>如<strong>int32_t</strong>长度下，范围是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">INT32_MAX: 2147483647</div><div class="line">INT32_MIN: -2147483648</div></pre></td></tr></table></figure>
+<p>虽然数学上：<code>2147483647 = (2&lt;&lt;31) - 1= 65536*65536-1</code>，但是计算机在计算的时候会产生微妙的问题。   </p>
+<p>根据<strong>int32_t</strong>值域，上述三种数值表达方式中的<strong>65536*65536-1</strong>会产生溢出，计算机从左往右依次计算，计算<strong>65536*65536</strong>时就会超过范围，其运算结果为2的32次方<strong>0x1 0000 0000</strong>，超过最大范围，于是进行数值截断，取后32位，其位<strong>0x0000 0000</strong>，对应补码解释为<strong>0</strong>，于是继续运算得到最终错误结果<strong>-1</strong>。  </p>
+<p>因此，想要保证结果正确，除了使用另外两种形式书写，也可以考虑调换数字位置，如使用<code>65536/2*65536-1</code>，确保中间值不会溢出。  </p>
+<p>另外例子中没有使用bool类型，因为C没有标准bool定义，可以自定义<strong>1为true，!1为false</strong>。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>笔者给出了一些测试代码，用来强调数的表法范围和运算溢出，代码的地址如下：<a href="https://github.com/kimihe/FUN_IN_CS/tree/master/NumberExpression" target="_blank" rel="external">https://github.com/kimihe/FUN_IN_CS/tree/master/NumberExpression</a></p>
+<h1 id="进一步研究"><a href="#进一步研究" class="headerlink" title="进一步研究"></a>进一步研究</h1><p>你可能需要去研究如下知识点：</p>
+<ul>
+<li>阿贝尔群</li>
+<li>浮点数</li>
+<li>数的位表示及运算</li>
+<li>布尔代数</li>
+</ul>
+<h1 id="后话"><a href="#后话" class="headerlink" title="后话"></a>后话</h1><p>科研其实还蛮有趣的，一起来钻研计算机与信息科学吧！</p>
+<h1 id="微信公众号"><a href="#微信公众号" class="headerlink" title="微信公众号"></a>微信公众号</h1><p>第一时间获取最新内容，欢迎关注微信公众号：「洛斯里克的大书库」。<br><img src="http://upload-images.jianshu.io/upload_images/1609713-8dd1b4276a64882a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="微信公众号「洛斯里克的大书库」"></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Objective-C Runtime之关联对象]]></title>
       <url>https://kimihe.github.io/2016/12/26/Objective-C-Runtime%E4%B9%8B%E5%85%B3%E8%81%94%E5%AF%B9%E8%B1%A1/</url>
       <content type="html"><![CDATA[<blockquote>
