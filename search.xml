@@ -10,6 +10,7 @@
 <p>本站托管于Github，如果觉得响应太慢，可移步至正式主站<a href="http://kimihe.com/" target="_blank" rel="external">http://kimihe.com/</a>。  </p>
 <p>博客文章可能比较多，你可以通过点击页面左侧的<strong><a href="https://kimihe.github.io/categories/">分类</a></strong>按钮，来快速定位你感兴趣的内容。  </p>
 <p>希望我的博客能够对大家有所帮助，感谢阅读！</p>
+<h1 id="微信公众号"><a href="#微信公众号" class="headerlink" title="微信公众号"></a>微信公众号</h1><p>第一时间获取最新内容，欢迎关注微信公众号：「洛斯里克的大书库」。<br><img src="http://upload-images.jianshu.io/upload_images/1609713-8dd1b4276a64882a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="微信公众号「洛斯里克的大书库」"></p>
 ]]></content>
     </entry>
     
@@ -60,6 +61,7 @@
 <li><a href="https://www.ianisme.com/ios/2019.html" target="_blank" rel="external">Objective-C Runtime 1小时入门教程</a></li>
 <li><a href="https://www.ianisme.com/ios/2233.html" target="_blank" rel="external">Objective-C Runtime之着魔的UIAlertView</a></li>
 </ul>
+<h1 id="微信公众号"><a href="#微信公众号" class="headerlink" title="微信公众号"></a>微信公众号</h1><p>第一时间获取最新内容，欢迎关注微信公众号：「洛斯里克的大书库」。<br><img src="http://upload-images.jianshu.io/upload_images/1609713-8dd1b4276a64882a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="微信公众号「洛斯里克的大书库」"></p>
 ]]></content>
     </entry>
     
@@ -91,6 +93,7 @@
 <p>你想要数到100，你得先数99，数99得先数98，…，一直到最开始你得先数0。这也是一种递归的思路，后续步骤都可以同结构地依赖之前的步骤。</p>
 <h1 id="代码地址"><a href="#代码地址" class="headerlink" title="代码地址"></a>代码地址</h1><p>代码示例可见<a href="https://github.com/kimihe/FUN_IN_CS/tree/master/HanoiTower" target="_blank" rel="external">https://github.com/kimihe/FUN_IN_CS/tree/master/HanoiTower</a>。</p>
 <p>#视频教学推荐<br>推荐B站上一个很棒的科普视频：<a href="http://www.bilibili.com/video/av7398130/" target="_blank" rel="external">用二进制来解汉诺塔问题</a>。</p>
+<h1 id="微信公众号"><a href="#微信公众号" class="headerlink" title="微信公众号"></a>微信公众号</h1><p>第一时间获取最新内容，欢迎关注微信公众号：「洛斯里克的大书库」。<br><img src="http://upload-images.jianshu.io/upload_images/1609713-8dd1b4276a64882a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="微信公众号「洛斯里克的大书库」"></p>
 ]]></content>
     </entry>
     
@@ -128,6 +131,7 @@
 <li>自动释放池排布在栈中，对象受到autorelease消息后，系统将其放入栈顶的池里。</li>
 <li>合理运用自动释放池，可以降低程序的内存峰值。</li>
 </ul>
+<h1 id="微信公众号"><a href="#微信公众号" class="headerlink" title="微信公众号"></a>微信公众号</h1><p>第一时间获取最新内容，欢迎关注微信公众号：「洛斯里克的大书库」。<br><img src="http://upload-images.jianshu.io/upload_images/1609713-8dd1b4276a64882a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="微信公众号「洛斯里克的大书库」"></p>
 ]]></content>
     </entry>
     
@@ -205,6 +209,7 @@
 <p><strong>tagged pointer</strong>不使用NSNumber对象，而是把数值有关的全部消息都放在指针值里面。运行期系统会在消息派发期间检测到这种标签指针，并对它执行相应操作，使其行为看上去和真正的NSNumber对象一样。这种优化只在某些场合使用，比如上述代码中的浮点数对象就没有优化，所以保留计数就是1。  </p>
 <p>上述的这种单例对象，其保留计数绝对不会变。这种对象的保留及释放操作都是“空操作”(noop)。  </p>
 <h3 id="retainCount小结"><a href="#retainCount小结" class="headerlink" title="retainCount小结"></a>retainCount小结</h3><p>对象的保留计数看似有用，其实<strong>最好根本不要去使用。</strong>因为任何给定时间点上的“绝对保留计数”(absolute retain count)都无法反应对象生命期的全貌。</p>
+<h1 id="微信公众号"><a href="#微信公众号" class="headerlink" title="微信公众号"></a>微信公众号</h1><p>第一时间获取最新内容，欢迎关注微信公众号：「洛斯里克的大书库」。<br><img src="http://upload-images.jianshu.io/upload_images/1609713-8dd1b4276a64882a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="微信公众号「洛斯里克的大书库」"></p>
 ]]></content>
     </entry>
     
@@ -370,6 +375,7 @@
 <p>后续会公布答案，答案非常简单也很神奇，请大家积极思考或者留言～</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>以上就是笔者对于堆栈以及内存模型的一些理解，在总结过程中参考不少资料，以确保可靠性。希望能够解答大家的疑惑。  </p>
 <p>感谢阅读，欢迎分享～</p>
+<h1 id="微信公众号"><a href="#微信公众号" class="headerlink" title="微信公众号"></a>微信公众号</h1><p>第一时间获取最新内容，欢迎关注微信公众号：「洛斯里克的大书库」。<br><img src="http://upload-images.jianshu.io/upload_images/1609713-8dd1b4276a64882a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="微信公众号「洛斯里克的大书库」"></p>
 ]]></content>
     </entry>
     
@@ -423,6 +429,7 @@
 <h1 id="美化操作"><a href="#美化操作" class="headerlink" title="美化操作"></a>美化操作</h1><p>有了上述三步最关键的操作，剩下的就是一些美化和代码整理。例如高亮选中的方块，把游戏主视图封装起来，独立于ViewConroller等等。</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这个消消乐小Demo的编写，还是涉及到了不少新内容。并且含有很多可以值得优化算法的地方。越往后学习真的越感觉到基础的重要性，甚至出现了跨学科的需求。希望大家对于编程，能够静下心打好基础，避免急于求成。  </p>
 <p>希望我的这篇文章能够给大家带来帮助，也非常欢迎大家提出宝贵意见，帮助改进这个Demo。感谢您的阅读，欢迎分享～</p>
+<h1 id="微信公众号"><a href="#微信公众号" class="headerlink" title="微信公众号"></a>微信公众号</h1><p>第一时间获取最新内容，欢迎关注微信公众号：「洛斯里克的大书库」。<br><img src="http://upload-images.jianshu.io/upload_images/1609713-8dd1b4276a64882a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="微信公众号「洛斯里克的大书库」"></p>
 ]]></content>
     </entry>
     
@@ -493,6 +500,7 @@
 <h1 id="留一个小问题"><a href="#留一个小问题" class="headerlink" title="留一个小问题"></a>留一个小问题</h1><p>看到这儿，相信你已经大概理解了循环结构和指针的原理，对汇编工具以及GDB的使用也略知一二。那么我在这里提一个小问题：这段汇编代码到底是做什么的？请你积极思考哦～  </p>
 <p>答案我会在留言中说明。</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本篇文章通过Linux下的一个最简易的汇编开发流程，带领大家熟悉了开发工具的使用，并入门了GDB这一神器。同时通过阅读汇编代码，从底层理解了循环结构和指针的原理。希望对大家有所启迪，感谢阅读！</p>
+<h1 id="微信公众号"><a href="#微信公众号" class="headerlink" title="微信公众号"></a>微信公众号</h1><p>第一时间获取最新内容，欢迎关注微信公众号：「洛斯里克的大书库」。<br><img src="http://upload-images.jianshu.io/upload_images/1609713-8dd1b4276a64882a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="微信公众号「洛斯里克的大书库」"></p>
 ]]></content>
     </entry>
     
@@ -595,6 +603,7 @@
 <p>而更加具体的原理可以深入查阅KMFaceChatRTC -&gt; KMFaceChat_RTC -&gt; KMRTCCore -&gt; RTCLib -&gt; <strong>ARDAppClient类</strong>。</p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本文主要是给出一个实际可用的视频聊天Demo，以期帮助大家实现快速开发。陈旧的代码总是无法直视，后续会继续更新。  </p>
 <p>更多iOS的知识，请继续关注后续的文章，感谢阅读！</p>
+<h1 id="微信公众号"><a href="#微信公众号" class="headerlink" title="微信公众号"></a>微信公众号</h1><p>第一时间获取最新内容，欢迎关注微信公众号：「洛斯里克的大书库」。<br><img src="http://upload-images.jianshu.io/upload_images/1609713-8dd1b4276a64882a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="微信公众号「洛斯里克的大书库」"></p>
 ]]></content>
     </entry>
     
@@ -649,6 +658,7 @@
 <li><strong>addSubview</strong>会触发UIView的<strong>drawRect</strong>方法。</li>
 <li><strong>setNeedsDisplay</strong>消息将触发<strong>UIView</strong>中的<strong>drawRect:</strong>方法，一个常见的使用案例就是：当屏幕发生旋转时重绘View以正确显示。</li>
 </ul>
+<h1 id="微信公众号"><a href="#微信公众号" class="headerlink" title="微信公众号"></a>微信公众号</h1><p>第一时间获取最新内容，欢迎关注微信公众号：「洛斯里克的大书库」。<br><img src="http://upload-images.jianshu.io/upload_images/1609713-8dd1b4276a64882a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="微信公众号「洛斯里克的大书库」"></p>
 ]]></content>
     </entry>
     
@@ -814,6 +824,7 @@
 <p>最后就是一些提升用户体验的步骤，比如自动重置<strong>KMNineBoxView</strong>的状态，控制用户触摸响应等等，这里就不再赘述了。  </p>
 <h1 id="8-总结"><a href="#8-总结" class="headerlink" title="8. 总结"></a>8. 总结</h1><p>本文介绍了如何仿制一个支付宝的手势密码，涉及到了较多页面布局和手势检测的知识。不过让我感受最深的还是其中有一些计算技巧，需要平时的基础积累。<del>这又再次提醒我：该回去补数据结构和算法啦！还不快ACM！</del>  </p>
 <p>总之，希望这篇文章对大家有所帮助。更多iOS的知识，请继续关注后续的文章，感谢阅读！</p>
+<h1 id="微信公众号"><a href="#微信公众号" class="headerlink" title="微信公众号"></a>微信公众号</h1><p>第一时间获取最新内容，欢迎关注微信公众号：「洛斯里克的大书库」。<br><img src="http://upload-images.jianshu.io/upload_images/1609713-8dd1b4276a64882a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="微信公众号「洛斯里克的大书库」"></p>
 ]]></content>
     </entry>
     
@@ -1088,6 +1099,7 @@
 </ul>
 <h1 id="如何使用该控件"><a href="#如何使用该控件" class="headerlink" title="如何使用该控件"></a>如何使用该控件</h1><p>参考<code>ViewController.m</code>中的示例，结合模拟器运行，大家可以更好地理解该控件的使用场景。<br><img src="http://oesd9di98.bkt.clouddn.com/KMProgressView.gif" alt="运行示意图"></p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文通过实际编写一个progressView来向大家演示如何自定义一个控件，涉及到了各种不同的小知识点，希望对大家有所帮助。更多绘图方面的知识，请继续关注后续的文章，感谢阅读！</p>
+<h1 id="微信公众号"><a href="#微信公众号" class="headerlink" title="微信公众号"></a>微信公众号</h1><p>第一时间获取最新内容，欢迎关注微信公众号：「洛斯里克的大书库」。<br><img src="http://upload-images.jianshu.io/upload_images/1609713-8dd1b4276a64882a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="微信公众号「洛斯里克的大书库」"></p>
 ]]></content>
     </entry>
     
@@ -1125,6 +1137,7 @@
 <li>上述对应UIView的说明同样适用于CALayer。   </li>
 </ul>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>为了能够进入layoutSubviews：<br>首先你必须能够<code>[aSuperView addSubview:customView];</code><br>其次请设置frame不为0，但是操作子层不受frame为0的影响。</p>
+<h1 id="微信公众号"><a href="#微信公众号" class="headerlink" title="微信公众号"></a>微信公众号</h1><p>第一时间获取最新内容，欢迎关注微信公众号：「洛斯里克的大书库」。<br><img src="http://upload-images.jianshu.io/upload_images/1609713-8dd1b4276a64882a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="微信公众号「洛斯里克的大书库」"></p>
 ]]></content>
     </entry>
     
@@ -1177,7 +1190,8 @@
 <p>而这里的终止条件就是：<code>当k＝＝0</code>时，代码逻辑不会走<code>if</code>语句，此时函数（现在是f0）就会return，执行<code>popq</code>指令。之后前面被push的f3, f2, f1就会依次pop，执行的相应的<code>popq</code>指令。当最开始的f3被pop结束后，外层的f4函数就正式执行完毕了。 </p>
 <p>一次递归调用f(4)的流程大致就是这样，大家可以真机运行一下，会更容易理解。 </p>
 <h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>以上就是关于递归的一些理解，希望能帮助到大家。<br>欢迎大家转载！</p>
-<h3 id="That’s-all-Thanks-for-reading"><a href="#That’s-all-Thanks-for-reading" class="headerlink" title="That’s all. Thanks for reading."></a>That’s all. Thanks for reading.</h3>]]></content>
+<h3 id="That’s-all-Thanks-for-reading"><a href="#That’s-all-Thanks-for-reading" class="headerlink" title="That’s all. Thanks for reading."></a>That’s all. Thanks for reading.</h3><h1 id="微信公众号"><a href="#微信公众号" class="headerlink" title="微信公众号"></a>微信公众号</h1><p>第一时间获取最新内容，欢迎关注微信公众号：「洛斯里克的大书库」。<br><img src="http://upload-images.jianshu.io/upload_images/1609713-8dd1b4276a64882a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="微信公众号「洛斯里克的大书库」"></p>
+]]></content>
     </entry>
     
     <entry>
@@ -1216,6 +1230,7 @@
 </ol>
 <p>第3点目前我还是不知道该如何解决这个问题，我在SoF上提了问题:<br><a href="http://stackoverflow.com/questions/39468374/ios9-after-restarting-my-test-device-universal-links-do-not-work-any-more" target="_blank" rel="external">iOS9: After restarting my test device, Universal Links do not work any more</a>。如果大家有谁能给提供解答，非常欢迎留言。</p>
 <p>That’s all. Thanks for reading.</p>
+<h1 id="微信公众号"><a href="#微信公众号" class="headerlink" title="微信公众号"></a>微信公众号</h1><p>第一时间获取最新内容，欢迎关注微信公众号：「洛斯里克的大书库」。<br><img src="http://upload-images.jianshu.io/upload_images/1609713-8dd1b4276a64882a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="微信公众号「洛斯里克的大书库」"></p>
 ]]></content>
     </entry>
     
@@ -1249,7 +1264,8 @@
 <li>第二个红圈，<code>rcx</code>寄存器中含有<code>arrayName</code>数组的首地址(注意：<code>arrayName+0</code>和<code>&amp;arrayName</code>取得的地址是相同的)，赋给<code>rdx</code>；<code>rdx</code>在把它赋给<code>[rbp-0x28]</code>，即赋给指针<code>p</code>。</li>
 <li>第三个红圈，第一句中，<code>$0x14</code>立即数就是十进制的20，表明10个<code>short*</code>型，因为每个<code>short *</code>占2B。<code>$0x14</code>赋给<code>rcx</code>寄存器，<code>rcx</code>再赋给指针<code>p</code>，最终导致前文所说的，所谓移动整个数组位，从第0个元素移到了第11个元素(虽然数组并没有第11个元素，但位置的移动可以这样理解)。</li>
 </ul>
-<h3 id="That’s-all-Thanks-for-reading"><a href="#That’s-all-Thanks-for-reading" class="headerlink" title="That’s all. Thanks for reading."></a>That’s all. Thanks for reading.</h3>]]></content>
+<h3 id="That’s-all-Thanks-for-reading"><a href="#That’s-all-Thanks-for-reading" class="headerlink" title="That’s all. Thanks for reading."></a>That’s all. Thanks for reading.</h3><h1 id="微信公众号"><a href="#微信公众号" class="headerlink" title="微信公众号"></a>微信公众号</h1><p>第一时间获取最新内容，欢迎关注微信公众号：「洛斯里克的大书库」。<br><img src="http://upload-images.jianshu.io/upload_images/1609713-8dd1b4276a64882a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="微信公众号「洛斯里克的大书库」"></p>
+]]></content>
     </entry>
     
   

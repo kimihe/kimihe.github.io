@@ -104,7 +104,8 @@
 123short arrayName[10] = &amp;#123;0, 1, 2, 3, 4, 5, 6, 7, 8, 9&amp;#125;;int *q = (int *)(&amp;amp;arrayName+1);printf(&amp;quot;*(q-2):%d\n&amp;quot">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1609713-02a43a395fccde1b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1609713-059738eebded541f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2016-11-19T13:16:31.000Z">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1609713-8dd1b4276a64882a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-01-10T08:40:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一道数组指针题搞清楚x86内存">
 <meta name="twitter:description" content="文章也同时在简书更新参考: iOS 最详细的解析（数组与指针）笔试题，并做了改进。
@@ -410,7 +411,8 @@
 <li>第二个红圈，<code>rcx</code>寄存器中含有<code>arrayName</code>数组的首地址(注意：<code>arrayName+0</code>和<code>&amp;arrayName</code>取得的地址是相同的)，赋给<code>rdx</code>；<code>rdx</code>在把它赋给<code>[rbp-0x28]</code>，即赋给指针<code>p</code>。</li>
 <li>第三个红圈，第一句中，<code>$0x14</code>立即数就是十进制的20，表明10个<code>short*</code>型，因为每个<code>short *</code>占2B。<code>$0x14</code>赋给<code>rcx</code>寄存器，<code>rcx</code>再赋给指针<code>p</code>，最终导致前文所说的，所谓移动整个数组位，从第0个元素移到了第11个元素(虽然数组并没有第11个元素，但位置的移动可以这样理解)。</li>
 </ul>
-<h3 id="That’s-all-Thanks-for-reading"><a href="#That’s-all-Thanks-for-reading" class="headerlink" title="That’s all. Thanks for reading."></a>That’s all. Thanks for reading.</h3>
+<h3 id="That’s-all-Thanks-for-reading"><a href="#That’s-all-Thanks-for-reading" class="headerlink" title="That’s all. Thanks for reading."></a>That’s all. Thanks for reading.</h3><h1 id="微信公众号"><a href="#微信公众号" class="headerlink" title="微信公众号"></a>微信公众号</h1><p>第一时间获取最新内容，欢迎关注微信公众号：「洛斯里克的大书库」。<br><img src="http://upload-images.jianshu.io/upload_images/1609713-8dd1b4276a64882a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="微信公众号「洛斯里克的大书库」"></p>
+
       
     </div>
 
@@ -666,7 +668,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#引题"><span class="nav-number">1.</span> <span class="nav-text">引题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重点："><span class="nav-number">2.</span> <span class="nav-text">重点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#补充"><span class="nav-number">3.</span> <span class="nav-text">补充</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#That’s-all-Thanks-for-reading"><span class="nav-number">4.</span> <span class="nav-text">That’s all. Thanks for reading.</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#引题"><span class="nav-number">1.</span> <span class="nav-text">引题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重点："><span class="nav-number">2.</span> <span class="nav-text">重点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#补充"><span class="nav-number">3.</span> <span class="nav-text">补充</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#That’s-all-Thanks-for-reading"><span class="nav-number">4.</span> <span class="nav-text">That’s all. Thanks for reading.</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#微信公众号"><span class="nav-number"></span> <span class="nav-text">微信公众号</span></a></div>
             
           </div>
         </section>
