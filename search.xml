@@ -15,6 +15,138 @@
     </entry>
     
     <entry>
+      <title><![CDATA[从科学角度分析“三个和尚没水喝”背后的知识]]></title>
+      <url>https://kimihe.github.io/2017/01/17/%E5%A6%82%E4%BD%95%E4%BB%8E%E7%A7%91%E5%AD%A6%E8%A7%92%E5%BA%A6%E5%88%86%E6%9E%90%E4%B8%89%E4%B8%AA%E5%92%8C%E5%B0%9A%E6%B2%A1%E6%B0%B4%E5%96%9D/</url>
+      <content type="html"><![CDATA[<blockquote>
+<p>文章也同时在<a href="http://www.jianshu.com/p/acb3d84deb6c" target="_blank" rel="external">简书</a>更新</p>
+</blockquote>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p><strong>“一个和尚挑水喝，两个和尚抬水喝，三个和尚没水喝。”</strong>相信大家对上面这则故事一定不陌生。对于该故事寓意的解释有很多，例如要团结合作，合理分工，按劳分配等等。  </p>
+<p>看似是小学作文素材的故事，仔细思考后其蕴涵的科学原理仍旧会让人大开眼界。本文就带领大家挖掘一下其背后的科学解释。  </p>
+<a id="more"></a>
+<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>故事的内容大致就是关于几个和尚挑水喝而产生的劳动与分配矛盾，重点是围绕和尚们挑水或不挑水，这会导致故事不同的结局。  </p>
+<p>无论有多少个和尚，在该故事中他们都有两个选择，即挑水或不挑水。他们自觉地根据自己的最优利益进行决策，而这些决策有时候会导致大家的利益都受到损害。上述的<strong>“决策”</strong>一词正是本文想要谈论的核心，决策在科学研究中有专门的一个领域，名叫：<strong>博弈论</strong>。</p>
+<h1 id="博弈论"><a href="#博弈论" class="headerlink" title="博弈论"></a>博弈论</h1><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>利益冲突伴随着人类社会发展的始终，在人与人之间存在矛盾与竞争时，参与者所进行的行为选择，我们可以称之为“博弈”。古代<strong>田忌赛马</strong>的故事是运用博弈论的一个典型案例。但博弈论目前还没有准确完备的定义，  </p>
+<p>博弈论可以看作是多人决策理论，即两个及以上的参与者之间的决策理论。并且我们通常假设每个参与者都是理性的，即在面临给定的约束条件下会主动地最大化自己的收益。 </p>
+<h3 id="组成元素"><a href="#组成元素" class="headerlink" title="组成元素"></a>组成元素</h3><p>博弈的基本元素包括：<strong>参与者(Player)</strong>，行动(Action)，信息(Information)，<strong>策略(Strategy)</strong>，<strong>支付(或报酬，Payoff)</strong>，理性(Rationality)，目标(Objective)，<strong>行动顺序(Order of Play)</strong>，结果(Outcome)和<strong>均衡(Equilibrium)。</strong>  </p>
+<p>众多术语可能会令读者感到困惑，针对本文要分析的“和尚喝水问题”，我们可以只关注上述加粗的部分，这是最关键的五个核心要素。</p>
+<h3 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h3><p>我们可以把问题建模成如下：</p>
+<ul>
+<li>参与者为和尚 <strong>T = {1,2,3};</strong></li>
+<li>每个参与者都有各自的非空<strong>策略空间S</strong>，在这里就是{挑水，不挑水};</li>
+<li>每个参与者有自己的<strong>支付函数(即收益)u</strong>，体现为：喝到水的收益与挑水付出的劳动之差。</li>
+<li>为简化问题，我们假设每个参与者的决策<strong>没有先后顺序</strong>，即他们同时作出决定。</li>
+<li>最终参与者会达到一种博弈的<strong>平衡状态</strong>，在此状态下每个参与者都实现了自身利益的最大化，我们称之为<strong>：均衡。</strong></li>
+</ul>
+<h1 id="纳什均衡-Nash-Equilibrium"><a href="#纳什均衡-Nash-Equilibrium" class="headerlink" title="纳什均衡(Nash Equilibrium)"></a>纳什均衡(Nash Equilibrium)</h1><p>这里我们着重介绍一下纳什均衡的概念，上述的平衡状态即属于纳什均衡。我们定义：<strong>每一个参与者的收益达到了一种最大化的平衡，在该状态下，任何一个参与者一旦选择其它策略，那么他的收益将会减少或者不变，但绝对不会增加。</strong>根据是否会严格减少，我们可以将纳什均衡分为<strong>强纳什均衡</strong>与<strong>弱纳什均衡</strong>。我们通常研究强纳什均衡。  </p>
+<p>由于参与者的个数较少，决策也有限，我们可以枚举出所有策略下每个参与者的支付函数，以此直观地来探究纳什均衡时的实际意义。</p>
+<h1 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h1><p>我们假设参与者个数为<strong>n</strong>。每个参与者挑一次水需要付出的劳动为<strong>C</strong>，一个参与者每次挑到水的毛收益为<strong>G</strong>。所有的水需要平分给大家，于是每个人的收益为<strong>G/n</strong>。最终每个参与者的净收益则为：<strong>G/n-C</strong>。  </p>
+<h3 id="一个参与者"><a href="#一个参与者" class="headerlink" title="一个参与者"></a>一个参与者</h3><p>对于一个和尚的情况，很显然他必需要去挑水，否则收益为0。或者说与其坐等口渴不如去挑水，让自己的收益更大。只要满足<strong>G&gt;C</strong>即可，这是显然成立的。  </p>
+<h3 id="两个参与者"><a href="#两个参与者" class="headerlink" title="两个参与者"></a>两个参与者</h3><p>对于A和B两个和尚，我们可以得到如下<strong>“支付矩阵”：</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center"><strong>B挑水</strong></th>
+<th style="text-align:center"><strong>B不挑水</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>A挑水</strong></td>
+<td style="text-align:center">u11(G-C, G-C)</td>
+<td style="text-align:center">u12(G/2-C, G/2)</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>A不挑水</strong></td>
+<td style="text-align:center">u21(G/2, G/2-C)</td>
+<td style="text-align:center">u22(0, 0)</td>
+</tr>
+</tbody>
+</table>
+<p>故事中，两个和尚抬水喝，说明这是他们达成的纳什均衡。根据纳什均衡的定义，此时，任何一个参与者一旦选择其它策略就会损害自己的收益，也就是说u11的收益是最好的，此时A和B都选择挑水。  </p>
+<p>以A为例，一旦他选择不挑水，支付函数u就会从u11转到u12，此时要满足纳什均衡的条件，则要求：</p>
+<ul>
+<li><strong>G-C &gt; G/2-C;</strong></li>
+<li><strong>G-C &gt; G/2;</strong></li>
+</ul>
+<p>解得：</p>
+<ul>
+<li><strong>G &gt; 0;</strong></li>
+<li><strong>G &gt; 2C;</strong></li>
+</ul>
+<p>第一点说明挑水的毛收益要大于0，这一点肯定是满足的，除非水桶是漏的。而第二点中，毛收益要大于付出劳动的两倍，在现实生活中这一点也是很容易满足的，没有人愿意为了接一杯水而下山，一般都会一次性挑尽可能多的水。</p>
+<h3 id="三个参与者"><a href="#三个参与者" class="headerlink" title="三个参与者"></a>三个参与者</h3><p>A，B，C三个和尚进行博弈，我们同上分析可以得到8种情况：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">支付函数ui</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>A挑水, B挑水, C挑水</strong></td>
+<td style="text-align:center">u111(G-C, G-C, G-C)</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>A挑水, B挑水, C不挑水</strong></td>
+<td style="text-align:center">u110(2G/3-C, 2G/3-C, 2G/3)</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>A挑水, B不挑水, C挑水</strong></td>
+<td style="text-align:center">u101(2G/3-C, 2G/3, 2G/3-C)</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>A挑水, B不挑水, C不挑水</strong></td>
+<td style="text-align:center">u100(G/3-C, G/3, G/3)</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>A不挑水, B挑水, C挑水</strong></td>
+<td style="text-align:center">u011(2G/3, 2G/3-C, 2G/3-C)</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>A不挑水, B挑水, C不挑水</strong></td>
+<td style="text-align:center">u010(G/3, G/3-C, G/3)</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>A不挑水, B不挑水, C挑水</strong></td>
+<td style="text-align:center">u001(G/3, G/3, G/3-C)</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>A不挑水, B不挑水, C不挑水</strong></td>
+<td style="text-align:center">u000(0, 0, 0)</td>
+</tr>
+</tbody>
+</table>
+<p>故事中三个上最后都没有去挑水，纳什均衡是u000。同样根据均衡的定义，我们可以如下分析，首先从u111入手，此时大家都去挑水，收益都为<strong>G-C</strong>。但其中一个人(以C为例)发现自己不挑水反而收益更高，于是C不挑水，此时u111跳转到u110，根据此时C收益更多，我们要满足：</p>
+<ul>
+<li><strong>G-C &lt; 2G/3;</strong></li>
+</ul>
+<p>接着另外一个人发现u110(以B为例)情况下，自己不挑水也收益更多，于是B也不挑水，u110条转到u100，同理要求满足：</p>
+<ul>
+<li><strong>2G/3-C &lt; G/3;</strong></li>
+</ul>
+<p>最终A也发现自己要吃亏，因为自己付出了劳动却要平分给三个人，可能会让自己入不敷出，于是也决定不挑水，u100跳转到了u000，此时满足：</p>
+<ul>
+<li><strong>G/3-C &lt; 0;</strong></li>
+</ul>
+<p>三式联立我们可以解得：</p>
+<ul>
+<li><strong>G &lt; 3C;</strong></li>
+</ul>
+<p>在三个和尚博弈的模型中，大家都是理性的，只要挑一次水的毛收益低于付出劳动的三倍，最终必然会导致三个和尚都不去挑水。而在现实生活中，上述不等式是可能成立的，例如那个水桶较小。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>至此大家应该对和尚喝水的寓言有了更深的理解，同时本文也抛砖引玉地向大家展现了博弈论的作用。  </p>
+<p>博弈论起源于经济学，感谢博弈论大师<a href="http://baike.baidu.com/view/52630.htm" target="_blank" rel="external">约翰·纳什</a>在其开创性论文《n人博弈的均衡点》[1]和《非合作博弈》[2]中给出了<strong>纳什均衡(Nash Equilibrium)</strong>的概念和均衡存在性定理。  </p>
+<p>如今博弈论已经在众多非经济学科学领域崭露头角，成为了一种求解最优化问题的有力工具。</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><ul>
+<li>[1] Nash J F. Equilibrium points in n-person games[J]. Proceedings of the National Academy of Sciences of the United States of America, 1950, 36(1):48-49.</li>
+<li>[2] Nash J. Non-Cooperative Games[J]. Ann.math.stud, 1951, 54(3):286-295.</li>
+</ul>
+<h1 id="微信公众号"><a href="#微信公众号" class="headerlink" title="微信公众号"></a>微信公众号</h1><p>第一时间获取最新内容，欢迎关注微信公众号：「洛斯里克的大书库」。<br><img src="http://upload-images.jianshu.io/upload_images/1609713-8dd1b4276a64882a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="微信公众号「洛斯里克的大书库」"></p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[五分钟速览计算机中数的存储与运算]]></title>
       <url>https://kimihe.github.io/2017/01/10/%E4%B8%80%E5%88%86%E9%92%9F%E9%80%9F%E8%A7%88%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%AD%E6%95%B0%E7%9A%84%E5%AD%98%E5%82%A8%E4%B8%8E%E8%BF%90%E7%AE%97/</url>
       <content type="html"><![CDATA[<blockquote>
