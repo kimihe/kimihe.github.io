@@ -43,7 +43,7 @@
 <a id="more"></a>
 <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>故事的内容大致就是关于几个和尚挑水喝而产生的劳动与分配矛盾，重点是围绕和尚们挑水或不挑水，这会导致故事不同的结局。  </p>
 <p>无论有多少个和尚，在该故事中他们都有两个选择，即挑水或不挑水。他们自觉地根据自己的最优利益进行决策，而这些决策有时候会导致大家的利益都受到损害。上述的<strong>“决策”</strong>一词正是本文想要谈论的核心，决策在科学研究中有专门的一个领域，名叫：<strong>博弈论</strong>。</p>
-<h1 id="博弈论"><a href="#博弈论" class="headerlink" title="博弈论"></a>博弈论</h1><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>利益冲突伴随着人类社会发展的始终，在人与人之间存在矛盾与竞争时，参与者所进行的行为选择，我们可以称之为“博弈”。古代<strong>田忌赛马</strong>的故事是运用博弈论的一个典型案例。但博弈论目前还没有准确完备的定义，  </p>
+<h1 id="博弈论"><a href="#博弈论" class="headerlink" title="博弈论"></a>博弈论</h1><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>利益冲突伴随着人类社会发展的始终，在人与人之间存在矛盾与竞争时，参与者所进行的行为选择，我们可以称之为“博弈”。古代<strong>田忌赛马</strong>的故事是运用博弈论的一个典型案例。但博弈论目前还没有准确完备的定义。  </p>
 <p>博弈论可以看作是多人决策理论，即两个及以上的参与者之间的决策理论。并且我们通常假设每个参与者都是理性的，即在面临给定的约束条件下会主动地最大化自己的收益。 </p>
 <h3 id="组成元素"><a href="#组成元素" class="headerlink" title="组成元素"></a>组成元素</h3><p>博弈的基本元素包括：<strong>参与者(Player)</strong>，行动(Action)，信息(Information)，<strong>策略(Strategy)</strong>，<strong>支付(或报酬，Payoff)</strong>，理性(Rationality)，目标(Objective)，<strong>行动顺序(Order of Play)</strong>，结果(Outcome)和<strong>均衡(Equilibrium)。</strong>  </p>
 <p>众多术语可能会令读者感到困惑，针对本文要分析的“和尚喝水问题”，我们可以只关注上述加粗的部分，这是最关键的五个核心要素。</p>
