@@ -126,7 +126,7 @@
 <meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/%E9%9A%90%E5%BC%8F%E7%A9%BA%E9%97%B2%E9%93%BE%E8%A1%A8.jpg">
 <meta property="og:image" content="http://oesd9di98.bkt.clouddn.com/%E6%A0%88%E5%B8%A7%E7%BB%93%E6%9E%84.jpg">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1609713-8dd1b4276a64882a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-01-10T08:41:25.000Z">
+<meta property="og:updated_time" content="2017-02-04T12:56:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="内存中的堆和栈到底是什么">
 <meta name="twitter:description" content="文章也同时在简书更新
@@ -473,7 +473,8 @@
 <h3 id="好书推荐"><a href="#好书推荐" class="headerlink" title="好书推荐"></a>好书推荐</h3><p>在这里，笔者推荐一本书：<a href="http://product.dangdang.com/20968472.html" target="_blank" rel="external">《深入理解计算机系统（原书第2版）》</a>。我很诧异这本书竟然出到第三版了，注意第三版针对64位CPU，学习的话还是在32位下比较方便，因此推荐第二版。  </p>
 <h3 id="可执行目标文件"><a href="#可执行目标文件" class="headerlink" title="可执行目标文件"></a>可执行目标文件</h3><p>程序在运行前以可执行文件的形式存储在磁盘中，我们先来看一下这张图：<br><img src="http://oesd9di98.bkt.clouddn.com/%E5%85%B8%E5%9E%8BELF%E5%8F%AF%E6%89%A7%E8%A1%8C%E7%9B%AE%E6%A0%87%E6%96%87%E4%BB%B6.jpg" alt="典型的ELF可执行目标文件"><br>ELF格式是类UNIX系统中可执行文件的常见格式，在众多表项中我们重点关注：<strong>.text，.rodata，.data，.bss</strong>这四个小段(节)。可以看到<strong>.text和.rodata</strong>属于只读存储器段(代码段)，而<strong>.data，.bss</strong>属于可读可写存储器段(数据段)。下面具体说明这四个小段。</p>
 <h5 id="text"><a href="#text" class="headerlink" title=".text"></a>.text</h5><p>存放已编译程序段机器代码。</p>
-<h5 id="rodata"><a href="#rodata" class="headerlink" title=".rodata"></a>.rodata</h5><p>存放只读数据，如C语言中printf语句中的格式串和开关语句的跳转表。</p>
+<h5 id="rodata"><a href="#rodata" class="headerlink" title=".rodata"></a>.rodata</h5><p>存放只读数据，如C语言中printf语句中的格式串和开关语句的跳转表。  </p>
+<p>所谓开关语句的跳转表，一个典型的例子就是<strong>switch(开关)</strong>语句的汇编实现，其使用了数组来映射代码块的地址，以此构成一张跳转表，相关的内容存储于只读数据中。</p>
 <h5 id="data"><a href="#data" class="headerlink" title=".data"></a>.data</h5><p><strong>已初始化</strong>的全局C变量。局部C变量在运行时保存在栈中，既不出现在.data中，也不在.bss中。</p>
 <h5 id="bss"><a href="#bss" class="headerlink" title=".bss"></a>.bss</h5><p><strong>未初始化</strong>的全局C变量。如前文汇编语言讲解中提到的，它在目标文件中不占据实际空间，仅仅是一个占位符。目标文件格式区分初始化和未初始化变量是<strong>为了空间效率：</strong>在目标文件中，未初始化变量不需要占据任何实际的磁盘空间。  </p>
 <p>值得一提的是，.<strong>bss</strong>原本是IBM704汇编语言(大约在1957年)中Block Started by Simple指令的首字母缩写，并沿用至今。不过在今天，我们只需要记住区别<strong>.data</strong>和<strong>.bss</strong>的最简单的方法就是把<strong>.bss</strong>看成是<strong>“更好地节省空间”(Better Save Space)的缩写！</strong></p>
