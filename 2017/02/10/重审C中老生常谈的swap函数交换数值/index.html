@@ -1,0 +1,1085 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=PingFang SC:300,300italic,400,400italic,700,700italic|Menlo:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="计算机基础,计算机科学,C语言," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="文章也同时在简书更新
+
+概览本文内容是关于C语言参数传值，以及x86底层实现的计算机科学。  
+包含了原理速览以及代码示例。
+引言如果你学习过C，可能会对经典的swap函数问题记忆深刻。简单的参数传值并不能在函数外部完成两个数的交换，而要用指针传地址。  
+对此的解释一般为：C语言是以传值的方式将参数传递给函数。因此传递进去的是参数的副本，纵使万千改动也无法触及本源丝毫。故有使用指针一说，以切实">
+<meta property="og:type" content="article">
+<meta property="og:title" content="重审C中老生常谈的swap函数交换数值">
+<meta property="og:url" content="https://kimihe.github.io/2017/02/10/重审C中老生常谈的swap函数交换数值/index.html">
+<meta property="og:site_name" content="洛斯里克的大书库">
+<meta property="og:description" content="文章也同时在简书更新
+
+概览本文内容是关于C语言参数传值，以及x86底层实现的计算机科学。  
+包含了原理速览以及代码示例。
+引言如果你学习过C，可能会对经典的swap函数问题记忆深刻。简单的参数传值并不能在函数外部完成两个数的交换，而要用指针传地址。  
+对此的解释一般为：C语言是以传值的方式将参数传递给函数。因此传递进去的是参数的副本，纵使万千改动也无法触及本源丝毫。故有使用指针一说，以切实">
+<meta property="og:updated_time" content="2017-02-10T15:29:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="重审C中老生常谈的swap函数交换数值">
+<meta name="twitter:description" content="文章也同时在简书更新
+
+概览本文内容是关于C语言参数传值，以及x86底层实现的计算机科学。  
+包含了原理速览以及代码示例。
+引言如果你学习过C，可能会对经典的swap函数问题记忆深刻。简单的参数传值并不能在函数外部完成两个数的交换，而要用指针传地址。  
+对此的解释一般为：C语言是以传值的方式将参数传递给函数。因此传递进去的是参数的副本，纵使万千改动也无法触及本源丝毫。故有使用指针一说，以切实">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '6339700991398512000',
+      author: '周鶏🐣'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://kimihe.github.io/2017/02/10/重审C中老生常谈的swap函数交换数值/"/>
+
+
+  <title> 重审C中老生常谈的swap函数交换数值 | 洛斯里克的大书库 </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?d35ebc1b61103b0e3b7f03558bc18af5";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">洛斯里克的大书库</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">ロスリックの大書庫</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                重审C中老生常谈的swap函数交换数值
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-10T21:51:53+08:00" content="2017-02-10">
+              2017-02-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/计算机科学/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/02/10/重审C中老生常谈的swap函数交换数值/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/10/重审C中老生常谈的swap函数交换数值/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/02/10/重审C中老生常谈的swap函数交换数值/" class="leancloud_visitors" data-flag-title="重审C中老生常谈的swap函数交换数值">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>文章也同时在<a href="http://www.jianshu.com/p/9789fb9bf757" target="_blank" rel="external">简书</a>更新</p>
+</blockquote>
+<h1 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h1><p>本文内容是关于C语言参数传值，以及x86底层实现的计算机科学。  </p>
+<p>包含了原理速览以及代码示例。</p>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>如果你学习过C，可能会对经典的<strong>swap</strong>函数问题记忆深刻。简单的参数传值并不能在函数外部完成两个数的交换，而要用<strong>指针</strong>传地址。  </p>
+<p>对此的解释一般为：<strong>C语言是以传值的方式将参数传递给函数。</strong>因此传递进去的是参数的副本，纵使万千改动也无法触及本源丝毫。故有使用指针一说，以切实地修改两个参数地址处的值。  </p>
+<p>但对于单纯的传值与传指针(亦地址，引用)的区别是什么，能够道出原委的人可能并不多。因此笔者想通过本文进入更底层的汇编领域，向大家更加清晰地阐述在底层究竟发生了什么。</p>
+<a id="more"></a> 
+<h1 id="原料"><a href="#原料" class="headerlink" title="原料"></a>原料</h1><h5 id="基本必需配置"><a href="#基本必需配置" class="headerlink" title="基本必需配置"></a>基本必需配置</h5><ul>
+<li>任意文本编辑器(可以用来copy文中出现的代码)</li>
+<li>GCC(我们需要用GCC来编译C源代码，并以GCC的规则来讲解，其它编译器产生的结果可能会不同)</li>
+</ul>
+<p>#####额外建议配置</p>
+<ul>
+<li>类UNIX的环境(Linux与Mac等皆可，笔者是Mac)</li>
+</ul>
+<h1 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h1><h3 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h3><p>我们拥有<strong>swapValue.c</strong>与<strong>swapAddr.c</strong>两份源代码，作为研究swap原理的基础，内容分别如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// swapValue.c</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">swapValue</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> tmp = a;</div><div class="line">    a = b;</div><div class="line">    b = tmp;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> a = <span class="number">2</span>;</div><div class="line">    <span class="keyword">int</span> b = <span class="number">3</span>;</div><div class="line">    </div><div class="line">    swapValue(a, b);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// swapAddr.c</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">swapAddr</span><span class="params">(<span class="keyword">int</span> *a, <span class="keyword">int</span> *b)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> tmp = *a;</div><div class="line">    *a = *b;</div><div class="line">    *b = tmp;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> a = <span class="number">2</span>;</div><div class="line">    <span class="keyword">int</span> b = <span class="number">3</span>;</div><div class="line">    </div><div class="line">    swapAddr(&amp;a, &amp;b);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>代码内容很简单，分别是用传值和传地址两种方式实现swap，并都在fun函数中调用swap。</p>
+<h3 id="使用汇编器"><a href="#使用汇编器" class="headerlink" title="使用汇编器"></a>使用汇编器</h3><p>启动命令行窗口，针对上述两份源代码进行汇编，输入如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">gcc   -S swapValue.c</div><div class="line">gcc   -S -O1 swapAddr.c</div></pre></td></tr></table></figure>
+<p>第二行多了一个<strong>-O1</strong>参数是为了让汇编代码更加便于阅读。之后得到<strong>swapValue.s</strong>与<strong>swapAddr.s</strong>两份汇编代码。  </p>
+<h1 id="分析汇编代码"><a href="#分析汇编代码" class="headerlink" title="分析汇编代码"></a>分析汇编代码</h1><h3 id="swapValue-s"><a href="#swapValue-s" class="headerlink" title="swapValue.s"></a>swapValue.s</h3><p>我们首先分析<strong>swapValue.s</strong>，撇去次要部分后，我们关注如下内容：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">_swapValue:                             ## @swapValue</div><div class="line">	...</div><div class="line">	...</div><div class="line">	movl	%edi, <span class="number">-4</span>(%rbp)</div><div class="line">	movl	%esi, <span class="number">-8</span>(%rbp)</div><div class="line">	movl	<span class="number">-4</span>(%rbp), %esi</div><div class="line">	movl	%esi, <span class="number">-12</span>(%rbp)</div><div class="line">	movl	<span class="number">-8</span>(%rbp), %esi</div><div class="line">	movl	%esi, <span class="number">-4</span>(%rbp)</div><div class="line">	movl	<span class="number">-12</span>(%rbp), %esi</div><div class="line">	movl	%esi, <span class="number">-8</span>(%rbp)</div><div class="line">	...</div><div class="line">	...</div><div class="line">	</div><div class="line">_fun:                                   ## @fun</div><div class="line">	...</div><div class="line">	...</div><div class="line">	movl	$<span class="number">2</span>, <span class="number">-4</span>(%rbp)</div><div class="line">	movl	$<span class="number">3</span>, <span class="number">-8</span>(%rbp)</div><div class="line">	movl	<span class="number">-4</span>(%rbp), %edi</div><div class="line">	movl	<span class="number">-8</span>(%rbp), %esi</div><div class="line">	callq	_swapValue</div><div class="line">	...</div><div class="line">	...</div></pre></td></tr></table></figure>
+<p>大家不必去理解汇编代码的含义，只需要理解笔者的讲解即可。可以看到汇编代码分为<strong>_fun</strong>和<strong>_swapValue</strong>两个部分，与C源码中两个函数是对应的。  </p>
+<p>注意：在汇编中我们把函数改用<strong>过程</strong>来称呼。  </p>
+<h5 id="fun过程"><a href="#fun过程" class="headerlink" title="_fun过程"></a>_fun过程</h5><p>对于<strong>_fun</strong>过程，我们可以看到参数2和参数3被最终分别传递到了寄存器<strong>%edi</strong>和<strong>%esi</strong>中。随后调用了<strong>_swapValue</strong>子过程。  </p>
+<p>简而言之就是<strong>_fun</strong>过程将两个实参存放在两个寄存器中，然后调用<strong>_swapValue</strong>子过程。  </p>
+<p>在x86架构中，上述两个寄存器是专门用来向函数传递参数的，<strong>%edi</strong>负责传递第一个参数，<strong>%esi</strong>负责传递第二个参数。</p>
+<h5 id="swapValue过程"><a href="#swapValue过程" class="headerlink" title="_swapValue过程"></a>_swapValue过程</h5><p>可能是GCC优化问题，汇编代码拐弯抹角地实现了一个实际上很简单的操作。  </p>
+<p>上文有提到：两个参数存放在寄存器<strong>%edi</strong>和<strong>%esi</strong>中。这段代码首先把两个参数分别复制到函数的栈内存中，即把<strong>%edi</strong>复制到<strong>-4(%rbp)</strong>中，把<strong>%esi</strong>复制到<strong>-8(%rbp)</strong>中，通过栈内存来存放局部变量。  </p>
+<p>随后拐弯抹角地交换了<strong>-4(%rbp)</strong>与<strong>-8(%rbp)</strong>内部的值。可以看到：<strong>由于两个参数一开始就被复制，函数操作的一直都是这份副本。</strong>于是，这就是传值操作无法切实修改参数值的原因。</p>
+<h3 id="swapAddr-s"><a href="#swapAddr-s" class="headerlink" title="swapAddr.s"></a>swapAddr.s</h3><p>再来看看<strong>swapAddr.s</strong>，其中<strong>_fun</strong>过程没有特别的变化，区别集中在<strong>_swapAddr</strong>过程。  </p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">_swapAddr:                              ## @swapAddr</div><div class="line">	...</div><div class="line">	movl	(%rdi), %eax</div><div class="line">	movl	(%rsi), %ecx</div><div class="line">	movl	%ecx, (%rdi)</div><div class="line">	movl	%eax, (%rsi)</div><div class="line">	...</div><div class="line">	...</div><div class="line">	</div><div class="line">_fun:                                   ## @fun</div><div class="line">	...</div><div class="line">	...</div><div class="line">	movl	$2, -4(%rbp)</div><div class="line">	movl	$3, -8(%rbp)</div><div class="line">	leaq	-4(%rbp), %rdi</div><div class="line">	leaq	-8(%rbp), %rsi</div><div class="line">	callq	_swapAddr</div><div class="line">	...</div><div class="line">	...</div></pre></td></tr></table></figure>
+<p>从外观上，可以看到<strong>_swapAddr</strong>中寄存器的操作，相比之前多了一对圆括号。<strong>(%rdi）</strong>与<strong>(%rsi)</strong>互相交换内容。  </p>
+<p>这对圆括号就是传地址的奥秘所在，该操作统称为<strong>间接寻址</strong>。  </p>
+<p>之前寄存器中存放的就是真实的数据，操作时直接取出寄存器中的内容即可。而这里，寄存器中存放的数据不能直接使用，它是一个索引(地址)，先取出这个索引，然后去内存中与该索引相对应的位置处取出数据。<strong>有点像图书馆中根据书籍的编号去找书。</strong>  </p>
+<p>再仔细想想，这个理念与C语言中的指针是不是很像？没错，指针的底层实现就是它！  </p>
+<p>因此，由于内存中的地址是唯一对应的，因此在<strong>_swapAddr</strong>中我们就直接修改了两个参数地址处的值，于是两个参数也就完成了数据交换。  </p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>以上就是对于传值与传地址的讲解。普通的变量就是保存一个数值而已，而指针是一种保存变量地址的变量，它的第一层含义是地址，第二层含义是根据该地址去取值。  </p>
+<p>指针常常是表达某个计算的唯一途径，而且可以生成更加高效紧凑的代码。例如字符串复制函数，关键代码若用指针只需如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">char</span> * <span class="title">strcpy</span><span class="params">(<span class="keyword">char</span> *dest, <span class="keyword">char</span> *src)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">char</span> *ret = dest;</div><div class="line">    <span class="keyword">while</span> ((*dest++ = *src++))</div><div class="line">        ;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> ret;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>正是有了指针，很多高级的操作才成为了可能，宏伟的程序才得以构建。  </p>
+<p>希望本文对大家有所帮助，感谢阅读，欢迎分享~</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://oesd9di98.bkt.clouddn.com/WechatQRCode.jpeg" alt="周鶏🐣(Kimiko) WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://oesd9di98.bkt.clouddn.com/AlipayReceipt.jpeg" alt="周鶏🐣(Kimiko) Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/计算机基础/" rel="tag">#计算机基础</a>
+          
+            <a href="/tags/计算机科学/" rel="tag">#计算机科学</a>
+          
+            <a href="/tags/C语言/" rel="tag">#C语言</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/23/女神异闻录P4G/" rel="next" title="女神异闻录P4G">
+                <i class="fa fa-chevron-left"></i> 女神异闻录P4G
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2099/12/30/README/" rel="prev" title="README">
+                README <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2017/02/10/重审C中老生常谈的swap函数交换数值/"
+     data-title="重审C中老生常谈的swap函数交换数值"
+     data-content=""
+     data-url="https://kimihe.github.io/2017/02/10/重审C中老生常谈的swap函数交换数值/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/02/10/重审C中老生常谈的swap函数交换数值/"
+           data-title="重审C中老生常谈的swap函数交换数值" data-url="https://kimihe.github.io/2017/02/10/重审C中老生常谈的swap函数交换数值/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://oesd9di98.bkt.clouddn.com/Yaki%20Dango.jpg"
+               alt="周鶏🐣(Kimiko)" />
+          <p class="site-author-name" itemprop="name">周鶏🐣(Kimiko)</p>
+          <p class="site-description motion-element" itemprop="description">iOS熟练工｜微机汇编｜D2D安全</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/kimihe" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/3235631330/" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://oesd9di98.bkt.clouddn.com/wechat_gongzhonghao.jpg" target="_blank" title="Wechat">
+                  
+                    <i class="fa fa-fw fa-wechat"></i>
+                  
+                  Wechat
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://kimihe.com/" title="本站点备用" target="_blank">本站点备用</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://xiaoysec.github.io/" title="西土城马戏团" target="_blank">西土城马戏团</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.cnblogs.com/xiaoxiaoleo/" title="安全工搬砖笔记" target="_blank">安全工搬砖笔记</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.520fzy.cn/" title="简单一点就好le" target="_blank">简单一点就好le</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">2.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原料"><span class="nav-number">3.</span> <span class="nav-text">原料</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#基本必需配置"><span class="nav-number">3.0.0.0.1.</span> <span class="nav-text">基本必需配置</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实验"><span class="nav-number">4.</span> <span class="nav-text">实验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#源代码"><span class="nav-number">4.0.1.</span> <span class="nav-text">源代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用汇编器"><span class="nav-number">4.0.2.</span> <span class="nav-text">使用汇编器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析汇编代码"><span class="nav-number">5.</span> <span class="nav-text">分析汇编代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#swapValue-s"><span class="nav-number">5.0.1.</span> <span class="nav-text">swapValue.s</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#fun过程"><span class="nav-number">5.0.1.0.1.</span> <span class="nav-text">_fun过程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#swapValue过程"><span class="nav-number">5.0.1.0.2.</span> <span class="nav-text">_swapValue过程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#swapAddr-s"><span class="nav-number">5.0.2.</span> <span class="nav-text">swapAddr.s</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">周鶏🐣(Kimiko)</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"kimihe"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = false;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title >= 0 || index_content >= 0 ){
+                                isMatch = true;
+								if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            } 
+							
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("oBmWcJcnEM1dD3mQvqBspzsP-gzGzoHsz", "NJJxuiV0HyMEnqE51aNQjXIK");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+</body>
+</html>
