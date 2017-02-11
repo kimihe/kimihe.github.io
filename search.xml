@@ -30,8 +30,7 @@
 <li>任意文本编辑器(可以用来copy文中出现的代码)</li>
 <li>GCC(我们需要用GCC来编译C源代码，并以GCC的规则来讲解，其它编译器产生的结果可能会不同)</li>
 </ul>
-<p>#####额外建议配置</p>
-<ul>
+<h5 id="额外建议配置"><a href="#额外建议配置" class="headerlink" title="额外建议配置"></a>额外建议配置</h5><ul>
 <li>类UNIX的环境(Linux与Mac等皆可，笔者是Mac)</li>
 </ul>
 <h1 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h1><h3 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h3><p>我们拥有<strong>swapValue.c</strong>与<strong>swapAddr.c</strong>两份源代码，作为研究swap原理的基础，内容分别如下：</p>
