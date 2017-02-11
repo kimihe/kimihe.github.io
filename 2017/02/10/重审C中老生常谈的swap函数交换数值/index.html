@@ -106,7 +106,8 @@
 包含了原理速览以及代码示例。
 引言如果你学习过C，可能会对经典的swap函数问题记忆深刻。简单的参数传值并不能在函数外部完成两个数的交换，而要用指针传地址。  
 对此的解释一般为：C语言是以传值的方式将参数传递给函数。因此传递进去的是参数的副本，纵使万千改动也无法触及本源丝毫。故有使用指针一说，以切实">
-<meta property="og:updated_time" content="2017-02-10T15:29:59.000Z">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1609713-8dd1b4276a64882a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-02-11T02:55:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="重审C中老生常谈的swap函数交换数值">
 <meta name="twitter:description" content="文章也同时在简书更新
@@ -115,6 +116,7 @@
 包含了原理速览以及代码示例。
 引言如果你学习过C，可能会对经典的swap函数问题记忆深刻。简单的参数传值并不能在函数外部完成两个数的交换，而要用指针传地址。  
 对此的解释一般为：C语言是以传值的方式将参数传递给函数。因此传递进去的是参数的副本，纵使万千改动也无法触及本源丝毫。故有使用指针一说，以切实">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1609713-8dd1b4276a64882a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -432,6 +434,7 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">char</span> * <span class="title">strcpy</span><span class="params">(<span class="keyword">char</span> *dest, <span class="keyword">char</span> *src)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">char</span> *ret = dest;</div><div class="line">    <span class="keyword">while</span> ((*dest++ = *src++))</div><div class="line">        ;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> ret;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>正是有了指针，很多高级的操作才成为了可能，宏伟的程序才得以构建。  </p>
 <p>希望本文对大家有所帮助，感谢阅读，欢迎分享~</p>
+<h1 id="微信公众号"><a href="#微信公众号" class="headerlink" title="微信公众号"></a>微信公众号</h1><p>第一时间获取最新内容，欢迎关注微信公众号：「洛斯里克的大书库」。<br><img src="http://upload-images.jianshu.io/upload_images/1609713-8dd1b4276a64882a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="微信公众号「洛斯里克的大书库」"></p>
 
       
     </div>
@@ -690,7 +693,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">2.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原料"><span class="nav-number">3.</span> <span class="nav-text">原料</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#基本必需配置"><span class="nav-number">3.0.0.0.1.</span> <span class="nav-text">基本必需配置</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实验"><span class="nav-number">4.</span> <span class="nav-text">实验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#源代码"><span class="nav-number">4.0.1.</span> <span class="nav-text">源代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用汇编器"><span class="nav-number">4.0.2.</span> <span class="nav-text">使用汇编器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析汇编代码"><span class="nav-number">5.</span> <span class="nav-text">分析汇编代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#swapValue-s"><span class="nav-number">5.0.1.</span> <span class="nav-text">swapValue.s</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#fun过程"><span class="nav-number">5.0.1.0.1.</span> <span class="nav-text">_fun过程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#swapValue过程"><span class="nav-number">5.0.1.0.2.</span> <span class="nav-text">_swapValue过程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#swapAddr-s"><span class="nav-number">5.0.2.</span> <span class="nav-text">swapAddr.s</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">2.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原料"><span class="nav-number">3.</span> <span class="nav-text">原料</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#基本必需配置"><span class="nav-number">3.0.0.0.1.</span> <span class="nav-text">基本必需配置</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实验"><span class="nav-number">4.</span> <span class="nav-text">实验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#源代码"><span class="nav-number">4.0.1.</span> <span class="nav-text">源代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用汇编器"><span class="nav-number">4.0.2.</span> <span class="nav-text">使用汇编器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析汇编代码"><span class="nav-number">5.</span> <span class="nav-text">分析汇编代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#swapValue-s"><span class="nav-number">5.0.1.</span> <span class="nav-text">swapValue.s</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#fun过程"><span class="nav-number">5.0.1.0.1.</span> <span class="nav-text">_fun过程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#swapValue过程"><span class="nav-number">5.0.1.0.2.</span> <span class="nav-text">_swapValue过程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#swapAddr-s"><span class="nav-number">5.0.2.</span> <span class="nav-text">swapAddr.s</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#微信公众号"><span class="nav-number">7.</span> <span class="nav-text">微信公众号</span></a></li></ol></div>
             
           </div>
         </section>
