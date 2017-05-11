@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="随笔,essay," />
+  <meta name="keywords" content="计算机科学,分布式计算,分布式系统,hadoop,HiBench," />
 
 
 
@@ -92,23 +92,26 @@
 
 <meta name="description" content="文章也同时在简书更新
 
-台风“海马”用雨水让我们感受到了它的存在，今天的上海普遍被暴雨侵袭。短暂的降雨间隙成了唯一适合外出活动的机会。在恶劣天气来临时，果然还是待在舒适的家中最惬意。
-张江昨晚我又回到了张江，虽然只相隔了三星期，但是却有那么一丝的陌生，也许整个上海都给我的是一种陌生。一旦你离开了一段时间，你可能真的就不属于这里了，一切你留下的印记都会迅速消失，这是魔都对“外乡人”的“不接纳”。第">
+引言HiBench是intel为评估各大数据框架而设计的测试集，它可以用来测试hadoop集群对于常见计算任务的性能。从普通的排序，字符串统计到机器学习，数据库操作，图像处理和搜索引擎，都能够涵盖。本文是HiBench中hadoopbench的快速配置指南。更加具体的使用说明可以参考官方wiki。  
+软件依赖HiBench需要java环境，以及Maven管理。
+安装ja">
 <meta property="og:type" content="article">
-<meta property="og:title" content="台风、张江、搬家">
-<meta property="og:url" content="https://kimihe.github.io/2016/10/22/台风、张江、搬家/index.html">
+<meta property="og:title" content="Hadoop常用测试集HiBench配置指南">
+<meta property="og:url" content="https://kimihe.github.io/2017/05/11/Hadoop常用测试集HiBench配置指南/index.html">
 <meta property="og:site_name" content="洛斯里克的大书库">
 <meta property="og:description" content="文章也同时在简书更新
 
-台风“海马”用雨水让我们感受到了它的存在，今天的上海普遍被暴雨侵袭。短暂的降雨间隙成了唯一适合外出活动的机会。在恶劣天气来临时，果然还是待在舒适的家中最惬意。
-张江昨晚我又回到了张江，虽然只相隔了三星期，但是却有那么一丝的陌生，也许整个上海都给我的是一种陌生。一旦你离开了一段时间，你可能真的就不属于这里了，一切你留下的印记都会迅速消失，这是魔都对“外乡人”的“不接纳”。第">
-<meta property="og:updated_time" content="2016-10-27T02:43:14.000Z">
+引言HiBench是intel为评估各大数据框架而设计的测试集，它可以用来测试hadoop集群对于常见计算任务的性能。从普通的排序，字符串统计到机器学习，数据库操作，图像处理和搜索引擎，都能够涵盖。本文是HiBench中hadoopbench的快速配置指南。更加具体的使用说明可以参考官方wiki。  
+软件依赖HiBench需要java环境，以及Maven管理。
+安装ja">
+<meta property="og:updated_time" content="2017-05-11T09:28:53.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="台风、张江、搬家">
+<meta name="twitter:title" content="Hadoop常用测试集HiBench配置指南">
 <meta name="twitter:description" content="文章也同时在简书更新
 
-台风“海马”用雨水让我们感受到了它的存在，今天的上海普遍被暴雨侵袭。短暂的降雨间隙成了唯一适合外出活动的机会。在恶劣天气来临时，果然还是待在舒适的家中最惬意。
-张江昨晚我又回到了张江，虽然只相隔了三星期，但是却有那么一丝的陌生，也许整个上海都给我的是一种陌生。一旦你离开了一段时间，你可能真的就不属于这里了，一切你留下的印记都会迅速消失，这是魔都对“外乡人”的“不接纳”。第">
+引言HiBench是intel为评估各大数据框架而设计的测试集，它可以用来测试hadoop集群对于常见计算任务的性能。从普通的排序，字符串统计到机器学习，数据库操作，图像处理和搜索引擎，都能够涵盖。本文是HiBench中hadoopbench的快速配置指南。更加具体的使用说明可以参考官方wiki。  
+软件依赖HiBench需要java环境，以及Maven管理。
+安装ja">
 
 
 
@@ -129,10 +132,10 @@
 
 
 
-  <link rel="canonical" href="https://kimihe.github.io/2016/10/22/台风、张江、搬家/"/>
+  <link rel="canonical" href="https://kimihe.github.io/2017/05/11/Hadoop常用测试集HiBench配置指南/"/>
 
 
-  <title> 台风、张江、搬家 | 洛斯里克的大书库 </title>
+  <title> Hadoop常用测试集HiBench配置指南 | 洛斯里克的大书库 </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -305,7 +308,7 @@
             
             
               
-                台风、张江、搬家
+                Hadoop常用测试集HiBench配置指南
               
             
           </h1>
@@ -317,8 +320,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-22T20:53:38+08:00" content="2016-10-22">
-              2016-10-22
+            <time itemprop="dateCreated" datetime="2017-05-11T15:52:42+08:00" content="2017-05-11">
+              2017-05-11
             </time>
           </span>
 
@@ -331,8 +334,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">随笔</span>
+                  <a href="/categories/计算机科学/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学</span>
                   </a>
                 </span>
 
@@ -347,8 +350,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/10/22/台风、张江、搬家/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/22/台风、张江、搬家/" itemprop="commentsCount"></span>
+                <a href="/2017/05/11/Hadoop常用测试集HiBench配置指南/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/11/Hadoop常用测试集HiBench配置指南/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -358,7 +361,7 @@
 
           
           
-             <span id="/2016/10/22/台风、张江、搬家/" class="leancloud_visitors" data-flag-title="台风、张江、搬家">
+             <span id="/2017/05/11/Hadoop常用测试集HiBench配置指南/" class="leancloud_visitors" data-flag-title="Hadoop常用测试集HiBench配置指南">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -381,16 +384,47 @@
 
       
         <blockquote>
-<p>文章也同时在<a href="http://www.jianshu.com/p/41cfedd88f3f" target="_blank" rel="external">简书</a>更新</p>
+<p>文章也同时在<a href="http://www.jianshu.com/p/cc453ba775e9" target="_blank" rel="external">简书</a>更新</p>
 </blockquote>
-<h1 id="台风"><a href="#台风" class="headerlink" title="台风"></a>台风</h1><p>“海马”用雨水让我们感受到了它的存在，今天的上海普遍被暴雨侵袭。短暂的降雨间隙成了唯一适合外出活动的机会。在恶劣天气来临时，果然还是待在舒适的家中最惬意。</p>
-<h1 id="张江"><a href="#张江" class="headerlink" title="张江"></a>张江</h1><p>昨晚我又回到了张江，虽然只相隔了三星期，但是却有那么一丝的陌生，也许整个上海都给我的是一种陌生。一旦你离开了一段时间，你可能真的就不属于这里了，一切你留下的印记都会迅速消失，这是魔都对“外乡人”的“不接纳”。第二故乡南京，阔别三个多月后的再次回归，却是那么亲切。  </p>
-<p>为什么说南京是第二故乡，因为我在这里度过了整整5年，之后还会继续直到研究生的结束。南京承载了我求学的经历，却无法让我驻足。  </p>
-<p>我经常思索，毕业后自己会去哪儿？可能会去上海，若压力太大也肯能会去杭州。但有一点是肯定的，南京我不会再继续待下去。就和所有“故乡”一样，现在的年轻人似乎总会主动或被动地选择离乡外出。  </p>
-<p>这或许就是当今社会的常态与摆在年轻人面前的无奈。</p>
-<h1 id="搬家"><a href="#搬家" class="headerlink" title="搬家"></a>搬家</h1><p>这次来上海，是陪女朋友搬家。于是便有幸感受了台风中搬家的滋味。在大汗淋漓与风雨拍打之后，坐在新“家”舒适的床上，暖光灯下的房间是那么的温馨。  </p>
-<p>经历了通勤高峰后我希望拥有一辆可以代步的车，在外漂泊后我希望拥有一个遮风避雨的家。  </p>
-<p>这可能会相当漫长和艰难，也许我永远不会落根上海，也许我会最终回到故乡无锡。但我会始终坚持一个信念：我的家是home，不是house。</p>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p><a href="https://github.com/intel-hadoop/HiBench" target="_blank" rel="external">HiBench</a>是intel为评估各大数据框架而设计的测试集，它可以用来测试hadoop集群对于常见计算任务的性能。从普通的排序，字符串统计到机器学习，数据库操作，图像处理和搜索引擎，都能够涵盖。本文是HiBench中hadoopbench的快速配置指南。更加具体的使用说明可以参考<a href="https://github.com/intel-hadoop/HiBench/wiki" target="_blank" rel="external">官方wiki</a>。  </p>
+<h1 id="软件依赖"><a href="#软件依赖" class="headerlink" title="软件依赖"></a>软件依赖</h1><p>HiBench需要java环境，以及Maven管理。</p>
+<h1 id="安装java运行环境"><a href="#安装java运行环境" class="headerlink" title="安装java运行环境"></a>安装java运行环境</h1><h3 id="安装JDK-amp-JRE"><a href="#安装JDK-amp-JRE" class="headerlink" title="安装JDK&amp;JRE"></a>安装JDK&amp;JRE</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install openjdk-8-jre openjdk-8-jdk</div></pre></td></tr></table></figure>
+<p>建议装version 8不要装9。安装完成后，默认路径是<code>/usr/lib/jvm/java-8-openjdk-amd64</code>，如果不一致请搜索到正确路径。</p>
+<h3 id="添加环境变量"><a href="#添加环境变量" class="headerlink" title="添加环境变量"></a>添加环境变量</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd</div><div class="line">vim .bashrc</div></pre></td></tr></table></figure>
+<p>添加如下jave的PATH：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># JAVA PATH</div><div class="line">export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64</div></pre></td></tr></table></figure>
+<p>更新环境变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">source .bashrc</div></pre></td></tr></table></figure>
+<h3 id="测试java环境"><a href="#测试java环境" class="headerlink" title="测试java环境"></a>测试java环境</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -version</div></pre></td></tr></table></figure>
+<p>看到相应版本信息输出即表明配置正确：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">hadoop@hadoop-master:~$ java -version</div><div class="line">openjdk version &quot;1.8.0_121&quot;</div><div class="line">OpenJDK Runtime Environment (build 1.8.0_121-8u121-b13-0ubuntu1.16.04.2-b13)</div><div class="line">OpenJDK 64-Bit Server VM (build 25.121-b13, mixed mode)</div></pre></td></tr></table></figure>
+<h1 id="安装Maven"><a href="#安装Maven" class="headerlink" title="安装Maven"></a>安装Maven</h1><h3 id="下载Maven包"><a href="#下载Maven包" class="headerlink" title="下载Maven包"></a>下载Maven包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://apache.fayea.com/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.zip</div></pre></td></tr></table></figure>
+<h3 id="解压缩"><a href="#解压缩" class="headerlink" title="解压缩"></a>解压缩</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">unzip apache-maven-3.5.0-bin.zip -d /YOUR/PATH/TO/RESTORE</div></pre></td></tr></table></figure>
+<p>笔者解压位置为<code>/usr/local/</code>。</p>
+<h3 id="添加环境变量-1"><a href="#添加环境变量-1" class="headerlink" title="添加环境变量"></a>添加环境变量</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd</div><div class="line">vim .bashrc</div></pre></td></tr></table></figure>
+<p>添加如下Maven的PATH：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># set maven environment</div><div class="line">export M3_HOME=/usr/local/apache-maven-3.5.0</div><div class="line">export PATH=$M3_HOME/bin:$PATH</div></pre></td></tr></table></figure>
+<p>更新环境变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">source .bashrc</div></pre></td></tr></table></figure>
+<h3 id="测试Maven环境"><a href="#测试Maven环境" class="headerlink" title="测试Maven环境"></a>测试Maven环境</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn -v</div></pre></td></tr></table></figure>
+<p>看到相应版本信息输出即表明配置正确：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">hadoop@hadoop-slave1:~$ mvn -v</div><div class="line">Apache Maven 3.5.0 (ff8f5e7444045639af65f6095c62210b5713f426; 2017-04-04T03:39:06+08:00)</div><div class="line">Maven home: /usr/local/apache-maven-3.5.0</div><div class="line">Java version: 1.8.0_121, vendor: Oracle Corporation</div><div class="line">Java home: /usr/lib/jvm/java-8-openjdk-amd64/jre</div><div class="line">Default locale: en_US, platform encoding: ANSI_X3.4-1968</div><div class="line">OS name: &quot;linux&quot;, version: &quot;4.4.0-53-generic&quot;, arch: &quot;amd64&quot;, family: &quot;unix&quot;</div></pre></td></tr></table></figure>
+<h1 id="下载HiBench"><a href="#下载HiBench" class="headerlink" title="下载HiBench"></a>下载HiBench</h1><p><code>git clone https://github.com/intel-hadoop/HiBench.git</code>比较慢，建议直接网页下载zip包，然后解压到理想的目录下。</p>
+<h1 id="安装Hibench"><a href="#安装Hibench" class="headerlink" title="安装Hibench"></a>安装Hibench</h1><p>切到HiBench下，执行对应的安装操作，可以选择自己想要安装的模块。以安装hadoop框架下用于测试sql的模块为例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn -Phadoopbench -Dmodules -Psql -Dscala=2.11 clean package</div></pre></td></tr></table></figure>
+<p>更多安装命令可见<a href="https://github.com/intel-hadoop/HiBench/blob/master/docs/build-hibench.md" target="_blank" rel="external">https://github.com/intel-hadoop/HiBench/blob/master/docs/build-hibench.md</a>。<br>鉴于网络因素，建议一个模块一个模块的安装，某些模块的安装可能会非常耗时。</p>
+<h1 id="配置HiBench"><a href="#配置HiBench" class="headerlink" title="配置HiBench"></a>配置HiBench</h1><p>主要配置<code>conf/hadoop.conf</code>及<code>conf/hibench.conf</code>两个文件。</p>
+<h3 id="hadoop-conf"><a href="#hadoop-conf" class="headerlink" title="hadoop.conf"></a>hadoop.conf</h3><p>笔者的hadoop是安装在<code>/usr/local/hadoop-2.8.0</code>目录下的，并且以单机localhost:9000(真分布式时使用真实的IP:port)为例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"># Hadoop home</div><div class="line">hibench.hadoop.home             /usr/local/hadoop-2.8.0</div><div class="line"></div><div class="line"># The path of hadoop executable</div><div class="line">hibench.hadoop.executable       /usr/local/hadoop-2.8.0/bin/hadoop</div><div class="line"></div><div class="line"># Hadoop configraution directory</div><div class="line">hibench.hadoop.configure.dir    /usr/local/hadoop-2.8.0/etc/hadoop</div><div class="line"></div><div class="line"># The root HDFS path to store HiBench data</div><div class="line">hibench.hdfs.master             hdfs://localhost:9000/user/hadoop/HiBench</div><div class="line"></div><div class="line"></div><div class="line"># Hadoop release provider. Supported value: apache, cdh5, hdp</div><div class="line">hibench.hadoop.release          apache</div></pre></td></tr></table></figure>
+<h3 id="hibench-conf"><a href="#hibench-conf" class="headerlink" title="hibench.conf"></a>hibench.conf</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"> The definition of these profiles can be found in the workload&apos;s conf file i.e. conf/workloads/micro/wordcount.conf</div><div class="line">hibench.scale.profile                 tiny</div><div class="line"></div><div class="line"># Mapper number in hadoop, partition number in Spark</div><div class="line">hibench.default.map.parallelism         8</div><div class="line"></div><div class="line"># Reducer nubmer in hadoop, shuffle partition number in Spark</div><div class="line">hibench.default.shuffle.parallelism     8</div></pre></td></tr></table></figure>
+<p>主要设置测试集运行时的数据量和并发度。</p>
+<h1 id="运行HiBench"><a href="#运行HiBench" class="headerlink" title="运行HiBench"></a>运行HiBench</h1><p>安装完成后，可以运行其中的测试集。首先要启动hadoop：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">start-dfs.sh;</div><div class="line">start-yarn.sh;</div></pre></td></tr></table></figure>
+<p>以运行Hadoop框架下micro集的sort为例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">bin/workloads/micro/sort/prepare/prepare.sh</div><div class="line">bin/workloads/micro/sort/hadoop/run.sh</div></pre></td></tr></table></figure>
+<p>等待读条MapReduce完毕，可以在<code>report/sort/hadoop/bench.log</code>处查看具体的运行结果和日志。运行结果大致是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">17/05/11 15:16:41 INFO client.RMProxy: Connecting to ResourceManager at localhost/127.0.0.1:8032</div><div class="line">Running on 1 nodes to sort from hdfs://localhost:9000/user/hadoop/HiBench/HiBench/Sort/Input into hdfs://localhost:9000/user/hadoop/HiBench/HiBench/Sort/Output with 8 reduces.</div><div class="line">Job started: Thu May 11 15:16:43 CST 2017</div><div class="line">17/05/11 15:16:43 INFO client.RMProxy: Connecting to ResourceManager at localhost/127.0.0.1:8032</div><div class="line">17/05/11 15:16:56 INFO input.FileInputFormat: Total input files to process : 8</div><div class="line">17/05/11 15:17:11 INFO mapreduce.JobSubmitter: number of splits:24</div><div class="line">17/05/11 15:17:15 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1494484569605_0006</div><div class="line">...</div><div class="line">17/05/11 15:17:27 INFO mapreduce.Job:  map 0% reduce 0%</div><div class="line">17/05/11 15:17:43 INFO mapreduce.Job:  map 25% reduce 0%</div><div class="line">...</div><div class="line">17/05/11 15:22:40 INFO mapreduce.Job:  map 100% reduce 98%</div><div class="line">17/05/11 15:22:48 INFO mapreduce.Job:  map 100% reduce 100%</div><div class="line">7/05/11 15:23:02 INFO mapreduce.Job: Job job_1494484569605_0006 completed successfully</div><div class="line">17/05/11 15:23:02 INFO mapreduce.Job: Counters: 51</div><div class="line">        File System Counters</div><div class="line">        ...</div><div class="line">        Job Counters</div><div class="line">        ...</div><div class="line">        Map-Reduce Framework</div><div class="line">        ...</div><div class="line">        Shuffle Errors</div><div class="line">        ...</div><div class="line">        File Input Format Counters</div><div class="line">        ...</div><div class="line">        File Output Format Counters</div><div class="line">        ...</div><div class="line">Job ended: Thu May 11 15:23:02 CST 2017</div><div class="line">The job took 378 seconds.</div></pre></td></tr></table></figure>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文是hadoop常用测试集HiBench的快速配置指南，希望对大家有所帮助。任何问题欢迎在下方留言，笔者会及时回答。</p>
 
       
     </div>
@@ -434,9 +468,15 @@
       
         <div class="post-tags">
           
-            <a href="/tags/随笔/" rel="tag">#随笔</a>
+            <a href="/tags/计算机科学/" rel="tag">#计算机科学</a>
           
-            <a href="/tags/essay/" rel="tag">#essay</a>
+            <a href="/tags/分布式计算/" rel="tag">#分布式计算</a>
+          
+            <a href="/tags/分布式系统/" rel="tag">#分布式系统</a>
+          
+            <a href="/tags/hadoop/" rel="tag">#hadoop</a>
+          
+            <a href="/tags/HiBench/" rel="tag">#HiBench</a>
           
         </div>
       
@@ -445,16 +485,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/20/读笔_汇编语言-基于Linux环境(第3章-摘下面具探索计算机的真正面目)/" rel="next" title="读笔_汇编语言-基于Linux环境(第3章-摘下面具探索计算机的真正面目)">
-                <i class="fa fa-chevron-left"></i> 读笔_汇编语言-基于Linux环境(第3章-摘下面具探索计算机的真正面目)
+              <a href="/2017/05/10/Hadoop真分布式集群最速搭建攻略/" rel="next" title="Hadoop真分布式集群最速搭建攻略">
+                <i class="fa fa-chevron-left"></i> Hadoop真分布式集群最速搭建攻略
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/10/26/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置I)/" rel="prev" title="读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置I)">
-                读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置I) <i class="fa fa-chevron-right"></i>
+              <a href="/2099/12/30/README/" rel="prev" title="README">
+                README <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -470,10 +510,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/10/22/台风、张江、搬家/"
-     data-title="台风、张江、搬家"
+        <div class="ds-share flat" data-thread-key="2017/05/11/Hadoop常用测试集HiBench配置指南/"
+     data-title="Hadoop常用测试集HiBench配置指南"
      data-content=""
-     data-url="https://kimihe.github.io/2016/10/22/台风、张江、搬家/">
+     data-url="https://kimihe.github.io/2017/05/11/Hadoop常用测试集HiBench配置指南/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -500,8 +540,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/10/22/台风、张江、搬家/"
-           data-title="台风、张江、搬家" data-url="https://kimihe.github.io/2016/10/22/台风、张江、搬家/">
+      <div class="ds-thread" data-thread-key="2017/05/11/Hadoop常用测试集HiBench配置指南/"
+           data-title="Hadoop常用测试集HiBench配置指南" data-url="https://kimihe.github.io/2017/05/11/Hadoop常用测试集HiBench配置指南/">
       </div>
     
   </div>
@@ -647,7 +687,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#台风"><span class="nav-number">1.</span> <span class="nav-text">台风</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#张江"><span class="nav-number">2.</span> <span class="nav-text">张江</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#搬家"><span class="nav-number">3.</span> <span class="nav-text">搬家</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#软件依赖"><span class="nav-number">2.</span> <span class="nav-text">软件依赖</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装java运行环境"><span class="nav-number">3.</span> <span class="nav-text">安装java运行环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装JDK-amp-JRE"><span class="nav-number">3.0.1.</span> <span class="nav-text">安装JDK&JRE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加环境变量"><span class="nav-number">3.0.2.</span> <span class="nav-text">添加环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试java环境"><span class="nav-number">3.0.3.</span> <span class="nav-text">测试java环境</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Maven"><span class="nav-number">4.</span> <span class="nav-text">安装Maven</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载Maven包"><span class="nav-number">4.0.1.</span> <span class="nav-text">下载Maven包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解压缩"><span class="nav-number">4.0.2.</span> <span class="nav-text">解压缩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加环境变量-1"><span class="nav-number">4.0.3.</span> <span class="nav-text">添加环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试Maven环境"><span class="nav-number">4.0.4.</span> <span class="nav-text">测试Maven环境</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#下载HiBench"><span class="nav-number">5.</span> <span class="nav-text">下载HiBench</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Hibench"><span class="nav-number">6.</span> <span class="nav-text">安装Hibench</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置HiBench"><span class="nav-number">7.</span> <span class="nav-text">配置HiBench</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#hadoop-conf"><span class="nav-number">7.0.1.</span> <span class="nav-text">hadoop.conf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hibench-conf"><span class="nav-number">7.0.2.</span> <span class="nav-text">hibench.conf</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运行HiBench"><span class="nav-number">8.</span> <span class="nav-text">运行HiBench</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">9.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
           </div>
         </section>

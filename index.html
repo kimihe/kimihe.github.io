@@ -412,6 +412,176 @@
             
               
                 
+                <a class="post-title-link" href="/2017/05/11/Hadoop常用测试集HiBench配置指南/" itemprop="url">
+                  Hadoop常用测试集HiBench配置指南
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-05-11T15:52:42+08:00" content="2017-05-11">
+              2017-05-11
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/计算机科学/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/05/11/Hadoop常用测试集HiBench配置指南/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/05/11/Hadoop常用测试集HiBench配置指南/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/05/11/Hadoop常用测试集HiBench配置指南/" class="leancloud_visitors" data-flag-title="Hadoop常用测试集HiBench配置指南">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>文章也同时在<a href="http://www.jianshu.com/p/cc453ba775e9" target="_blank" rel="external">简书</a>更新</p>
+</blockquote>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p><a href="https://github.com/intel-hadoop/HiBench" target="_blank" rel="external">HiBench</a>是intel为评估各大数据框架而设计的测试集，它可以用来测试hadoop集群对于常见计算任务的性能。从普通的排序，字符串统计到机器学习，数据库操作，图像处理和搜索引擎，都能够涵盖。本文是HiBench中hadoopbench的快速配置指南。更加具体的使用说明可以参考<a href="https://github.com/intel-hadoop/HiBench/wiki" target="_blank" rel="external">官方wiki</a>。  </p>
+<h1 id="软件依赖"><a href="#软件依赖" class="headerlink" title="软件依赖"></a>软件依赖</h1><p>HiBench需要java环境，以及Maven管理。</p>
+<h1 id="安装java运行环境"><a href="#安装java运行环境" class="headerlink" title="安装java运行环境"></a>安装java运行环境</h1><h3 id="安装JDK-amp-JRE"><a href="#安装JDK-amp-JRE" class="headerlink" title="安装JDK&amp;JRE"></a>安装JDK&amp;JRE</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install openjdk-8-jre openjdk-8-jdk</div></pre></td></tr></table></figure>
+<p>建议装version 8不要装9。安装完成后，默认路径是<code>/usr/lib/jvm/java-8-openjdk-amd64</code>，如果不一致请搜索到正确路径。</p>
+<h3 id="添加环境变量"><a href="#添加环境变量" class="headerlink" title="添加环境变量"></a>添加环境变量</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd</div><div class="line">vim .bashrc</div></pre></td></tr></table></figure>
+<p>添加如下jave的PATH：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># JAVA PATH</div><div class="line">export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64</div></pre></td></tr></table></figure>
+<p>更新环境变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">source .bashrc</div></pre></td></tr></table></figure>
+<h3 id="测试java环境"><a href="#测试java环境" class="headerlink" title="测试java环境"></a>测试java环境</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -version</div></pre></td></tr></table></figure>
+<p>看到相应版本信息输出即表明配置正确：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">hadoop@hadoop-master:~$ java -version</div><div class="line">openjdk version &quot;1.8.0_121&quot;</div><div class="line">OpenJDK Runtime Environment (build 1.8.0_121-8u121-b13-0ubuntu1.16.04.2-b13)</div><div class="line">OpenJDK 64-Bit Server VM (build 25.121-b13, mixed mode)</div></pre></td></tr></table></figure>
+<h1 id="安装Maven"><a href="#安装Maven" class="headerlink" title="安装Maven"></a>安装Maven</h1><h3 id="下载Maven包"><a href="#下载Maven包" class="headerlink" title="下载Maven包"></a>下载Maven包</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://apache.fayea.com/maven/maven-3/3.5.0/binaries/apache-maven-3.5.0-bin.zip</div></pre></td></tr></table></figure>
+<h3 id="解压缩"><a href="#解压缩" class="headerlink" title="解压缩"></a>解压缩</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">unzip apache-maven-3.5.0-bin.zip -d /YOUR/PATH/TO/RESTORE</div></pre></td></tr></table></figure>
+<p>笔者解压位置为<code>/usr/local/</code>。</p>
+<h3 id="添加环境变量-1"><a href="#添加环境变量-1" class="headerlink" title="添加环境变量"></a>添加环境变量</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd</div><div class="line">vim .bashrc</div></pre></td></tr></table></figure>
+<p>添加如下Maven的PATH：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># set maven environment</div><div class="line">export M3_HOME=/usr/local/apache-maven-3.5.0</div><div class="line">export PATH=$M3_HOME/bin:$PATH</div></pre></td></tr></table></figure>
+<p>更新环境变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">source .bashrc</div></pre></td></tr></table></figure>
+<h3 id="测试Maven环境"><a href="#测试Maven环境" class="headerlink" title="测试Maven环境"></a>测试Maven环境</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn -v</div></pre></td></tr></table></figure>
+<p>看到相应版本信息输出即表明配置正确：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">hadoop@hadoop-slave1:~$ mvn -v</div><div class="line">Apache Maven 3.5.0 (ff8f5e7444045639af65f6095c62210b5713f426; 2017-04-04T03:39:06+08:00)</div><div class="line">Maven home: /usr/local/apache-maven-3.5.0</div><div class="line">Java version: 1.8.0_121, vendor: Oracle Corporation</div><div class="line">Java home: /usr/lib/jvm/java-8-openjdk-amd64/jre</div><div class="line">Default locale: en_US, platform encoding: ANSI_X3.4-1968</div><div class="line">OS name: &quot;linux&quot;, version: &quot;4.4.0-53-generic&quot;, arch: &quot;amd64&quot;, family: &quot;unix&quot;</div></pre></td></tr></table></figure>
+<h1 id="下载HiBench"><a href="#下载HiBench" class="headerlink" title="下载HiBench"></a>下载HiBench</h1><p><code>git clone https://github.com/intel-hadoop/HiBench.git</code>比较慢，建议直接网页下载zip包，然后解压到理想的目录下。</p>
+<h1 id="安装Hibench"><a href="#安装Hibench" class="headerlink" title="安装Hibench"></a>安装Hibench</h1><p>切到HiBench下，执行对应的安装操作，可以选择自己想要安装的模块。以安装hadoop框架下用于测试sql的模块为例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn -Phadoopbench -Dmodules -Psql -Dscala=2.11 clean package</div></pre></td></tr></table></figure>
+<p>更多安装命令可见<a href="https://github.com/intel-hadoop/HiBench/blob/master/docs/build-hibench.md" target="_blank" rel="external">https://github.com/intel-hadoop/HiBench/blob/master/docs/build-hibench.md</a>。<br>鉴于网络因素，建议一个模块一个模块的安装，某些模块的安装可能会非常耗时。</p>
+<h1 id="配置HiBench"><a href="#配置HiBench" class="headerlink" title="配置HiBench"></a>配置HiBench</h1><p>主要配置<code>conf/hadoop.conf</code>及<code>conf/hibench.conf</code>两个文件。</p>
+<h3 id="hadoop-conf"><a href="#hadoop-conf" class="headerlink" title="hadoop.conf"></a>hadoop.conf</h3><p>笔者的hadoop是安装在<code>/usr/local/hadoop-2.8.0</code>目录下的，并且以单机localhost:9000(真分布式时使用真实的IP:port)为例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"># Hadoop home</div><div class="line">hibench.hadoop.home             /usr/local/hadoop-2.8.0</div><div class="line"></div><div class="line"># The path of hadoop executable</div><div class="line">hibench.hadoop.executable       /usr/local/hadoop-2.8.0/bin/hadoop</div><div class="line"></div><div class="line"># Hadoop configraution directory</div><div class="line">hibench.hadoop.configure.dir    /usr/local/hadoop-2.8.0/etc/hadoop</div><div class="line"></div><div class="line"># The root HDFS path to store HiBench data</div><div class="line">hibench.hdfs.master             hdfs://localhost:9000/user/hadoop/HiBench</div><div class="line"></div><div class="line"></div><div class="line"># Hadoop release provider. Supported value: apache, cdh5, hdp</div><div class="line">hibench.hadoop.release          apache</div></pre></td></tr></table></figure>
+<h3 id="hibench-conf"><a href="#hibench-conf" class="headerlink" title="hibench.conf"></a>hibench.conf</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"> The definition of these profiles can be found in the workload&apos;s conf file i.e. conf/workloads/micro/wordcount.conf</div><div class="line">hibench.scale.profile                 tiny</div><div class="line"></div><div class="line"># Mapper number in hadoop, partition number in Spark</div><div class="line">hibench.default.map.parallelism         8</div><div class="line"></div><div class="line"># Reducer nubmer in hadoop, shuffle partition number in Spark</div><div class="line">hibench.default.shuffle.parallelism     8</div></pre></td></tr></table></figure>
+<p>主要设置测试集运行时的数据量和并发度。</p>
+<h1 id="运行HiBench"><a href="#运行HiBench" class="headerlink" title="运行HiBench"></a>运行HiBench</h1><p>安装完成后，可以运行其中的测试集。首先要启动hadoop：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">start-dfs.sh;</div><div class="line">start-yarn.sh;</div></pre></td></tr></table></figure>
+<p>以运行Hadoop框架下micro集的sort为例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">bin/workloads/micro/sort/prepare/prepare.sh</div><div class="line">bin/workloads/micro/sort/hadoop/run.sh</div></pre></td></tr></table></figure>
+<p>等待读条MapReduce完毕，可以在<code>report/sort/hadoop/bench.log</code>处查看具体的运行结果和日志。运行结果大致是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">17/05/11 15:16:41 INFO client.RMProxy: Connecting to ResourceManager at localhost/127.0.0.1:8032</div><div class="line">Running on 1 nodes to sort from hdfs://localhost:9000/user/hadoop/HiBench/HiBench/Sort/Input into hdfs://localhost:9000/user/hadoop/HiBench/HiBench/Sort/Output with 8 reduces.</div><div class="line">Job started: Thu May 11 15:16:43 CST 2017</div><div class="line">17/05/11 15:16:43 INFO client.RMProxy: Connecting to ResourceManager at localhost/127.0.0.1:8032</div><div class="line">17/05/11 15:16:56 INFO input.FileInputFormat: Total input files to process : 8</div><div class="line">17/05/11 15:17:11 INFO mapreduce.JobSubmitter: number of splits:24</div><div class="line">17/05/11 15:17:15 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1494484569605_0006</div><div class="line">...</div><div class="line">17/05/11 15:17:27 INFO mapreduce.Job:  map 0% reduce 0%</div><div class="line">17/05/11 15:17:43 INFO mapreduce.Job:  map 25% reduce 0%</div><div class="line">...</div><div class="line">17/05/11 15:22:40 INFO mapreduce.Job:  map 100% reduce 98%</div><div class="line">17/05/11 15:22:48 INFO mapreduce.Job:  map 100% reduce 100%</div><div class="line">7/05/11 15:23:02 INFO mapreduce.Job: Job job_1494484569605_0006 completed successfully</div><div class="line">17/05/11 15:23:02 INFO mapreduce.Job: Counters: 51</div><div class="line">        File System Counters</div><div class="line">        ...</div><div class="line">        Job Counters</div><div class="line">        ...</div><div class="line">        Map-Reduce Framework</div><div class="line">        ...</div><div class="line">        Shuffle Errors</div><div class="line">        ...</div><div class="line">        File Input Format Counters</div><div class="line">        ...</div><div class="line">        File Output Format Counters</div><div class="line">        ...</div><div class="line">Job ended: Thu May 11 15:23:02 CST 2017</div><div class="line">The job took 378 seconds.</div></pre></td></tr></table></figure>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文是hadoop常用测试集HiBench的快速配置指南，希望对大家有所帮助。任何问题欢迎在下方留言，笔者会及时回答。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/05/10/Hadoop真分布式集群最速搭建攻略/" itemprop="url">
                   Hadoop真分布式集群最速搭建攻略
                 </a>
@@ -1475,140 +1645,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/12/03/深入总结iOS内存管理/" itemprop="url">
-                  深入总结iOS内存管理
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-03T22:09:23+08:00" content="2016-12-03">
-              2016-12-03
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/12/03/深入总结iOS内存管理/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/03/深入总结iOS内存管理/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-             <span id="/2016/12/03/深入总结iOS内存管理/" class="leancloud_visitors" data-flag-title="深入总结iOS内存管理">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>文章也同时在<a href="http://www.jianshu.com/p/9c8139fc3100">简书</a>更新</p>
-</blockquote>
-<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本文主要针对iOS内存管理进行总结，相信看过之后一定会让你有所收获。对于内存管理，网上有很多这方面的文章，但论质量可谓良莠不齐。其中的很多总结已经过时，甚至有些内容是似懂非懂的误读。因此，本文立足严谨的治学态度，希望能够尽可能全面地让大家理解内存管理的要点。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/03/深入总结iOS内存管理/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1654,7 +1690,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">32</span>
+              <span class="site-state-item-count">33</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1671,7 +1707,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">52</span>
+                <span class="site-state-item-count">53</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
