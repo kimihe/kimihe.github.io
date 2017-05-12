@@ -100,7 +100,7 @@
 <meta property="og:description" content="文章也同时在简书更新
 
 引言笔者目前已经开启了博士预科，方向偏系统工程，涉及到分布式架构的设计与改进。Apache基于Google的MapReduce体系开发的hadoop是业界最常用的分布式框架。本文将把笔者在前期调研过程中，搭建hadoop真分布集群的实践做一个总结，形成一个“最速搭建攻略”。">
-<meta property="og:updated_time" content="2017-05-10T14:55:28.000Z">
+<meta property="og:updated_time" content="2017-05-12T04:39:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hadoop真分布式集群最速搭建攻略">
 <meta name="twitter:description" content="文章也同时在简书更新
@@ -429,7 +429,7 @@
 <h1 id="安装hadoop"><a href="#安装hadoop" class="headerlink" title="安装hadoop"></a>安装hadoop</h1><p>建议安装最新的稳定版(stable)，直接去apache官网下载比较慢，可以下载镜像。笔者当时最新稳定版是2.8.0：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget http://mirror.bit.edu.cn/apache/hadoop/common/hadoop-2.8.0/hadoop-2.8.0.tar.gz</div></pre></td></tr></table></figure>
 <p>下载完解压到<code>/usr/local/</code>目录下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo tar -zxf ~/你下载这个压缩包的地方/hadoop-2.8.0.tar.gz -C /usr/local    # 解压到/usr/local中</div><div class="line">sudo chown -R hadoop ./hadoop       # 修改文件权限</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo tar -zxf ~/你下载这个压缩包的地方/hadoop-2.8.0.tar.gz -C /usr/local    # 解压到/usr/local中</div><div class="line">cd /usr/local      # 切到含有hadoop-2.8.0的目录下</div><div class="line">sudo chown -R hadoop:hadoop ./hadoop-2.8.0       # 修改文件权限</div></pre></td></tr></table></figure>
 <h3 id="配置hadoop环境变量"><a href="#配置hadoop环境变量" class="headerlink" title="配置hadoop环境变量"></a>配置hadoop环境变量</h3><p>同java的环境变量一样，执行<code>vim ~/.bashrc</code>，在内容末尾添加如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"># JAVA PATH</div><div class="line">export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64</div><div class="line"></div><div class="line">HADOOP PATH START</div><div class="line">export HADOOP_INSTALL=/usr/local/hadoop-2.8.0</div><div class="line">export PATH=$PATH:$HADOOP_INSTALL/bin</div><div class="line">export PATH=$PATH:$HADOOP_INSTALL/sbin</div><div class="line">export HADOOP_MAPRED_HOME=$HADOOP_INSTALL</div><div class="line">export HADOOP_COMMON_HOME=$HADOOP_INSTALL</div><div class="line">export HADOOP_HDFS_HOME=$HADOOP_INSTALL</div><div class="line">export YARN_HOME=$HADOOP_INSTALL</div><div class="line">export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_INSTALL/lib/native</div><div class="line">export HADOOP_OPTS=&quot;-Djava.library.path=$HADOOP_INSTALL/lib&quot;</div><div class="line">#HADOOP PATH END</div></pre></td></tr></table></figure>
 <h1 id="配置真分布参数"><a href="#配置真分布参数" class="headerlink" title="配置真分布参数"></a>配置真分布参数</h1><p>在hadoop-master上，如果按前面的环境配置，所有的配置文件都在<code>/usr/local/hadoop-2.8.0/etc/hadoop/</code>目录下。接下来用vim逐个修改：</p>
