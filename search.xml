@@ -21,6 +21,7 @@
 <p>文章也同时在<a href="http://www.jianshu.com/p/cc453ba775e9" target="_blank" rel="external">简书</a>更新</p>
 </blockquote>
 <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p><a href="https://github.com/intel-hadoop/HiBench" target="_blank" rel="external">HiBench</a>是intel为评估各大数据框架而设计的测试集，它可以用来测试hadoop集群对于常见计算任务的性能。从普通的排序，字符串统计到机器学习，数据库操作，图像处理和搜索引擎，都能够涵盖。本文是HiBench中hadoopbench的快速配置指南。更加具体的使用说明可以参考<a href="https://github.com/intel-hadoop/HiBench/wiki" target="_blank" rel="external">官方wiki</a>。  </p>
+<a id="more"></a> 
 <h1 id="软件依赖"><a href="#软件依赖" class="headerlink" title="软件依赖"></a>软件依赖</h1><p>HiBench需要java环境，以及Maven管理。</p>
 <h1 id="安装java运行环境"><a href="#安装java运行环境" class="headerlink" title="安装java运行环境"></a>安装java运行环境</h1><h3 id="安装JDK-amp-JRE"><a href="#安装JDK-amp-JRE" class="headerlink" title="安装JDK&amp;JRE"></a>安装JDK&amp;JRE</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install openjdk-8-jre openjdk-8-jdk</div></pre></td></tr></table></figure>
 <p>建议装version 8不要装9。安装完成后，默认路径是<code>/usr/lib/jvm/java-8-openjdk-amd64</code>，如果不一致请搜索到正确路径。</p>
