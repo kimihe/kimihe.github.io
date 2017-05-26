@@ -100,7 +100,7 @@
 <meta property="og:description" content="文章也同时在简书更新
 
 引言笔者目前已经开启了博士预科，方向偏系统工程，涉及到分布式架构的设计与改进。Apache基于Google的MapReduce体系开发的hadoop是业界最常用的分布式框架。本文将把笔者在前期调研过程中，搭建hadoop真分布集群的实践做一个总结，形成一个“最速搭建攻略”。">
-<meta property="og:updated_time" content="2017-05-12T04:39:39.000Z">
+<meta property="og:updated_time" content="2017-05-26T12:05:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hadoop真分布式集群最速搭建攻略">
 <meta name="twitter:description" content="文章也同时在简书更新
@@ -381,7 +381,7 @@
 <p>文章也同时在<a href="http://www.jianshu.com/p/4e0dc91ad86e" target="_blank" rel="external">简书</a>更新</p>
 </blockquote>
 <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>笔者目前已经开启了博士预科，方向偏系统工程，涉及到分布式架构的设计与改进。Apache基于Google的MapReduce体系开发的hadoop是业界最常用的分布式框架。本文将把笔者在前期调研过程中，搭建hadoop真分布集群的实践做一个总结，形成一个“最速搭建攻略”。</p>
-<a id="more"></a> 
+<a id="more"></a>
 <h1 id="背景概述"><a href="#背景概述" class="headerlink" title="背景概述"></a>背景概述</h1><ul>
 <li>分布式体系有很多，基于MapReduce的hadoop只是一种实现。</li>
 <li>分布式计算适合大数据集(GB级&amp;以上)，数据量过少无法体现其价值。</li>
@@ -453,7 +453,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">hadoop@hadoop-slave1:~$ jps</div><div class="line">5091 NodeManager</div><div class="line">5302 Jps</div><div class="line">4952 DataNode</div></pre></td></tr></table></figure>
 <p>以上缺少任何一个进程都表明运行出错了，一般都是配置有误。或者是系统资源不足。</p>
 <h1 id="web查看信息"><a href="#web查看信息" class="headerlink" title="web查看信息"></a>web查看信息</h1><p>在浏览器中输入：<code>hadoop-master:50070</code>可以查看各工作节点状态。输入<code>hadoop-master:8088</code>可以查看任务进度。</p>
-<h1 id="运行测试集benchmark"><a href="#运行测试集benchmark" class="headerlink" title="运行测试集benchmark"></a>运行测试集benchmark</h1><p>笔者选择<a href="https://github.com/intel-hadoop/HiBench" target="_blank" rel="external">HiBench</a>，具体的测试过程请见另外的文章。</p>
+<h1 id="运行测试集benchmark"><a href="#运行测试集benchmark" class="headerlink" title="运行测试集benchmark"></a>运行测试集benchmark</h1><p>笔者选择<a href="https://github.com/intel-hadoop/HiBench" target="_blank" rel="external">HiBench</a>，具体的测试过程及配置教程请见<a href="http://kimihe.com/2017/05/11/Hadoop%E5%B8%B8%E7%94%A8%E6%B5%8B%E8%AF%95%E9%9B%86HiBench%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/" target="_blank" rel="external">Hadoop常用测试集HiBench配置指南</a>。</p>
 <h1 id="关闭hadoop"><a href="#关闭hadoop" class="headerlink" title="关闭hadoop"></a>关闭hadoop</h1><p>执行相反的操作：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">stop-yarn.sh</div><div class="line">stop-dfs.sh</div></pre></td></tr></table></figure>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文是快速搭建Hadoop真分布集群的好帮手，希望对大家有所帮助！任何疑问和建议欢迎留言，笔者会及时反馈。</p>

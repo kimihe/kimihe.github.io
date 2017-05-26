@@ -21,7 +21,7 @@
 <p>文章也同时在<a href="http://www.jianshu.com/p/cc453ba775e9" target="_blank" rel="external">简书</a>更新</p>
 </blockquote>
 <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p><a href="https://github.com/intel-hadoop/HiBench" target="_blank" rel="external">HiBench</a>是intel为评估各大数据框架而设计的测试集，它可以用来测试hadoop集群对于常见计算任务的性能。从普通的排序，字符串统计到机器学习，数据库操作，图像处理和搜索引擎，都能够涵盖。本文是HiBench中hadoopbench的快速配置指南。更加具体的使用说明可以参考<a href="https://github.com/intel-hadoop/HiBench/wiki" target="_blank" rel="external">官方wiki</a>。  </p>
-<a id="more"></a> 
+<a id="more"></a>
 <h1 id="软件依赖"><a href="#软件依赖" class="headerlink" title="软件依赖"></a>软件依赖</h1><p>HiBench需要java环境，以及Maven管理。</p>
 <h1 id="安装java运行环境"><a href="#安装java运行环境" class="headerlink" title="安装java运行环境"></a>安装java运行环境</h1><h3 id="安装JDK-amp-JRE"><a href="#安装JDK-amp-JRE" class="headerlink" title="安装JDK&amp;JRE"></a>安装JDK&amp;JRE</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install openjdk-8-jre openjdk-8-jdk</div></pre></td></tr></table></figure>
 <p>建议装version 8不要装9。安装完成后，默认路径是<code>/usr/lib/jvm/java-8-openjdk-amd64</code>，如果不一致请搜索到正确路径。</p>
@@ -55,6 +55,8 @@
 <p>主要设置测试集运行时的数据量和并发度。</p>
 <h1 id="运行HiBench"><a href="#运行HiBench" class="headerlink" title="运行HiBench"></a>运行HiBench</h1><p>安装完成后，可以运行其中的测试集。首先要启动hadoop：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">start-dfs.sh;</div><div class="line">start-yarn.sh;</div></pre></td></tr></table></figure>
+<p>关于hadoop的快速配置教程请见<a href="http://kimihe.com/2017/05/10/Hadoop%E7%9C%9F%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E6%9C%80%E9%80%9F%E6%90%AD%E5%BB%BA%E6%94%BB%E7%95%A5/" target="_blank" rel="external">Hadoop真分布式集群最速搭建攻略
+</a>。</p>
 <p>以运行Hadoop框架下micro集的sort为例：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">bin/workloads/micro/sort/prepare/prepare.sh</div><div class="line">bin/workloads/micro/sort/hadoop/run.sh</div></pre></td></tr></table></figure>
 <p>等待读条MapReduce完毕，可以在<code>report/sort/hadoop/bench.log</code>处查看具体的运行结果和日志。运行结果大致是这样的：</p>
@@ -70,7 +72,7 @@
 <p>文章也同时在<a href="http://www.jianshu.com/p/4e0dc91ad86e" target="_blank" rel="external">简书</a>更新</p>
 </blockquote>
 <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>笔者目前已经开启了博士预科，方向偏系统工程，涉及到分布式架构的设计与改进。Apache基于Google的MapReduce体系开发的hadoop是业界最常用的分布式框架。本文将把笔者在前期调研过程中，搭建hadoop真分布集群的实践做一个总结，形成一个“最速搭建攻略”。</p>
-<a id="more"></a> 
+<a id="more"></a>
 <h1 id="背景概述"><a href="#背景概述" class="headerlink" title="背景概述"></a>背景概述</h1><ul>
 <li>分布式体系有很多，基于MapReduce的hadoop只是一种实现。</li>
 <li>分布式计算适合大数据集(GB级&amp;以上)，数据量过少无法体现其价值。</li>
@@ -142,7 +144,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">hadoop@hadoop-slave1:~$ jps</div><div class="line">5091 NodeManager</div><div class="line">5302 Jps</div><div class="line">4952 DataNode</div></pre></td></tr></table></figure>
 <p>以上缺少任何一个进程都表明运行出错了，一般都是配置有误。或者是系统资源不足。</p>
 <h1 id="web查看信息"><a href="#web查看信息" class="headerlink" title="web查看信息"></a>web查看信息</h1><p>在浏览器中输入：<code>hadoop-master:50070</code>可以查看各工作节点状态。输入<code>hadoop-master:8088</code>可以查看任务进度。</p>
-<h1 id="运行测试集benchmark"><a href="#运行测试集benchmark" class="headerlink" title="运行测试集benchmark"></a>运行测试集benchmark</h1><p>笔者选择<a href="https://github.com/intel-hadoop/HiBench" target="_blank" rel="external">HiBench</a>，具体的测试过程请见另外的文章。</p>
+<h1 id="运行测试集benchmark"><a href="#运行测试集benchmark" class="headerlink" title="运行测试集benchmark"></a>运行测试集benchmark</h1><p>笔者选择<a href="https://github.com/intel-hadoop/HiBench" target="_blank" rel="external">HiBench</a>，具体的测试过程及配置教程请见<a href="http://kimihe.com/2017/05/11/Hadoop%E5%B8%B8%E7%94%A8%E6%B5%8B%E8%AF%95%E9%9B%86HiBench%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/" target="_blank" rel="external">Hadoop常用测试集HiBench配置指南</a>。</p>
 <h1 id="关闭hadoop"><a href="#关闭hadoop" class="headerlink" title="关闭hadoop"></a>关闭hadoop</h1><p>执行相反的操作：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">stop-yarn.sh</div><div class="line">stop-dfs.sh</div></pre></td></tr></table></figure>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文是快速搭建Hadoop真分布集群的好帮手，希望对大家有所帮助！任何疑问和建议欢迎留言，笔者会及时反馈。</p>
