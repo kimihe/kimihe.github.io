@@ -17,7 +17,7 @@
       <title><![CDATA[Recently]]></title>
       <url>https://kimihe.github.io/2017/09/09/Recently/</url>
       <content type="html"><![CDATA[<h1 id="关于最近"><a href="#关于最近" class="headerlink" title="关于最近"></a>关于最近</h1><p>近期忙于科研及论文，博客未能及时更新，望大家见谅。  </p>
-<p>预定于10月底11月初，现阶段工作截止后，笔者会一鼓作气补充完关于分布式框架<strong><a href="https://spark.apache.org/" target="_blank" rel="external">Spark</a></strong>的研究。  </p>
+<p>预定于12月底，现阶段工作截止后，笔者会一鼓作气补充完关于分布式框架<strong><a href="https://spark.apache.org/" target="_blank" rel="external">Spark</a></strong>的研究。  </p>
 <ul>
 <li>从最基本的：Spark配置及运行。</li>
 <li>到进阶：如何编写属于你的Spark应用以及IDEA打包运行。</li>
