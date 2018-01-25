@@ -14,6 +14,46 @@
     </entry>
     
     <entry>
+      <title><![CDATA[Spark入门指南 III - Spark集群化与Hibench测试集]]></title>
+      <url>https://kimihe.github.io/2018/01/25/Spark%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97%20III%20-%20Spark%E9%9B%86%E7%BE%A4%E5%8C%96%E4%B8%8EHibench%E6%B5%8B%E8%AF%95%E9%9B%86/</url>
+      <content type="html"><![CDATA[<blockquote>
+<p>文章也同时在<a href="https://www.jianshu.com/p/4a500a34d1fa" target="_blank" rel="external">简书</a>更新</p>
+</blockquote>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>“Apache Spark™ is a fast and general engine for large-scale data processing.”  </p>
+<p><a href="https://spark.apache.org/" target="_blank" rel="external">Spark</a>是一种高性能分布式计算框架。它基于RDD使用内存来加速迭代过程。相比于前辈Hadoop，Spark有着更好的性能表现，尤其针对Machine Learning此类典型的应用，提升更为显著。</p>
+<p>作为入门指南的第三篇，本文将集中介绍如何使用IntelliJ IDEA进行开发。<br>前文：</p>
+<ul>
+<li><a href="http://kimihe.com/2018/01/25/Spark%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97%20I%20-%20%E5%BF%AB%E9%80%9F%E9%85%8D%E7%BD%AE/" target="_blank" rel="external">《Spark入门指南 I - 使用IntelliJ IDEA开发》</a>。</li>
+<li><a href="http://kimihe.com/2018/01/25/Spark%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97%20II%20-%20%E4%BD%BF%E7%94%A8IntelliJ%20IDEA%E5%BC%80%E5%8F%91/" target="_blank" rel="external">《Spark入门指南 II - 使用IntelliJ IDEA开发》</a>。</li>
+</ul>
+<a id="more"></a>
+<h1 id="集群化"><a href="#集群化" class="headerlink" title="集群化"></a>集群化</h1><p>Spark集群化部署的思路与Hadoop非常类似。关于Hadoop集群化的配置可以参考这篇文章: <a href="http://kimihe.com/2017/05/10/Hadoop%E7%9C%9F%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E6%9C%80%E9%80%9F%E6%90%AD%E5%BB%BA%E6%94%BB%E7%95%A5/" target="_blank" rel="external">《Hadoop真分布式集群最速搭建攻略》</a>。</p>
+<h3 id="配置worker节点"><a href="#配置worker节点" class="headerlink" title="配置worker节点"></a>配置worker节点</h3><p>主要是对于Spark-2.2.0根目录下conf子目录中<code>slaves.template</code>的配置，重命名去除<code>.template</code>后缀，并添加worker节点的IP或hosts信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># For Cluster</div><div class="line">10.10.43.131</div><div class="line">10.10.43.132</div></pre></td></tr></table></figure>
+<h1 id="Hibench"><a href="#Hibench" class="headerlink" title="Hibench"></a>Hibench</h1><h3 id="配置SparkBench"><a href="#配置SparkBench" class="headerlink" title="配置SparkBench"></a>配置SparkBench</h3><p>关于Hibench(含HadoopBench及SparkBench)，其实之前已经有一篇关于HadoopBench的文章: <a href="http://kimihe.com/2017/05/11/Hadoop%E5%B8%B8%E7%94%A8%E6%B5%8B%E8%AF%95%E9%9B%86HiBench%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/" target="_blank" rel="external">《Hadoop常用测试集HiBench配置指南》</a>。值得庆幸的是，SparkBench在配置上与前者并没有特别的变化，只要建立在HadoopBench配置的基础上，SparkBench的配置非常简单，无非是配置各类根目录之类。<br>关于SparkBench配置的官方介绍: <a href="https://github.com/intel-hadoop/HiBench/blob/master/docs/run-sparkbench.md" target="_blank" rel="external">Run SparkBench</a>。</p>
+<h3 id="conf的高级配置"><a href="#conf的高级配置" class="headerlink" title="conf的高级配置"></a>conf的高级配置</h3><p>Hibench根目录下conf子目录下，有一系列配置文件可以按需求修改。常用的有：</p>
+<ul>
+<li>framework.lst</li>
+<li>benchmark.lst</li>
+<li>hibench.conf</li>
+<li>hadoop.conf.template(激活需去除.template后缀)</li>
+<li>spark.conf.template(激活需去除.template后缀)</li>
+</ul>
+<p><strong>注意：</strong>其中的<code>framework.ls</code>t可选择<code>hadoop</code>或<code>spark</code>模式，以此来决定<code>benchmark.lst</code>中列出的应用是运行HadoopBench还是SparkBench。<br>此外Spark运行时对于内存消耗较多，如遇到内存不足的警报，可配置<code>spark.conf</code>相关选项，以控制内存消耗，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># executor and driver memory in standalone &amp; YARN mode</div><div class="line">spark.executor.memory  2g</div><div class="line">spark.driver.memory    2g</div></pre></td></tr></table></figure>
+<p>更多高级配置可查阅官方<a href="https://github.com/intel-hadoop/HiBench/wiki" target="_blank" rel="external">Wiki</a>。</p>
+<h3 id="修改Hibench源码"><a href="#修改Hibench源码" class="headerlink" title="修改Hibench源码"></a>修改Hibench源码</h3><p>Hibench根目录下的hadoopbench及sparkbench中包含各种测试程序的源代码，可根据需求修改。例如，修改了sparkbench下micro的wordcount源码，则可以重新编译Hibench的micro模块，来使用新生成的wordcount测试程序。编译命令如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn -Psparkbench -Dmodules -Pmicro -Dspark=2.1 -Dscala=2.11 clean package</div></pre></td></tr></table></figure>
+<p><strong>请注意对照命令中Spark与Scala的版本号。</strong><br>另详细的编译命令介绍可查阅官方链接: <a href="https://github.com/intel-hadoop/HiBench/blob/master/docs/build-hibench.md" target="_blank" rel="external">Build HiBench</a>。</p>
+<h3 id="运行一个测试程序"><a href="#运行一个测试程序" class="headerlink" title="运行一个测试程序"></a>运行一个测试程序</h3><p>此处仍以Spark的wordcount为例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">bin/workloads/micro/wordcount/prepare/prepare.sh</div><div class="line">bin/workloads/micro/wordcount/spark/run.sh</div></pre></td></tr></table></figure>
+<p>详细运行命令介绍可见: <a href="https://github.com/intel-hadoop/HiBench/blob/master/docs/run-sparkbench.md" target="_blank" rel="external">Run SparkBench</a>.</p>
+<p>至此，最基本的“Spark集群化与Hibench的SparkBench”介绍完毕。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>作为Spark入门指南的第三篇，本文介绍了如何配置集群化的Spark，以及使用SparkBench进行测试。<br>下一篇笔者将<strong>抛砖引玉</strong>地介绍Spark源码的阅读，修改，编译，debug，打包，测试等过程。</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Spark入门指南 II - 使用IntelliJ IDEA开发]]></title>
       <url>https://kimihe.github.io/2018/01/25/Spark%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97%20II%20-%20%E4%BD%BF%E7%94%A8IntelliJ%20IDEA%E5%BC%80%E5%8F%91/</url>
       <content type="html"><![CDATA[<blockquote>
@@ -54,46 +94,6 @@
 <p>观察控制台的输出结果，有一些列信息反馈，即说明一切顺利。<br>如有报错，很可能就是spark启动错误，或者是打包失败。<br>读者后续可修改代码以及加入断点来调试程序，以更多地理解其工作流程。</p>
 <p>至此，最基本的“使用IntelliJ IDEA进行spark应用的开发”介绍完毕。</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>作为Spark入门指南的第二篇，本文介绍了如何使用IntelliJ IDEA进行spark应用的开发。<br>下一篇笔者将讲解Spark集群化部署以及使用Hibench进行SparkBenchmark的测试。</p>
-]]></content>
-    </entry>
-    
-    <entry>
-      <title><![CDATA[Spark入门指南 III - Spark集群化与Hibench测试集]]></title>
-      <url>https://kimihe.github.io/2018/01/25/Spark%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97%20III%20-%20Spark%E9%9B%86%E7%BE%A4%E5%8C%96%E4%B8%8EHibench%E6%B5%8B%E8%AF%95%E9%9B%86/</url>
-      <content type="html"><![CDATA[<blockquote>
-<p>文章也同时在<a href="https://www.jianshu.com/p/4a500a34d1fa" target="_blank" rel="external">简书</a>更新</p>
-</blockquote>
-<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>“Apache Spark™ is a fast and general engine for large-scale data processing.”  </p>
-<p><a href="https://spark.apache.org/" target="_blank" rel="external">Spark</a>是一种高性能分布式计算框架。它基于RDD使用内存来加速迭代过程。相比于前辈Hadoop，Spark有着更好的性能表现，尤其针对Machine Learning此类典型的应用，提升更为显著。</p>
-<p>作为入门指南的第三篇，本文将集中介绍如何使用IntelliJ IDEA进行开发。<br>前文：</p>
-<ul>
-<li><a href="http://kimihe.com/2018/01/25/Spark%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97%20I%20-%20%E5%BF%AB%E9%80%9F%E9%85%8D%E7%BD%AE/" target="_blank" rel="external">《Spark入门指南 I - 使用IntelliJ IDEA开发》</a>。</li>
-<li><a href="http://kimihe.com/2018/01/25/Spark%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97%20II%20-%20%E4%BD%BF%E7%94%A8IntelliJ%20IDEA%E5%BC%80%E5%8F%91/" target="_blank" rel="external">《Spark入门指南 II - 使用IntelliJ IDEA开发》</a>。</li>
-</ul>
-<a id="more"></a>
-<h1 id="集群化"><a href="#集群化" class="headerlink" title="集群化"></a>集群化</h1><p>Spark集群化部署的思路与Hadoop非常类似。关于Hadoop集群化的配置可以参考这篇文章: <a href="http://kimihe.com/2017/05/10/Hadoop%E7%9C%9F%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E6%9C%80%E9%80%9F%E6%90%AD%E5%BB%BA%E6%94%BB%E7%95%A5/" target="_blank" rel="external">《Hadoop真分布式集群最速搭建攻略》</a>。</p>
-<h3 id="配置worker节点"><a href="#配置worker节点" class="headerlink" title="配置worker节点"></a>配置worker节点</h3><p>主要是对于Spark-2.2.0根目录下conf子目录中<code>slaves.template</code>的配置，重命名去除<code>.template</code>后缀，并添加worker节点的IP或hosts信息：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># For Cluster</div><div class="line">10.10.43.131</div><div class="line">10.10.43.132</div></pre></td></tr></table></figure>
-<h1 id="Hibench"><a href="#Hibench" class="headerlink" title="Hibench"></a>Hibench</h1><h3 id="配置SparkBench"><a href="#配置SparkBench" class="headerlink" title="配置SparkBench"></a>配置SparkBench</h3><p>关于Hibench(含HadoopBench及SparkBench)，其实之前已经有一篇关于HadoopBench的文章: <a href="http://kimihe.com/2017/05/11/Hadoop%E5%B8%B8%E7%94%A8%E6%B5%8B%E8%AF%95%E9%9B%86HiBench%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/" target="_blank" rel="external">《Hadoop常用测试集HiBench配置指南》</a>。值得庆幸的是，SparkBench在配置上与前者并没有特别的变化，只要建立在HadoopBench配置的基础上，SparkBench的配置非常简单，无非是配置各类根目录之类。<br>关于SparkBench配置的官方介绍: <a href="https://github.com/intel-hadoop/HiBench/blob/master/docs/run-sparkbench.md" target="_blank" rel="external">Run SparkBench</a>。</p>
-<h3 id="conf的高级配置"><a href="#conf的高级配置" class="headerlink" title="conf的高级配置"></a>conf的高级配置</h3><p>Hibench根目录下conf子目录下，有一系列配置文件可以按需求修改。常用的有：</p>
-<ul>
-<li>framework.lst</li>
-<li>benchmark.lst</li>
-<li>hibench.conf</li>
-<li>hadoop.conf.template(激活需去除.template后缀)</li>
-<li>spark.conf.template(激活需去除.template后缀)</li>
-</ul>
-<p><strong>注意：</strong>其中的<code>framework.ls</code>t可选择<code>hadoop</code>或<code>spark</code>模式，以此来决定<code>benchmark.lst</code>中列出的应用是运行HadoopBench还是SparkBench。<br>此外Spark运行时对于内存消耗较多，如遇到内存不足的警报，可配置<code>spark.conf</code>相关选项，以控制内存消耗，如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># executor and driver memory in standalone &amp; YARN mode</div><div class="line">spark.executor.memory  2g</div><div class="line">spark.driver.memory    2g</div></pre></td></tr></table></figure>
-<p>更多高级配置可查阅官方<a href="https://github.com/intel-hadoop/HiBench/wiki" target="_blank" rel="external">Wiki</a>。</p>
-<h3 id="修改Hibench源码"><a href="#修改Hibench源码" class="headerlink" title="修改Hibench源码"></a>修改Hibench源码</h3><p>Hibench根目录下的hadoopbench及sparkbench中包含各种测试程序的源代码，可根据需求修改。例如，修改了sparkbench下micro的wordcount源码，则可以重新编译Hibench的micro模块，来使用新生成的wordcount测试程序。编译命令如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mvn -Psparkbench -Dmodules -Pmicro -Dspark=2.1 -Dscala=2.11 clean package</div></pre></td></tr></table></figure>
-<p><strong>请注意对照命令中Spark与Scala的版本号。</strong><br>另详细的编译命令介绍可查阅官方链接: <a href="https://github.com/intel-hadoop/HiBench/blob/master/docs/build-hibench.md" target="_blank" rel="external">Build HiBench</a>。</p>
-<h3 id="运行一个测试程序"><a href="#运行一个测试程序" class="headerlink" title="运行一个测试程序"></a>运行一个测试程序</h3><p>此处仍以Spark的wordcount为例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">bin/workloads/micro/wordcount/prepare/prepare.sh</div><div class="line">bin/workloads/micro/wordcount/spark/run.sh</div></pre></td></tr></table></figure>
-<p>详细运行命令介绍可见: <a href="https://github.com/intel-hadoop/HiBench/blob/master/docs/run-sparkbench.md" target="_blank" rel="external">Run SparkBench</a>.</p>
-<p>至此，最基本的“Spark集群化与Hibench的SparkBench”介绍完毕。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>作为Spark入门指南的第三篇，本文介绍了如何配置集群化的Spark，以及使用SparkBench进行测试。<br>下一篇笔者将<strong>抛砖引玉</strong>地介绍Spark源码的阅读，修改，编译，debug，打包，测试等过程。</p>
 ]]></content>
     </entry>
     
