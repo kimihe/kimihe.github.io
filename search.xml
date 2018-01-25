@@ -14,6 +14,55 @@
     </entry>
     
     <entry>
+      <title><![CDATA[Spark入门指南 I - 快速配置]]></title>
+      <url>https://kimihe.github.io/2018/01/25/Spark%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97%20I%20-%20%E5%BF%AB%E9%80%9F%E9%85%8D%E7%BD%AE/</url>
+      <content type="html"><![CDATA[<blockquote>
+<p>文章也同时在<a href="https://www.jianshu.com/p/b9b8ce62483d" target="_blank" rel="external">简书</a>更新</p>
+</blockquote>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>“Apache Spark™ is a fast and general engine for large-scale data processing.”  </p>
+<p><a href="https://spark.apache.org/" target="_blank" rel="external">Spark</a>是一种高性能分布式计算框架。它基于RDD使用内存来加速迭代过程。相比于前辈Hadoop，Spark有着更好的性能表现，尤其针对Machine Learning此类典型的应用，提升更为显著。</p>
+<p>本文将集中介绍如何快速配置Spark。</p>
+<a id="more"></a>
+<h1 id="软件依赖"><a href="#软件依赖" class="headerlink" title="软件依赖"></a>软件依赖</h1><ul>
+<li>运行Spark需要java环境。  </li>
+<li>Spark应用多用Scala编写，建议使用SBT来管理。</li>
+</ul>
+<h1 id="安装java运行环境"><a href="#安装java运行环境" class="headerlink" title="安装java运行环境"></a>安装java运行环境</h1><h3 id="安装JDK-amp-JRE"><a href="#安装JDK-amp-JRE" class="headerlink" title="安装JDK&amp;JRE"></a>安装JDK&amp;JRE</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install openjdk-8-jre openjdk-8-jdk</div></pre></td></tr></table></figure>
+<p>建议装version 8不要装9。安装完成后，默认路径是<code>/usr/lib/jvm/java-8-openjdk-amd64</code>，如果不一致请搜索到正确路径。</p>
+<h3 id="添加环境变量"><a href="#添加环境变量" class="headerlink" title="添加环境变量"></a>添加环境变量</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd</div><div class="line">vim .bashrc</div></pre></td></tr></table></figure>
+<p>添加如下jave的PATH：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># JAVA PATH</div><div class="line">export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64</div></pre></td></tr></table></figure>
+<p>更新环境变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">source .bashrc</div></pre></td></tr></table></figure>
+<h3 id="测试java环境"><a href="#测试java环境" class="headerlink" title="测试java环境"></a>测试java环境</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -version</div></pre></td></tr></table></figure>
+<p>看到相应版本信息输出即表明配置正确：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">hadoop@hadoop-master:~$ java -version</div><div class="line">openjdk version &quot;1.8.0_121&quot;</div><div class="line">OpenJDK Runtime Environment (build 1.8.0_121-8u121-b13-0ubuntu1.16.04.2-b13)</div><div class="line">OpenJDK 64-Bit Server VM (build 25.121-b13, mixed mode)</div></pre></td></tr></table></figure>
+<h1 id="安装SBT"><a href="#安装SBT" class="headerlink" title="安装SBT"></a>安装SBT</h1><h3 id="Mac"><a href="#Mac" class="headerlink" title="Mac"></a>Mac</h3><p>使用Homebrew下载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ brew install sbt@1</div></pre></td></tr></table></figure>
+<p>或者使用Macports (Third-party package)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ port install sbt</div></pre></td></tr></table></figure>
+<h3 id="其它平台"><a href="#其它平台" class="headerlink" title="其它平台"></a>其它平台</h3><p><a href="http://www.scala-sbt.org/download.html" target="_blank" rel="external">SBT官方链接</a>。有.zip，.tgz以及.msi供选择。</p>
+<h1 id="下载Spark"><a href="#下载Spark" class="headerlink" title="下载Spark"></a>下载Spark</h1><p><a href="https://spark.apache.org/downloads.html" target="_blank" rel="external">Spark官方链接</a>。笔者选择的是2.2.0版本。</p>
+<h1 id="配置Spark"><a href="#配置Spark" class="headerlink" title="配置Spark"></a>配置Spark</h1><p>解压下载的.zip后，若只是想单机版运行，无需后续配置，直接就已经可以运行任务了。若想进行真正的分布式运行，请阅读下述配置流程：</p>
+<ul>
+<li>进入spark-2.2.0根目录的conf子目录。重点关注如下几个配置文件：log4j.properties.template(日记相关，使用默认即可), slaves.template(分布式worker节点配置)以及spark-defaults.conf.template(运行参数配置)。入门的配置大多只需要修改<strong>slaves.template</strong>即可。</li>
+<li>将slaves.template重命名，去除.template后缀，在其中添加分布式节点的IP信息。若只在<strong>本地</strong>运行，请填写localhost。笔者进行的是真分布式，所以填写了两台worker节点的<strong>IP或hosts</strong>信息，如：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># For Cluster</div><div class="line">10.10.43.131</div><div class="line">10.10.43.132</div></pre></td></tr></table></figure>
+<p>备注：请自行对应IP与hosts。</p>
+<ul>
+<li>配置完成后，进入spark-2.2.0根目录。运行<code>./sbin/start-all.sh</code>启动Spark。</li>
+<li>提交一个example中的任务：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">./bin/spark-submit --class org.apache.spark.examples.SparkPi \</div><div class="line">--master local ./examples/jars/spark-examples_2.11-2.2.0.jar 10</div></pre></td></tr></table></figure>
+<p>出现一系列反馈信息，如报错请仔细检查前面的配置，以及各类path输入是否正确。<br>详细的提交格式如下(可查阅<a href="https://spark.apache.org/docs/2.2.0/submitting-applications.html" target="_blank" rel="external">Document</a>)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">./bin/spark-submit \</div><div class="line">  --class &lt;main-class&gt; \</div><div class="line">  --master &lt;master-url&gt; \</div><div class="line">  --deploy-mode &lt;deploy-mode&gt; \</div><div class="line">  --conf &lt;key&gt;=&lt;value&gt; \</div><div class="line">  ... # other options</div><div class="line">  &lt;application-jar&gt; \</div><div class="line">  [application-arguments]</div></pre></td></tr></table></figure>
+<p>至此，最简单的Spark配置流程告一段落。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>作为Spark入门指南的第一篇，本文介绍了最快速的配置方法。<br>下篇笔者将讲解如何使用IntelliJ IDEA进行spark应用的开发。</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Recently]]></title>
       <url>https://kimihe.github.io/2017/09/09/Recently/</url>
       <content type="html"><![CDATA[<h1 id="关于最近"><a href="#关于最近" class="headerlink" title="关于最近"></a>关于最近</h1><p>近期忙于科研及论文，博客未能及时更新，望大家见谅。  </p>
