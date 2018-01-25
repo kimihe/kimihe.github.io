@@ -83,7 +83,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="读书笔记,汇编语言-基于Linux环境,reading notes," />
+  <meta name="keywords" content="计算机科学,分布式计算,分布式系统,Spark,IntelliJ IDEA," />
 
 
 
@@ -101,23 +101,26 @@
 
 <meta name="description" content="文章也同时在简书更新
 
-引言本章节着重阐述x86的内存寻址机制，理解内存寻址是一项艰苦的过程，但是一旦掌握其中的精髓，将会收获一生受用(程序员生涯)的技能，这是令人激动的。  
-我在本科以及考研期间，都有系统地学习过《微型计算机原理与接口技术》，其中涉及到汇编的部分详细地讲解了内存寻址，因此这一次在本书中再次看到这方面的知识，是怀着一种怀旧和重温的心境的。本以为之前已经学得不错了，这次再读，果然">
+引言“Apache Spark™ is a fast and general engine for large-scale data processing.”  
+Spark是一种高性能分布式计算框架。它基于RDD使用内存来加速迭代过程。相比于前辈Hadoop，Spark有着更好的性能表现，尤其针对Machine Learning此类典型的应用，提升更为显著。
+作为入门指">
 <meta property="og:type" content="article">
-<meta property="og:title" content="读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置I)">
-<meta property="og:url" content="https://kimihe.github.io/2016/10/26/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置I)/index.html">
+<meta property="og:title" content="Spark入门指南 II - 使用IntelliJ IDEA开发">
+<meta property="og:url" content="https://kimihe.github.io/2018/01/25/Spark入门指南 II - 使用IntelliJ IDEA开发/index.html">
 <meta property="og:site_name" content="洛斯里克的大书库">
 <meta property="og:description" content="文章也同时在简书更新
 
-引言本章节着重阐述x86的内存寻址机制，理解内存寻址是一项艰苦的过程，但是一旦掌握其中的精髓，将会收获一生受用(程序员生涯)的技能，这是令人激动的。  
-我在本科以及考研期间，都有系统地学习过《微型计算机原理与接口技术》，其中涉及到汇编的部分详细地讲解了内存寻址，因此这一次在本书中再次看到这方面的知识，是怀着一种怀旧和重温的心境的。本以为之前已经学得不错了，这次再读，果然">
-<meta property="og:updated_time" content="2016-10-27T02:38:33.000Z">
+引言“Apache Spark™ is a fast and general engine for large-scale data processing.”  
+Spark是一种高性能分布式计算框架。它基于RDD使用内存来加速迭代过程。相比于前辈Hadoop，Spark有着更好的性能表现，尤其针对Machine Learning此类典型的应用，提升更为显著。
+作为入门指">
+<meta property="og:updated_time" content="2018-01-25T06:13:18.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置I)">
+<meta name="twitter:title" content="Spark入门指南 II - 使用IntelliJ IDEA开发">
 <meta name="twitter:description" content="文章也同时在简书更新
 
-引言本章节着重阐述x86的内存寻址机制，理解内存寻址是一项艰苦的过程，但是一旦掌握其中的精髓，将会收获一生受用(程序员生涯)的技能，这是令人激动的。  
-我在本科以及考研期间，都有系统地学习过《微型计算机原理与接口技术》，其中涉及到汇编的部分详细地讲解了内存寻址，因此这一次在本书中再次看到这方面的知识，是怀着一种怀旧和重温的心境的。本以为之前已经学得不错了，这次再读，果然">
+引言“Apache Spark™ is a fast and general engine for large-scale data processing.”  
+Spark是一种高性能分布式计算框架。它基于RDD使用内存来加速迭代过程。相比于前辈Hadoop，Spark有着更好的性能表现，尤其针对Machine Learning此类典型的应用，提升更为显著。
+作为入门指">
 
 
 
@@ -145,13 +148,13 @@
 
 
 
-  <link rel="canonical" href="https://kimihe.github.io/2016/10/26/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置I)/"/>
+  <link rel="canonical" href="https://kimihe.github.io/2018/01/25/Spark入门指南 II - 使用IntelliJ IDEA开发/"/>
 
 
 
 
 
-  <title>读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置I) | 洛斯里克的大书库</title>
+  <title>Spark入门指南 II - 使用IntelliJ IDEA开发 | 洛斯里克的大书库</title>
   
 
 
@@ -300,7 +303,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://kimihe.github.io/2016/10/26/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置I)/">
+    <link itemprop="mainEntityOfPage" href="https://kimihe.github.io/2018/01/25/Spark入门指南 II - 使用IntelliJ IDEA开发/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="周鶏🐣(Kimiko)">
@@ -317,7 +320,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置I)</h1>
+          <h1 class="post-title" itemprop="name headline">Spark入门指南 II - 使用IntelliJ IDEA开发</h1>
         
 
         <div class="post-meta">
@@ -329,8 +332,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-26T18:52:35+08:00">
-                2016-10-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-25T14:15:00+08:00">
+                2018-01-25
               </time>
             
 
@@ -352,8 +355,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/读书笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">读书笔记</span>
+                  <a href="/categories/计算机科学/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学</span>
                   </a>
                 </span>
 
@@ -370,8 +373,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2016/10/26/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置I)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/26/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置I)/" itemprop="commentCount"></span>
+                <a href="/2018/01/25/Spark入门指南 II - 使用IntelliJ IDEA开发/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/01/25/Spark入门指南 II - 使用IntelliJ IDEA开发/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -379,7 +382,7 @@
 
           
           
-             <span id="/2016/10/26/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置I)/" class="leancloud_visitors" data-flag-title="读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置I)">
+             <span id="/2018/01/25/Spark入门指南 II - 使用IntelliJ IDEA开发/" class="leancloud_visitors" data-flag-title="Spark入门指南 II - 使用IntelliJ IDEA开发">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -408,29 +411,43 @@
 
       
         <blockquote>
-<p>文章也同时在<a href="http://www.jianshu.com/p/8a01e00bad5d" target="_blank" rel="external">简书</a>更新</p>
+<p>文章也同时在<a href="https://www.jianshu.com/p/851e921bbf74" target="_blank" rel="external">简书</a>更新</p>
 </blockquote>
-<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>本章节着重阐述x86的内存寻址机制，理解内存寻址是一项艰苦的过程，但是一旦掌握其中的精髓，将会收获一生受用(程序员生涯)的技能，这是令人激动的。  </p>
-<p>我在本科以及考研期间，都有系统地学习过《微型计算机原理与接口技术》，其中涉及到汇编的部分详细地讲解了内存寻址，因此这一次在本书中再次看到这方面的知识，是怀着一种怀旧和重温的心境的。本以为之前已经学得不错了，这次再读，果然如作者所说，会有新的知识 <strong>GET DA☆ZE!!!</strong>  </p>
-<p>作为一名从计算机专业科班出身的人来说，将来不管是做什么，可能都或多或少无法割离编程了，甚至可以说编程的影响已经深入我的生活中，它是一种思维方式。而计算机也几乎是我们谋生的首选技能，当然一味地以金钱和收入来衡量计算机专业的价值是对这门科学的不尊重。大家可以看到现在软件行业门槛低，收入高，非常多的人趋之若鹜，大多是以追求高收入为首要目标，真正从心底热爱它，撇去名利地想去钻研它的人还是非常少的。这里我不会去评价这种现象，它存在必然有它的合理性。但不管我们是以何种动机踏入计算机科学的领域，我们都希望在这方面做得出色，至少能够做一名<strong>优秀的程序员</strong>。  </p>
-<p>想做到这一点，需要我们付出艰苦的努力，我现在越来越感受到基础知识的重要性，有一个好的计算机专业基础，将会极大提高我们学习新知识的能力。而在基础知识中，我认为底层方面计算机的基本原理是非常重要的，这也是为什么我会在互联网时代还会去学一门不少人嗤之以鼻的汇编语言。本身我业余兴趣是做iOS，iOS做到后来需要强力的C语言支持，而C语言又会牵扯出更多底层的知识：Linux，数据结构，计算机网络，操作系统，算法等等。恰恰这也是各大一流企业所看重的基本技能。所以，如果你想成为一个优秀的程序员，可能就需要在这些方面花点精力进行提高了。当然，学习的知识有很多，不局限与我所说的，如果你有兴趣和我一起学习计算机底层的知识，那将是我的荣幸，非常欢迎你的加入！  </p>
-<p>我们开始吧！</p>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>“Apache Spark™ is a fast and general engine for large-scale data processing.”  </p>
+<p><a href="https://spark.apache.org/" target="_blank" rel="external">Spark</a>是一种高性能分布式计算框架。它基于RDD使用内存来加速迭代过程。相比于前辈Hadoop，Spark有着更好的性能表现，尤其针对Machine Learning此类典型的应用，提升更为显著。</p>
+<p>作为入门指南的第二篇，本文将集中介绍如何使用IntelliJ IDEA进行开发。<br>前文：<a href="http://kimihe.com/2018/01/25/Spark%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97%20I%20-%20%E5%BF%AB%E9%80%9F%E9%85%8D%E7%BD%AE/" target="_blank" rel="external">《Spark入门指南 I - 使用IntelliJ IDEA开发》</a>。</p>
 <a id="more"></a>
-<h1 id="摘录"><a href="#摘录" class="headerlink" title="摘录"></a>摘录</h1><p>以下皆基于<strong>intel x86 CPU</strong>的架构。</p>
-<ul>
-<li>内存寻址有三种模式：1. <strong>实模式平面模型</strong>(real model flat model); 2. <strong>实模式段模型</strong>(real model segmented model); 3. <strong>保护模式平面模型</strong>(protected mode flat model);</li>
-<li>内存系统中的地址线根数和存在在每个位置上的数据的位数之间没有必然的关系。如16根地址线可以寻址64K字节，但在每个位置可以存在8位位二进制数，也能同样存在16位或者32位数据。</li>
-<li>距离内存底部256字节的地址为0100H，这前256个字节叫<strong>程序段前缀PSP</strong>(Program Segment Prefix)，里面包含各种零碎消息和一个用于程序磁盘输入输出的通用内存缓冲区。</li>
-<li>兆字节本质：一个1M字节的内存，由包含20根电线的地址总线连接的，计算机内部的一些内存芯片组合。通过向那20根地址线提供20位地址来标识1MB中的一个字节。</li>
-<li>现代CPU利用某技术把自己暂时变成一个8086，这叫<strong>虚拟86模式</strong>(virtual-86 mode)。</li>
-<li>在实模式分段模型中，段是一个内存区域，它从一个段落(paragraph)边界开始，并扩展到一定数量的字节。在实模式分段模型中，这个数量小于或等于64K(65536)。因此，任何能被16整除的内存地址都被称为一个段落边界(paragraph boudary)。</li>
-<li>因为一个段可能开始于任何一个段落，所以把段开始的那个段落边界的<strong>编号</strong>叫做该段的<strong>段地址</strong>。</li>
-<li>实模式1M内存中，段落大小：16字节；段落编号：0～0FFFFH，共65536个；一个段大小：2的16次方，64KB。最高的段地址为0FFFFH(对应内存地址0FFF0H)，它距离实模式1MB内存最顶部(对应内存地址0FFFFFH)16个字节。</li>
-<li>段可以开始于任意段地址，共有65536个段地址均匀地分布在实模式下满满1MB内存中，每两个段地址之间相隔16字节。一个段最大可达64KB，但并不一定非要那么大。此外，段也是可以重叠的。</li>
-<li><strong>实模式段模型</strong>中，20位内存地址需要放到16位的寄存器中，这就需要2个寄存器来工作。通过<strong>[段地址: 偏移地址]</strong>的方式来进行。</li>
-<li>用两个16位寄存器表示一个20位地址，就是把段地址放入一个16位寄存器，把偏移地址放入另一个16位寄存器。两个寄存器一起，共同标识实模式1MB内存中1048576(2的20次方)个字节中的一个。  </li>
+<h1 id="下载IntelliJ-IDEA"><a href="#下载IntelliJ-IDEA" class="headerlink" title="下载IntelliJ IDEA"></a>下载IntelliJ IDEA</h1><p><a href="https://www.jetbrains.com/idea/" target="_blank" rel="external">IntelliJ IDEA 官方链接</a>.</p>
+<h1 id="新建Project"><a href="#新建Project" class="headerlink" title="新建Project"></a>新建Project</h1><ul>
+<li>File -&gt; New -&gt; Project</li>
+<li>Scale -&gt; SBT或IDEA均可 </li>
 </ul>
-<h1 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h1><p>读懂了寻址也就读懂了汇编。</p>
+<h1 id="配置Project"><a href="#配置Project" class="headerlink" title="配置Project"></a>配置Project</h1><p>以基于SBT的Project为例，打开<code>build.sbt</code>文件，进行如下配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">name := &quot;ProjectName&quot;</div><div class="line"></div><div class="line">version := &quot;ProjectVersion&quot;</div><div class="line"></div><div class="line">scalaVersion := &quot;2.11.11&quot;</div><div class="line"></div><div class="line">// additional libraries</div><div class="line">libraryDependencies ++= Seq(</div><div class="line">  //&quot;org.apache.spark&quot; %% &quot;spark-core&quot; % &quot;2.2.0&quot; % &quot;provided&quot;</div><div class="line">  &quot;org.apache.spark&quot; %% &quot;spark-core&quot; % &quot;2.2.0&quot; % &quot;compile&quot;,</div><div class="line">  &quot;org.apache.spark&quot; % &quot;spark-sql_2.11&quot; % &quot;2.2.0&quot; % &quot;compile&quot;</div><div class="line">)</div></pre></td></tr></table></figure>
+<p>其中ScalaVersion要对应，引官网原文：</p>
+<blockquote>
+<p>Spark runs on Java 8+, Python 2.7+/3.4+ and R 3.1+. For the Scala API, Spark 2.2.0 uses Scala 2.11. You will need to use a compatible Scala version (2.11.x).</p>
+<p>Note that support for Java 7, Python 2.6 and old Hadoop versions before 2.6.5 were removed as of Spark 2.2.0.</p>
+<p>Note that support for Scala 2.10 is deprecated as of Spark 2.1.0, and may be removed in Spark 2.3.0.</p>
+</blockquote>
+<p>也就是说，我们使用了Spark-2.2.0版本，对应的ScaleVersion就应该设置为2.11系列，因此笔者选择了<strong>2.11.11</strong>。<br>此外，spark各模块版本也要对应，选择<strong>2.2.0</strong>。一般而言只需要用到<strong>spark-core</strong>模块即可。其它模块，如sql，则可以通过上述类似的语句进行添加。而最后的编译项请选择“<strong>compiled</strong>”。<br>修改完成后，刷新project，耐心等待IDEA去下载所需要的lib以及依赖。</p>
+<h1 id="第一个应用：SparkWordCount"><a href="#第一个应用：SparkWordCount" class="headerlink" title="第一个应用：SparkWordCount"></a>第一个应用：SparkWordCount</h1><p>待上述操作执行完毕，便可建立第一个Spark应用。<br>在Project左侧的层级导航栏中找到src -&gt; main -&gt; scala，右键 -&gt; New -&gt; Scala Class，命名为SparkWordCount。<br>在原文件中输入如下示例代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">  * Created by zhouqihua on 2017/8/23.</div><div class="line">  */</div><div class="line"></div><div class="line">import org.apache.spark.&#123;SparkContext, SparkConf&#125;</div><div class="line">import java.io.File</div><div class="line"></div><div class="line">object SparkWordCount &#123;</div><div class="line">  def main(args: Array[String]): Unit = &#123;</div><div class="line"></div><div class="line">    //    val log: Logger = Logger.</div><div class="line">    val INPUT_HDFS =  &quot;./INPUT_HDFS&quot;</div><div class="line">    val OUTPUT_HDFS = &quot;./OUTPUT_HDFS_WORDCOUNT&quot;</div><div class="line"></div><div class="line">    val outputPath: File = new File(OUTPUT_HDFS)</div><div class="line">    if (outputPath.exists())</div><div class="line">      deleteDir(outputPath)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">      println(&quot;************************ Step0: new SparkConf() begin ************************&quot;)</div><div class="line">    //    val conf = new SparkConf().setMaster(&quot;local&quot;).setAppName(&quot;wordCount&quot;)</div><div class="line">    val conf = new SparkConf().setAppName(&quot;SparkWordCount&quot;)</div><div class="line">      .setMaster(&quot;spark://localhost:7077&quot;)</div><div class="line">      .setJars(List(&quot;/path/to/artifacts.jar&quot;))</div><div class="line">      .set(&quot;spark.shuffle.compress&quot;, &quot;false&quot;)</div><div class="line">      .set(&quot;spark.io.compression.codec&quot;, &quot;org.apache.spark.io.LZFCompressionCodec&quot;)</div><div class="line">    //.set(&quot;spark.executor.extraJavaOptions&quot;, &quot;-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005&quot;)</div><div class="line">    println(&quot;************************ Step0: new SparkConf() end ************************&quot;)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    println(&quot;************************ Step1: new SparkContext(conf) begin ************************&quot;)</div><div class="line">    // Create a Scala Spark Context.</div><div class="line">    val sc = new SparkContext(conf)</div><div class="line">    println(&quot;************************ Step1: new SparkContext(conf) end ************************&quot;)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    println(&quot;************************ Step2: SparkContext.textFile(inputFile) begin ************************&quot;)</div><div class="line">    // Load our input data.</div><div class="line">    val input =  sc.textFile(INPUT_HDFS)</div><div class="line">    println(&quot;************************ Step2: SparkContext.textFile(inputFile) end ************************&quot;)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    println(&quot;************************ Step3: flatMap begin ************************&quot;)</div><div class="line">    // Split up into words.</div><div class="line">    val words = input.flatMap(line =&gt; line.split(&quot; &quot;))</div><div class="line">    println(&quot;************************ Step3: flatMap end ************************&quot;)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    println(&quot;************************ Step4: map begin ************************&quot;)</div><div class="line">    // Transform into word and count.</div><div class="line">    val mapWords = words.map(word =&gt; (word, 1))</div><div class="line">    println(&quot;************************ Step4: map end ************************&quot;)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    println(&quot;************************ Step5: reduceByKey begin ************************&quot;)</div><div class="line">    val counts = mapWords.reduceByKey&#123;case (x, y) =&gt; x + y&#125;</div><div class="line">    println(&quot;************************ Step5: reduceByKey end ************************&quot;)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    println(&quot;************************ Step6: saveAsTextFile(outputFile) begin ************************&quot;)</div><div class="line">    // Save the word count back out to a text file, causing evaluation.</div><div class="line">    counts.saveAsTextFile(OUTPUT_HDFS)</div><div class="line">    //    val collection = counts.collect()</div><div class="line">    //    println(s&quot;Result: $collection&quot;)</div><div class="line">    println(&quot;************************ Step6: saveAsTextFile(outputFile) end ************************&quot;)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    println(&quot;************************ Step7: Thread Sleep for 100s ... begin ************************&quot;)</div><div class="line">    Thread.sleep(100000)</div><div class="line">    println(&quot;************************ Step7: Thread Sleep for 100s ... end ************************&quot;)</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  def deleteDir(dir: File): Unit = &#123;</div><div class="line">    val files = dir.listFiles()</div><div class="line">    files.foreach(f =&gt; &#123;</div><div class="line">      if (f.isDirectory) &#123;</div><div class="line">        deleteDir(f)</div><div class="line">      &#125; else &#123;</div><div class="line">        f.delete()</div><div class="line">        println(s&quot;Delete File: $&#123;f.getAbsolutePath&#125;&quot;)</div><div class="line">      &#125;</div><div class="line">    &#125;)</div><div class="line">    dir.delete()</div><div class="line">    println(s&quot;Delete Dir:  $&#123;dir.getAbsolutePath&#125;\n&quot; )</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>备注：笔者加入了一些额外的清理垃圾的语句。</p>
+<h1 id="配置打包编译选项"><a href="#配置打包编译选项" class="headerlink" title="配置打包编译选项"></a>配置打包编译选项</h1><ul>
+<li>File -&gt; Project Structure</li>
+<li>在Artifacts中 Add我们刚才新建的应用SparkWordCount，并在右侧勾选“include in project”选项。</li>
+<li>最后排除多余的大包依赖，也就是说只保留我们应用的依赖，其余三方库的依赖均可进行删除。</li>
+</ul>
+<p><strong>注意：示例代码中的<code>.setJars(List(&quot;/path/to/artifacts.jar&quot;))</code>要与打包输出的jar的目录一致。</strong></p>
+<h1 id="编译打包运行"><a href="#编译打包运行" class="headerlink" title="编译打包运行"></a>编译打包运行</h1><ul>
+<li>首先启动spark-2.2.0，关于如何配置spark以运行，可以看先前一篇文章<a href="http://kimihe.com/2018/01/25/Spark%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97%20I%20-%20%E5%BF%AB%E9%80%9F%E9%85%8D%E7%BD%AE/" target="_blank" rel="external">《Spark入门指南 I - 使用IntelliJ IDEA开发》</a>。</li>
+<li>Build -&gt; Build Artifacts -&gt; SparkWordCount (可选)</li>
+<li>Run -&gt; SparkWordCount</li>
+</ul>
+<p>观察控制台的输出结果，有一些列信息反馈，即说明一切顺利。<br>如有报错，很可能就是spark启动错误，或者是打包失败。<br>读者后续可修改代码以及加入断点来调试程序，以更多地理解其工作流程。</p>
+<p>至此，最基本的“使用IntelliJ IDEA进行spark应用的开发”介绍完毕。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>作为Spark入门指南的第二篇，本文介绍了如何使用IntelliJ IDEA进行spark应用的开发。<br>下一篇笔者将讲解Spark集群化部署以及使用Hibench进行SparkBenchmark的测试。</p>
 
       
     </div>
@@ -486,11 +503,15 @@
       
         <div class="post-tags">
           
-            <a href="/tags/读书笔记/" rel="tag"># 读书笔记</a>
+            <a href="/tags/计算机科学/" rel="tag"># 计算机科学</a>
           
-            <a href="/tags/汇编语言-基于Linux环境/" rel="tag"># 汇编语言-基于Linux环境</a>
+            <a href="/tags/分布式计算/" rel="tag"># 分布式计算</a>
           
-            <a href="/tags/reading-notes/" rel="tag"># reading notes</a>
+            <a href="/tags/分布式系统/" rel="tag"># 分布式系统</a>
+          
+            <a href="/tags/Spark/" rel="tag"># Spark</a>
+          
+            <a href="/tags/IntelliJ-IDEA/" rel="tag"># IntelliJ IDEA</a>
           
         </div>
       
@@ -503,8 +524,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/22/台风、张江、搬家/" rel="next" title="台风、张江、搬家">
-                <i class="fa fa-chevron-left"></i> 台风、张江、搬家
+              <a href="/2018/01/25/Spark入门指南 I - 快速配置/" rel="next" title="Spark入门指南 I - 快速配置">
+                <i class="fa fa-chevron-left"></i> Spark入门指南 I - 快速配置
               </a>
             
           </div>
@@ -513,8 +534,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/10/27/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置II)/" rel="prev" title="读笔 汇编语言-基于Linux环境(第4章-位置:寄存器、内存寻址以及了解数据存储位置II)">
-                读笔 汇编语言-基于Linux环境(第4章-位置:寄存器、内存寻址以及了解数据存储位置II) <i class="fa fa-chevron-right"></i>
+              <a href="/2099/12/30/README/" rel="prev" title="README">
+                README <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -530,10 +551,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/10/26/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置I)/"
-     data-title="读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置I)"
+        <div class="ds-share flat" data-thread-key="2018/01/25/Spark入门指南 II - 使用IntelliJ IDEA开发/"
+     data-title="Spark入门指南 II - 使用IntelliJ IDEA开发"
      data-content=""
-     data-url="https://kimihe.github.io/2016/10/26/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置I)/">
+     data-url="https://kimihe.github.io/2018/01/25/Spark入门指南 II - 使用IntelliJ IDEA开发/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -560,8 +581,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/10/26/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置I)/"
-           data-title="读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置I)" data-url="https://kimihe.github.io/2016/10/26/读笔_汇编语言-基于Linux环境(第4章-位置_寄存器_内存寻址以及了解数据存储位置I)/">
+      <div class="ds-thread" data-thread-key="2018/01/25/Spark入门指南 II - 使用IntelliJ IDEA开发/"
+           data-title="Spark入门指南 II - 使用IntelliJ IDEA开发" data-url="https://kimihe.github.io/2018/01/25/Spark入门指南 II - 使用IntelliJ IDEA开发/">
       </div>
     
   </div>
@@ -723,7 +744,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#摘录"><span class="nav-number">2.</span> <span class="nav-text">摘录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#感想"><span class="nav-number">3.</span> <span class="nav-text">感想</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#下载IntelliJ-IDEA"><span class="nav-number">2.</span> <span class="nav-text">下载IntelliJ IDEA</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#新建Project"><span class="nav-number">3.</span> <span class="nav-text">新建Project</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置Project"><span class="nav-number">4.</span> <span class="nav-text">配置Project</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第一个应用：SparkWordCount"><span class="nav-number">5.</span> <span class="nav-text">第一个应用：SparkWordCount</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置打包编译选项"><span class="nav-number">6.</span> <span class="nav-text">配置打包编译选项</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编译打包运行"><span class="nav-number">7.</span> <span class="nav-text">编译打包运行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
