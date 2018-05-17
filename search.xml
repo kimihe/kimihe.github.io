@@ -14,6 +14,21 @@
     </entry>
     
     <entry>
+      <title><![CDATA[Parameter Server研究之MXNet使用]]></title>
+      <url>https://kimihe.github.io/2018/05/17/Parameter%20Server%E7%A0%94%E7%A9%B6%E4%B9%8BMXNet%E4%BD%BF%E7%94%A8/</url>
+      <content type="html"><![CDATA[<blockquote>
+<p>文章也同时在<a href="https://www.jianshu.com/p/55d16a566bca" target="_blank" rel="external">简书</a>更新</p>
+</blockquote>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p><strong>Parameter Server (PS) [1]</strong> 是一种目前主流的分布式机器学习范式。其中，<strong><a href="https://www.cs.cmu.edu/~muli/" target="_blank" rel="external">李沐</a></strong> 提出的第三代PS <strong>[2]</strong> 影响力甚大，可以在Github找到其simulation：<a href="https://github.com/dmlc/ps-lite" target="_blank" rel="external">https://github.com/dmlc/ps-lite</a>。<br>基于上述<strong>ps-lite</strong>，<strong><a href="https://mxnet.incubator.apache.org/" target="_blank" rel="external">MXNet</a> [3]</strong> 应运而生，发展为目前最“热门”的Deep Learning 软件库之一。<br>注意：本文将主要着眼于<strong>MXNet</strong>。</p>
+<a id="more"></a>
+<h1 id="MXNet-安装与配置-注意点"><a href="#MXNet-安装与配置-注意点" class="headerlink" title="MXNet 安装与配置 (注意点)"></a>MXNet 安装与配置 (注意点)</h1><p>根据<a href="https://mxnet.incubator.apache.org/" target="_blank" rel="external">官网</a>的指引进行安装，一般没有什么问题。这里重点讲一下<strong>“Build From Source” (源码)</strong>方式可能遇到的问题。<br>笔者的Mac下进行操作，Linux与此是类似的。Windows可能有些区别。 </p>
+<h3 id="关于Mac系统版本"><a href="#关于Mac系统版本" class="headerlink" title="关于Mac系统版本"></a>关于Mac系统版本</h3><p>下载安装脚本<code>install-mxnet-osx-python.sh</code>，赋予其执行权限后，运行此脚本。脚本会根据Mac的系统版本号进行check，截止目前(MXNet ver1.2.0)，官方Doc中声称只支持<strong>OSX Sierra (10.12) and El Capitan (10.11)</strong>。因此在<strong>High Sierra (10.13)</strong>，会抛出<strong>ERROR</strong>。此时，解决办法很简单，直接编辑脚本文件，在文件末尾的<code>main()</code>中将<code>chk_mac_vers</code>注释掉即可：<code>#chk_mac_vers</code>。</p>
+<h3 id="关于python版本问题"><a href="#关于python版本问题" class="headerlink" title="关于python版本问题"></a>关于python版本问题</h3><p>Mac自带的python版本为2.7.10。对于MXNet的某些依赖过于陈旧，会阻碍安装，建议更新。<br>鉴于一系列历史遗留和后续考量，建议采用<strong>一劳永逸</strong>的解决方案：<strong>安装<a href="https://www.anaconda.com/download/#macos" target="_blank" rel="external">Anaconda</a></strong>。另：附上清华大学的镜像资源，用于下载加速：<strong><a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/?C=M&amp;O=A" target="_blank" rel="external">Anaconda清华镜像</a></strong>。你需要做的就是：下载Anaconda的安装脚本，赋予其执行权限，运行脚本，并同意相关操作。<br><strong>注意：</strong>安装Anaconda的目的是为了更新陈旧的python。<strong>在安装完成后，记得重新打开你的terminal。</strong>仍旧停留在原先的terminal，python环境变量不会更新。</p>
+<h1 id="保存后续更新中"><a href="#保存后续更新中" class="headerlink" title="保存后续更新中"></a>保存后续更新中</h1><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p>[1] A. Smola et al. <strong>“An architecture for parallel topic models.”</strong> In <em>VLDB</em>. 2010.<br>[2] M. Li et al. <strong>“Scaling distributed machine learning with the parameter server.”</strong> In <em>OSDI</em>. 2014.<br>[3] T. Chen et al. <strong>“MXNet: A Flexible and Efficient Machine Learning Library for Heterogeneous Distributed Systems.”</strong> In <em>NIPS</em>. 2016.</p>
+]]></content>
+    </entry>
+    
+    <entry>
       <title><![CDATA[Spark入门指南 IV - 抛砖引玉的Spark源码开发]]></title>
       <url>https://kimihe.github.io/2018/01/25/Spark%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97%20IV%20-%20%E6%8A%9B%E7%A0%96%E5%BC%95%E7%8E%89%E7%9A%84Spark%E6%BA%90%E7%A0%81%E5%BC%80%E5%8F%91/</url>
       <content type="html"><![CDATA[<blockquote>
