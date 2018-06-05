@@ -428,6 +428,168 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://kimihe.github.io/2018/06/05/Parameter Server研究之ps-lite源码分析与开发/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="周鶏🐣(Kimiko)">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oesd9di98.bkt.clouddn.com/Yaki%20Dango.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="洛斯里克的大书库">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/05/Parameter Server研究之ps-lite源码分析与开发/" itemprop="url">Parameter Server研究之ps-lite源码分析与开发</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-05T16:32:00+08:00">
+                2018-06-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机科学/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/05/Parameter Server研究之ps-lite源码分析与开发/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/06/05/Parameter Server研究之ps-lite源码分析与开发/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/06/05/Parameter Server研究之ps-lite源码分析与开发/" class="leancloud_visitors" data-flag-title="Parameter Server研究之ps-lite源码分析与开发">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>文章也同时在<a href="https://www.jianshu.com/p/55d16a566bca">简书</a>更新</p>
+</blockquote>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p><strong>Parameter Server (PS) [1]</strong> 是一种目前主流的分布式机器学习范式。其中，<strong><a href="https://www.cs.cmu.edu/~muli/">李沐</a></strong> 提出的第三代PS <strong>[2]</strong> 影响力甚大，可以在Github找到其core-sources：<strong><a href="https://github.com/dmlc/ps-lite">ps-lite</a></strong>。<br>基于上述<strong>ps-lite</strong>，<strong><a href="https://mxnet.incubator.apache.org/">MXNet</a> [3]</strong> 应运而生，发展为目前最“热门”的Deep Learning 软件库之一。<br>注意：本文将主要着眼于<strong>ps-lite</strong>。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/06/05/Parameter Server研究之ps-lite源码分析与开发/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://kimihe.github.io/2018/05/17/Parameter Server研究之MXNet使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -541,172 +703,10 @@
           <blockquote>
 <p>文章也同时在<a href="https://www.jianshu.com/p/55d16a566bca">简书</a>更新</p>
 </blockquote>
-<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p><strong>Parameter Server (PS) [1]</strong> 是一种目前主流的分布式机器学习范式。其中，<strong><a href="https://www.cs.cmu.edu/~muli/">李沐</a></strong> 提出的第三代PS <strong>[2]</strong> 影响力甚大，可以在Github找到其simulation：<a href="https://github.com/dmlc/ps-lite">https://github.com/dmlc/ps-lite</a>。<br>基于上述<strong>ps-lite</strong>，<strong><a href="https://mxnet.incubator.apache.org/">MXNet</a> [3]</strong> 应运而生，发展为目前最“热门”的Deep Learning 软件库之一。<br>注意：本文将主要着眼于<strong>MXNet</strong>。</p>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p><strong>Parameter Server (PS) [1]</strong> 是一种目前主流的分布式机器学习范式。其中，<strong><a href="https://www.cs.cmu.edu/~muli/">李沐</a></strong> 提出的第三代PS <strong>[2]</strong> 影响力甚大，可以在Github找到其simulation：<a href="https://github.com/dmlc/ps-lite">ps-lite</a>。<br>基于上述<strong>ps-lite</strong>，<strong><a href="https://mxnet.incubator.apache.org/">MXNet</a> [3]</strong> 应运而生，发展为目前最“热门”的Deep Learning 软件库之一。<br>注意：本文将主要着眼于<strong>MXNet</strong>。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/05/17/Parameter Server研究之MXNet使用/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://kimihe.github.io/2018/05/17/Parameter Server研究之ps-lite源码分析与开发/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="周鶏🐣(Kimiko)">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://oesd9di98.bkt.clouddn.com/Yaki%20Dango.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="洛斯里克的大书库">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/17/Parameter Server研究之ps-lite源码分析与开发/" itemprop="url">Parameter Server研究之ps-lite源码分析与开发</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-17T16:32:00+08:00">
-                2018-05-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算机科学/" itemprop="url" rel="index">
-                    <span itemprop="name">计算机科学</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/05/17/Parameter Server研究之ps-lite源码分析与开发/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/05/17/Parameter Server研究之ps-lite源码分析与开发/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2018/05/17/Parameter Server研究之ps-lite源码分析与开发/" class="leancloud_visitors" data-flag-title="Parameter Server研究之ps-lite源码分析与开发">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数 </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p>文章也同时在<a href="https://www.jianshu.com/p/55d16a566bca">简书</a>更新</p>
-</blockquote>
-<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p><strong>Parameter Server (PS) [1]</strong> 是一种目前主流的分布式机器学习范式。其中，<strong><a href="https://www.cs.cmu.edu/~muli/">李沐</a></strong> 提出的第三代PS <strong>[2]</strong> 影响力甚大，可以在Github找到其core-sources：<strong><a href="https://github.com/dmlc/ps-lite">ps-lite</a></strong>。<br>基于上述<strong>ps-lite</strong>，<strong><a href="https://mxnet.incubator.apache.org/">MXNet</a> [3]</strong> 应运而生，发展为目前最“热门”的Deep Learning 软件库之一。<br>注意：本文将主要着眼于<strong>ps-lite</strong>。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/17/Parameter Server研究之ps-lite源码分析与开发/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>

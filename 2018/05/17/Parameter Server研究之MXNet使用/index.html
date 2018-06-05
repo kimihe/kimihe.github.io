@@ -101,20 +101,20 @@
 
 <meta name="description" content="文章也同时在简书更新
 
-引言Parameter Server (PS) [1] 是一种目前主流的分布式机器学习范式。其中，李沐 提出的第三代PS [2] 影响力甚大，可以在Github找到其simulation：https://github.com/dmlc/ps-lite。基于上述ps-lite，MXNet [3] 应运而生，发展为目前最“热门”的Deep Learning 软件库之一。注意：">
+引言Parameter Server (PS) [1] 是一种目前主流的分布式机器学习范式。其中，李沐 提出的第三代PS [2] 影响力甚大，可以在Github找到其simulation：ps-lite。基于上述ps-lite，MXNet [3] 应运而生，发展为目前最“热门”的Deep Learning 软件库之一。注意：本文将主要着眼于MXNet。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Parameter Server研究之MXNet使用">
 <meta property="og:url" content="https://kimihe.github.io/2018/05/17/Parameter Server研究之MXNet使用/index.html">
 <meta property="og:site_name" content="洛斯里克的大书库">
 <meta property="og:description" content="文章也同时在简书更新
 
-引言Parameter Server (PS) [1] 是一种目前主流的分布式机器学习范式。其中，李沐 提出的第三代PS [2] 影响力甚大，可以在Github找到其simulation：https://github.com/dmlc/ps-lite。基于上述ps-lite，MXNet [3] 应运而生，发展为目前最“热门”的Deep Learning 软件库之一。注意：">
-<meta property="og:updated_time" content="2018-05-17T08:34:52.492Z">
+引言Parameter Server (PS) [1] 是一种目前主流的分布式机器学习范式。其中，李沐 提出的第三代PS [2] 影响力甚大，可以在Github找到其simulation：ps-lite。基于上述ps-lite，MXNet [3] 应运而生，发展为目前最“热门”的Deep Learning 软件库之一。注意：本文将主要着眼于MXNet。">
+<meta property="og:updated_time" content="2018-06-05T07:28:33.627Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Parameter Server研究之MXNet使用">
 <meta name="twitter:description" content="文章也同时在简书更新
 
-引言Parameter Server (PS) [1] 是一种目前主流的分布式机器学习范式。其中，李沐 提出的第三代PS [2] 影响力甚大，可以在Github找到其simulation：https://github.com/dmlc/ps-lite。基于上述ps-lite，MXNet [3] 应运而生，发展为目前最“热门”的Deep Learning 软件库之一。注意：">
+引言Parameter Server (PS) [1] 是一种目前主流的分布式机器学习范式。其中，李沐 提出的第三代PS [2] 影响力甚大，可以在Github找到其simulation：ps-lite。基于上述ps-lite，MXNet [3] 应运而生，发展为目前最“热门”的Deep Learning 软件库之一。注意：本文将主要着眼于MXNet。">
 
 
 
@@ -407,7 +407,7 @@
         <blockquote>
 <p>文章也同时在<a href="https://www.jianshu.com/p/55d16a566bca" target="_blank" rel="external">简书</a>更新</p>
 </blockquote>
-<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p><strong>Parameter Server (PS) [1]</strong> 是一种目前主流的分布式机器学习范式。其中，<strong><a href="https://www.cs.cmu.edu/~muli/" target="_blank" rel="external">李沐</a></strong> 提出的第三代PS <strong>[2]</strong> 影响力甚大，可以在Github找到其simulation：<a href="https://github.com/dmlc/ps-lite" target="_blank" rel="external">https://github.com/dmlc/ps-lite</a>。<br>基于上述<strong>ps-lite</strong>，<strong><a href="https://mxnet.incubator.apache.org/" target="_blank" rel="external">MXNet</a> [3]</strong> 应运而生，发展为目前最“热门”的Deep Learning 软件库之一。<br>注意：本文将主要着眼于<strong>MXNet</strong>。</p>
+<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p><strong>Parameter Server (PS) [1]</strong> 是一种目前主流的分布式机器学习范式。其中，<strong><a href="https://www.cs.cmu.edu/~muli/" target="_blank" rel="external">李沐</a></strong> 提出的第三代PS <strong>[2]</strong> 影响力甚大，可以在Github找到其simulation：<a href="https://github.com/dmlc/ps-lite" target="_blank" rel="external">ps-lite</a>。<br>基于上述<strong>ps-lite</strong>，<strong><a href="https://mxnet.incubator.apache.org/" target="_blank" rel="external">MXNet</a> [3]</strong> 应运而生，发展为目前最“热门”的Deep Learning 软件库之一。<br>注意：本文将主要着眼于<strong>MXNet</strong>。</p>
 <a id="more"></a>
 <h1 id="MXNet-安装与配置-注意点"><a href="#MXNet-安装与配置-注意点" class="headerlink" title="MXNet 安装与配置 (注意点)"></a>MXNet 安装与配置 (注意点)</h1><p>根据<a href="https://mxnet.incubator.apache.org/" target="_blank" rel="external">官网</a>的指引进行安装，一般没有什么问题。这里重点讲一下<strong>“Build From Source” (源码)</strong>方式可能遇到的问题。<br>笔者的Mac下进行操作，Linux与此是类似的。Windows可能有些区别。 </p>
 <h3 id="关于Mac系统版本"><a href="#关于Mac系统版本" class="headerlink" title="关于Mac系统版本"></a>关于Mac系统版本</h3><p>下载安装脚本<code>install-mxnet-osx-python.sh</code>，赋予其执行权限后，运行此脚本。脚本会根据Mac的系统版本号进行check，截止目前(MXNet ver1.2.0)，官方Doc中声称只支持<strong>OSX Sierra (10.12) and El Capitan (10.11)</strong>。因此在<strong>High Sierra (10.13)</strong>，会抛出<strong>ERROR</strong>。此时，解决办法很简单，直接编辑脚本文件，在文件末尾的<code>main()</code>中将<code>chk_mac_vers</code>注释掉即可：<code>#chk_mac_vers</code>。</p>
@@ -489,8 +489,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/17/Parameter Server研究之ps-lite源码分析与开发/" rel="next" title="Parameter Server研究之ps-lite源码分析与开发">
-                <i class="fa fa-chevron-left"></i> Parameter Server研究之ps-lite源码分析与开发
+              <a href="/2018/01/25/Spark入门指南 IV - 抛砖引玉的Spark源码开发/" rel="next" title="Spark入门指南 IV - 抛砖引玉的Spark源码开发">
+                <i class="fa fa-chevron-left"></i> Spark入门指南 IV - 抛砖引玉的Spark源码开发
               </a>
             
           </div>
@@ -499,8 +499,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2099/12/30/README/" rel="prev" title="README">
-                README <i class="fa fa-chevron-right"></i>
+              <a href="/2018/06/05/Parameter Server研究之ps-lite源码分析与开发/" rel="prev" title="Parameter Server研究之ps-lite源码分析与开发">
+                Parameter Server研究之ps-lite源码分析与开发 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
